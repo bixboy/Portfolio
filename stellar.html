@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Locomotion | Project Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/stellar.css">
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item">BACK TO PLUGINS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-stellar-primary);">
+                    STELLAR LOCOMOTION</h1>
+                <h2 class="subtitle text-stellar">VEHICLE FRAMEWORK</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value">UNREAL PLUGIN</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">FOCUS</span>
+                    <span class="stat-value">VEHICLES SYSTEM</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">NETWORKING</span>
+                    <span class="stat-value">REPLICATED</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO -->
+        <section class="mb-5">
+            <h3 class="section-title">FRAMEWORK OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;">
+                <strong>Stellar Locomotion</strong> est une suite modulaire pour Unreal Engine 5.
+                Mon travail se concentre sur l'architecture et l'implémentation du <strong>système complet de véhicules
+                    multi-crew</strong>.
+                Ce module permet de créer des véhicules complexes (Vaisseaux, Hovercrafts) avec gestion de rôles,
+                tourelles indépendantes et interactions réseau fluides.
+            </p>
+        </section>
+
+        <!-- 1. ARCHITECTURE VISUALIZATION -->
+        <section class="section-padding">
+            <h3 class="section-title">SYSTEM ARCHITECTURE</h3>
+            <div class="hologram-card stellar-card p-4" style="background: rgba(10, 5, 20, 0.9);">
+
+                <!-- LEVEL 1: CORE -->
+                <div style="text-align: center;">
+                    <div class="stat-block"
+                        style="display: inline-block; width: 300px; border-color: var(--color-stellar-secondary);">
+                        <span class="stat-label">PARENT CLASS</span>
+                        <h4 class="mb-0" style="color: white;">AVehicleMaster</h4>
+                        <span class="stat-label" style="font-size: 0.7rem;">(Replication, Seats, Engine Logic)</span>
+                    </div>
+                </div>
+
+                <!-- TREE CONNECTORS -->
+                <!-- Main Stem -->
+                <div style="height: 25px; width: 2px; background: var(--color-stellar-primary); margin: 0 auto;"></div>
+
+                <!-- Horizontal Bar -->
+                <div
+                    style="width: 66%; height: 2px; background: var(--color-stellar-primary); margin: 0 auto; position: relative;">
+                </div>
+
+                <!-- LEVEL 2: DERIVED CLASSES -->
+                <div
+                    style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 1rem; margin-top: 0; width: 85%; margin-left: auto; margin-right: auto;">
+
+                    <!-- Branch 1 (Hover) -->
+                    <div
+                        style="text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center;">
+                        <div
+                            style="height: 20px; width: 2px; background: var(--color-stellar-primary); margin-bottom: 5px;">
+                        </div>
+                        <div class="stat-block" style="width: 100%;">
+                            <span class="stat-label">CHILD CLASS</span>
+                            <h5 class="mb-0 text-stellar">AHoverVehicle</h5>
+                            <span class="stat-label">Physics Raycasts</span>
+                        </div>
+                    </div>
+
+                    <!-- Branch 2 (Ship) -->
+                    <div
+                        style="text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center;">
+                        <div
+                            style="height: 20px; width: 2px; background: var(--color-stellar-primary); margin-bottom: 5px;">
+                        </div>
+                        <div class="stat-block" style="width: 100%;">
+                            <span class="stat-label">CHILD CLASS</span>
+                            <h5 class="mb-0 text-stellar">AShipMaster</h5>
+                            <span class="stat-label">6-DOF Flight</span>
+                        </div>
+                    </div>
+
+                    <!-- Branch 3 (Walker) -->
+                    <div
+                        style="text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center;">
+                        <div
+                            style="height: 20px; width: 2px; background: var(--color-stellar-primary); margin-bottom: 5px;">
+                        </div>
+                        <div class="stat-block" style="width: 100%;">
+                            <span class="stat-label">CHILD CLASS</span>
+                            <h5 class="mb-0 text-stellar">AWalkerVehicle</h5>
+                            <span class="stat-label">Procedural Animation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LEVEL 3: COMPONENTS -->
+                <div class="mt-5"
+                    style="border-top: 1px solid var(--color-stellar-dim); padding-top: 1rem; text-align: center;">
+                    <span class="stat-label mb-2 d-block">SHARED COMPONENTS</span>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <span class="module-badge">USeatComponent</span>
+                        <span class="module-badge">UCameraVehicle (Turrel)</span>
+                        <span class="module-badge">UProximityPrompt</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. IMPLEMENTED CLASSES -->
+        <section class="section-padding">
+            <h3 class="section-title">IMPLEMENTED VEHICLE CLASSES</h3>
+            <p class="description mb-4">
+                Architecture polymorphe permettant de définir des comportements physiques radicalement différents selon
+                le type de véhicule.
+            </p>
+
+            <div class="project-grid">
+
+                <article class="data-card hologram-card stellar-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(168, 85, 247, 0.1);">
+                            <span class="img-label text-stellar">HOVER</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-stellar">AG-HOVERCRAFT</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine">PHYSICS</span>
+                            <span class="tag tag-role">RAYCAST</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2"><strong class="text-stellar">Floating Physics:</strong> Simulation de
+                                coussin d'air via Raycasts multiples (`HoverPoints`). Gestion de l'oscillation et de
+                                l'amortissement.</li>
+                            <li class="mb-2"><strong class="text-stellar">Surface Clamping:</strong> Adaptation
+                                dynamique à l'angle du terrain avec seuil (`MaxSurfaceAngle`).</li>
+                            <li><strong class="text-stellar">Dynamic VFX:</strong> Lignes de vitesse procédurales et
+                                poussière Niagara réactive à la hauteur.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card stellar-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(252, 211, 77, 0.1);">
+                            <span class="img-label" style="color: var(--color-stellar-secondary);">SHIP</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 style="color: var(--color-stellar-secondary);">VOID STARSHIP</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine"
+                                style="border-color: var(--color-stellar-secondary); color: var(--color-stellar-secondary);">6-DOF</span>
+                            <span class="tag tag-role"
+                                style="border-color: var(--color-stellar-secondary); color: var(--color-stellar-secondary);">STATE
+                                MACHINE</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2"><strong style="color: var(--color-stellar-secondary);">Flight
+                                    States:</strong> Machine à états complète (Landed, TakeOff, Flying, Landing).
+                                Séquences d'atterrissage automatiques.</li>
+                            <li class="mb-2"><strong style="color: var(--color-stellar-secondary);">Mouse
+                                    Steering:</strong> Pilotage type "Virtual Joystick" avec interpolation de la souris
+                                et Banking (Roulis) automatique.</li>
+                            <li><strong style="color: var(--color-stellar-secondary);">Physics:</strong> Gestion de la
+                                poussée 6 axes (Thrust, Lift, Side) et de la gravité variable.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card stellar-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(255, 255, 255, 0.05);">
+                            <span class="img-label text-white">WALKER</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-white">MECHA WALKER</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: white; color: white;">PROCEDURAL</span>
+                            <span class="tag tag-role" style="border-color: white; color: white;">IK</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2"><strong class="text-white">Procedural Gait:</strong> Calcul en temps réel
+                                du placement des pieds via `Control Rig`.</li>
+                            <li class="mb-2"><strong class="text-white">Ground Adaptation:</strong> Détection de la
+                                hauteur de sol par membre pour ajuster le bassin (`WalkerCenter`).</li>
+                            <li><strong class="text-white">Logic:</strong> Système hybride utilisant
+                                `FloatingPawnMovement` pour la navigation et IK pour le visuel.</li>
+                        </ul>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 3. MULTI-CREW SYSTEMS -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: VEHICLES</span>
+                <h3 class="section-title">MULTI-CREW ARCHITECTURE</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-stellar">> Seat Architecture :</strong>
+                        Système de composants (`USeatComponent`) pour définir les places disponibles. Gestion dynamique
+                        des occupants et du verrouillage des places.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-stellar">> Role System :</strong>
+                        Attribution de rôles spécifiques (Driver, Gunner, Engineer) affectant les contrôles disponibles.
+                        Replication serveur autoritaire pour éviter les conflits d'entrée.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-stellar">> Seamless Interaction :</strong>
+                        Possession et dé-possession fluides du Pawn original vers le véhicule, avec gestion des caméra
+                        et des inputs contextuels (Input Mapping Context switching).
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card stellar-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(168, 85, 247, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-stellar-primary);">
+                    [ MULTI_CREW_PREVIEW ]
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. INTERACTION SYSTEM -->
+        <section class="section-padding">
+            <h3 class="section-title">INTERACTION SYSTEM (PROXIMITY PROMPT)</h3>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="feature-media hologram-card stellar-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(168, 85, 247, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-stellar-primary);">
+                        [ PROMPT_WIDGET_PREVIEW ]
+                    </div>
+                </div>
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-stellar mb-3">> SMART PROMPTS</h4>
+                    <p class="description">
+                        Gestionnaire centralisé d'interactions contextuelles (`ProximityPromptManager`) inspiré des
+                        standards de l'industrie.
+                    </p>
+                    <ul class="spec-list">
+                        <li><strong>Context Aware:</strong> Détection automatique de l'interaction la plus pertinente
+                            (Best Prompt) selon la distance et la visibilité.</li>
+                        <li><strong>Input Binding:</strong> Affichage dynamique des touches (`GetKeyForAction`) en
+                            fonction de l'`InputAction` assignée (Clavier/Manette).</li>
+                        <li><strong>Modular UI:</strong> Widget entièrement personnalisable (`UPromptWidget`) avec mise
+                            à jour du texte en temps réel.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONSTRUCTION & TOOLS -->
+        <section class="section-padding">
+            <h3 class="section-title">CONSTRUCTION & TOOLS</h3>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-stellar mb-3">> GRID PLACEMENT SYSTEM</h4>
+                    <p class="description">
+                        Un système complet pour la construction modulaire de véhicules ou de bases.
+                        Le composant `UGridPlacementComponent` gère la grille en temps réel.
+                    </p>
+                    <ul class="spec-list">
+                        <li><strong>Snapping Automatique:</strong> Transformation des coordonnées World en cellules de
+                            grille (X,Y,Z).</li>
+                        <li><strong>Visualisation:</strong> Rendu de la grille via `UProceduralMeshComponent` pour un
+                            feedback immédiat.</li>
+                        <li><strong>Object Preview:</strong> Prévisualisation fantôme des objets avant placement via
+                            `ObjectPreviewComponent`.</li>
+                    </ul>
+                </div>
+                <div class="feature-media hologram-card stellar-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(168, 85, 247, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-stellar-primary);">
+                        [ GRID_SYSTEM_PREVIEW ]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // STELLAR PLUGIN</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

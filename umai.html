@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMAI !!! | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/umai.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px var(--color-secondary);">UMAI !!!
+                </h1>
+                <h2 class="subtitle text-red">COUCH GAME / PARTY GAME</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-value">UNREAL 5</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">ROLE</span>
+                    <span class="stat-value">LEAD DEV</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">DURATION</span>
+                    <span class="stat-value">2 MONTHS</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">TEAM</span>
+                    <span class="stat-value">2 PROG • 3 ART • 2 GD</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- SECTION 1: MISSION -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <h3 class="section-title">MISSION BRIEFING</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    UMAI! is a 4-player 3D Couch Game where you play as eccentric sushi characters fighting for the
+                    ultimate honor: <strong>to be chosen and devoured by the customers!</strong>
+                    <br><br>
+                    <strong>Objective:</strong> Fish for ingredients, craft powerful makis, sink your rivals' ships,
+                    and prove you are the most delicious dish on the menu!
+                </p>
+                <a href="https://venizio.itch.io/umai" target="_blank" class="btn btn-secondary hologram-btn">
+                    <span class="btn-content">PLAY ON ITCH.IO</span>
+                    <span class="btn-glitch"></span>
+                </a>
+            </div>
+            <div class="feature-media">
+                <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/7c51d2f5-25a2-46da-8ecf-9307a66d6214_rw_600.png?h=e78ea2816f6e1e2087ffe42cba6f47cd"
+                    alt="Gameplay Overview">
+                <span class="feature-caption">GAMEPLAY OVERVIEW</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: TECH (REVERSE) -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <h3 class="section-title">TECHNICAL IMPLEMENTATION</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Interaction Engine:</strong>
+                        Implementation of the <code>ICouchInteractable</code> interface to standardize interactions
+                        (Pickable/Interactable).
+                        Creation of <code>UCouchMovement</code> using <strong>Splines Components</strong> and
+                        <strong>Timelines</strong> to manage dynamic obstacles and conveyor belts parametrically.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Custom Physics Projectile:</strong>
+                        <code>UCouchProjectile</code> uses a deterministic physics simulation (Gravity Z: -980.0)
+                        independent of PhysX to ensure responsive and synchronized gameplay.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Game Architecture:</strong>
+                        Usage of a <code>GameInstanceSubsystem</code> (<code>UCouchGameManagerSubSystem</code>) as a
+                        persistent State Machine to manage Rounds, the Global Timer, and Win Conditions.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/070c17a1-f2be-45df-ab36-a9e7b31fd155_rw_600.gif?h=9e5d76485aa08d2fbefebb7cdc93a821"
+                    alt="Interaction System">
+                <span class="feature-caption">INTERACTION SYSTEM</span>
+            </div>
+        </section>
+
+        <!-- SECTION 3: FISHING -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <h3 class="section-title">FISHING MECHANICS 2.0</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> QTE System:</strong>
+                        Complex mechanic using <code>UCableComponent</code> for line physics.
+                        Conflict management via a <strong>QTE</strong> state (<code>StartQte</code> /
+                        <code>RewindQte</code>) where players must "mash" buttons to win the contested object.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> Feedback:</strong>
+                        <strong>Juice</strong> system driven by <code>BlueprintNativeEvents</code> allowing designers to
+                        iterate on Game Feel (Camera Shake, Force Feedback) without recompilation.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/ab52ebd0-e9fb-43ad-af23-a2decaa3bb8f_rw_600.gif?h=632a4f153c1765e11f94f87099f28293"
+                    alt="Fishing Mechanics">
+                <span class="feature-caption">FISHING & QTE</span>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CATAPULT (REVERSE) -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <h3 class="section-title">CATAPULT & DEFENSE</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> Ballistics:</strong>
+                        Real-time parabolic trajectory calculation based on Velocity and a Power Curve
+                        (<code>CurveShoot</code>).
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> Weapon Logic:</strong>
+                        Class <code>ACouchCatapult</code> inheriting from <code>ACouchInteractableWeapons</code>.
+                        Manual reloading system (<code>Reload</code>) requiring physical ammo
+                        (<code>ACouchStaticCanonBall</code>).
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/0d813832-d7c9-448d-8646-394c20194a8d_rw_600.gif?h=80cb2c66f98297962d77e78d176bbfa3"
+                    alt="Catapult Mechanic">
+                <span class="feature-caption">CATAPULT LOGIC</span>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TOOLS -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <h3 class="section-title">TOOLS & PLUGINS</h3>
+                <p class="description" style="font-size: 1rem;">
+                    Development of a <strong>Level Selection Plugin</strong>: An Editor Utility Widget tool to organize,
+                    categorize, and instantly load development and production maps, optimizing the entire team's
+                    workflow.
+                </p>
+            </div>
+            <div class="feature-media">
+                <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/bcb78ff8-1981-44ee-bda7-f462e2348149_rw_600.gif?h=5cc5cf313c0c75667ee58633e4a65222"
+                    alt="Level Selection Plugin">
+                <span class="feature-caption">EDITOR TOOL</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // UMAI PROJECT</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

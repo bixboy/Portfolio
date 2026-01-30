@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bix Engine | System Core | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bix_engine.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="scan-overlay"></div>
+        <div class="container" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 2rem;">
+            <div>
+                <h1 class="glitch-text"
+                    style="font-size: 3rem; background: rgba(0,0,0,0.7); padding: 10px; display: inline-block;">BIX
+                    ENGINE</h1>
+                <div class="tech-tags"
+                    style="margin-top: 1rem; background: rgba(0,0,0,0.7); padding: 10px; display: inline-block;">
+                    <span class="tag tag-lang">C++ 20</span>
+                    <span class="tag tag-engine">FULL EDITOR SUITE</span>
+                    <span class="tag tag-role">CUSTOM REFLECTION</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <section class="mb-5">
+            <h3 class="section-title">ENGINE ECOSYSTEM</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;">
+                Le <strong>Bix Engine</strong> est un environnement de développement complet.
+                Au-delà d'un simple runtime, il intègre une suite d'outils d'édition natifs ("Page System"), un pipeline
+                de build (BixAssetTool) et une architecture de données orientée performance.
+            </p>
+        </section>
+
+        <!-- --- SECTION: SUITE OUTILS (Layout Interactif) --- -->
+        <section class="mb-5">
+            <h3 class="section-title">SUITE OUTILS & EDITEURS</h3>
+
+            <!-- Feature Row 1: Editor System -->
+            <div class="feature-row">
+                <div class="feature-text hologram-card tech-item">
+                    <h4>>>> EDITOR PAGE SYSTEM</h4>
+                    <p>Architecture UI fenêtrée basée sur le concept de <strong>Pages</strong> et <strong>Docking
+                            Spaces</strong>.</p>
+                    <ul class="feature-list">
+                        <li>Fenêtres flottantes et layouts persistants (ImGui Docking).</li>
+                        <li>Système de Focus et Raccourcis globaux.</li>
+                        <li>Inspection en temps réel de n'importe quel <code>UObject</code>.</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <!-- PLACEHOLDER: Insert Editor GIF here -->
+                    <div class="placeholder-media">
+                        [ INSERT EDITOR_UI.GIF ]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Row 2: Sprite Slicer -->
+            <div class="feature-row">
+                <div class="feature-text hologram-card tech-item">
+                    <h4>>>> VISUAL SPRITE ATLAS SLICER</h4>
+                    <p>Outil dédié au découpage de textures et à la génération d'animations.</p>
+                    <ul class="feature-list">
+                        <li>Définition visuelle des régions de sprites.</li>
+                        <li>Points de pivots et métadonnées d'animation.</li>
+                        <li>Export optimisé en <code>.atlas</code> binaire.</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <!-- PLACEHOLDER: Insert Atlas Tool GIF here -->
+                    <div class="placeholder-media">
+                        [ INSERT ATLAS_TOOL.GIF ]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Row 3: Prefab & Audio -->
+            <div class="tech-grid">
+                <div class="tech-item hologram-card">
+                    <h4>>>> ACTOR & PREFAB EDITOR</h4>
+                    <p>
+                        Éditeur visuel d'objets (Prefabs) pour la composition d'entités.
+                    </p>
+                    <div class="sys-diagram">
+                        Components -> Visualization -> Serialization
+                    </div>
+                    <ul class="feature-list">
+                        <li>Assemblage drag & drop de composants (Sprite, Collider, Script).</li>
+                        <li>Modification hiérarchique : les changements sur le Prefab se propagent aux instances.</li>
+                        <li>Sauvegarde en JSON lisible ou binaire optimisé.</li>
+                    </ul>
+                </div>
+                <div class="tech-item hologram-card">
+                    <h4>>>> AUDIO CONTAINER SYSTEM</h4>
+                    <p>
+                        Système avancé de gestion des assets sonores.
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>Randomization :</strong> Variation automatique du Pitch et du Volume.</li>
+                        <li><strong>Virtualization :</strong> Gestion des voix via Miniaudio.</li>
+                        <li><strong>Looping & Streaming :</strong> Contrôle fin de la lecture mémoire.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- --- SECTION: GAMEPLAY FRAMEWORK (Layout Détaillé) --- -->
+        <section class="mb-5">
+            <h3 class="section-title">GAMEPLAY FRAMEWORK</h3>
+
+            <div class="feature-row">
+                <div class="feature-visual" style="flex: 0.6;">
+                    <!-- PLACEHOLDER: Insert Input/Gameplay GIF here -->
+                    <div class="placeholder-media">
+                        [ INSERT GAMEPLAY_DEMO.GIF ]
+                    </div>
+                </div>
+                <div class="feature-text">
+                    <h4 class="section-subtitle" style="color: var(--color-primary); margin-bottom: 1rem;">> INPUT
+                        SYSTEM (Action & Axis)</h4>
+                    <div class="hologram-card tech-item">
+                        <p>Le système d'input sépare la logique de jeu du matériel physique via une abstraction
+                            complète.</p>
+                        <ul class="feature-list">
+                            <li><strong>BindAction :</strong> Événements discrets (Saut, Tir). Gère les états
+                                <code>Pressed</code>, <code>Released</code> et <code>Hold</code>.
+                            </li>
+                            <li><strong>BindAxis :</strong> Valeurs continues (Mouvement). Normalise automatiquement les
+                                entrées Clavier/Gamepad entre [-1, 1].</li>
+                            <li>Support du Hot-Plugging de manettes SDL3.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Component Grid -->
+            <h4 class="section-subtitle" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 1rem;">>
+                COMPONENT DATABASE</h4>
+            <div class="tech-grid">
+                <div class="tech-item hologram-card">
+                    <h4>[GFX] SPRITE ANIMATOR</h4>
+                    <p>Moteur d'animation 2D haute performance.</p>
+                    <ul class="feature-list">
+                        <li>Lecture native des fichiers <code>.atlas</code> binaires.</li>
+                        <li>Machine à états (Idle -> Run -> Jump).</li>
+                        <li>Système d'événements (OnAnimationEnd, OnFrame).</li>
+                    </ul>
+                </div>
+                <div class="tech-item hologram-card">
+                    <h4>[PHYS] BOX COLLIDER</h4>
+                    <p>Intégration profonde de Box2D.</p>
+                    <ul class="feature-list">
+                        <li><strong>Modes :</strong> Static, Kinematic, Dynamic.</li>
+                        <li><strong>Material :</strong> Friction, Restitution (Rebond), Densité.</li>
+                        <li><strong>Events :</strong> Callbacks C++ <code>OnCollisionEnter</code> / <code>Exit</code>.
+                        </li>
+                    </ul>
+                </div>
+                <div class="tech-item hologram-card">
+                    <h4>[SFX] AUDIO SOURCE</h4>
+                    <p>Émetteur sonore 3D.</p>
+                    <ul class="feature-list">
+                        <li>Spatialisation basée sur la distance (Min/Max).</li>
+                        <li>Pooling automatique des voix pour éviter la surcharge CPU.</li>
+                        <li>Support du Doppler Effect simulé.</li>
+                    </ul>
+                </div>
+                <div class="tech-item hologram-card">
+                    <h4>[CORE] CAMERA</h4>
+                    <p>Système de vue flexible.</p>
+                    <ul class="feature-list">
+                        <li>Gestion du Zoom et de l'Offset dynamique.</li>
+                        <li>Helpers <code>WorldToScreen</code> et <code>ScreenToWorld</code> pour le UI.</li>
+                        <li>Support de l'Aspect Ratio fixe ou adaptatif.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- SECTION: ARCHITECTURE & CORE (Grid Layout) --- -->
+        <section class="mb-5">
+            <h3 class="section-title">CORE & ARCHITECTURE</h3>
+            <div class="tech-grid">
+
+                <div class="tech-item hologram-card">
+                    <h4>>>> UOBJECT DATAMODEL</h4>
+                    <p>La classe racine de tout le système de réflexion.</p>
+                    <ul class="feature-list">
+                        <li>Apporte l'identité unique (UUID) à chaque entité.</li>
+                        <li>Embarque le Transform (Position/Rotation/Scale).</li>
+                        <li>Compatible avec la sérialisation automatique <code>BPROPERTY</code>.</li>
+                    </ul>
+                </div>
+
+                <div class="tech-item hologram-card">
+                    <h4>>>> SCENE SYSTEM</h4>
+                    <p>Conteneur hermétique du gameplay.</p>
+                    <ul class="feature-list">
+                        <li>Encapsule son propre monde physique <strong>Box2D</strong>.</li>
+                        <li>Gère le cycle de vie des Acteurs (Spawn/Destroy).</li>
+                        <li>Possède son contexte (Input, Render, Window) injecté.</li>
+                    </ul>
+                </div>
+
+                <div class="tech-item hologram-card">
+                    <h4>>>> BINARY SERIALIZATION</h4>
+                    <p>Système de persistance haute performance.</p>
+                    <ul class="feature-list">
+                        <li>Sauvegarde l'état complet du monde en binaire compact.</li>
+                        <li>Utilise un système de <strong>Factory</strong> pour réinstancier les acteurs par leur nom de
+                            classe.</li>
+                        <li>Supporte le versioning de données.</li>
+                    </ul>
+                </div>
+
+                <div class="tech-item hologram-card">
+                    <h4>>>> CUSTOM MATH</h4>
+                    <p>Bibliothèque mathématique optimisée C++20.</p>
+                    <ul class="feature-list">
+                        <li>Structures <code>Vec3</code>, <code>Matrix4</code>, <code>Rotator</code> (Euler) faites
+                            maison.</li>
+                        <li>Système de <strong>Dirty Flags</strong> dans le Transform pour éviter les calculs de
+                            matrices inutiles.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="text-center section-padding">
+            <a href="https://github.com/bixboy" target="_blank" class="btn btn-primary hologram-btn">
+                <span class="btn-content">ACCESS SOURCE CODE [GITHUB]</span>
+                <span class="btn-glitch"></span>
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // BIX ENGINE</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

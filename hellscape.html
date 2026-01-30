@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HellScape | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/hellscape.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px #ff0000;">HELLSCAPE</h1>
+                <h2 class="subtitle text-red">FAST FPS / SURVIVAL</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-value">UNREAL 5</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">ROLE</span>
+                    <span class="stat-value">GAMEPLAY PROG</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">DURATION</span>
+                    <span class="stat-value">4 WEEKS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <div class="engine-layout" style="align-items: flex-start;">
+            <div class="engine-info" style="flex: 2;">
+                <h3 class="section-title">OPERATION: SURVIVAL</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Dans ce Fast-FPS infernal, vous devez survivre à des vagues de démons intérieurs. Progresse pour
+                    devenir invincible.
+                    Injustement emprisonné en enfer, seule la violence vous permettra de vous échapper.
+                </p>
+
+                <h3 class="section-title">TECHNICAL IMPLEMENTATION</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> AI System (Behavior Trees) :</strong> Création de deux archétypes
+                        d'ennemis.
+                        L'ennemi à distance (4 jambes) qui utilise le décor pour se positionner et fuir le joueur,
+                        et l'ennemi de mêlée (2 jambes) qui rush le joueur agressivement.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Player Controller :</strong> Implémentation d'un mouvement fluide
+                        "Fast FPS" : Dash, Double Saut, et feedback de caméra dynamique. Système de combo d'attaques à 3
+                        coups + attaque laser spéciale.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> VFX & Particles :</strong> Gestion des effets environnementaux
+                        (Ambres
+                        flottants, Brume au sol) et des feedbacks de combat (Sang projeté au sol et sur l'écran du
+                        joueur, Flashs de dégâts).
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Dynamic HUD :</strong> Interface réactive avec barre de score
+                        tremblante selon les combos, et teinte rouge progressive selon les dégâts reçus.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="engine-visual" style="flex: 1; border: none; height: auto;">
+                <article class="data-card hologram-card">
+                    <div class="card-visual" style="height: 250px;">
+                        <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/ccb15e37-8bcc-41ba-a330-fd66f745a8a2_rw_600.png?h=0db8498a208582419032f55460fa4900"
+                            style="width:100%; height:100%; object-fit: cover;">
+                    </div>
+                    <div class="card-content">
+                        <p class="description text-center">Gameplay Screenshot</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <section class="section-padding">
+            <h3 class="section-title">COMBAT DATA</h3>
+            <div class="project-grid">
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/540a176f-85cd-4947-bfa1-f85b07ad1847_rw_600.gif?h=7d6d896af3d2e3246af262f8c4434fc8"
+                        style="width: 100%; border: 1px solid var(--color-secondary);">
+                    <p class="text-center mt-2 font-mono">Enemy AI Behavior</p>
+                </article>
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/ac0990e3-b2d2-4ed9-8c7c-2116746165aa_rw_600.gif?h=b4d5b0da4e38960f82492bfe508b93c6"
+                        style="width: 100%; border: 1px solid var(--color-secondary);">
+                    <p class="text-center mt-2 font-mono">Environmental FX & Fog</p>
+                </article>
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/6d391a73-e3ef-45dc-b436-e4fe04ee18b9_rw_600.gif?h=419e30efadd459f17eb8078f0ca26344"
+                        style="width: 100%; border: 1px solid var(--color-secondary);">
+                    <p class="text-center mt-2 font-mono">Combat Feedback</p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // HELLSCAPE</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

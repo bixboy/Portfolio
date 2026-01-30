@@ -1,0 +1,13 @@
+        .project-hero {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), var(--color-bg)), url('https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/e7f4d186-bd1f-42ac-9907-b0c98264f8ba_rwc_0x62x512x384x512.png?h=f3f5541514f70db6f1e321041075ecb9') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            border-bottom: 2px solid var(--color-secondary);
+        }
+
+        /* Custom theme for BeepBoop */
+        :root {
+            --color-secondary: #00d9ff;
+            /* Cyan */
+        }

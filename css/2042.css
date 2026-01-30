@@ -1,0 +1,7 @@
+        .project-hero {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), var(--color-bg)), url('https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/4de1fb77-fd35-4702-bd20-eb1b4e7cf240_rw_600.png?h=5d6b84e9cceccdc3e3cc7d84c254f2f6') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            border-bottom: 2px solid #5500ff;
+        }

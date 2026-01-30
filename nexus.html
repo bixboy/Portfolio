@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Online | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/nexus.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item">BACK TO PLUGINS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem;">NEXUS ONLINE</h1>
+                <h2 class="subtitle text-cyan">MULTIPLAYER FRAMEWORK // UNREAL ENGINE 5</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block" style="border-color: var(--color-primary); color: var(--color-primary);">
+                    TYPE: <span style="color: white;">MODULE C++</span>
+                </div>
+                <div class="stat-block" style="border-color: var(--color-primary); color: var(--color-primary);">
+                    ARCH: <span style="color: white;">SESSION-BASED</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO & ARCHITECTURE -->
+        <section class="mb-5">
+            <h3 class="section-title">NEXUS FRAMEWORK CORE <span class="blinking-cursor">_</span></h3>
+            <p class="description mb-4">
+                Nexus Framework est une couche d'abstraction structurée au-dessus de l'<code>IOnlineSubsystem</code>
+                (Steam, EOS, Null).
+                Il expose la logique réseau complexe via des nœuds asynchrones Blueprint-friendly.
+            </p>
+
+            <div class="hologram-card p-4" style="background: rgba(0, 20, 40, 0.8);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 class="text-cyan mb-3">ASYNC TASK SYSTEM</h4>
+                        <ul class="feature-list">
+                            <li><strong>CreateSession</strong>: `UAsyncTask_CreateSession` gère automatiquement la
+                                destruction de l'ancienne session avant d'en créer une nouvelle, évitant les conflits.
+                            </li>
+                            <li><strong>FindSessions</strong>: Wrapper autour de `FindSessions`, exposant les résultats
+                                sous forme de liste structurée avec Ping et PlayerCount.</li>
+                            <li><strong>JoinSession</strong>: Gère la résolution d'IP et le ClientTravel.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-cyan mb-3">ONLINE SUBSYSTEM WRAPPERS</h4>
+                        <ul class="feature-list">
+                            <li><strong>Steam Integration</strong>: Support natif des lobbies Steam via
+                                `FOnlineSessionSettings`.</li>
+                            <li><strong>Event Driven</strong>: Le `AOnlineSessionManager` diffuse des événements globaux
+                                (`OnPlayerJoined`, `OnPlayerLeft`) pour l'UI, simplifiant la mise à jour des widgets
+                                comme le Lobby Screen.</li>
+                            <li><strong>Unique Net ID</strong>: Abstraction des PlatformIDs pour le banissement et le
+                                tracking cross-platform.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SESSION & MIGRATION -->
+        <section class="mb-5">
+            <h3 class="section-title text-cyan">SESSION & HOST MIGRATION</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+                <div>
+                    <p class="description mb-3">
+                        La résilience des sessions est assurée par le <code>UNexusMigrationSubsystem</code>. En cas de
+                        déconnexion de l'hôte, le système élit
+                        automatiquement un nouveau leader sans interrompre la partie pour les clients restants.
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>Heir Election</strong>: Algorithme de sélection déterministe basé sur l'ancienneté
+                            (PlayerID) pour désigner le nouvel hôte.</li>
+                        <li><strong>State Recovery</strong>: Restauration automatique des GameStates et des PlayerStates
+                            après la migration.</li>
+                        <li><strong>Seamless Transition</strong>: Gestion transparente du Travel pour éviter les écrans
+                            de chargement inutiles.</li>
+                    </ul>
+                    <div
+                        style="margin-top: 1rem; padding: 1rem; border: 1px solid rgba(0, 255, 255, 0.2); background: rgba(0, 20, 40, 0.5);">
+                        <div
+                            style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.8rem; margin-bottom: 0.5rem; opacity: 0.8;">
+                            MIGRATION PROTOCOL</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <code
+                                style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">TryRegisterHost()</code>
+                            <code
+                                style="color: #ffaaaa; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid rgba(255, 100, 100, 0.3);">OnNetworkFailure()</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- IMAGE TEMPLATE: MIGRATION FLOW -->
+                    <div class="img-template" style="height: 100%;">
+                        <div class="template-label">
+                            [ INSERT MIGRATION DIAGRAM ]<br>
+                            <span style="font-size: 0.8rem; opacity: 0.7;">Host -> Disconnect -> Elect -> Rehost</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADVANCED MATCHMAKING -->
+        <section class="mb-5">
+            <h3 class="section-title text-cyan">ADVANCED MATCHMAKING</h3>
+            <div class="hologram-card p-4" style="background: rgba(0, 20, 40, 0.8);">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 class="text-secondary mb-3">FILTERS & RULES ENGINE</h4>
+                        <p class="text-muted mb-3">
+                            Le système de matchmaking repose sur des `SessionFilterPresets` configurables en DataAssets.
+                            Il permet de définir des règles logiques complexes pour trouver la session parfaite.
+                        </p>
+                        <ul class="feature-list">
+                            <li><strong>Filter Rules</strong>: Prédicats logiques sérialisés (ex: `MapName == "Desert"
+                                && Ping < 50`).</li>
+                            <li><strong>Sorting Rules</strong>: Tri dynamique des résultats (ex:
+                                `Ascending(PlayerCount)`).</li>
+                            <li><strong>Flexible Query</strong>: Abstraction des requêtes spécifiques au sous-système
+                                (Steam Lobbies vs EOS vs LAN).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-secondary mb-3">UTILITIES & HELPERS</h4>
+                        <p class="text-muted mb-3">
+                            Une suite de Blueprint Function Libraries (`UNexusSteamUtils`) pour faciliter l'intégration
+                            sociale.
+                        </p>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <code
+                                style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">GetCachedFriends()</code>
+                            <code
+                                style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">InviteFriendToSession()</code>
+                            <code
+                                style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">ShowProfileOverlay()</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOCIAL & CHAT -->
+        <section class="mb-5">
+            <h3 class="section-title text-red">SOCIAL INFRASTRUCTURE</h3>
+            <div class="hologram-card p-4 mb-5">
+                <div>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+                        <div>
+                            <h4 class="text-secondary mb-3">MODULE: NEXUS CHAT</h4>
+                            <p class="text-muted mb-3">
+                                Un système de messagerie temps réel extensible, conçu pour les communautés persistantes.
+                                Il intègre des fonctionnalités d'accessibilité et de synchronisation avancées.
+                            </p>
+
+                            <!-- GIF Placeholder -->
+                            <div class="img-template"
+                                style="height: 200px; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.3);">
+                                <div class="template-label">
+                                    [ INSERT CHAT GIF ]<br>
+                                    <span style="font-size: 0.8rem; opacity: 0.7;">Typing Flow & History Sync</span>
+                                </div>
+                            </div>
+
+                            <ul class="feature-list" style="margin-bottom: 2rem;">
+                                <li><strong>History Synchronization</strong>: Lors de la connexion (`OnRep`), les
+                                    nouveaux
+                                    joueurs reçoivent automatiquement les `N` derniers messages via
+                                    `Client_ReceiveChatHistory`, assurant qu'ils ne manquent pas le contexte.</li>
+                                <li><strong>Text-to-Speech (TTS)</strong>: Le `NexusVoiceComponent` peut lire vocalement
+                                    les
+                                    messages entrants (`Speak()`), améliorant l'accessibilité ou permettant des annonces
+                                    système audibles.</li>
+                                <li><strong>Command Parsing</strong>: Support des commandes type IRC
+                                    (<code>/w user msg</code>, <code>/kick user</code>, <code>/reply</code>).</li>
+                                <li><strong>UI Virtualization</strong>: Utilisation de <code>UListView</code> pour gérer
+                                    des
+                                    historiques de chat de milliers de lignes sans impact CPU.</li>
+                                <li><strong>Channel Routing</strong>: Système de dispatching dynamique pour isoler les
+                                    flux
+                                    de communication (Général vs Squad vs Party).</li>
+                                <li><strong>Blueprint Extensibility</strong>: Création de commandes custom (ex:
+                                    `/emote`)
+                                    via `RegisterBlueprintCommand()`, permettant aux designers d'étendre le chat sans
+                                    C++.
+                                </li>
+                                <li><strong>Smart Hyperlinks</strong>: Le module `NexusLinkHelpers` parse
+                                    automatiquement
+                                    les URLs et permet d'insérer des liens interactifs riches (Items, Quêtes, GPS)
+                                    cliquables dans le chat.</li>
+                            </ul>
+
+                            <!-- Command Bar - Quick Reference -->
+                            <div
+                                style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <div class="stat-block text-center"
+                                    style="background: rgba(0,229,255,0.05); flex: 1; min-width: 150px;">
+                                    CMD: <span style="color: #fff;">/WHISPER</span>
+                                </div>
+                                <div class="stat-block text-center"
+                                    style="background: rgba(0,229,255,0.05); flex: 1; min-width: 150px;">
+                                    CMD: <span style="color: #fff;">/CUSTOM</span>
+                                </div>
+                                <div class="stat-block text-center"
+                                    style="background: rgba(255,100,255,0.1); flex: 1; min-width: 150px;">
+                                    LINK: <span style="color: #fff;">[ITEM_ID]</span>
+                                </div>
+                                <div class="stat-block text-center"
+                                    style="background: rgba(100,255,100,0.05); flex: 1; min-width: 150px;">
+                                    SYNC: <span style="color: #fff;">HISTORY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- ADMIN TOOLS -->
+        <section class="mb-5">
+            <h3 class="section-title">ADMINISTRATION TOOLS</h3>
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+                <div>
+                    <!-- IMAGE TEMPLATE: ADMIN PANEL -->
+                    <div class="img-template" style="height: 100%;">
+                        <div class="template-label">
+                            [ INSERT ADMIN DASHBOARD ]<br>
+                            <span style="font-size: 0.8rem; opacity: 0.7;">Ban List & Kick Menu</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="description mb-3">
+                        Le <code>ANexusGameMode</code> expose une API d'administration complète, sécurisée par des
+                        vérifications d'autorité strictes.
+                        Les bannissements sont persistants et sérialisés.
+                    </p>
+                    <div
+                        style="margin-top: 1rem; padding: 1rem; border: 1px solid rgba(0, 255, 255, 0.2); background: rgba(0, 20, 40, 0.5);">
+                        <div
+                            style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.8rem; margin-bottom: 0.5rem; opacity: 0.8;">
+                            GAME MODE API</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <code
+                                style="color: #ffaaaa; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid rgba(255, 100, 100, 0.3);">KickPlayer(Target, Reason)</code>
+                            <code
+                                style="color: #ffaaaa; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid rgba(255, 100, 100, 0.3);">BanPlayer(Target, Reason)</code>
+                            <code
+                                style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">TempBanPlayer(Target, Duration)</code>
+                            <code
+                                style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">UnbanPlayer(PlayerId)</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // NEXUS ONLINE</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

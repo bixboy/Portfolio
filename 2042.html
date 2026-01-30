@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2042 | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/2042.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px #3300aa;">2042</h1>
+                <h2 class="subtitle" style="color: #8855ff;">NEO-RETRO SHOOTER</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block" style="border-color: #8855ff; color: #8855ff;">LIB: SFML / C++</div>
+                <div class="stat-block" style="border-color: #8855ff; color: #8855ff;">TEAM: 4 PROGS</div>
+                <div class="stat-block" style="border-color: #8855ff; color: #8855ff;">DURATION: 5 DAYS</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <section class="mb-5">
+            <h3 class="section-title">PROJECT OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 800px;">
+                2042 est un Shmup (Shoot 'em up) vertical rendant hommage à "1942", revisité avec une esthétique
+                géométrique minimaliste.
+                Développé en pur C++ avec la SFML en seulement 5 jours.
+            </p>
+        </section>
+
+        <section class="mb-5">
+            <h3 class="section-title">SYSTEM IMPLEMENTATION</h3>
+            <div class="tech-grid">
+                <div class="hologram-card">
+                    <h4 style="color: #8855ff;">Dynamic Background</h4>
+                    <p>Défilement vertical infini créant l'illusion de vitesse. Système de changement de palette de
+                        couleurs en temps réel pendant le jeu.</p>
+                </div>
+                <div class="hologram-card">
+                    <h4 style="color: #8855ff;">User Interface</h4>
+                    <p>HUD minimaliste affichant Score et Vies. Menus interactifs avec effets de clignotement et
+                        navigation fluide.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <h3 class="section-title">GAMEPLAY RECORDS</h3>
+            <div class="project-grid">
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/3c856957-ad0d-496f-8349-b5164320acbb_rw_600.gif?h=fa7c05dd7e2471e75bee7923476229f4"
+                        style="width: 100%;">
+                    <p class="text-center mt-2 font-mono">Endless Scrolling & Action</p>
+                </article>
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/6394560f-f2e6-4ac1-a9a8-944346514c80_rw_600.png?h=a4d20b93db3db7245f10cfd7c0718253"
+                        style="width: 100%;">
+                    <p class="text-center mt-2 font-mono">Menu Interface</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="text-center section-padding">
+            <a href="https://jaribou.itch.io/2042" target="_blank" class="btn btn-secondary hologram-btn">
+                <span class="btn-content">PLAY ON ITCH.IO</span>
+                <span class="btn-glitch"></span>
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // 2042</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

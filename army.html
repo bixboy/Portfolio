@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Clicker | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/army.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px #aa8800;">ARMY CLICKER</h1>
+                <h2 class="subtitle" style="color: #eebb00;">MOBILE CLICKER / STRATEGY</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block" style="border-color: #eebb00; color: #eebb00;">ENGINE: UNITY</div>
+                <div class="stat-block" style="border-color: #eebb00; color: #eebb00;">TEAM: 2 PROGS</div>
+                <div class="stat-block" style="border-color: #eebb00; color: #eebb00;">DURATION: 3 WEEKS</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <div class="engine-layout" style="align-items: flex-start;">
+            <div class="engine-info" style="flex: 2;">
+                <h3 class="section-title">OPERATION DETAILS</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Jeu mobile où l'on commande le spawn de soldats pour combattre des vagues de monstres.
+                    Améliorez vos statistiques, débloquez des compétences et vainquez le boss pour progresser.
+                </p>
+
+                <h3 class="section-title">TECHNICAL SPECS</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong style="color: #eebb00;">> Soldier Logic :</strong> Gestion du spawn (clic + limite),
+                        Pathfinding simple vers l'ennemi le plus proche, Système de combat automatique (HP/Atk).
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong style="color: #eebb00;">> Enemy System :</strong> Détection de portée, Drop de monnaie à
+                        la mort, Barres de vie dynamiques.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong style="color: #eebb00;">> UI & Progression :</strong> Arbre de compétences avec
+                        conditions de déblocage et pop-ups d'info. Animation de transition spectaculaire pour l'arrivée
+                        du Boss.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="engine-visual" style="flex: 1; border: none; height: auto;">
+                <article class="data-card hologram-card">
+                    <div class="card-visual" style="height: 400px;">
+                        <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/f8e27691-ab42-44c9-9172-9bcdc9c1d127_rw_600.gif?h=4202b8b99a5e1e0cc5e42c79db614e45"
+                            style="width:100%; height:100%; object-fit: contain;">
+                    </div>
+                    <div class="card-content">
+                        <p class="description text-center">UI & Skills</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <section class="section-padding">
+            <h3 class="section-title">COMBAT FOOTAGE</h3>
+            <div class="project-grid">
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/2906527d-6934-44a4-b204-e83ad7a600c4_rw_600.gif?h=745c7ec68cd17dd10129d699015f41ae"
+                        style="width: 100%;">
+                    <p class="text-center mt-2 font-mono">Soldier Spawning & Combat</p>
+                </article>
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/9fabcb36-1a98-433f-a725-85912bf814e8_rw_600.gif?h=a38530a3a5da002a2822e7ad70a18a06"
+                        style="width: 100%;">
+                    <p class="text-center mt-2 font-mono">Enemy Logic</p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // ARMY CLICKER</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

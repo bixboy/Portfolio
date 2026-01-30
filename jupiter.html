@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupiter Plugin | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jupiter.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item">BACK TO PLUGINS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem;">JUPITER PLUGIN</h1>
+                <h2 class="subtitle text-cyan">RTS FRAMEWORK // UNREAL ENGINE 5</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block" style="border-color: var(--color-primary); color: var(--color-primary);">
+                    TYPE: <span style="color: white;">MODULE C++</span>
+                </div>
+                <div class="stat-block" style="border-color: var(--color-primary); color: var(--color-primary);">
+                    ARCH: <span style="color: white;">COMPONENT-BASED</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO & ARCHITECTURE -->
+        <section class="mb-5">
+            <h3 class="section-title">SYSTEM ANALYSIS <span class="blinking-cursor">_</span></h3>
+            <p class="description mb-4">
+                Jupiter est un plugin d'infrastructure pour Unreal Engine 5, conçu pour accélérer le développement de
+                jeux de stratégie (RTS).
+                L'architecture est entièrement modulaire, reposant sur une séparation stricte entre les données, la
+                logique de contrôle et la représentation visuelle.
+            </p>
+        </section>
+
+        <!-- PLAYER CAMERA ARCHITECTURE -->
+        <section class="mb-5">
+            <h3 class="section-title text-cyan">RTS CAMERA ARCHITECTURE</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+                <div>
+                    <p class="description mb-3">
+                        La classe <code>APlayerCamera</code> n'est pas un simple Pawn, mais un orchestrateur de
+                        systèmes. Plutôt que de tout gérer dans une seule classe géante ("God Class"), la caméra délègue
+                        ses responsabilités à des sous-systèmes dédiés (<code>UCamera*System</code>).
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>Movement System</strong>: Gère uniquement la translation, le zoom, et le "Edge
+                            Scrolling".</li>
+                        <li><strong>Selection System</strong>: Gère le Raycasting et la logique de sélection (Simple,
+                            Box, Multi).</li>
+                        <li><strong>Command System</strong>: Interprète les clics contextuels (Attaque, Move, Patrol) en
+                            fonction de l'entité sous la souris.</li>
+                    </ul>
+                    <div class="system-grid"
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div class="stat-block text-center" style="padding: 1rem;">
+                            <div style="font-size: 1.5rem; color: var(--color-primary);">✇</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem; color: #fff;">MOVEMENT SYS</div>
+                        </div>
+                        <div class="stat-block text-center" style="padding: 1rem;">
+                            <div style="font-size: 1.5rem; color: var(--color-primary);">⌖</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem; color: #fff;">SELECTION SYS</div>
+                        </div>
+                        <div class="stat-block text-center" style="padding: 1rem;">
+                            <div style="font-size: 1.5rem; color: var(--color-primary);">⚡</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem; color: #fff;">COMMAND SYS</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- IMAGE TEMPLATE: CAMERA GRAPH -->
+                    <div class="img-template">
+                        <div class="template-label">
+                            [ INSERT CAMERA BLUEPRINT/GRAPH ]<br>
+                            <span style="font-size: 0.8rem; opacity: 0.7;">Shows System Relationships</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDITOR TOOLS DEEP DIVE -->
+        <section class="mb-5">
+            <h3 class="section-title text-red">EDITOR TOOLS DETAIL</h3>
+            <p class="description mb-4">
+                Le cœur de l'expérience développeur réside dans le <code>UJupiterEditorPanel</code>, qui héberge des
+                outils spécialisés (Pages) pour la création de contenu in-game. Chaque page est une classe C++ distincte
+                héritant de <code>UJupiterPageBase</code>.
+            </p>
+
+            <!-- PAGE: UNIT SPAWNER -->
+            <div class="hologram-card p-4 mb-5">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 class="text-secondary mb-3">TOOL A: UNIT SPAWNER (Page_UnitSpawn)</h4>
+                        <p class="text-muted mb-3">
+                            Outil principal pour le peuplement de niveaux. Il ne se contente pas de lister des acteurs,
+                            mais offre une gestion avancée de catalogue via <code>UUnitsSelectionDataAsset</code>.
+                        </p>
+                        <ul class="feature-list">
+                            <li><strong>Filtrage Dynamique</strong>: Système de recherche textuelle et filtrage par tags
+                                (via <code>ApplyFilters()</code>) pour naviguer rapidement dans de grandes bibliothèques
+                                d'unités.</li>
+                            <li><strong>Inspecteur Pliable</strong>: Un panneau latéral
+                                (<code>InspectorContainer</code>) permet de configurer les propriétés de spawn (Nombre
+                                d'unités, Formation initiale, Axe d'orientation) avant le placement.</li>
+                            <li><strong>Ghost Previz</strong>: Injection de dépendance vers
+                                <code>UUnitSpawnComponent</code> pour afficher un "fantôme" de l'unité sous la souris
+                                avant validation.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <!-- IMAGE TEMPLATE: SPAWN TOOL -->
+                        <div class="img-template" style="height: 100%;">
+                            <div class="template-label">
+                                [ INSERT SPAWN TOOL SCREEN ]<br>
+                                <span style="font-size: 0.8rem; opacity: 0.7;">List + Inspector Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: PATROL MANAGER -->
+            <div class="hologram-card p-4 mb-5">
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+                    <div>
+                        <!-- IMAGE TEMPLATE: PATROL TOOL -->
+                        <div class="img-template" style="height: 100%;">
+                            <div class="template-label">
+                                [ INSERT PATROL EDITOR SCREEN ]<br>
+                                <span style="font-size: 0.8rem; opacity: 0.7;">Spline Editing View</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-secondary mb-3">TOOL B: PATROL MANAGER (Page_Patrol)</h4>
+                        <p class="text-muted mb-3">
+                            Système de création de routes IA basé sur des Splines. Contrairement aux systèmes classiques
+                            points par points, celui-ci permet une édition visuelle fluide.
+                        </p>
+                        <ul class="feature-list">
+                            <li><strong>Spline Integration</strong>: Utilise <code>UUnitPatrolComponent</code> pour
+                                dessiner et modifier des courbes de Bézier directement dans le monde.</li>
+                            <li><strong>Route List & Detail</strong>: Interface maître-détail. La liste de gauche
+                                (<code>EntryContainer</code>) affiche toutes les patrouilles du niveau. Cliquer sur une
+                                entrée ouvre le <code>PatrolDetailWidget</code> pour ajuster les propriétés (Vitesse,
+                                Pause aux nœuds, Boucle).</li>
+                            <li><strong>Live Feedback</strong>: Le delegate <code>HandleRoutesChanged</code> assure que
+                                la liste UI reste toujours synchronisée avec les données du monde, même lors de
+                                suppressions/modifications externes.</li>
+                        </ul>
+
+                        <div
+                            style="margin-top: 1rem; border-left: 2px solid var(--color-secondary); padding-left: 1rem;">
+                            <div style="color: var(--color-secondary); font-size: 0.8rem; text-transform: uppercase;">
+                                Event Stream</div>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                <span class="tag tag-role">HandleRoutesChanged()</span>
+                                <span class="tag tag-engine">REFRESH UI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI & BEHAVIOR -->
+        <section class="mb-5">
+            <h3 class="section-title">AI & AUTONOMY <span class="blinking-cursor">_</span></h3>
+            <div class="tech-grid">
+                <div class="hologram-card">
+                    <h4 class="text-cyan">RTS Controller Logic</h4>
+                    <p class="description small">
+                        La classe <code>AAiControllerRts</code> surcharge le contrôleur standard pour gérer les ordres
+                        vectoriels complexes. Elle intègre un système de patrouille hiérarchique avec gestion d'état
+                        (Attack, Patrol, Idle) et prise de décision locale (Engagement automatique si menace détectée).
+                    </p>
+                </div>
+                <div class="hologram-card">
+                    <h4 class="text-cyan">Behavior Tree Integration</h4>
+                    <p class="description small">
+                        Le système expose des delegates Blueprint (<code>FReachedDestination</code>,
+                        <code>FOnStartAttack</code>) permettant aux Behavior Trees d'Unreal de réagir sans coupler le
+                        code C++ à la logique du BT.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 1rem; padding: 1rem; border: 1px solid rgba(0, 255, 255, 0.2); background: rgba(0, 20, 40, 0.5);">
+                <div
+                    style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.8rem; margin-bottom: 0.5rem; opacity: 0.8;">
+                    CORE API SYMBOLS</div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <code
+                        style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">UpdateCurrentPatrol()</code>
+                    <code
+                        style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">CommandMoveToLocation(Cmd)</code>
+                    <code
+                        style="color: #ffaaaa; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid rgba(255, 100, 100, 0.3);">Server_CreatePatrol(Params)</code>
+                    <code
+                        style="color: #ffaaaa; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid rgba(255, 100, 100, 0.3);">Server_ModifyPatrol(ID, Action)</code>
+                    <code
+                        style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">NotifyPatrolUpdate()</code>
+                    <code
+                        style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">Client_UpdateMoveMarker()</code>
+                    <code
+                        style="color: #aaddff; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid var(--color-primary-dim);">RebuildUnitLookupMap()</code>
+                    <code
+                        style="color: #ffaaaa; background: rgba(0,0,0,0.5); padding: 0.3rem 0.6rem; border: 1px solid rgba(255, 100, 100, 0.3);">OnStartAttack()</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATHEMATICS & FORMATIONS -->
+        <section class="mb-5">
+            <h3 class="section-title">MATH LIBRARY & FORMATIONS</h3>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                <div>
+                    <p class="description mb-3">
+                        Le positionnement des unités repose sur <code>UFormationMathLibrary</code>, une bibliothèque
+                        statique pure fournissant des algorithmes géométriques déterministes.
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>Geometric Patterns</strong>: Calculs vectoriels pour générer des offsets de
+                            formations standards (Ligne, Colonne, Carré, Triangle) et organiques (Blob).</li>
+                        <li><strong>Determinism</strong>: Pour la formation "Blob", un seed basé sur l'index de l'unité
+                            assure que la formation reste stable et reproductible (pas de jitter réseau).</li>
+                        <li><strong>Path Projection</strong>: Algorithme performant
+                            (<code>CalculateClosestPointOnPath</code>) pour projeter une position arbitraire sur le
+                            segment de patrouille le plus proche.</li>
+                    </ul>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; justify-content: center;">
+                    <div class="stat-block text-center" style="background: rgba(0,255,100,0.1);">
+                        ALGORITHM: <span style="color: #fff;">WEDGE_OFFSETS</span>
+                    </div>
+                    <div class="stat-block text-center" style="background: rgba(0,255,100,0.1);">
+                        ALGORITHM: <span style="color: #fff;">BLOB_SEEDING</span>
+                    </div>
+                    <div class="stat-block text-center" style="background: rgba(100,100,255,0.1);">
+                        MATH: <span style="color: #fff;">PATH_PROJECTION</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // JUPITER PLUGIN</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

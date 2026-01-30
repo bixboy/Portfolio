@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Zombie | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/zombie.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem;">PROJET ZOMBIE</h1>
+                <h2 class="subtitle text-green">FPS MULTIPLAYER / SURVIVAL</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-value">UNREAL 5</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">ROLE</span>
+                    <span class="stat-value">SOLO DEV</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">PLATFORM</span>
+                    <span class="stat-value">PC</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <section class="mb-5">
+            <h3 class="section-title">MISSION BRIEFING</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 800px;">
+                Dans les confins de l’espace, la survie est votre seule mission. Vous êtes un soldat d'élite, piégé sur
+                une station spatiale abandonnée.
+                Des hordes de zombies extraterrestres déchaînés attaquent sans relâche, devenant de plus en plus
+                puissants à chaque vague.
+                Armé de technologie futuriste, vous devez repousser ces créatures et découvrir les sombres secrets de la
+                station.
+            </p>
+        </section>
+
+        <section class="mb-5">
+            <h3 class="section-title">SYSTEM ARCHITECTURE</h3>
+            <div class="tech-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="hologram-card p-4">
+                    <h4 class="text-green mb-2">> Interactions & Economy</h4>
+                    <p>Système complet d'économie : Points gagnés par kill. Achat d'armes (Mur/Boîte Mystère), ouverture
+                        de portes.</p>
+                    <p class="mt-2"><strong>Perk Machines :</strong> Architecture modulaire via Enum. Changement
+                        automatique du modèle 3D et du bonus appliqué (ex: Boost PV) selon la configuration.</p>
+                </div>
+                <div class="hologram-card p-4">
+                    <h4 class="text-green mb-2">> Weapon Systems</h4>
+                    <p>Gestion Slots (Principale/Secondaire). Modes de tir commutables (Auto, Semi, Single). Animation
+                        de rechargement et visée procédurale adaptative.</p>
+                </div>
+                <div class="hologram-card p-4">
+                    <h4 class="text-green mb-2">> AI & Behavior</h4>
+                    <p>Comportement de horde. Tracking du joueur et navigation complexe dans la station spatiale.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <h3 class="section-title">VISUAL LOGS</h3>
+            <div class="project-grid">
+                <article class="hologram-card">
+                    <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/9eed0d94-ed89-45cb-8071-549f67b28402_rwc_0x125x1024x768x1024.jpeg?h=24dfc7148a24da7c7330786a35fe6ea4"
+                        style="width: 100%; border: 1px solid var(--color-primary-dim);">
+                    <p class="text-center mt-2 font-mono">Gameplay Environment</p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // PROJET ZOMBIE</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

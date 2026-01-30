@@ -1,0 +1,12 @@
+        .project-hero {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), var(--color-bg)), url('https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/70a5958b-0823-4444-815b-3729d7c79b51_rw_1200.png?h=e571883130f81dd6f32addd0cf2e6629') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            border-bottom: 2px solid #eebb00;
+        }
+
+        :root {
+            --color-secondary: #eebb00;
+            /* Gold/Yellow */
+        }

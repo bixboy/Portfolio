@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFIDENTIAL | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/gamejam.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px var(--color-secondary);">
+                    CONFIDENTIAL
+                </h1>
+                <h2 class="subtitle text-red">SCP / SURVIVAL HORROR</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">MOTEUR</span>
+                    <span class="stat-value">UNREAL 5</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">ROLE</span>
+                    <span class="stat-value">GAMEPLAY PROG</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">DUREE</span>
+                    <span class="stat-value">5 JOURS</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">EQUIPE</span>
+                    <span class="stat-value">2 PROG • 3 ART • 5 3D ART</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- SECTION 1: OVERVIEW -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <h3 class="section-title">RESUME DE LA MISSION</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Vous faites partie d'une des entreprises concurrentes de SCP, votre but : <strong>dérober le
+                        SCP_032_FR</strong> et repartir avec.
+                    <br><br>
+                    Pour cela, vous vous rendrez dans un bâtiment scientifique militarisé et abandonné. Y entrer s'avère
+                    assez simple, mais qui sait ce qui vous attend à la sortie.
+                </p>
+                <a href="https://khrogu.itch.io/jamunreal" target="_blank" class="btn btn-secondary hologram-btn">
+                    <span class="btn-content">JOUER SUR ITCH.IO</span>
+                    <span class="btn-glitch"></span>
+                </a>
+            </div>
+            <div class="feature-media">
+                <img src="assets/gamejam/gameplay_overview.png" alt="Gameplay Overview">
+                <span class="feature-caption">INFILTRATION COMPLEXE</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: WEAPON MECHANICS -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <h3 class="section-title">ARME SCP-032</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Balistique Sanguine :</strong>
+                        L'arme est le SCP 032 qui tire du sang avec des particules. Détection de collision intégrée pour
+                        faire apparaître des "decal materials" de sang.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Rechargement à Risque :</strong>
+                        L'arme a seulement 2 balles et se recharge ensuite grâce à votre propre sang (PV), créant une
+                        tension constante entre attaque et survie.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-red">> Dialogue Interactif :</strong>
+                        L'arme a plusieurs lignes de dialogue activables à différents endroits du complexe.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <img src="assets/gamejam/weapon_mechanic.gif" alt="Weapon Mechanic">
+                <span class="feature-caption">ARME VIVANTE</span>
+            </div>
+        </section>
+
+        <!-- SECTION 3: POST PROCESS & FX -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <h3 class="section-title">SYSTEMES IMMERSIFS</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> Post-Process Dynamique :</strong>
+                        Chaque rechargement de l'arme donne différents effets négatifs visuels répartis sur des paliers
+                        (ex: mort au 5ème rechargement). Tous les effets sont modifiables via des variables (durée,
+                        force).
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> Environnement Organique :</strong>
+                        <strong>SplineLines</strong> placées dans l'éditeur et reliées à un œil central. Utilisation de
+                        Spline Meshes avec effet de respiration lorsqu'elles sont activées.
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong class="text-secondary">> Accès Sécurisés (Portes) :</strong>
+                        Chaque porte a un lecteur de badge et un niveau d'accès. Si la carte a le bon niveau, la porte
+                        s'ouvre (lumière verte), sinon elle reste fermée (lumière rouge).
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <img src="assets/gamejam/post_process.gif" alt="Post Process FX">
+                <span class="feature-caption">HALLUCINATIONS VISUELLES</span>
+            </div>
+        </section>
+
+        <!-- SECTION 4: SPLINE TECH -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <h3 class="section-title">OUTILS & EDITOR</h3>
+                <p class="description" style="font-size: 1rem;">
+                    Développement d'outils Editor Utility pour placer facilement les "SplineLines" — des câbles
+                    organiques reliés au décor. Gestion automatique des animations de respiration et du mapping de
+                    texture.
+                </p>
+            </div>
+            <div class="feature-media">
+                <img src="assets/gamejam/spline_mechanic.gif" alt="Spline Mechanic">
+                <span class="feature-caption">SPLINES ORGANIQUES</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // PROJECT CONFIDENTIAL</p>
+        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

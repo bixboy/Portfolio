@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierre Lamare | Game Programmer | Imperial Datalink</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="noise"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- HERO SECTION -->
+    <header id="hero" class="cockpit-view">
+        <div class="container text-center">
+            <h1 class="glitch-text" data-text="PIERRE LAMARE">PIERRE LAMARE</h1>
+            <h2 class="subtitle">GAME PROGRAMMER <span class="accent-text">[ C# / C++ ]</span></h2>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary hologram-btn">
+                    <span class="btn-content">INITIALISER PROJETS</span>
+                    <span class="btn-glitch"></span>
+                </a>
+                <button id="start-sim-btn" class="btn btn-secondary hologram-btn"
+                    style="border-color: #ff3333; color: #ff3333;">
+                    <span class="btn-content">COMBAT SIMULATION</span>
+                    <span class="btn-glitch" style="background: #ff3333;"></span>
+                </button>
+            </div>
+            <div class="status-indicators">
+                <span class="status-item">SYSTEM: ONLINE</span>
+                <span class="status-item">UE5: READY</span>
+                <span class="status-item">UNITY: ACTIVE</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand">PL-88</div>
+            <ul class="nav-links">
+                <li><a href="#projects" class="nav-item">PROJETS</a></li>
+                <li><a href="#plugins" class="nav-item">PLUGINS</a></li>
+                <li><a href="#bix-engine" class="nav-item">BIX ENGINE</a></li>
+                <li><a href="#contact" class="nav-item">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="section-padding">
+            <div class="container">
+                <h3 class="section-title">BASE DE DONNÉES <span class="blinking-cursor">_</span></h3>
+
+                <div class="project-grid">
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/e5c409e4-680a-4f7e-a8ee-286bf94a963d_rwc_100x0x599x450x599.png?h=4a754b25b1a031c373a841c06a29df39"
+                                alt="UMAI Project" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">UMAI !!!</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">LEAD DEV</span>
+                            </div>
+                            <p class="description">Jeu de canapé 4 joueurs. Incarnez des sushis, pêchez des ingrédients
+                                et coulez vos rivaux !</p>
+                            <a href="umai.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="assets/gamejam/gameplay_overview.png" alt="SCP Game Jam"
+                                style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">CONFIDENTIAL (SCP)</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">GAMEPLAY</span>
+                            </div>
+                            <p class="description">Survival Horror. Infiltration d'un complexe SCP. Mécanique de sang et
+                                environnement organique.</p>
+                            <a href="gamejam.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/1516969e-142a-4a9a-a82b-65d563010463_rwc_297x31x1364x1023x1364.png?h=3d75ec9176d8d06eee53f2562b7c4aea"
+                                alt="HellScape Project" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">HELLSCAPE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">GAMEPLAY</span>
+                            </div>
+                            <p class="description">Fast-FPS infernal. Combattez vos démons intérieurs avec un système de
+                                mouvement avancé.</p>
+                            <a href="hellscape.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/88343361-7dda-4ce8-9903-2ae1437a205e_rw_600.png?h=7fbfc152bd97b74b96add4daa4056d3c"
+                                alt="Bix Engine" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">BIX ENGINE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">CUSTOM</span>
+                                <span class="tag tag-lang">C++ 20</span>
+                                <span class="tag tag-role">SOLO</span>
+                            </div>
+                            <p class="description">Moteur de jeu 2D Custom. Box2D, ImGui et Éditeur Visuel complet.
+                            </p>
+                            <a href="bix_engine.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/9eed0d94-ed89-45cb-8071-549f67b28402_rwc_0x125x1024x768x1024.jpeg?h=24dfc7148a24da7c7330786a35fe6ea4"
+                                alt="Projet Zombie" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">PROJET ZOMBIE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">SOLO</span>
+                            </div>
+                            <p class="description">FPS Solo Survie. Système d'armes complet, IA de horde et économie de
+                                jeu.</p>
+                            <a href="zombie.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/e7f4d186-bd1f-42ac-9907-b0c98264f8ba_rwc_0x62x512x384x512.png?h=f3f5541514f70db6f1e321041075ecb9"
+                                alt="BeepBoop Battle" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">BEEPBOOP BATTLE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNITY</span>
+                                <span class="tag tag-lang">C#</span>
+                                <span class="tag tag-role">TEAM</span>
+                            </div>
+                            <p class="description">Jeu de stratégie mobile. Construction de vaisseaux et batailles
+                                tactiques.</p>
+                            <a href="beepboop.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/70a5958b-0823-4444-815b-3729d7c79b51_rw_600.png?h=ebc0a9def0422c3973c7333eb99974bb"
+                                alt="Army Clicker" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">ARMY CLICKER</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNITY</span>
+                                <span class="tag tag-lang">C#</span>
+                                <span class="tag tag-role">TEAM</span>
+                            </div>
+                            <p class="description">Clicker stratégie. Gestion d'armée, skills trees et combats de boss.
+                            </p>
+                            <a href="army.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/4de1fb77-fd35-4702-bd20-eb1b4e7cf240_rw_600.png?h=5d6b84e9cceccdc3e3cc7d84c254f2f6"
+                                alt="2042" style="width:100%; height:100%; object-fit:cover; object-position: top;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">2042</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">SFML</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">TEAM</span>
+                            </div>
+                            <p class="description">Shooter Arcade Neo-Retro. Hommage minimaliste aux classiques du
+                                genre.</p>
+                            <a href="2042.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLUGINS SECTION -->
+        <section id="plugins" class="section-padding">
+            <div class="container">
+                <h3 class="section-title">EXTENSIONS SYSTÈME (PLUGINS) <span class="blinking-cursor">_</span></h3>
+                <div class="project-grid">
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <div class="placeholder-img"
+                                style="background: radial-gradient(circle, #001 0%, #000 100%); border: 1px solid #336;">
+                                <span class="img-label" style="color: #0ff; font-size: 3rem;">JPTR</span>
+                            </div>
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">JUPITER PLUGIN</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">MODULE</span>
+                            </div>
+                            <p class="description">Framework RTS complet. Gestion d'unités, formations, et UI tactique.
+                            </p>
+                            <a href="jupiter.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <div class="placeholder-img"
+                                style="background: radial-gradient(circle, #200 0%, #000 100%); border: 1px solid #633;">
+                                <span class="img-label" style="color: #f06; font-size: 3rem;">NEXUS</span>
+                            </div>
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">NEXUS ONLINE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">MODULE</span>
+                            </div>
+                            <p class="description">Backend multijoueur. Sessions, Host Migration, et Chat System
+                                sécurisé.
+                            </p>
+                            <a href="nexus.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <div class="placeholder-img"
+                                style="background: radial-gradient(circle, #1a0b2e 0%, #000 100%); border: 1px solid #a855f7;">
+                                <span class="img-label" style="color: #d8b4fe; font-size: 3rem;">STLR</span>
+                            </div>
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title" style="color: #a855f7;">STELLAR PLUGIN</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine" style="border-color: #a855f7; color: #a855f7;">UNREAL
+                                    5</span>
+                                <span class="tag tag-lang" style="border-color: #fcd34d; color: #fcd34d;">C++</span>
+                                <span class="tag tag-role"
+                                    style="border-color: #a855f7; color: #a855f7;">VEHICLES</span>
+                            </div>
+                            <p class="description">Framework de locomotion spatiale. Système complet de véhicules
+                                multi-crew et tourelles.</p>
+                            <a href="stellar.html" class="card-link" style="color: #a855f7;">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left" style="border-color: #a855f7;"></span>
+                            <span class="corner top-right" style="border-color: #a855f7;"></span>
+                            <span class="corner bottom-left" style="border-color: #a855f7;"></span>
+                            <span class="corner bottom-right" style="border-color: #a855f7;"></span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- REACTOR SECTION -->
+        <section id="bix-engine" class="section-padding reactor-core">
+            <div class="container">
+                <div class="engine-layout">
+                    <div class="engine-info">
+                        <h3 class="section-title text-red">CŒUR DU RÉACTEUR : BIX ENGINE</h3>
+                        <div class="engine-specs">
+                            <p class="tech-text">Moteur de jeu 2D/3D écrit à partir de zéro en C++ moderne.</p>
+                            <ul class="spec-list">
+                                <li>> Architecture Entity-Component (Object -> Actor)</li>
+                                <li>> Suite d'outils d'édition (ImGui Docking)</li>
+                                <li>> Physique Box2D Intégrée</li>
+                                <li>> Pipeline de Build & Cooking d'Assets</li>
+                            </ul>
+                            <a href="bix_engine.html" class="btn btn-danger hologram-btn mt-4">
+                                <span class="btn-content">ANALYSE DU MOTEUR</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="engine-visual">
+                        <div class="schematic-anim">
+                            <div class="reactor-ring ring-outer"></div>
+                            <div class="reactor-ring ring-mid"></div>
+                            <div class="reactor-ring ring-inner"></div>
+                            <div class="reactor-core-orb"></div>
+                            <div class="reactor-particles"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="transmission-panel">
+        <div class="container text-center">
+            <h3 class="section-title">CANAL DE TRANSMISSION</h3>
+            <p>Fréquence ouverte pour opportunités de missions.</p>
+
+            <div class="social-links">
+                <a href="#" class="hologram-link">[ LINKEDIN ]</a>
+                <a href="#" class="hologram-link">[ GITHUB ]</a>
+                <a href="mailto:contact@pierrelamare.dev" class="hologram-link">[ EMAIL ]</a>
+            </div>
+
+            <div class="footer-meta">
+                <p>ID: PIERRE-LAMARE // STATUS: AVAILABLE</p>
+                <p>© 2026 IMPERIAL DATAPAD v2.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

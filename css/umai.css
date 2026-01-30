@@ -1,0 +1,28 @@
+        .project-hero {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), var(--color-bg)), url('https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/e5c409e4-680a-4f7e-a8ee-286bf94a963d_rwc_100x0x599x450x599.png?h=4a754b25b1a031c373a841c06a29df39') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            border-bottom: 2px solid var(--color-secondary);
+        }
+
+        .stat-block {
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid var(--color-secondary);
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-secondary);
+            display: block;
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: #fff;
+        }

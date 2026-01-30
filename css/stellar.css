@@ -1,0 +1,65 @@
+/* Stellar Plugin Theme: Deep Space Purple & Gold */
+:root {
+    --color-stellar-bg: #0a0514;
+    --color-stellar-primary: #a855f7;
+    /* Purple */
+    --color-stellar-secondary: #fcd34d;
+    /* Gold */
+    --color-stellar-dim: rgba(168, 85, 247, 0.1);
+}
+
+.project-hero {
+    height: 60vh;
+    background: linear-gradient(to bottom, rgba(10, 5, 20, 0.6), var(--color-bg)),
+        url('https://images.unsplash.com/photo-1543722530-d1853851ad31?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border-bottom: 2px solid var(--color-stellar-primary);
+}
+
+.stat-block {
+    background: var(--color-stellar-dim);
+    border: 1px solid var(--color-stellar-primary);
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stat-label {
+    font-family: var(--font-heading);
+    color: var(--color-stellar-primary);
+    font-size: 0.8rem;
+    display: block;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.text-stellar {
+    color: var(--color-stellar-primary);
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.stellar-card {
+    border-color: var(--color-stellar-primary);
+    background: rgba(10, 5, 20, 0.8);
+}
+
+.stellar-card:hover {
+    box-shadow: 0 0 20px var(--color-stellar-dim);
+    border-color: var(--color-stellar-secondary);
+}
+
+/* Feature specific styles */
+.module-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid var(--color-stellar-secondary);
+    color: var(--color-stellar-secondary);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    margin-bottom: 10px;
+}
