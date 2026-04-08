@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol: Sync | Project Data | Pierre Lamare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/protocol_sync.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-secondary-dim);">PROTOCOL: SYNC</h1>
+                <h2 class="subtitle" style="color: var(--color-secondary);" data-i18n="net-subtitle">MULTIPLAYER HUB / NETWORKING</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block" style="border-color: var(--color-secondary); color: var(--color-secondary);">TECH: C++ / ENET</div>
+                <div class="stat-block" style="border-color: var(--color-secondary); color: var(--color-secondary);">ROLE: SOLO DEV</div>
+                <div class="stat-block" style="border-color: var(--color-secondary); color: var(--color-secondary);">DURATION: 1 MONTH</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="net-overview-title">TECHNICAL OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 800px;" data-i18n="net-overview-text">
+                NetLessons est un projet de recherche et développement sur le multijoueur temps réel. Il s'agit d'un hub regroupant plusieurs mini-jeux, construit sur une architecture Client/Serveur robuste utilisant ENet pour la couche transport UDP.
+            </p>
+        </section>
+
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="net-networking-title">NETWORKING ARCHITECTURE</h3>
+            <div class="tech-grid">
+                <div class="hologram-card p-4">
+                    <h4 class="tech-card-title" data-i18n="net-net-1-title">> GamePacket System</h4>
+                    <p class="tech-card-desc" data-i18n="net-net-1-desc">Implémentation d'une couche de sérialisation binaire avec surcharge des opérateurs << et >>. Gestion automatique de l'Endianness (Big/Little) pour garantir l'intégrité des données cross-platform.</p>
+                </div>
+                <div class="hologram-card p-4">
+                    <h4 class="tech-card-title" data-i18n="net-net-2-title">> Client/Server Architecture</h4>
+                    <p class="tech-card-desc" data-i18n="net-net-2-desc">Synchronisation d'états basée sur un modèle de confiance serveur. Gestion des cycles de vie des paquets (Ack), des timeouts et des déconnexions sécurisées via une machine à états robuste.</p>
+                </div>
+                <div class="hologram-card p-4">
+                    <h4 class="tech-card-title" data-i18n="net-net-3-title">> UDP Optimization (ENet)</h4>
+                    <p class="tech-card-desc" data-i18n="net-net-3-desc">Utilisation de ENet pour une gestion efficace des canaux. Mise en place de canaux séparés pour les données fiables (connexion, scores) et non-fiables (mouvements) afin d'optimiser la bande passante.</p>
+                </div>
+                <div class="hologram-card p-4">
+                    <h4 class="tech-card-title" data-i18n="net-net-4-title">> Prediction & Reconciliation</h4>
+                    <p class="tech-card-desc" data-i18n="net-net-4-desc">Mise en œuvre de la prédiction côté client pour une réactivité instantanée des contrôles. Système de réconciliation fluide corrigeant la position locale sans saccades via un lerp adaptatif sur <code>CORRECTION_STRENGTH</code>.</p>
+                </div>
+                <div class="hologram-card p-4">
+                    <h4 class="tech-card-title" data-i18n="net-chat-title">> Système de Chat Avancé</h4>
+                    <p class="tech-card-desc" data-i18n="net-chat-desc">Gestion multi-canaux (Global, Private) avec système d'onglets, chuchotements (Whispers) et messages système filtrables pour une communication fluide.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="net-catalog-title">MINI-GAMES CATALOG</h3>
+            <div class="catalog-grid">
+                <div class="hologram-card p-4 mini-game-card">
+                    <h4 style="color: var(--color-secondary);" data-i18n="net-game-1-title">Red Light Green Light</h4>
+                    <p data-i18n="net-game-1-desc">Un jeu de réflexes où le serveur synchronise l'état de mouvement de tous les joueurs.</p>
+                </div>
+                <div class="hologram-card p-4 mini-game-card">
+                    <h4 style="color: var(--color-secondary);" data-i18n="net-game-2-title">Hot Potato</h4>
+                    <p data-i18n="net-game-2-desc">Patate chaude multijoueur : transfert immédiat d'objet entre clients via des paquets ultra-légers.</p>
+                </div>
+                <div class="hologram-card p-4 mini-game-card">
+                    <h4 style="color: var(--color-secondary);" data-i18n="net-game-3-title">Price is Right</h4>
+                    <p data-i18n="net-game-3-desc">Compétition de devinette en temps réel avec validation instantanée côté serveur.</p>
+                </div>
+                <div class="hologram-card p-4 mini-game-card">
+                    <h4 style="color: var(--color-secondary);" data-i18n="net-game-4-title">Color Match</h4>
+                    <p data-i18n="net-game-4-desc">Mini-jeu de puzzle collaboratif testant la latence et la coordination des joueurs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="net-video-title">DÉMONSTRATION OPÉRATIONNELLE</h3>
+            <div class="hologram-card p-0" style="overflow: hidden; aspect-ratio: 16/9; max-width: 800px; margin: 0 auto;">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1yLm7-9g8ZM?si=CPrUTSrbJBN2DrS5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="net-visuals-title">INTERFACE & RÉSEAU</h3>
+            <div class="project-grid">
+                <article class="hologram-card">
+                    <img src="assets/protocol_sync.png" style="width: 100%; border: 1px solid var(--color-secondary-dim);">
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="transmission-panel text-center">
+        <p data-i18n="footer-eot-net">END OF TRANSMISSION // PROTOCOL: SYNC</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

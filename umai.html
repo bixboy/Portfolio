@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/umai.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
             </ul>
         </div>
     </nav>
@@ -34,23 +38,23 @@
             <div>
                 <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px var(--color-secondary);">UMAI !!!
                 </h1>
-                <h2 class="subtitle text-red">COUCH GAME / PARTY GAME</h2>
+                <h2 class="subtitle text-red" data-i18n="umai-desc">COUCH GAME / PARTY GAME</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div class="stat-block">
-                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-label" data-i18n="stat-engine">ENGINE</span>
                     <span class="stat-value">UNREAL 5</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">ROLE</span>
+                    <span class="stat-label" data-i18n="stat-role">ROLE</span>
                     <span class="stat-value">LEAD DEV</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">DURATION</span>
+                    <span class="stat-label" data-i18n="stat-duration">DURATION</span>
                     <span class="stat-value">2 MONTHS</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">TEAM</span>
+                    <span class="stat-label" data-i18n="stat-team">TEAM</span>
                     <span class="stat-value">2 PROG • 3 ART • 2 GD</span>
                 </div>
             </div>
@@ -62,8 +66,8 @@
         <!-- SECTION 1: MISSION -->
         <section class="feature-row">
             <div class="feature-text">
-                <h3 class="section-title">MISSION BRIEFING</h3>
-                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                <h3 class="section-title" data-i18n="umai-mission-title">MISSION BRIEFING</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="umai-mission-text">
                     UMAI! is a 4-player 3D Couch Game where you play as eccentric sushi characters fighting for the
                     ultimate honor: <strong>to be chosen and devoured by the customers!</strong>
                     <br><br>
@@ -71,7 +75,7 @@
                     and prove you are the most delicious dish on the menu!
                 </p>
                 <a href="https://venizio.itch.io/umai" target="_blank" class="btn btn-secondary hologram-btn">
-                    <span class="btn-content">PLAY ON ITCH.IO</span>
+                    <span class="btn-content" data-i18n="btn-play-itch">PLAY ON ITCH.IO</span>
                     <span class="btn-glitch"></span>
                 </a>
             </div>
@@ -85,21 +89,21 @@
         <!-- SECTION 2: TECH (REVERSE) -->
         <section class="feature-row reverse">
             <div class="feature-text">
-                <h3 class="section-title">TECHNICAL IMPLEMENTATION</h3>
+                <h3 class="section-title" data-i18n="umai-tech-title">TECHNICAL IMPLEMENTATION</h3>
                 <ul class="spec-list" style="font-size: 1rem;">
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-tech-1">
                         <strong class="text-red">> Interaction Engine:</strong>
                         Implementation of the <code>ICouchInteractable</code> interface to standardize interactions
                         (Pickable/Interactable).
                         Creation of <code>UCouchMovement</code> using <strong>Splines Components</strong> and
                         <strong>Timelines</strong> to manage dynamic obstacles and conveyor belts parametrically.
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-tech-2">
                         <strong class="text-red">> Custom Physics Projectile:</strong>
                         <code>UCouchProjectile</code> uses a deterministic physics simulation (Gravity Z: -980.0)
                         independent of PhysX to ensure responsive and synchronized gameplay.
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-tech-3">
                         <strong class="text-red">> Game Architecture:</strong>
                         Usage of a <code>GameInstanceSubsystem</code> (<code>UCouchGameManagerSubSystem</code>) as a
                         persistent State Machine to manage Rounds, the Global Timer, and Win Conditions.
@@ -116,15 +120,15 @@
         <!-- SECTION 3: FISHING -->
         <section class="feature-row">
             <div class="feature-text">
-                <h3 class="section-title">FISHING MECHANICS 2.0</h3>
+                <h3 class="section-title" data-i18n="umai-fish-title">FISHING MECHANICS 2.0</h3>
                 <ul class="spec-list" style="font-size: 1rem;">
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-fish-1">
                         <strong class="text-secondary">> QTE System:</strong>
                         Complex mechanic using <code>UCableComponent</code> for line physics.
                         Conflict management via a <strong>QTE</strong> state (<code>StartQte</code> /
                         <code>RewindQte</code>) where players must "mash" buttons to win the contested object.
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-fish-2">
                         <strong class="text-secondary">> Feedback:</strong>
                         <strong>Juice</strong> system driven by <code>BlueprintNativeEvents</code> allowing designers to
                         iterate on Game Feel (Camera Shake, Force Feedback) without recompilation.
@@ -141,14 +145,14 @@
         <!-- SECTION 4: CATAPULT (REVERSE) -->
         <section class="feature-row reverse">
             <div class="feature-text">
-                <h3 class="section-title">CATAPULT & DEFENSE</h3>
+                <h3 class="section-title" data-i18n="umai-catapult-title">CATAPULT & DEFENSE</h3>
                 <ul class="spec-list" style="font-size: 1rem;">
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-catapult-1">
                         <strong class="text-secondary">> Ballistics:</strong>
                         Real-time parabolic trajectory calculation based on Velocity and a Power Curve
                         (<code>CurveShoot</code>).
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="umai-catapult-2">
                         <strong class="text-secondary">> Weapon Logic:</strong>
                         Class <code>ACouchCatapult</code> inheriting from <code>ACouchInteractableWeapons</code>.
                         Manual reloading system (<code>Reload</code>) requiring physical ammo
@@ -166,8 +170,8 @@
         <!-- SECTION 5: TOOLS -->
         <section class="feature-row">
             <div class="feature-text">
-                <h3 class="section-title">TOOLS & PLUGINS</h3>
-                <p class="description" style="font-size: 1rem;">
+                <h3 class="section-title" data-i18n="umai-tools-title">TOOLS & PLUGINS</h3>
+                <p class="description" style="font-size: 1rem;" data-i18n="umai-tools-text">
                     Development of a <strong>Level Selection Plugin</strong>: An Editor Utility Widget tool to organize,
                     categorize, and instantly load development and production maps, optimizing the entire team's
                     workflow.
@@ -184,7 +188,7 @@
 
     <footer class="transmission-panel text-center">
         <p>END OF TRANSMISSION // UMAI PROJECT</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>

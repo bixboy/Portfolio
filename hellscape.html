@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/hellscape.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
             </ul>
         </div>
     </nav>
@@ -33,19 +37,19 @@
             style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
             <div>
                 <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px #ff0000;">HELLSCAPE</h1>
-                <h2 class="subtitle text-red">FAST FPS / SURVIVAL</h2>
+                <h2 class="subtitle text-red" data-i18n="hell-subtitle">FAST FPS / SURVIVAL</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div class="stat-block">
-                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-label" data-i18n="stat-engine">ENGINE</span>
                     <span class="stat-value">UNREAL 5</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">ROLE</span>
+                    <span class="stat-label" data-i18n="stat-role">ROLE</span>
                     <span class="stat-value">GAMEPLAY PROG</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">DURATION</span>
+                    <span class="stat-label" data-i18n="stat-duration">DURATION</span>
                     <span class="stat-value">4 WEEKS</span>
                 </div>
             </div>
@@ -56,33 +60,33 @@
 
         <div class="engine-layout" style="align-items: flex-start;">
             <div class="engine-info" style="flex: 2;">
-                <h3 class="section-title">OPERATION: SURVIVAL</h3>
-                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                <h3 class="section-title" data-i18n="hell-op-survival-title">OPERATION: SURVIVAL</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="hell-op-survival-text">
                     Dans ce Fast-FPS infernal, vous devez survivre à des vagues de démons intérieurs. Progresse pour
                     devenir invincible.
                     Injustement emprisonné en enfer, seule la violence vous permettra de vous échapper.
                 </p>
 
-                <h3 class="section-title">TECHNICAL IMPLEMENTATION</h3>
+                <h3 class="section-title" data-i18n="hell-tech-title">TECHNICAL IMPLEMENTATION</h3>
                 <ul class="spec-list" style="font-size: 1rem;">
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="hell-tech-1">
                         <strong class="text-red">> AI System (Behavior Trees) :</strong> Création de deux archétypes
                         d'ennemis.
                         L'ennemi à distance (4 jambes) qui utilise le décor pour se positionner et fuir le joueur,
                         et l'ennemi de mêlée (2 jambes) qui rush le joueur agressivement.
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="hell-tech-2">
                         <strong class="text-red">> Player Controller :</strong> Implémentation d'un mouvement fluide
                         "Fast FPS" : Dash, Double Saut, et feedback de caméra dynamique. Système de combo d'attaques à 3
                         coups + attaque laser spéciale.
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="hell-tech-3">
                         <strong class="text-red">> VFX & Particles :</strong> Gestion des effets environnementaux
                         (Ambres
                         flottants, Brume au sol) et des feedbacks de combat (Sang projeté au sol et sur l'écran du
                         joueur, Flashs de dégâts).
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="hell-tech-4">
                         <strong class="text-red">> Dynamic HUD :</strong> Interface réactive avec barre de score
                         tremblante selon les combos, et teinte rouge progressive selon les dégâts reçus.
                     </li>
@@ -96,29 +100,29 @@
                             style="width:100%; height:100%; object-fit: cover;">
                     </div>
                     <div class="card-content">
-                        <p class="description text-center">Gameplay Screenshot</p>
+                        <p class="description text-center" data-i18n="hell-gameplay-screenshot">Gameplay Screenshot</p>
                     </div>
                 </article>
             </div>
         </div>
 
         <section class="section-padding">
-            <h3 class="section-title">COMBAT DATA</h3>
+            <h3 class="section-title" data-i18n="hell-combat-data-title">COMBAT DATA</h3>
             <div class="project-grid">
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/540a176f-85cd-4947-bfa1-f85b07ad1847_rw_600.gif?h=7d6d896af3d2e3246af262f8c4434fc8"
                         style="width: 100%; border: 1px solid var(--color-secondary);">
-                    <p class="text-center mt-2 font-mono">Enemy AI Behavior</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="hell-enemy-ai">Enemy AI Behavior</p>
                 </article>
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/ac0990e3-b2d2-4ed9-8c7c-2116746165aa_rw_600.gif?h=b4d5b0da4e38960f82492bfe508b93c6"
                         style="width: 100%; border: 1px solid var(--color-secondary);">
-                    <p class="text-center mt-2 font-mono">Environmental FX & Fog</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="hell-env-fx">Environmental FX & Fog</p>
                 </article>
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/6d391a73-e3ef-45dc-b436-e4fe04ee18b9_rw_600.gif?h=419e30efadd459f17eb8078f0ca26344"
                         style="width: 100%; border: 1px solid var(--color-secondary);">
-                    <p class="text-center mt-2 font-mono">Combat Feedback</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="hell-combat-fb">Combat Feedback</p>
                 </article>
             </div>
         </section>
@@ -126,11 +130,15 @@
     </main>
 
     <footer class="transmission-panel text-center">
-        <p>END OF TRANSMISSION // HELLSCAPE</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <p data-i18n="footer-eot-hell">END OF TRANSMISSION // HELLSCAPE</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>
+</body>
+
+</html>
+ipt>
 </body>
 
 </html>

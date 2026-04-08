@@ -14,6 +14,11 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -27,22 +32,22 @@
     <header id="hero" class="cockpit-view">
         <div class="container text-center">
             <h1 class="glitch-text" data-text="PIERRE LAMARE">PIERRE LAMARE</h1>
-            <h2 class="subtitle">GAME PROGRAMMER <span class="accent-text">[ C# / C++ ]</span></h2>
+            <h2 class="subtitle"><span data-i18n="hero-subtitle">GAME PROGRAMMER</span> <span class="accent-text">[ C# / C++ ]</span></h2>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary hologram-btn">
-                    <span class="btn-content">INITIALISER PROJETS</span>
+                    <span class="btn-content" data-i18n="btn-init">INITIALISER PROJETS</span>
                     <span class="btn-glitch"></span>
                 </a>
                 <button id="start-sim-btn" class="btn btn-secondary hologram-btn"
                     style="border-color: #ff3333; color: #ff3333;">
-                    <span class="btn-content">COMBAT SIMULATION</span>
+                    <span class="btn-content" data-i18n="btn-sim-start">COMBAT SIMULATION</span>
                     <span class="btn-glitch" style="background: #ff3333;"></span>
                 </button>
             </div>
             <div class="status-indicators">
-                <span class="status-item">SYSTEM: ONLINE</span>
-                <span class="status-item">UE5: READY</span>
-                <span class="status-item">UNITY: ACTIVE</span>
+                <span class="status-item" data-i18n="status-system">SYSTEM: ONLINE</span>
+                <span class="status-item" data-i18n="status-ue5">UE5: READY</span>
+                <span class="status-item" data-i18n="status-unity">UNITY: ACTIVE</span>
             </div>
         </div>
     </header>
@@ -52,10 +57,10 @@
         <div class="container nav-container">
             <div class="nav-brand">PL-88</div>
             <ul class="nav-links">
-                <li><a href="#projects" class="nav-item">PROJETS</a></li>
-                <li><a href="#plugins" class="nav-item">PLUGINS</a></li>
-                <li><a href="#bix-engine" class="nav-item">BIX ENGINE</a></li>
-                <li><a href="#contact" class="nav-item">CONTACT</a></li>
+                <li><a href="#projects" class="nav-item" data-i18n="nav-projects">PROJETS</a></li>
+                <li><a href="#plugins" class="nav-item" data-i18n="nav-plugins">PLUGINS</a></li>
+                <li><a href="#bix-engine" class="nav-item" data-i18n="nav-engine">BIX ENGINE</a></li>
+                <li><a href="#contact" class="nav-item" data-i18n="nav-contact">CONTACT</a></li>
             </ul>
         </div>
     </nav>
@@ -64,7 +69,7 @@
         <!-- PROJECTS SECTION -->
         <section id="projects" class="section-padding">
             <div class="container">
-                <h3 class="section-title">BASE DE DONNÉES <span class="blinking-cursor">_</span></h3>
+                <h3 class="section-title"><span data-i18n="section-projects">BASE DE DONNÉES</span> <span class="blinking-cursor">_</span></h3>
 
                 <div class="project-grid">
                     <article class="data-card hologram-card">
@@ -80,9 +85,9 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">LEAD DEV</span>
                             </div>
-                            <p class="description">Jeu de canapé 4 joueurs. Incarnez des sushis, pêchez des ingrédients
+                            <p class="description" data-i18n="umai-desc">Jeu de canapé 4 joueurs. Incarnez des sushis, pêchez des ingrédients
                                 et coulez vos rivaux !</p>
-                            <a href="umai.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="umai.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -105,9 +110,9 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">GAMEPLAY</span>
                             </div>
-                            <p class="description">Survival Horror. Infiltration d'un complexe SCP. Mécanique de sang et
+                            <p class="description" data-i18n="scp-desc">Survival Horror. Infiltration d'un complexe SCP. Mécanique de sang et
                                 environnement organique.</p>
-                            <a href="gamejam.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="gamejam.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -130,9 +135,9 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">GAMEPLAY</span>
                             </div>
-                            <p class="description">Fast-FPS infernal. Combattez vos démons intérieurs avec un système de
+                            <p class="description" data-i18n="hellscape-desc">Fast-FPS infernal. Combattez vos démons intérieurs avec un système de
                                 mouvement avancé.</p>
-                            <a href="hellscape.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="hellscape.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -155,9 +160,9 @@
                                 <span class="tag tag-lang">C++ 20</span>
                                 <span class="tag tag-role">SOLO</span>
                             </div>
-                            <p class="description">Moteur de jeu 2D Custom. Box2D, ImGui et Éditeur Visuel complet.
+                            <p class="description" data-i18n="bix-desc">Moteur de jeu 2D Custom. Box2D, ImGui et Éditeur Visuel complet.
                             </p>
-                            <a href="bix_engine.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="bix_engine.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -180,9 +185,9 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">SOLO</span>
                             </div>
-                            <p class="description">FPS Solo Survie. Système d'armes complet, IA de horde et économie de
+                            <p class="description" data-i18n="zombie-desc">FPS Solo Survie. Système d'armes complet, IA de horde et économie de
                                 jeu.</p>
-                            <a href="zombie.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="zombie.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -205,9 +210,9 @@
                                 <span class="tag tag-lang">C#</span>
                                 <span class="tag tag-role">TEAM</span>
                             </div>
-                            <p class="description">Jeu de stratégie mobile. Construction de vaisseaux et batailles
+                            <p class="description" data-i18n="beepboop-desc">Jeu de stratégie mobile. Construction de vaisseaux et batailles
                                 tactiques.</p>
-                            <a href="beepboop.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="beepboop.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -230,9 +235,9 @@
                                 <span class="tag tag-lang">C#</span>
                                 <span class="tag tag-role">TEAM</span>
                             </div>
-                            <p class="description">Clicker stratégie. Gestion d'armée, skills trees et combats de boss.
+                            <p class="description" data-i18n="army-desc">Clicker stratégie. Gestion d'armée, skills trees et combats de boss.
                             </p>
-                            <a href="army.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="army.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -255,9 +260,33 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">TEAM</span>
                             </div>
-                            <p class="description">Shooter Arcade Neo-Retro. Hommage minimaliste aux classiques du
+                            <p class="description" data-i18n="2042-desc">Shooter Arcade Neo-Retro. Hommage minimaliste aux classiques du
                                 genre.</p>
-                            <a href="2042.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                                                    <a href="2042.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                        <div class="card-decorations">
+                            <span class="corner top-left"></span>
+                            <span class="corner top-right"></span>
+                            <span class="corner bottom-left"></span>
+                            <span class="corner bottom-right"></span>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card">
+                        <div class="card-visual">
+                            <img src="assets/protocol_sync.png"
+                                alt="Protocol: Sync" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title" style="color: var(--color-secondary);">PROTOCOL: SYNC</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine" style="border-color: var(--color-secondary); color: var(--color-secondary);">ENET / UDP</span>
+                                <span class="tag tag-lang">C++ 20</span>
+                                <span class="tag tag-role">SOLO</span>
+                            </div>
+                            <p class="description" data-i18n="net-desc">Hub de mini-jeux multijoueurs. Architecture Client/Server custom, UDP et sérialisation binaire.</p>
+                            <a href="protocol_sync.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -273,7 +302,7 @@
         <!-- PLUGINS SECTION -->
         <section id="plugins" class="section-padding">
             <div class="container">
-                <h3 class="section-title">EXTENSIONS SYSTÈME (PLUGINS) <span class="blinking-cursor">_</span></h3>
+                <h3 class="section-title" data-i18n="section-plugins">EXTENSIONS SYSTÈME (PLUGINS)</h3>
                 <div class="project-grid">
                     <article class="data-card hologram-card">
                         <div class="card-visual">
@@ -290,9 +319,9 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">MODULE</span>
                             </div>
-                            <p class="description">Framework RTS complet. Gestion d'unités, formations, et UI tactique.
+                            <p class="description" data-i18n="jupiter-desc">Framework RTS complet. Gestion d'unités, formations, et UI tactique.
                             </p>
-                            <a href="jupiter.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="jupiter.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -317,10 +346,10 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">MODULE</span>
                             </div>
-                            <p class="description">Backend multijoueur. Sessions, Host Migration, et Chat System
+                            <p class="description" data-i18n="nexus-desc">Backend multijoueur. Sessions, Host Migration, et Chat System
                                 sécurisé.
                             </p>
-                            <a href="nexus.html" class="card-link">ACCÉDER AUX DONNÉES >></a>
+                            <a href="nexus.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left"></span>
@@ -347,9 +376,9 @@
                                 <span class="tag tag-role"
                                     style="border-color: #a855f7; color: #a855f7;">VEHICLES</span>
                             </div>
-                            <p class="description">Framework de locomotion spatiale. Système complet de véhicules
+                            <p class="description" data-i18n="stellar-desc">Framework de locomotion spatiale. Système complet de véhicules
                                 multi-crew et tourelles.</p>
-                            <a href="stellar.html" class="card-link" style="color: #a855f7;">ACCÉDER AUX DONNÉES >></a>
+                            <a href="stellar.html" class="card-link" data-i18n="btn-access" style="color: #a855f7;">ACCÉDER AUX DONNÉES >></a>
                         </div>
                         <div class="card-decorations">
                             <span class="corner top-left" style="border-color: #a855f7;"></span>
@@ -367,17 +396,17 @@
             <div class="container">
                 <div class="engine-layout">
                     <div class="engine-info">
-                        <h3 class="section-title text-red">CŒUR DU RÉACTEUR : BIX ENGINE</h3>
+                        <h3 class="section-title text-red" data-i18n="section-engine">CŒUR DU RÉACTEUR : BIX ENGINE</h3>
                         <div class="engine-specs">
-                            <p class="tech-text">Moteur de jeu 2D/3D écrit à partir de zéro en C++ moderne.</p>
+                            <p class="tech-text" data-i18n="engine-desc">Moteur de jeu 2D/3D écrit à partir de zéro en C++ moderne.</p>
                             <ul class="spec-list">
-                                <li>> Architecture Entity-Component (Object -> Actor)</li>
-                                <li>> Suite d'outils d'édition (ImGui Docking)</li>
-                                <li>> Physique Box2D Intégrée</li>
-                                <li>> Pipeline de Build & Cooking d'Assets</li>
+                                <li data-i18n="engine-spec-1">> Architecture Entity-Component (Object -> Actor)</li>
+                                <li data-i18n="engine-spec-2">> Suite d'outils d'édition (ImGui Docking)</li>
+                                <li data-i18n="engine-spec-3">> Physique Box2D Intégrée</li>
+                                <li data-i18n="engine-spec-4">> Pipeline de Build & Cooking d'Assets</li>
                             </ul>
                             <a href="bix_engine.html" class="btn btn-danger hologram-btn mt-4">
-                                <span class="btn-content">ANALYSE DU MOTEUR</span>
+                                <span class="btn-content" data-i18n="btn-engine-analysis">ANALYSE DU MOTEUR</span>
                             </a>
                         </div>
                     </div>
@@ -398,8 +427,8 @@
     <!-- FOOTER -->
     <footer id="contact" class="transmission-panel">
         <div class="container text-center">
-            <h3 class="section-title">CANAL DE TRANSMISSION</h3>
-            <p>Fréquence ouverte pour opportunités de missions.</p>
+            <h3 class="section-title" data-i18n="footer-title">CANAL DE TRANSMISSION</h3>
+            <p data-i18n="footer-text">Fréquence ouverte pour opportunités de missions.</p>
 
             <div class="social-links">
                 <a href="#" class="hologram-link">[ LINKEDIN ]</a>
@@ -408,7 +437,7 @@
             </div>
 
             <div class="footer-meta">
-                <p>ID: PIERRE-LAMARE // STATUS: AVAILABLE</p>
+                <p data-i18n="footer-meta">ID: PIERRE-LAMARE // STATUS: AVAILABLE</p>
                 <p>© 2026 IMPERIAL DATAPAD v2.0</p>
             </div>
         </div>

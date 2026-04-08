@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/zombie.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
             </ul>
         </div>
     </nav>
@@ -33,19 +37,19 @@
             style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
             <div>
                 <h1 class="glitch-text" style="font-size: 4rem;">PROJET ZOMBIE</h1>
-                <h2 class="subtitle text-green">FPS MULTIPLAYER / SURVIVAL</h2>
+                <h2 class="subtitle text-green" data-i18n="zom-subtitle">FPS MULTIPLAYER / SURVIVAL</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div class="stat-block">
-                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-label" data-i18n="stat-engine">ENGINE</span>
                     <span class="stat-value">UNREAL 5</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">ROLE</span>
+                    <span class="stat-label" data-i18n="stat-role">ROLE</span>
                     <span class="stat-value">SOLO DEV</span>
                 </div>
                 <div class="stat-block">
-                    <span class="stat-label">PLATFORM</span>
+                    <span class="stat-label" data-i18n="stat-platform">PLATFORM</span>
                     <span class="stat-value">PC</span>
                 </div>
             </div>
@@ -55,8 +59,8 @@
     <main class="container section-padding">
 
         <section class="mb-5">
-            <h3 class="section-title">MISSION BRIEFING</h3>
-            <p class="description" style="font-size: 1.1rem; max-width: 800px;">
+            <h3 class="section-title" data-i18n="zom-mission-title">MISSION BRIEFING</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 800px;" data-i18n="zom-mission-text">
                 Dans les confins de l’espace, la survie est votre seule mission. Vous êtes un soldat d'élite, piégé sur
                 une station spatiale abandonnée.
                 Des hordes de zombies extraterrestres déchaînés attaquent sans relâche, devenant de plus en plus
@@ -67,35 +71,35 @@
         </section>
 
         <section class="mb-5">
-            <h3 class="section-title">SYSTEM ARCHITECTURE</h3>
+            <h3 class="section-title" data-i18n="zom-arch-title">SYSTEM ARCHITECTURE</h3>
             <div class="tech-grid"
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                 <div class="hologram-card p-4">
-                    <h4 class="text-green mb-2">> Interactions & Economy</h4>
+                    <h4 class="text-green mb-2" data-i18n="zom-arch-1">> Interactions & Economy</h4>
                     <p>Système complet d'économie : Points gagnés par kill. Achat d'armes (Mur/Boîte Mystère), ouverture
                         de portes.</p>
                     <p class="mt-2"><strong>Perk Machines :</strong> Architecture modulaire via Enum. Changement
                         automatique du modèle 3D et du bonus appliqué (ex: Boost PV) selon la configuration.</p>
                 </div>
                 <div class="hologram-card p-4">
-                    <h4 class="text-green mb-2">> Weapon Systems</h4>
+                    <h4 class="text-green mb-2" data-i18n="zom-arch-2">> Weapon Systems</h4>
                     <p>Gestion Slots (Principale/Secondaire). Modes de tir commutables (Auto, Semi, Single). Animation
                         de rechargement et visée procédurale adaptative.</p>
                 </div>
                 <div class="hologram-card p-4">
-                    <h4 class="text-green mb-2">> AI & Behavior</h4>
+                    <h4 class="text-green mb-2" data-i18n="zom-arch-3">> AI & Behavior</h4>
                     <p>Comportement de horde. Tracking du joueur et navigation complexe dans la station spatiale.</p>
                 </div>
             </div>
         </section>
 
         <section class="section-padding">
-            <h3 class="section-title">VISUAL LOGS</h3>
+            <h3 class="section-title" data-i18n="zom-visual-logs-title">VISUAL LOGS</h3>
             <div class="project-grid">
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/9eed0d94-ed89-45cb-8071-549f67b28402_rwc_0x125x1024x768x1024.jpeg?h=24dfc7148a24da7c7330786a35fe6ea4"
                         style="width: 100%; border: 1px solid var(--color-primary-dim);">
-                    <p class="text-center mt-2 font-mono">Gameplay Environment</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="zom-gameplay-env">Gameplay Environment</p>
                 </article>
             </div>
         </section>
@@ -103,11 +107,15 @@
     </main>
 
     <footer class="transmission-panel text-center">
-        <p>END OF TRANSMISSION // PROJET ZOMBIE</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <p data-i18n="footer-eot-zombie">END OF TRANSMISSION // PROJET ZOMBIE</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>
+</body>
+
+</html>
+ipt>
 </body>
 
 </html>

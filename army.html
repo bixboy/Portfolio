@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/army.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
             </ul>
         </div>
     </nav>
@@ -33,7 +37,7 @@
             style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
             <div>
                 <h1 class="glitch-text" style="font-size: 4rem; text-shadow: 4px 4px #aa8800;">ARMY CLICKER</h1>
-                <h2 class="subtitle" style="color: #eebb00;">MOBILE CLICKER / STRATEGY</h2>
+                <h2 class="subtitle" style="color: #eebb00;" data-i18n="army-subtitle">MOBILE CLICKER / STRATEGY</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div class="stat-block" style="border-color: #eebb00; color: #eebb00;">ENGINE: UNITY</div>
@@ -47,23 +51,23 @@
 
         <div class="engine-layout" style="align-items: flex-start;">
             <div class="engine-info" style="flex: 2;">
-                <h3 class="section-title">OPERATION DETAILS</h3>
-                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                <h3 class="section-title" data-i18n="army-op-details-title">OPERATION DETAILS</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="army-op-details-text">
                     Jeu mobile où l'on commande le spawn de soldats pour combattre des vagues de monstres.
                     Améliorez vos statistiques, débloquez des compétences et vainquez le boss pour progresser.
                 </p>
 
-                <h3 class="section-title">TECHNICAL SPECS</h3>
+                <h3 class="section-title" data-i18n="army-tech-specs-title">TECHNICAL SPECS</h3>
                 <ul class="spec-list" style="font-size: 1rem;">
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="army-tech-1">
                         <strong style="color: #eebb00;">> Soldier Logic :</strong> Gestion du spawn (clic + limite),
                         Pathfinding simple vers l'ennemi le plus proche, Système de combat automatique (HP/Atk).
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="army-tech-2">
                         <strong style="color: #eebb00;">> Enemy System :</strong> Détection de portée, Drop de monnaie à
                         la mort, Barres de vie dynamiques.
                     </li>
-                    <li style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="army-tech-3">
                         <strong style="color: #eebb00;">> UI & Progression :</strong> Arbre de compétences avec
                         conditions de déblocage et pop-ups d'info. Animation de transition spectaculaire pour l'arrivée
                         du Boss.
@@ -78,24 +82,24 @@
                             style="width:100%; height:100%; object-fit: contain;">
                     </div>
                     <div class="card-content">
-                        <p class="description text-center">UI & Skills</p>
+                        <p class="description text-center" data-i18n="army-ui-skills">UI & Skills</p>
                     </div>
                 </article>
             </div>
         </div>
 
         <section class="section-padding">
-            <h3 class="section-title">COMBAT FOOTAGE</h3>
+            <h3 class="section-title" data-i18n="army-combat-footage-title">COMBAT FOOTAGE</h3>
             <div class="project-grid">
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/2906527d-6934-44a4-b204-e83ad7a600c4_rw_600.gif?h=745c7ec68cd17dd10129d699015f41ae"
                         style="width: 100%;">
-                    <p class="text-center mt-2 font-mono">Soldier Spawning & Combat</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="army-spawn-combat">Soldier Spawning & Combat</p>
                 </article>
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/9fabcb36-1a98-433f-a725-85912bf814e8_rw_600.gif?h=a38530a3a5da002a2822e7ad70a18a06"
                         style="width: 100%;">
-                    <p class="text-center mt-2 font-mono">Enemy Logic</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="army-enemy-logic">Enemy Logic</p>
                 </article>
             </div>
         </section>
@@ -103,11 +107,14 @@
     </main>
 
     <footer class="transmission-panel text-center">
-        <p>END OF TRANSMISSION // ARMY CLICKER</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <p data-i18n="footer-eot-army">END OF TRANSMISSION // ARMY CLICKER</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>
 </body>
+
+</html>
+
 
 </html>

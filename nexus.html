@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/nexus.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#plugins" class="nav-item">BACK TO PLUGINS</a></li>
+                <li><a href="index.html#plugins" class="nav-item" data-i18n="nav-plugins">BACK TO PLUGINS</a></li>
             </ul>
         </div>
     </nav>
@@ -33,14 +37,14 @@
             style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
             <div>
                 <h1 class="glitch-text" style="font-size: 4rem;">NEXUS ONLINE</h1>
-                <h2 class="subtitle text-cyan">MULTIPLAYER FRAMEWORK // UNREAL ENGINE 5</h2>
+                <h2 class="subtitle text-primary" data-i18n="nexus-desc">MULTIPLAYER BACKEND // UNREAL ENGINE 5</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div class="stat-block" style="border-color: var(--color-primary); color: var(--color-primary);">
-                    TYPE: <span style="color: white;">MODULE C++</span>
+                    PROTOCOL: <span style="color: white;" data-i18n="stat-udp-rpc">UDP / RPC</span>
                 </div>
                 <div class="stat-block" style="border-color: var(--color-primary); color: var(--color-primary);">
-                    ARCH: <span style="color: white;">SESSION-BASED</span>
+                    API: <span style="color: white;" data-i18n="stat-online-sub">ONLINE SUBSYSTEM</span>
                 </div>
             </div>
         </div>
@@ -50,8 +54,8 @@
 
         <!-- INTRO & ARCHITECTURE -->
         <section class="mb-5">
-            <h3 class="section-title">NEXUS FRAMEWORK CORE <span class="blinking-cursor">_</span></h3>
-            <p class="description mb-4">
+            <h3 class="section-title" data-i18n="nex-core">NEXUS FRAMEWORK CORE <span class="blinking-cursor">_</span></h3>
+            <p class="description mb-4" data-i18n="nex-core-desc">
                 Nexus Framework est une couche d'abstraction structurée au-dessus de l'<code>IOnlineSubsystem</code>
                 (Steam, EOS, Null).
                 Il expose la logique réseau complexe via des nœuds asynchrones Blueprint-friendly.
@@ -60,25 +64,25 @@
             <div class="hologram-card p-4" style="background: rgba(0, 20, 40, 0.8);">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                     <div>
-                        <h4 class="text-cyan mb-3">ASYNC TASK SYSTEM</h4>
+                        <h4 class="text-cyan mb-3" data-i18n="nex-async-title">ASYNC TASK SYSTEM</h4>
                         <ul class="feature-list">
-                            <li><strong>CreateSession</strong>: `UAsyncTask_CreateSession` gère automatiquement la
+                            <li data-i18n="nex-async-1"><strong>CreateSession</strong>: `UAsyncTask_CreateSession` gère automatiquement la
                                 destruction de l'ancienne session avant d'en créer une nouvelle, évitant les conflits.
                             </li>
-                            <li><strong>FindSessions</strong>: Wrapper autour de `FindSessions`, exposant les résultats
+                            <li data-i18n="nex-async-2"><strong>FindSessions</strong>: Wrapper autour de `FindSessions`, exposant les résultats
                                 sous forme de liste structurée avec Ping et PlayerCount.</li>
-                            <li><strong>JoinSession</strong>: Gère la résolution d'IP et le ClientTravel.</li>
+                            <li data-i18n="nex-async-3"><strong>JoinSession</strong>: Gère la résolution d'IP et le ClientTravel.</li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-cyan mb-3">ONLINE SUBSYSTEM WRAPPERS</h4>
+                        <h4 class="text-cyan mb-3" data-i18n="nex-wrap-title">ONLINE SUBSYSTEM WRAPPERS</h4>
                         <ul class="feature-list">
-                            <li><strong>Steam Integration</strong>: Support natif des lobbies Steam via
+                            <li data-i18n="nex-wrap-1"><strong>Steam Integration</strong>: Support natif des lobbies Steam via
                                 `FOnlineSessionSettings`.</li>
-                            <li><strong>Event Driven</strong>: Le `AOnlineSessionManager` diffuse des événements globaux
+                            <li data-i18n="nex-wrap-2"><strong>Event Driven</strong>: Le `AOnlineSessionManager` diffuse des événements globaux
                                 (`OnPlayerJoined`, `OnPlayerLeft`) pour l'UI, simplifiant la mise à jour des widgets
                                 comme le Lobby Screen.</li>
-                            <li><strong>Unique Net ID</strong>: Abstraction des PlatformIDs pour le banissement et le
+                            <li data-i18n="nex-wrap-3"><strong>Unique Net ID</strong>: Abstraction des PlatformIDs pour le banissement et le
                                 tracking cross-platform.</li>
                         </ul>
                     </div>
@@ -88,20 +92,20 @@
 
         <!-- SESSION & MIGRATION -->
         <section class="mb-5">
-            <h3 class="section-title text-cyan">SESSION & HOST MIGRATION</h3>
+            <h3 class="section-title text-cyan" data-i18n="nex-mig-title">SESSION & HOST MIGRATION</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
                 <div>
-                    <p class="description mb-3">
+                    <p class="description mb-3" data-i18n="nex-mig-desc">
                         La résilience des sessions est assurée par le <code>UNexusMigrationSubsystem</code>. En cas de
                         déconnexion de l'hôte, le système élit
                         automatiquement un nouveau leader sans interrompre la partie pour les clients restants.
                     </p>
                     <ul class="feature-list">
-                        <li><strong>Heir Election</strong>: Algorithme de sélection déterministe basé sur l'ancienneté
+                        <li data-i18n="nex-mig-1"><strong>Heir Election</strong>: Algorithme de sélection déterministe basé sur l'ancienneté
                             (PlayerID) pour désigner le nouvel hôte.</li>
-                        <li><strong>State Recovery</strong>: Restauration automatique des GameStates et des PlayerStates
+                        <li data-i18n="nex-mig-2"><strong>State Recovery</strong>: Restauration automatique des GameStates et des PlayerStates
                             après la migration.</li>
-                        <li><strong>Seamless Transition</strong>: Gestion transparente du Travel pour éviter les écrans
+                        <li data-i18n="nex-mig-3"><strong>Seamless Transition</strong>: Gestion transparente du Travel pour éviter les écrans
                             de chargement inutiles.</li>
                     </ul>
                     <div
@@ -135,17 +139,17 @@
             <div class="hologram-card p-4" style="background: rgba(0, 20, 40, 0.8);">
                 <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
                     <div>
-                        <h4 class="text-secondary mb-3">FILTERS & RULES ENGINE</h4>
-                        <p class="text-muted mb-3">
+                        <h4 class="text-secondary mb-3" data-i18n="nex-match-rules">FILTERS & RULES ENGINE</h4>
+                        <p class="text-muted mb-3" data-i18n="nex-match-rules-desc">
                             Le système de matchmaking repose sur des `SessionFilterPresets` configurables en DataAssets.
                             Il permet de définir des règles logiques complexes pour trouver la session parfaite.
                         </p>
                         <ul class="feature-list">
-                            <li><strong>Filter Rules</strong>: Prédicats logiques sérialisés (ex: `MapName == "Desert"
+                            <li data-i18n="nex-match-1"><strong>Filter Rules</strong>: Prédicats logiques sérialisés (ex: `MapName == "Desert"
                                 && Ping < 50`).</li>
-                            <li><strong>Sorting Rules</strong>: Tri dynamique des résultats (ex:
+                            <li data-i18n="nex-match-2"><strong>Sorting Rules</strong>: Tri dynamique des résultats (ex:
                                 `Ascending(PlayerCount)`).</li>
-                            <li><strong>Flexible Query</strong>: Abstraction des requêtes spécifiques au sous-système
+                            <li data-i18n="nex-match-3"><strong>Flexible Query</strong>: Abstraction des requêtes spécifiques au sous-système
                                 (Steam Lobbies vs EOS vs LAN).</li>
                         </ul>
                     </div>
@@ -170,13 +174,13 @@
 
         <!-- SOCIAL & CHAT -->
         <section class="mb-5">
-            <h3 class="section-title text-red">SOCIAL INFRASTRUCTURE</h3>
+            <h3 class="section-title text-red" data-i18n="nex-social-title">SOCIAL INFRASTRUCTURE</h3>
             <div class="hologram-card p-4 mb-5">
                 <div>
                     <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
                         <div>
-                            <h4 class="text-secondary mb-3">MODULE: NEXUS CHAT</h4>
-                            <p class="text-muted mb-3">
+                            <h4 class="text-secondary mb-3" data-i18n="nex-chat-title">MODULE: NEXUS CHAT</h4>
+                            <p class="text-muted mb-3" data-i18n="nex-chat-desc">
                                 Un système de messagerie temps réel extensible, conçu pour les communautés persistantes.
                                 Il intègre des fonctionnalités d'accessibilité et de synchronisation avancées.
                             </p>
@@ -191,28 +195,28 @@
                             </div>
 
                             <ul class="feature-list" style="margin-bottom: 2rem;">
-                                <li><strong>History Synchronization</strong>: Lors de la connexion (`OnRep`), les
+                                <li data-i18n="nex-chat-1"><strong>History Synchronization</strong>: Lors de la connexion (`OnRep`), les
                                     nouveaux
                                     joueurs reçoivent automatiquement les `N` derniers messages via
                                     `Client_ReceiveChatHistory`, assurant qu'ils ne manquent pas le contexte.</li>
-                                <li><strong>Text-to-Speech (TTS)</strong>: Le `NexusVoiceComponent` peut lire vocalement
+                                <li data-i18n="nex-chat-2"><strong>Text-to-Speech (TTS)</strong>: Le `NexusVoiceComponent` peut lire vocalement
                                     les
                                     messages entrants (`Speak()`), améliorant l'accessibilité ou permettant des annonces
                                     système audibles.</li>
-                                <li><strong>Command Parsing</strong>: Support des commandes type IRC
+                                <li data-i18n="nex-chat-3"><strong>Command Parsing</strong>: Support des commandes type IRC
                                     (<code>/w user msg</code>, <code>/kick user</code>, <code>/reply</code>).</li>
-                                <li><strong>UI Virtualization</strong>: Utilisation de <code>UListView</code> pour gérer
+                                <li data-i18n="nex-chat-4"><strong>UI Virtualization</strong>: Utilisation de <code>UListView</code> pour gérer
                                     des
                                     historiques de chat de milliers de lignes sans impact CPU.</li>
-                                <li><strong>Channel Routing</strong>: Système de dispatching dynamique pour isoler les
+                                <li data-i18n="nex-chat-5"><strong>Channel Routing</strong>: Système de dispatching dynamique pour isoler les
                                     flux
                                     de communication (Général vs Squad vs Party).</li>
-                                <li><strong>Blueprint Extensibility</strong>: Création de commandes custom (ex:
+                                <li data-i18n="nex-chat-6"><strong>Blueprint Extensibility</strong>: Création de commandes custom (ex:
                                     `/emote`)
                                     via `RegisterBlueprintCommand()`, permettant aux designers d'étendre le chat sans
                                     C++.
                                 </li>
-                                <li><strong>Smart Hyperlinks</strong>: Le module `NexusLinkHelpers` parse
+                                <li data-i18n="nex-chat-7"><strong>Smart Hyperlinks</strong>: Le module `NexusLinkHelpers` parse
                                     automatiquement
                                     les URLs et permet d'insérer des liens interactifs riches (Items, Quêtes, GPS)
                                     cliquables dans le chat.</li>
@@ -242,12 +246,11 @@
                     </div>
                 </div>
             </div>
-            </div>
         </section>
 
         <!-- ADMIN TOOLS -->
         <section class="mb-5">
-            <h3 class="section-title">ADMINISTRATION TOOLS</h3>
+            <h3 class="section-title" data-i18n="nex-admin-title">ADMINISTRATION TOOLS</h3>
             <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
                 <div>
                     <!-- IMAGE TEMPLATE: ADMIN PANEL -->
@@ -259,7 +262,7 @@
                     </div>
                 </div>
                 <div>
-                    <p class="description mb-3">
+                    <p class="description mb-3" data-i18n="nex-admin-desc">
                         Le <code>ANexusGameMode</code> expose une API d'administration complète, sécurisée par des
                         vérifications d'autorité strictes.
                         Les bannissements sont persistants et sérialisés.
@@ -288,7 +291,7 @@
 
     <footer class="transmission-panel text-center">
         <p>END OF TRANSMISSION // NEXUS ONLINE</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>

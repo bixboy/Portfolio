@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/beepboop.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
             </ul>
         </div>
     </nav>
@@ -33,7 +37,7 @@
             style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
             <div>
                 <h1 class="glitch-text" style="font-size: 4rem;">BEEPBOOP BATTLE</h1>
-                <h2 class="subtitle text-cyan">STRATEGY / REFLECTION</h2>
+                <h2 class="subtitle text-cyan" data-i18n="beep-subtitle">STRATEGY / REFLECTION</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div class="stat-block" style="border-color: var(--color-secondary); color: var(--color-secondary);">
@@ -52,8 +56,8 @@
     <main class="container section-padding">
 
         <section class="mb-5">
-            <h3 class="section-title">TACTICAL OVERVIEW</h3>
-            <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;">
+            <h3 class="section-title" data-i18n="beep-tactical-title">TACTICAL OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="beep-tactical-text">
                 Chaque capitaine robot possède son propre vaisseau unique, équipé d'armes redoutables.
                 Disposez les pièces vitales de votre vaisseau selon votre stratégie.
                 Esquivez les attaques ennemies et déjouez leurs défenses dans ce jeu de réflexion tactique.
@@ -69,52 +73,52 @@
         </section>
 
         <section class="mb-5">
-            <h3 class="section-title">DEV TOOLS IMPLEMENTATION</h3>
+            <h3 class="section-title" data-i18n="beep-dev-tools-title">DEV TOOLS IMPLEMENTATION</h3>
             <div class="tech-grid">
                 <div class="hologram-card">
-                    <h4 class="text-cyan">Audio System</h4>
-                    <p>Gestionnaire de musique intelligent. Playlist musique (boucle/aléatoire) et SFX
+                    <h4 class="text-cyan" data-i18n="beep-audio-title">Audio System</h4>
+                    <p data-i18n="beep-audio-text">Gestionnaire de musique intelligent. Playlist musique (boucle/aléatoire) et SFX
                         (PlaySoundExplosion). Système de dialogues vocaux contextuels (Win, Hit, etc.). Mixer audio
                         séparé (Global/Music).</p>
                 </div>
                 <div class="hologram-card">
-                    <h4 class="text-cyan">Localization Tool</h4>
-                    <p>Système de traduction basé sur XML. Outil personnalisé permettant de sélectionner quels textes
+                    <h4 class="text-cyan" data-i18n="beep-loc-title">Localization Tool</h4>
+                    <p data-i18n="beep-loc-text">Système de traduction basé sur XML. Outil personnalisé permettant de sélectionner quels textes
                         traduire via une liste centralisée.</p>
                 </div>
                 <div class="hologram-card">
-                    <h4 class="text-cyan">Dialogue System</h4>
-                    <p>Architecture événementielle pour les dialogues. Déclenchement automatique selon le contexte
+                    <h4 class="text-cyan" data-i18n="beep-diag-title">Dialogue System</h4>
+                    <p data-i18n="beep-diag-text">Architecture événementielle pour les dialogues. Déclenchement automatique selon le contexte
                         (Attaque, Victoire, Tuto) via `GetPlayListDialogueWin()`.</p>
                 </div>
             </div>
         </section>
 
         <section class="section-padding">
-            <h3 class="section-title">DATA ARTIFACTS</h3>
+            <h3 class="section-title" data-i18n="beep-data-artifacts-title">DATA ARTIFACTS</h3>
             <div class="project-grid">
                 <!-- Data extracted from extracted links -->
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/7412cc8f-d699-4668-975b-6a504a779452_rw_600.gif?h=b5b8c1ed1dbb861a7764f8490afdcfab"
                         style="width: 100%;">
-                    <p class="text-center mt-2 font-mono">Translation Tool in Action</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="beep-loc-action">Translation Tool in Action</p>
                 </article>
                 <article class="hologram-card">
                     <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/17d52ae6-c6de-4968-bbfc-f8114444ba41_rw_600.gif?h=3b0158822d13124b8cb81e9299dc371c"
                         style="width: 100%;">
-                    <p class="text-center mt-2 font-mono">Character Dialogue System</p>
+                    <p class="text-center mt-2 font-mono" data-i18n="beep-char-diag">Character Dialogue System</p>
                 </article>
             </div>
         </section>
 
         <section class="text-center section-padding">
             <a href="https://logre.itch.io/beep-boop-battle" target="_blank" class="btn btn-secondary hologram-btn">
-                <span class="btn-content">DOWNLOAD [ITCH.IO]</span>
+                <span class="btn-content" data-i18n="btn-download-itch">DOWNLOAD [ITCH.IO]</span>
                 <span class="btn-glitch"></span>
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.RavioliStudio.BeepBoopBattle" target="_blank"
                 class="btn btn-primary hologram-btn ml-4">
-                <span class="btn-content">GET ON PLAY STORE</span>
+                <span class="btn-content" data-i18n="btn-playstore">GET ON PLAY STORE</span>
                 <span class="btn-glitch"></span>
             </a>
         </section>
@@ -122,11 +126,15 @@
     </main>
 
     <footer class="transmission-panel text-center">
-        <p>END OF TRANSMISSION // BEEPBOOP BATTLE</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <p data-i18n="footer-eot-beep">END OF TRANSMISSION // BEEPBOOP BATTLE</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>
+</body>
+
+</html>
+
 </body>
 
 </html>

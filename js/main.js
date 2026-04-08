@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let lasers = [];
     let mouseX = 0;
     let mouseY = 0;
+    let stars = [];
+    const canvas = document.getElementById('space-canvas');
 
     function simpleWrapOffset(val, max) {
         if (val < 0)
@@ -22,11 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- STARFIELD SYSTEM (CANVAS) ---
-    const canvas = document.getElementById('space-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let width, height;
-        let stars = [];
 
         const DRIFT_X = 0.05;
         const DRIFT_Y = 0.01;
@@ -373,13 +373,13 @@ document.addEventListener('DOMContentLoaded', () => {
             simBtn.addEventListener('click', () => {
                 gameActive = !gameActive;
                 if (gameActive) {
-                    simBtn.querySelector('.btn-content').innerText = "TERMINATE SIMULATION";
+                    simBtn.querySelector('.btn-content').innerText = translations[i18n.currentLang]["btn-sim-stop"];
                     score = 0;
                     enemies = [];
                     lasers = [];
                 }
                 else {
-                    simBtn.querySelector('.btn-content').innerText = "COMBAT SIMULATION";
+                    simBtn.querySelector('.btn-content').innerText = translations[i18n.currentLang]["btn-sim-start"];
                 }
             });
         }
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- HYPERSPACE LOGIC ---
-    function engageHyperspace() {
+    window.engageHyperspace = function() {
         if (warpMode)
             return;
 
@@ -532,12 +532,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const targetElement = document.querySelector(href);
                 if (targetElement) {
-                    engageHyperspace();
+                    window.engageHyperspace();
                     smoothScrollTo(targetElement, 1500);
                 }
             }
             else if (href && !href.startsWith('#')) {
-                engageHyperspace();
+                window.engageHyperspace();
             }
         });
     });

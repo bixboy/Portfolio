@@ -12,6 +12,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bix_engine.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -23,7 +27,7 @@
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
             </ul>
         </div>
     </nav>
@@ -38,8 +42,8 @@
                 <div class="tech-tags"
                     style="margin-top: 1rem; background: rgba(0,0,0,0.7); padding: 10px; display: inline-block;">
                     <span class="tag tag-lang">C++ 20</span>
-                    <span class="tag tag-engine">FULL EDITOR SUITE</span>
-                    <span class="tag tag-role">CUSTOM REFLECTION</span>
+                    <span class="tag tag-engine" data-i18n="tag-editor-suite">FULL EDITOR SUITE</span>
+                    <span class="tag tag-role" data-i18n="tag-custom-reflection">CUSTOM REFLECTION</span>
                 </div>
             </div>
         </div>
@@ -48,8 +52,8 @@
     <main class="container section-padding">
 
         <section class="mb-5">
-            <h3 class="section-title">ENGINE ECOSYSTEM</h3>
-            <p class="description" style="font-size: 1.1rem; max-width: 900px;">
+            <h3 class="section-title" data-i18n="bix-eco-title">ENGINE ECOSYSTEM</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;" data-i18n="bix-eco-desc">
                 Le <strong>Bix Engine</strong> est un environnement de développement complet.
                 Au-delà d'un simple runtime, il intègre une suite d'outils d'édition natifs ("Page System"), un pipeline
                 de build (BixAssetTool) et une architecture de données orientée performance.
@@ -58,18 +62,18 @@
 
         <!-- --- SECTION: SUITE OUTILS (Layout Interactif) --- -->
         <section class="mb-5">
-            <h3 class="section-title">SUITE OUTILS & EDITEURS</h3>
+            <h3 class="section-title" data-i18n="bix-suite-title">SUITE OUTILS & EDITEURS</h3>
 
             <!-- Feature Row 1: Editor System -->
             <div class="feature-row">
                 <div class="feature-text hologram-card tech-item">
-                    <h4>>>> EDITOR PAGE SYSTEM</h4>
-                    <p>Architecture UI fenêtrée basée sur le concept de <strong>Pages</strong> et <strong>Docking
+                    <h4 data-i18n="bix-page-title">>>> EDITOR PAGE SYSTEM</h4>
+                    <p data-i18n="bix-page-desc">Architecture UI fenêtrée basée sur le concept de <strong>Pages</strong> et <strong>Docking
                             Spaces</strong>.</p>
                     <ul class="feature-list">
-                        <li>Fenêtres flottantes et layouts persistants (ImGui Docking).</li>
-                        <li>Système de Focus et Raccourcis globaux.</li>
-                        <li>Inspection en temps réel de n'importe quel <code>UObject</code>.</li>
+                        <li data-i18n="bix-page-1">Fenêtres flottantes et layouts persistants (ImGui Docking).</li>
+                        <li data-i18n="bix-page-2">Système de Focus et Raccourcis globaux.</li>
+                        <li data-i18n="bix-page-3">Inspection en temps réel de n'importe quel <code>UObject</code>.</li>
                     </ul>
                 </div>
                 <div class="feature-visual">
@@ -83,12 +87,12 @@
             <!-- Feature Row 2: Sprite Slicer -->
             <div class="feature-row">
                 <div class="feature-text hologram-card tech-item">
-                    <h4>>>> VISUAL SPRITE ATLAS SLICER</h4>
-                    <p>Outil dédié au découpage de textures et à la génération d'animations.</p>
+                    <h4 data-i18n="bix-atlas-title">>>> VISUAL SPRITE ATLAS SLICER</h4>
+                    <p data-i18n="bix-atlas-desc">Outil dédié au découpage de textures et à la génération d'animations.</p>
                     <ul class="feature-list">
-                        <li>Définition visuelle des régions de sprites.</li>
-                        <li>Points de pivots et métadonnées d'animation.</li>
-                        <li>Export optimisé en <code>.atlas</code> binaire.</li>
+                        <li data-i18n="bix-atlas-1">Définition visuelle des régions de sprites.</li>
+                        <li data-i18n="bix-atlas-2">Points de pivots et métadonnées d'animation.</li>
+                        <li data-i18n="bix-atlas-3">Export optimisé en <code>.atlas</code> binaire.</li>
                     </ul>
                 </div>
                 <div class="feature-visual">
@@ -102,28 +106,28 @@
             <!-- Feature Row 3: Prefab & Audio -->
             <div class="tech-grid">
                 <div class="tech-item hologram-card">
-                    <h4>>>> ACTOR & PREFAB EDITOR</h4>
-                    <p>
+                    <h4 data-i18n="bix-prefab-title">>>> ACTOR & PREFAB EDITOR</h4>
+                    <p data-i18n="bix-prefab-desc">
                         Éditeur visuel d'objets (Prefabs) pour la composition d'entités.
                     </p>
                     <div class="sys-diagram">
                         Components -> Visualization -> Serialization
                     </div>
                     <ul class="feature-list">
-                        <li>Assemblage drag & drop de composants (Sprite, Collider, Script).</li>
-                        <li>Modification hiérarchique : les changements sur le Prefab se propagent aux instances.</li>
-                        <li>Sauvegarde en JSON lisible ou binaire optimisé.</li>
+                        <li data-i18n="bix-prefab-1">Assemblage drag & drop de composants (Sprite, Collider, Script).</li>
+                        <li data-i18n="bix-prefab-2">Modification hiérarchique : les changements sur le Prefab se propagent aux instances.</li>
+                        <li data-i18n="bix-prefab-3">Sauvegarde en JSON lisible ou binaire optimisé.</li>
                     </ul>
                 </div>
                 <div class="tech-item hologram-card">
-                    <h4>>>> AUDIO CONTAINER SYSTEM</h4>
-                    <p>
+                    <h4 data-i18n="bix-audio-title">>>> AUDIO CONTAINER SYSTEM</h4>
+                    <p data-i18n="bix-audio-desc">
                         Système avancé de gestion des assets sonores.
                     </p>
                     <ul class="feature-list">
-                        <li><strong>Randomization :</strong> Variation automatique du Pitch et du Volume.</li>
-                        <li><strong>Virtualization :</strong> Gestion des voix via Miniaudio.</li>
-                        <li><strong>Looping & Streaming :</strong> Contrôle fin de la lecture mémoire.</li>
+                        <li data-i18n="bix-audio-1"><strong>Randomization :</strong> Variation automatique du Pitch et du Volume.</li>
+                        <li data-i18n="bix-audio-2"><strong>Virtualization :</strong> Gestion des voix via Miniaudio.</li>
+                        <li data-i18n="bix-audio-3"><strong>Looping & Streaming :</strong> Contrôle fin de la lecture mémoire.</li>
                     </ul>
                 </div>
             </div>
@@ -142,30 +146,30 @@
                     </div>
                 </div>
                 <div class="feature-text">
-                    <h4 class="section-subtitle" style="color: var(--color-primary); margin-bottom: 1rem;">> INPUT
+                    <h4 class="section-subtitle" style="color: var(--color-primary); margin-bottom: 1rem;" data-i18n="bix-input-title">> INPUT
                         SYSTEM (Action & Axis)</h4>
                     <div class="hologram-card tech-item">
-                        <p>Le système d'input sépare la logique de jeu du matériel physique via une abstraction
+                        <p data-i18n="bix-input-desc">Le système d'input sépare la logique de jeu du matériel physique via une abstraction
                             complète.</p>
                         <ul class="feature-list">
-                            <li><strong>BindAction :</strong> Événements discrets (Saut, Tir). Gère les états
+                            <li data-i18n="bix-input-1"><strong>BindAction :</strong> Événements discrets (Saut, Tir). Gère les états
                                 <code>Pressed</code>, <code>Released</code> et <code>Hold</code>.
                             </li>
-                            <li><strong>BindAxis :</strong> Valeurs continues (Mouvement). Normalise automatiquement les
+                            <li data-i18n="bix-input-2"><strong>BindAxis :</strong> Valeurs continues (Mouvement). Normalise automatiquement les
                                 entrées Clavier/Gamepad entre [-1, 1].</li>
-                            <li>Support du Hot-Plugging de manettes SDL3.</li>
+                            <li data-i18n="bix-input-3">Support du Hot-Plugging de manettes SDL3.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- Component Grid -->
-            <h4 class="section-subtitle" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 1rem;">>
+            <h4 class="section-subtitle" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 1rem;" data-i18n="bix-comp-title">>
                 COMPONENT DATABASE</h4>
             <div class="tech-grid">
                 <div class="tech-item hologram-card">
-                    <h4>[GFX] SPRITE ANIMATOR</h4>
-                    <p>Moteur d'animation 2D haute performance.</p>
+                    <h4 data-i18n="bix-comp-gfx">[GFX] SPRITE ANIMATOR</h4>
+                    <p data-i18n="bix-comp-gfx-desc">Moteur d'animation 2D haute performance.</p>
                     <ul class="feature-list">
                         <li>Lecture native des fichiers <code>.atlas</code> binaires.</li>
                         <li>Machine à états (Idle -> Run -> Jump).</li>
@@ -173,8 +177,8 @@
                     </ul>
                 </div>
                 <div class="tech-item hologram-card">
-                    <h4>[PHYS] BOX COLLIDER</h4>
-                    <p>Intégration profonde de Box2D.</p>
+                    <h4 data-i18n="bix-comp-phys">[PHYS] BOX COLLIDER</h4>
+                    <p data-i18n="bix-comp-phys-desc">Intégration profonde de Box2D.</p>
                     <ul class="feature-list">
                         <li><strong>Modes :</strong> Static, Kinematic, Dynamic.</li>
                         <li><strong>Material :</strong> Friction, Restitution (Rebond), Densité.</li>
@@ -183,8 +187,8 @@
                     </ul>
                 </div>
                 <div class="tech-item hologram-card">
-                    <h4>[SFX] AUDIO SOURCE</h4>
-                    <p>Émetteur sonore 3D.</p>
+                    <h4 data-i18n="bix-comp-sfx">[SFX] AUDIO SOURCE</h4>
+                    <p data-i18n="bix-comp-sfx-desc">Émetteur sonore 3D.</p>
                     <ul class="feature-list">
                         <li>Spatialisation basée sur la distance (Min/Max).</li>
                         <li>Pooling automatique des voix pour éviter la surcharge CPU.</li>
@@ -192,8 +196,8 @@
                     </ul>
                 </div>
                 <div class="tech-item hologram-card">
-                    <h4>[CORE] CAMERA</h4>
-                    <p>Système de vue flexible.</p>
+                    <h4 data-i18n="bix-comp-cam">[CORE] CAMERA</h4>
+                    <p data-i18n="bix-comp-cam-desc">Système de vue flexible.</p>
                     <ul class="feature-list">
                         <li>Gestion du Zoom et de l'Offset dynamique.</li>
                         <li>Helpers <code>WorldToScreen</code> et <code>ScreenToWorld</code> pour le UI.</li>
@@ -205,12 +209,12 @@
 
         <!-- --- SECTION: ARCHITECTURE & CORE (Grid Layout) --- -->
         <section class="mb-5">
-            <h3 class="section-title">CORE & ARCHITECTURE</h3>
+            <h3 class="section-title" data-i18n="bix-arch-title">CORE & ARCHITECTURE</h3>
             <div class="tech-grid">
 
                 <div class="tech-item hologram-card">
-                    <h4>>>> UOBJECT DATAMODEL</h4>
-                    <p>La classe racine de tout le système de réflexion.</p>
+                    <h4 data-i18n="bix-arch-obj">>>> UOBJECT DATAMODEL</h4>
+                    <p data-i18n="bix-arch-obj-desc">La classe racine de tout le système de réflexion.</p>
                     <ul class="feature-list">
                         <li>Apporte l'identité unique (UUID) à chaque entité.</li>
                         <li>Embarque le Transform (Position/Rotation/Scale).</li>
@@ -219,8 +223,8 @@
                 </div>
 
                 <div class="tech-item hologram-card">
-                    <h4>>>> SCENE SYSTEM</h4>
-                    <p>Conteneur hermétique du gameplay.</p>
+                    <h4 data-i18n="bix-arch-scene">>>> SCENE SYSTEM</h4>
+                    <p data-i18n="bix-arch-scene-desc">Conteneur hermétique du gameplay.</p>
                     <ul class="feature-list">
                         <li>Encapsule son propre monde physique <strong>Box2D</strong>.</li>
                         <li>Gère le cycle de vie des Acteurs (Spawn/Destroy).</li>
@@ -229,8 +233,8 @@
                 </div>
 
                 <div class="tech-item hologram-card">
-                    <h4>>>> BINARY SERIALIZATION</h4>
-                    <p>Système de persistance haute performance.</p>
+                    <h4 data-i18n="bix-arch-seriv">>>> BINARY SERIALIZATION</h4>
+                    <p data-i18n="bix-arch-seriv-desc">Système de persistance haute performance.</p>
                     <ul class="feature-list">
                         <li>Sauvegarde l'état complet du monde en binaire compact.</li>
                         <li>Utilise un système de <strong>Factory</strong> pour réinstancier les acteurs par leur nom de
@@ -240,8 +244,8 @@
                 </div>
 
                 <div class="tech-item hologram-card">
-                    <h4>>>> CUSTOM MATH</h4>
-                    <p>Bibliothèque mathématique optimisée C++20.</p>
+                    <h4 data-i18n="bix-arch-math">>>> CUSTOM MATH</h4>
+                    <p data-i18n="bix-arch-math-desc">Bibliothèque mathématique optimisée C++20.</p>
                     <ul class="feature-list">
                         <li>Structures <code>Vec3</code>, <code>Matrix4</code>, <code>Rotator</code> (Euler) faites
                             maison.</li>
@@ -256,7 +260,7 @@
 
         <section class="text-center section-padding">
             <a href="https://github.com/bixboy" target="_blank" class="btn btn-primary hologram-btn">
-                <span class="btn-content">ACCESS SOURCE CODE [GITHUB]</span>
+                <span class="btn-content" data-i18n="btn-source">ACCESS SOURCE CODE [GITHUB]</span>
                 <span class="btn-glitch"></span>
             </a>
         </section>
@@ -265,7 +269,7 @@
 
     <footer class="transmission-panel text-center">
         <p>END OF TRANSMISSION // BIX ENGINE</p>
-        <a href="index.html" class="hologram-link">[ RETURN TO BASE ]</a>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>
