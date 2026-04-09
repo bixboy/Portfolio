@@ -149,3 +149,38 @@
             background: orange;
             box-shadow: 0 0 10px orange;
         }
+
+        /* AI Image Indicator */
+        .ai-indicator-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            cursor: crosshair;
+        }
+
+        .ai-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            padding: 2px 8px;
+            background: rgba(0, 5, 10, 0.5);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            color: var(--color-primary);
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.55;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ai-indicator-wrapper:hover .ai-badge {
+            opacity: 0.8;
+            background: rgba(0, 10, 20, 0.7);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }

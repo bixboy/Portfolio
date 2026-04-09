@@ -353,6 +353,7 @@ const translations = {
         "net-video-title": "DÉMONSTRATION OPÉRATIONNELLE",
         "net-hub-preview": "Aperçu du Hub de Connexion",
         "footer-eot-net": "FIN DE TRANSMISSION // PROTOCOL: SYNC",
+        "ai-tag": "CONCEPT VISUEL",
     },
     en: {
         // --- COMMON ---
@@ -703,5 +704,6 @@ const translations = {
         "net-video-title": "OPERATIONAL DEMONSTRATION",
         "net-hub-preview": "Connection Hub Preview",
         "footer-eot-net": "END OF TRANSMISSION // PROTOCOL: SYNC",
+        "ai-tag": "CONCEPTUAL PREVIEW",
     }
 };
