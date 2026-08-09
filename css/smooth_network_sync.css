@@ -1,0 +1,62 @@
+/* Smooth Network Sync Theme: Signal Green & Data Blue */
+:root {
+    --color-sync-bg: #00120a;
+    --color-sync-primary: #34d399;
+    --color-sync-secondary: #60a5fa;
+    --color-sync-dim: rgba(52, 211, 153, 0.1);
+}
+
+.project-hero {
+    height: 60vh;
+    background: linear-gradient(to bottom, rgba(0, 20, 12, 0.7), var(--color-bg)),
+        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2074&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border-bottom: 2px solid var(--color-sync-primary);
+}
+
+.stat-block {
+    background: var(--color-sync-dim);
+    border: 1px solid var(--color-sync-primary);
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stat-label {
+    font-family: var(--font-heading);
+    color: var(--color-sync-primary);
+    font-size: 0.8rem;
+    display: block;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.text-sync {
+    color: var(--color-sync-primary);
+    text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+}
+
+.sync-card {
+    border-color: var(--color-sync-primary);
+    background: rgba(0, 20, 12, 0.8);
+}
+
+.sync-card:hover {
+    box-shadow: 0 0 20px var(--color-sync-dim);
+    border-color: var(--color-sync-secondary);
+}
+
+.module-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid var(--color-sync-secondary);
+    color: var(--color-sync-secondary);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    margin-bottom: 10px;
+}

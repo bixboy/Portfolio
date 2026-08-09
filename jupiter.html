@@ -186,7 +186,7 @@
             </div>
 
             <!-- PAGE: PROP SPAWNER -->
-            <div class="hologram-card p-4">
+            <div class="hologram-card p-4 mb-5">
                 <div style="display: grid; grid-template-columns: 2fr 1.5fr; gap: 2rem;">
                     <div>
                         <h4 class="text-secondary mb-3" data-i18n="jup-tool-c-title">TOOL C: PROP SPAWNER (Page_PropSpawn)</h4>
@@ -204,6 +204,37 @@
                             <span class="ai-badge" data-i18n="ai-tag">CONCEPTUAL PREVIEW</span>
                             <img src="assets/jupiter_props.png" alt="Jupiter Prop Spawner" style="width: 100%; border: 1px solid var(--color-secondary-dim); box-shadow: 0 0 20px var(--color-secondary-dim);">
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: AUDIO SPAWNER -->
+            <div class="hologram-card p-4">
+                <div style="display: grid; grid-template-columns: 1.5fr 2fr; gap: 2rem;">
+                    <div>
+                        <div class="placeholder-img"
+                            style="height: 100%; min-height: 220px; background: rgba(0, 153, 255, 0.05); border: 1px solid #0099ff; display: flex; align-items: center; justify-content: center; color: #0099ff; font-family: var(--font-mono); font-size: 0.8rem; text-align: center;">
+                            [ AUDIO_SPAWN_PREVIEW ]<br>2D / 3D · VOL · RADIUS · FALLOFF · REVERB
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-secondary mb-3" data-i18n="jup-tool-d-title">TOOL D: AUDIO SPAWNER (Page_AudioSpawn)</h4>
+                        <p class="text-muted mb-3" data-i18n="jup-tool-d-desc">
+                            Outil de déploiement d'ambiances et de musique en tant que Game Master. C'est un pont
+                            direct vers le plugin <a href="stellar_audio.html" style="color: #0099ff;">Stellar Audio</a> :
+                            <code>UPlacementAudioData</code> référence un son du dictionnaire
+                            <code>StellarSoundDataAsset</code> par GameplayTag (ou une définition custom locale), et
+                            <code>AAudioPlacementActor</code> délègue la lecture réelle à
+                            <code>UStellarAudioManager</code>.
+                        </p>
+                        <ul class="feature-list">
+                            <li data-i18n="jup-tool-d-1"><strong>Mode 2D / 3D</strong>: bascule entre ambiance globale (2D, un son actif à la
+                                fois) et son positionné dans le monde (3D), avec prévisualisation directe en éditeur.</li>
+                            <li data-i18n="jup-tool-d-2"><strong>Mixer temps réel</strong>: sliders Volume, Radius, Falloff et Reverb Send
+                                appliqués et répliqués en direct sur la sélection (<code>Server_UpdateAudioParams</code>).</li>
+                            <li data-i18n="jup-tool-d-3"><strong>Ciblage par joueur</strong>: liste de toggles par joueur pour restreindre un
+                                son à un sous-ensemble de la partie via <code>Server_UpdateTargetedPlayers</code>.</li>
+                        </ul>
                     </div>
                 </div>
             </div>

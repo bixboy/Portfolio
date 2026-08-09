@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism UI | Project Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/prism_ui.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item" data-i18n="nav-plugins">BACK TO PLUGINS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-prism-primary);">
+                    PRISM UI</h1>
+                <h2 class="subtitle text-prism" data-i18n="prism-subtitle">ZERO-TICK C++ UI FRAMEWORK // UNREAL ENGINE 5.7</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value" data-i18n="stat-type-plugin">UNREAL PLUGIN</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">FOCUS</span>
+                    <span class="stat-value" data-i18n="prism-focus">UI FRAMEWORK</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">TICK</span>
+                    <span class="stat-value">ZERO-TICK</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO -->
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="prism-overview">FRAMEWORK OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;" data-i18n="prism-overview-desc">
+                <strong>Prism UI</strong> est un framework C++ pour l'UMG d'Unreal Engine 5.7, conçu pour être
+                strictement <strong>zero-tick</strong> (piloté par événements), <strong>orienté données</strong>
+                (tokens sémantiques) et rapide à utiliser pour un programmeur via une approche
+                <strong>Fluent Builder</strong>. Il remplace les couleurs et polices codées en dur dans chaque
+                widget, le <code>Tick()</code> permanent pour les transitions visuelles, et le churn GC lié à la
+                création/destruction constante de widgets.
+            </p>
+        </section>
+
+        <!-- 1. THEMING SYSTEM -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: THEMING</span>
+                <h3 class="section-title" data-i18n="prism-theme-title">THEMING PAR TOKENS SÉMANTIQUES</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="prism-theme-1">
+                        <strong class="text-prism">> Moteur central :</strong>
+                        <code>UPrismUIThemeSubsystem</code> (LocalPlayerSubsystem) tient le thème actif et notifie
+                        tous les widgets abonnés lors d'un changement.
+                    </li>
+                    <li style="margin-bottom: 1rem;" data-i18n="prism-theme-2">
+                        <strong class="text-prism">> Tokens sémantiques :</strong>
+                        <code>EPrismColorToken</code> / <code>EPrismTypographyToken</code> mappés par "rôle" de
+                        widget (Primary, Danger...) via des Data Assets (<code>UPrismUIThemeData</code>,
+                        <code>UPrismUIStyle</code>).
+                    </li>
+                    <li data-i18n="prism-theme-3">
+                        <strong class="text-prism">> Reskin instantané :</strong>
+                        changer le thème actif re-skinne toute l'UI à l'exécution, sans toucher au code — un
+                        mode sombre alternatif devient un simple asset de données.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card prism-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(34, 211, 238, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-prism-primary);">
+                    [ THEME_SUBSYSTEM → ROLE → STYLE ]
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ZERO-TICK + POOLING -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="prism-perf-title">ZERO-TICK & WIDGET POOLING</h3>
+            <p class="description mb-4" data-i18n="prism-perf-desc">
+                <code>UPrismWidgetBase</code> est la base commune de tout widget Prism : machine à états
+                (<code>EPrismWidgetState</code>), transitions visuelles pilotées par timer, et nettoyage
+                automatique des bindings et du pool à la destruction.
+            </p>
+
+            <div class="project-grid">
+                <article class="data-card hologram-card prism-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(34, 211, 238, 0.1);">
+                            <span class="img-label text-prism">TICK</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-prism" data-i18n="prism-zerotick-title">ZERO-TICK BASE</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine">EVENT-DRIVEN</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="prism-zerotick-1"><strong class="text-prism">Transitions
+                                    minutées :</strong> <code>StartVisualTransition</code> ne s'exécute que le temps
+                                de l'animation, puis se désenregistre.</li>
+                            <li data-i18n="prism-zerotick-2"><strong class="text-prism">État explicite :</strong>
+                                Normal / Hovered / Pressed / Disabled / Selected géré par une seule machine à
+                                états.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card prism-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(240, 171, 252, 0.1);">
+                            <span class="img-label" style="color: var(--color-prism-secondary);">POOL</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 style="color: var(--color-prism-secondary);" data-i18n="prism-pool-title">WIDGET POOLING</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: var(--color-prism-secondary); color: var(--color-prism-secondary);">GC-SAFE</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="prism-pool-1"><strong style="color: var(--color-prism-secondary);">Pool par
+                                    classe :</strong> <code>UPrismUIWidgetPoolSubsystem</code> évite le churn GC des
+                                listes et éléments de HUD.</li>
+                            <li data-i18n="prism-pool-2"><strong style="color: var(--color-prism-secondary);">Cycle de
+                                    vie :</strong> tout widget Prism implémente <code>IPrismPoolableWidget</code> pour
+                                se nettoyer proprement quand il retourne au pool.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card prism-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(255, 255, 255, 0.05);">
+                            <span class="img-label text-white">BIND</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-white" data-i18n="prism-bind-title">DATA BINDING</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: white; color: white;">REACTIVE</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="prism-bind-1"><strong class="text-white">IPrismUIDataBound :</strong> interface
+                                générique <code>BindData(UObject*)</code> pour tout widget piloté par des
+                                données.</li>
+                            <li data-i18n="prism-bind-2"><strong class="text-white">Nettoyage auto :</strong> chaque
+                                binding s'enregistre via <code>AddBindingCleanup</code> et se coupe automatiquement à
+                                la destruction/mise en pool.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. FLUENT BUILDER -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: BUILDER</span>
+                <h3 class="section-title" data-i18n="prism-builder-title">FLUENT C++ BUILDER & MACROS</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="prism-builder-1">
+                        <strong class="text-prism">> API chaînable :</strong>
+                        <code>FPrismBuilder</code> (inspiré de Slate / des frameworks web) construit des arbres UMG
+                        en quelques lignes : <code>BeginVerticalBox / AddText / SetPadding / EndPanel</code>.
+                    </li>
+                    <li style="margin-bottom: 1rem;" data-i18n="prism-builder-2">
+                        <strong class="text-prism">> Binding réactif :</strong>
+                        <code>.BindEvent()</code> templaté relie un delegate à une lambda, avec nettoyage
+                        automatique via un flag "actif" partagé — pas de fuite de lambda après destruction.
+                    </li>
+                    <li data-i18n="prism-builder-3">
+                        <strong class="text-prism">> Macros complémentaires :</strong>
+                        <code>PRISM_CREATE</code>, <code>PRISM_ADD_VBOX/HBOX/OVERLAY</code> pour une construction
+                        UMG typée sans passer par le Widget Designer.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card prism-card">
+                <pre style="height: 300px; margin: 0; padding: 1rem; overflow: auto; font-family: var(--font-mono); font-size: 0.75rem; color: #cbd5e1; background: rgba(2,20,24,0.6);"><span style="color: #666;">// FPrismBuilder usage</span>
+Builder.BeginVerticalBox()
+    .AddText(TEXT("Score"), "Primary", H2)
+    .AddButton("Primary")
+        .BindEvent(OnClicked, [this]{ Fire(); })
+    .EndPanel();</pre>
+            </div>
+        </section>
+
+        <!-- 4. WIDGET LIBRARY -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="prism-lib-title">BIBLIOTHÈQUE DE WIDGETS</h3>
+            <p class="description mb-4" data-i18n="prism-lib-desc">
+                Boutons, toggles, sliders, dropdowns et search box thémés composent la base ; deux composants
+                sortent du lot par leur complexité.
+            </p>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="feature-media hologram-card prism-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(34, 211, 238, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-prism-primary);">
+                        [ COLOR_WHEEL / RADIAL_MENU ]
+                    </div>
+                </div>
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-prism mb-3">> COMPOSANTS AVANCÉS</h4>
+                    <ul class="spec-list">
+                        <li data-i18n="prism-lib-1"><strong>UPrismColorWheel :</strong> sélecteur de couleur circulaire HSV,
+                            sélection Teinte/Saturation en un seul espace 2D, drag input natif.</li>
+                        <li data-i18n="prism-lib-2"><strong>UPrismRadialMenu :</strong> menu radial segmenté (pie menu) pour
+                            une sélection rapide, pensé manette.</li>
+                        <li data-i18n="prism-lib-3"><strong>UPrismUIModelWidget :</strong> aperçu 3D d'un mesh statique ou
+                            skeletal (avec animation) rendu vers une <code>RenderTarget</code> via
+                            <code>SceneCaptureComponent2D</code>, avec rotation au drag et zoom molette.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. DEV TOOL -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="prism-tool-title">BONUS : SIMULATEUR LIVE-PREVIEW</h3>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-prism mb-3">> HOT-RELOAD SANS ÉDITEUR</h4>
+                    <p class="description">
+                        <code>Tools/Simulator</code> est un outil de développement indépendant de l'éditeur Unreal :
+                        un serveur Node.js qui surveille le dossier <code>Source/PrismUI</code>, parse le C++ modifié
+                        par regex, et pousse en direct (Server-Sent Events) une reconstruction approximative de
+                        l'arbre de widgets dans un navigateur.
+                    </p>
+                    <ul class="spec-list">
+                        <li data-i18n="prism-tool-1"><strong>Parsing statique :</strong> extraction des
+                            <code>NewObject/CreateWidget/PRISM_CREATE</code>, des <code>SetXxx(...)</code> et de la
+                            hiérarchie <code>AddChildTo*</code> directement depuis le texte source.</li>
+                        <li data-i18n="prism-tool-2"><strong>Feedback instantané :</strong> un programmeur modifie
+                            <code>BuildDefaultLayout()</code> en C++ et voit le résultat approximatif dans l'onglet
+                            navigateur, sans recompiler ni relancer l'éditeur.</li>
+                    </ul>
+                </div>
+                <div class="feature-media hologram-card prism-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(240, 171, 252, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-prism-secondary);">
+                        [ SOURCE .cpp → PARSER → SSE → BROWSER ]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // PRISM UI</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

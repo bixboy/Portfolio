@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Network Sync | Project Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/smooth_network_sync.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item" data-i18n="nav-plugins">BACK TO PLUGINS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.2rem; text-shadow: 4px 4px var(--color-sync-primary);">
+                    SMOOTH NETWORK SYNC</h1>
+                <h2 class="subtitle text-sync" data-i18n="nsync-subtitle">ADVANCED MOVEMENT REPLICATION // UNREAL ENGINE 5.7</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value" data-i18n="stat-type-plugin">UNREAL PLUGIN</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">FOCUS</span>
+                    <span class="stat-value" data-i18n="nsync-focus">MOVEMENT SYNC</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">NETWORKING</span>
+                    <span class="stat-value">REPLICATED</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO -->
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="nsync-overview">SYSTEM OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;" data-i18n="nsync-overview-desc">
+                <strong>Smooth Network Sync</strong> remplace/complète la réplication de mouvement native d'Unreal
+                Engine 5.7. Il synchronise transform (position, rotation, échelle) et vélocité pour les
+                <strong>Simulated Proxies</strong> comme pour les <strong>Autonomous Proxies</strong>, pour des
+                pawns/personnages comme pour des props (y compris physiques).
+            </p>
+        </section>
+
+        <!-- 1. INTERPOLATION CORE -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="nsync-core-title">CŒUR D'INTERPOLATION</h3>
+            <p class="description mb-4" data-i18n="nsync-core-desc">
+                <code>UNetworkInterpolatorComponent</code> tient deux buffers circulaires d'états horodatés (position
+                / rotation). <code>USmoothSyncSubsystem</code>, un <code>UTickableWorldSubsystem</code> central,
+                évalue chaque frame la position interpolée de chaque composant enregistré.
+            </p>
+
+            <div class="project-grid">
+                <article class="data-card hologram-card sync-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(52, 211, 153, 0.1);">
+                            <span class="img-label text-sync">LERP</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-sync" data-i18n="nsync-interp-title">INTERPOLATION</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine">HERMITE</span>
+                            <span class="tag tag-role">SLERP</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="nsync-interp-1"><strong class="text-sync">Position :</strong>
+                                spline cubique Hermite entre deux états bufferisés, tangentes dérivées de la
+                                vélocité.</li>
+                            <li data-i18n="nsync-interp-2"><strong class="text-sync">Rotation :</strong>
+                                <code>FQuat::Slerp</code> entre les états bufferisés.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card sync-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(96, 165, 250, 0.1);">
+                            <span class="img-label" style="color: var(--color-sync-secondary);">SNAP</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 style="color: var(--color-sync-secondary);" data-i18n="nsync-extra-title">EXTRAPOLATION & HARD-SNAP</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: var(--color-sync-secondary); color: var(--color-sync-secondary);">DEAD RECKONING</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="nsync-extra-1"><strong style="color: var(--color-sync-secondary);">Dead
+                                    reckoning :</strong> position + vélocité, plafonné par
+                                <code>MaxExtrapolationTime</code> en cas de paquets perdus.</li>
+                            <li data-i18n="nsync-extra-2"><strong style="color: var(--color-sync-secondary);">Téléportation :</strong>
+                                au-delà d'un seuil de distance, snap direct sans interpolation (évite de traverser
+                                les murs).</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card sync-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(255, 255, 255, 0.05);">
+                            <span class="img-label text-white">JIT</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-white" data-i18n="nsync-jitter-title">JITTER BUFFER & LOD RÉSEAU</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: white; color: white;">ADAPTIVE</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="nsync-jitter-1"><strong class="text-white">Buffer
+                                    dynamique :</strong> le délai d'interpolation cible s'ajuste selon la santé du
+                                buffer (0.10s à 0.15s), lissé par <code>FInterpTo</code>.</li>
+                            <li data-i18n="nsync-jitter-2"><strong class="text-white">Network LOD :</strong> fréquence
+                                de mise à jour position/rotation réduite selon la distance au joueur local (pleine
+                                fréquence, 10Hz, 5Hz).</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 2. CLIENT PREDICTION -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: PREDICTION</span>
+                <h3 class="section-title" data-i18n="nsync-pred-title">PRÉDICTION CLIENT (AUTONOMOUS PROXY)</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="nsync-pred-1">
+                        <strong class="text-sync">> Correction ressort-amortisseur :</strong>
+                        <code>HandleAutonomousProxyPrediction</code> compare la position locale prédite à la
+                        position extrapolée par le serveur, et applique une accélération de correction
+                        proportionnelle et bornée.
+                    </li>
+                    <li style="margin-bottom: 1rem;" data-i18n="nsync-pred-2">
+                        <strong class="text-sync">> Physique et non-physique :</strong> fonctionne aussi bien pour
+                        des acteurs qui simulent la physique que pour des pawns classiques, avec un amortissement
+                        supplémentaire sur l'axe Z.
+                    </li>
+                    <li data-i18n="nsync-pred-3">
+                        <strong class="text-sync">> Snap dur / doux :</strong> correction angulaire douce sous un
+                        seuil, snap dur au-delà — pour ne jamais laisser le joueur "glisser" visiblement vers la
+                        bonne position.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card sync-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(52, 211, 153, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-sync-primary);">
+                    [ LOCAL PREDICTION vs SERVER STATE ]
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BANDWIDTH -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="nsync-bw-title">OPTIMISATION DE LA BANDE PASSANTE</h3>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-sync mb-3">> COMPRESSION RÉSEAU CUSTOM</h4>
+                    <p class="description">
+                        Les états répliqués implémentent leur propre <code>NetSerialize</code> plutôt que de
+                        s'appuyer sur la réplication par défaut.
+                    </p>
+                    <ul class="spec-list">
+                        <li data-i18n="nsync-bw-1"><strong>Position/scale :</strong> quantifiées via
+                            <code>FVector_NetQuantize100</code>.</li>
+                        <li data-i18n="nsync-bw-2"><strong>Rotation :</strong> quaternion compressé "à trois
+                            composantes" — le W est abandonné et reconstruit depuis X/Y/Z, chacun packé sur 16 bits.</li>
+                        <li data-i18n="nsync-bw-3"><strong>Tolérance de changement :</strong> les mises à jour
+                            redondantes (sous un seuil de position/rotation/échelle) ne sont pas envoyées.</li>
+                    </ul>
+                </div>
+                <div class="feature-media hologram-card sync-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(96, 165, 250, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-sync-secondary);">
+                        [ QUAT (X,Y,Z) → 16-BIT PACKED ]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. USAGE -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="nsync-usage-title">USAGE : ACTEURS D'EXEMPLE</h3>
+            <p class="description mb-4" data-i18n="nsync-usage-desc">
+                Le plugin fournit un mode <strong>client-authoritative</strong> optionnel
+                (<code>bIsClientAuthoritative</code>) et quatre acteurs d'exemple implémentant l'interface
+                <code>ISmoothSyncable</code> : <code>SmoothPawn</code> (Character + Enhanced Input),
+                <code>SmoothProp</code>, <code>SmoothPhysicsProp</code> et <code>SmoothScaleProp</code>.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // SMOOTH NETWORK SYNC</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

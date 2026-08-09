@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Audio | Project Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/stellar_audio.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item" data-i18n="nav-plugins">BACK TO PLUGINS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-audio-primary);">
+                    STELLAR AUDIO</h1>
+                <h2 class="subtitle text-audio" data-i18n="staudio-subtitle">MULTIPLAYER AUDIO SUBSYSTEM // UNREAL ENGINE 5.7</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value" data-i18n="stat-type-plugin">UNREAL PLUGIN</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">FOCUS</span>
+                    <span class="stat-value" data-i18n="staudio-focus">AUDIO POOLING</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">NETWORKING</span>
+                    <span class="stat-value">REPLICATED</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO -->
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="staudio-overview">SUBSYSTEM OVERVIEW</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;" data-i18n="staudio-overview-desc">
+                <strong>Stellar Audio</strong> est un sous-système audio (<code>UWorldSubsystem</code>) pour Unreal
+                Engine 5.7, piloté par <strong>GameplayTags</strong> et pensé pour le multijoueur dès le départ.
+                Il centralise la lecture de sons 2D/3D derrière un pool de composants réutilisables et un acteur
+                dédié à la réplication réseau, pour éviter les pics de garbage collection et garder la bande passante
+                sous contrôle.
+            </p>
+        </section>
+
+        <!-- 1. OBJECT POOLING / MANAGER -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="staudio-manager-title">AUDIO MANAGER & OBJECT POOLING</h3>
+            <p class="description mb-4" data-i18n="staudio-manager-desc">
+                <code>UStellarAudioManager</code> pré-alloue un pool de <code>UAudioComponent</code> à
+                l'initialisation pour éviter toute création/destruction en jeu, source classique de spikes GC.
+            </p>
+
+            <div class="project-grid">
+                <article class="data-card hologram-card audio-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(0, 153, 255, 0.1);">
+                            <span class="img-label text-audio">POOL</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-audio" data-i18n="staudio-pool-title">COMPONENT POOL</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine">GC-SAFE</span>
+                            <span class="tag tag-role">8-256</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="staudio-pool-1"><strong class="text-audio">Pré-allocation :</strong> pool de
+                                <code>UAudioComponent</code> (taille configurable, défaut 32-64) créé une seule fois au démarrage.</li>
+                            <li class="mb-2" data-i18n="staudio-pool-2"><strong class="text-audio">Recyclage par priorité :</strong> pool
+                                épuisé ? le composant actif de plus faible priorité est recyclé plutôt que refusé.</li>
+                            <li data-i18n="staudio-pool-3"><strong class="text-audio">Chargement asynchrone :</strong> les sons sont chargés
+                                via le <code>StreamableManager</code> pour ne jamais bloquer le thread de jeu.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card audio-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(102, 204, 255, 0.1);">
+                            <span class="img-label" style="color: var(--color-audio-secondary);">CULL</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 style="color: var(--color-audio-secondary);" data-i18n="staudio-culling-title">COOLDOWN & CULLING</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: var(--color-audio-secondary); color: var(--color-audio-secondary);">PERF</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="staudio-culling-1"><strong style="color: var(--color-audio-secondary);">Cooldowns par
+                                    son :</strong> évite le spam d'un même effet sonore en quelques millisecondes.</li>
+                            <li class="mb-2" data-i18n="staudio-culling-2"><strong style="color: var(--color-audio-secondary);">Limite
+                                    d'instances :</strong> nombre maximum d'occurrences simultanées par type de son.</li>
+                            <li data-i18n="staudio-culling-3"><strong style="color: var(--color-audio-secondary);">Distance
+                                    culling :</strong> les sons hors de portée audible (<code>MaxAudibleDistance</code>) ne sont pas joués.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card audio-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(255, 255, 255, 0.05);">
+                            <span class="img-label text-white">TAGS</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-white" data-i18n="staudio-data-title">DATA-DRIVEN SOUNDS</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: white; color: white;">DATA ASSET</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-2" data-i18n="staudio-data-1"><strong class="text-white">Registry par tag :</strong>
+                                <code>UStellarSoundDataAsset</code> mappe un <code>FGameplayTag</code> à une
+                                <code>FStellarSoundDefinition</code> (soft reference).</li>
+                            <li class="mb-2" data-i18n="staudio-data-2"><strong class="text-white">Découplage :</strong> le gameplay ne
+                                référence jamais un <code>USoundBase</code> en dur, seulement son tag.</li>
+                            <li data-i18n="staudio-data-3"><strong class="text-white">Debug visuel :</strong> sphères de debug
+                                instanciées pour visualiser la portée audible en éditeur.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 2. NETWORK REPLICATION -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: NETWORK</span>
+                <h3 class="section-title" data-i18n="staudio-net-title">MULTICAST REPLICATION</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1rem;" data-i18n="staudio-net-1">
+                        <strong class="text-audio">> Relais dédié :</strong>
+                        <code>AStellarAudioReplicator</code> est un <code>AInfo</code> spawné côté serveur,
+                        responsable de tous les RPC Multicast audio.
+                    </li>
+                    <li style="margin-bottom: 1rem;" data-i18n="staudio-net-2">
+                        <strong class="text-audio">> Fiabilité différenciée :</strong>
+                        sons positionnels/ambiants transitoires en <code>Unreliable</code> (économie de bande
+                        passante), événements stop/cancel en <code>Reliable</code> (doivent arriver).
+                    </li>
+                    <li style="margin-bottom: 1rem;" data-i18n="staudio-net-3">
+                        <strong class="text-audio">> Diffusion ciblée :</strong>
+                        possibilité d'envoyer un son à un sous-ensemble précis de joueurs (<code>APlayerState</code>)
+                        plutôt qu'à toute la partie.
+                    </li>
+                    <li data-i18n="staudio-net-4">
+                        <strong class="text-audio">> Pipeline client → serveur :</strong>
+                        <code>UStellarAudioClientComponent</code> sur le PlayerController expose des RPC Server pour
+                        qu'un client déclenche un son via le serveur, sans code réseau côté gameplay.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card audio-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(0, 153, 255, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-audio-primary);">
+                    [ CLIENT → SERVER → MULTICAST ]
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MEDIA STREAMING -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="staudio-media-title">BONUS : MEDIA STREAMING LAYER</h3>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="feature-media hologram-card audio-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(0, 153, 255, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-audio-primary);">
+                        [ YOUTUBE_STREAMER_PREVIEW ]
+                    </div>
+                </div>
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-audio mb-3">> STREAMED MEDIA ACTORS</h4>
+                    <p class="description">
+                        <code>AStellarYouTubeStreamer</code> étend le pooling au-delà du simple son : un acteur
+                        transitoire, géré par le même système de pool, capable de streamer de l'audio/vidéo depuis
+                        une URL internet.
+                    </p>
+                    <ul class="spec-list">
+                        <li data-i18n="staudio-media-1"><strong>Résolution du flux :</strong> extraction de l'URL directe via
+                            <code>yt-dlp</code>, mise en cache avec expiration.</li>
+                        <li data-i18n="staudio-media-2"><strong>Video-on-mesh :</strong> lecture via <code>UMediaPlayer</code> /
+                            <code>UMediaSoundComponent</code> / <code>UMediaTexture</code>, projetée sur un mesh de la
+                            scène.</li>
+                        <li data-i18n="staudio-media-3"><strong>Pooling partagé :</strong> les streamers sont recyclés dans le même
+                            pool que les composants audio classiques.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // STELLAR AUDIO</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

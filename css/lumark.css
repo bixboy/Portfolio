@@ -1,0 +1,62 @@
+/* LuMark Theme: Brushed Steel & Laser Orange */
+:root {
+    --color-lumark-bg: #0a1216;
+    --color-lumark-primary: #4facfe;
+    --color-lumark-secondary: #fb923c;
+    --color-lumark-dim: rgba(79, 172, 254, 0.1);
+}
+
+.project-hero {
+    height: 60vh;
+    background: linear-gradient(to bottom, rgba(15, 32, 39, 0.75), var(--color-bg)),
+        linear-gradient(120deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    background-size: cover;
+    position: relative;
+    border-bottom: 2px solid var(--color-lumark-primary);
+}
+
+.stat-block {
+    background: var(--color-lumark-dim);
+    border: 1px solid var(--color-lumark-primary);
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stat-label {
+    font-family: var(--font-heading);
+    color: var(--color-lumark-primary);
+    font-size: 0.8rem;
+    display: block;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.text-lumark {
+    color: var(--color-lumark-primary);
+    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+}
+
+.lumark-card {
+    border-color: var(--color-lumark-primary);
+    background: rgba(15, 32, 39, 0.85);
+}
+
+.lumark-card:hover {
+    box-shadow: 0 0 20px var(--color-lumark-dim);
+    border-color: var(--color-lumark-secondary);
+}
+
+.module-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid var(--color-lumark-secondary);
+    color: var(--color-lumark-secondary);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    margin-bottom: 10px;
+}

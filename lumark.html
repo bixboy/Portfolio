@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuMark | Project Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/lumark.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#pro-software" class="nav-item" data-i18n="nav-software-back">BACK TO SOFTWARE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-lumark-primary);">
+                    LUMARK</h1>
+                <h2 class="subtitle text-lumark" data-i18n="lumark-subtitle">OUTIL DE MÉTRAGE LASER POUR LA MENUISERIE // QT 6 / QML / C++</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value" data-i18n="lumark-type">APP MOBILE B2B</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">STACK</span>
+                    <span class="stat-value">QT 6 / QML / C++</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">PLATFORM</span>
+                    <span class="stat-value">ANDROID / iOS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- INTRO -->
+        <section class="mb-5">
+            <h3 class="section-title" data-i18n="lumark-overview">PRÉSENTATION</h3>
+            <p class="description" style="font-size: 1.1rem; max-width: 900px;" data-i18n="lumark-overview-desc">
+                <strong>LuMark</strong> est une application mobile professionnelle développée en Qt 6 / QML / C++
+                pour les métreurs du bâtiment (menuiserie Alu/PVC/Bois). Elle transforme un laser Bluetooth du
+                commerce en outil de métré numérique : prise de cotes sur site, comparaison en temps réel aux
+                tolérances d'un gabarit technique, et génération de rapports de conformité PDF. Projet solo,
+                actuellement en production avec plus de 50 commits, doté d'un système de licence commerciale
+                complet.
+            </p>
+        </section>
+
+        <!-- 1. MVVM ARCHITECTURE -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">ARCHITECTURE</span>
+                <h3 class="section-title" data-i18n="lumark-mvvm-title">MVVM & REPOSITORY PATTERN</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="lumark-mvvm-1">
+                        <strong class="text-lumark">> Séparation stricte :</strong><br><br>
+                        le QML (View) n'a aucune logique métier.<br>
+                        Cinq ViewModels C++
+                        (<code>AppViewModel</code>, <code>ProjectViewModel</code>, <code>DrawingViewModel</code>,
+                        <code>MarkerViewModel</code>, <code>ExportViewModel</code>) exposent l'état via
+                        <code>Q_PROPERTY</code>/<code>Q_INVOKABLE</code>.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="lumark-mvvm-2">
+                        <strong class="text-lumark">> Repository Pattern :</strong><br><br>
+                        <code>IDataRepository</code> découple la logique métier du stockage.<br>
+                        Aujourd'hui, c'est <code>SqliteRepository</code> qui l'implémente.<br>
+                        Demain, un <code>RestApiRepository</code> pourra s'y brancher pour la synchronisation ERP —
+                        sans toucher au reste du code.
+                    </li>
+                    <li data-i18n="lumark-mvvm-3">
+                        <strong class="text-lumark">> Modèle multi-métier :</strong><br><br>
+                        <code>ProfessionManager</code> et <code>TemplateManager</code> décrivent cotes et
+                        tolérances par métier via des schémas JSON dynamiques, plutôt que des colonnes SQL figées.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card lumark-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(79, 172, 254, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-lumark-primary); font-family: var(--font-mono); font-size: 0.8rem; text-align: center; padding: 1rem;">
+                    View (QML) → ViewModel (C++) → IDataRepository → SqliteRepository
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. HARDWARE LAYER -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="lumark-hw-title">ABSTRACTION MATÉRIELLE : LASERS BLUETOOTH</h3>
+            <p class="description mb-4" data-i18n="lumark-hw-desc">
+                Aucune marque de laser n'est câblée en dur dans l'application. <code>ILaserDevice</code> définit un
+                contrat commun ; <code>AbstractBleLaserDevice</code> porte le moteur BLE générique, chaque marque
+                ne surcharge que le décodage de trame.
+            </p>
+
+            <div class="project-grid">
+                <article class="data-card hologram-card lumark-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(79, 172, 254, 0.1);">
+                            <span class="img-label text-lumark">BLE</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-lumark" data-i18n="lumark-ble-title">MOTEUR BLE GÉNÉRIQUE</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine">QLOWENERGY</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-3" data-i18n="lumark-ble-1"><strong class="text-lumark">Découverte GATT :</strong><br><br>
+                                filtrage par nom, connexion prioritaire aux appareils déjà appairés, activation en
+                                file des descriptors Notify/Indicate.</li>
+                            <li data-i18n="lumark-ble-2"><strong class="text-lumark">Workaround Android :</strong><br><br>
+                                requête JNI des appareils déjà "bonded" (<code>BluetoothAdapter.getBondedDevices</code>)
+                                via <code>QtConcurrent</code>, car le scan BLE standard les ignore souvent.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card lumark-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(251, 146, 60, 0.1);">
+                            <span class="img-label" style="color: var(--color-lumark-secondary);">DECODE</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 style="color: var(--color-lumark-secondary);" data-i18n="lumark-decode-title">DÉCODAGE PAR MARQUE</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: var(--color-lumark-secondary); color: var(--color-lumark-secondary);">LEICA / HILTI</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-3" data-i18n="lumark-decode-1"><strong style="color: var(--color-lumark-secondary);">Leica
+                                    Disto :</strong><br><br> tentative de décodage binaire IEEE-754, repli sur un parsing
+                                texte par regex si la trame binaire est invalide.</li>
+                            <li data-i18n="lumark-decode-2"><strong style="color: var(--color-lumark-secondary);">Hilti PD-I :</strong><br><br>
+                                décodage texte par regex. Ajouter une nouvelle marque = une classe de plus, sans
+                                toucher au reste.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="data-card hologram-card lumark-card">
+                    <div class="card-visual">
+                        <div class="placeholder-img" style="background: rgba(255, 255, 255, 0.05);">
+                            <span class="img-label text-white">PERM</span>
+                        </div>
+                        <div class="scan-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="text-white" data-i18n="lumark-perm-title">PERMISSIONS & SERVICE</h4>
+                        <div class="tech-tags">
+                            <span class="tag tag-engine" style="border-color: white; color: white;">HARDWARESERVICE</span>
+                        </div>
+                        <ul class="spec-list mt-3">
+                            <li class="mb-3" data-i18n="lumark-perm-1"><strong class="text-white">Façade QML :</strong><br><br>
+                                <code>HardwareService</code> expose connexion/état/dernière mesure, et instancie le
+                                bon device via <code>LaserFactory</code>.</li>
+                            <li data-i18n="lumark-perm-2"><strong class="text-white">Permissions runtime :</strong><br><br>
+                                machine à états gérant les permissions Bluetooth/localisation Android avant toute
+                                connexion.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. DXF & TOLERANCE -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: QA / DXF</span>
+                <h3 class="section-title" data-i18n="lumark-tol-title">GABARITS DXF & CONTRÔLE DE CONFORMITÉ</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="lumark-tol-1">
+                        <strong class="text-lumark">> Parser DXF maison :</strong><br><br>
+                        <code>DxfParser</code> convertit les entités LINE/LWPOLYLINE/ARC d'un plan AutoCAD en chemin
+                        SVG, et extrait les cotes (TEXT/MTEXT) comme points de mesure ciblés.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="lumark-tol-2">
+                        <strong class="text-lumark">> Bibliothèque de formes :</strong><br><br>
+                        <code>DxfManager</code> gère l'import et le stockage local des gabarits, avec repositionnement
+                        manuel des étiquettes de cote.
+                    </li>
+                    <li data-i18n="lumark-tol-3">
+                        <strong class="text-lumark">> Jauge de tolérance temps réel :</strong><br><br>
+                        chaque cote a une valeur cible et une tolérance ; la mesure laser reçue est comparée en
+                        direct, avec code couleur (orange/vert/rouge) sur le marqueur du plan.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card lumark-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(79, 172, 254, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-lumark-primary); font-family: var(--font-mono); font-size: 0.8rem; text-align: center; padding: 1rem;">
+                    DXF (LINE/ARC) → SVG PATH → TOLERANCE GAUGE
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PDF REPORTS -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="lumark-pdf-title">RAPPORTS DE CONFORMITÉ PDF</h3>
+            <div class="engine-layout" style="align-items: center;">
+                <div class="feature-media hologram-card lumark-card" style="flex: 1; height: 250px;">
+                    <div class="placeholder-img"
+                        style="height: 100%; background: rgba(251, 146, 60, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-lumark-secondary);">
+                        [ GABARIT + COTES RÉELLES + PHOTOS ]
+                    </div>
+                </div>
+                <div class="engine-info" style="flex: 1;">
+                    <h4 class="text-lumark mb-3">> STRATEGY PATTERN (IPdfRenderer)</h4>
+                    <p class="description">
+                        <code>ExportViewModel::GeneratePdfReport</code> assemble un rapport client vectoriel via
+                        <code>QPainter</code>, combinant plans, diagrammes de cotes et preuves photo.
+                    </p>
+                    <ul class="spec-list">
+                        <li class="mb-3" data-i18n="lumark-pdf-1"><strong>Double diagramme :</strong><br><br> <code>DrawGabaritDiagram</code>
+                            (cotes théoriques + tolérances) et <code>DrawMeasurementDiagram</code> (cotes réelles
+                            relevées).</li>
+                        <li class="mb-3" data-i18n="lumark-pdf-2"><strong>Options client :</strong><br><br> inclusion des plans, tolérances,
+                            repères et photos, à la carte pour chaque rapport généré.</li>
+                        <li data-i18n="lumark-pdf-3"><strong>Partage natif :</strong><br><br> ouverture/partage du PDF via
+                            l'Intent Android natif (<code>FileProvider</code>).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. LICENSING -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MODULE: COMMERCIAL</span>
+                <h3 class="section-title" data-i18n="lumark-lic-title">SYSTÈME DE LICENCE COMMERCIALE</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="lumark-lic-1">
+                        <strong class="text-lumark">> Vérification signée RSA :</strong><br><br>
+                        <code>LicenseManager</code> interroge un serveur Node/Express dédié, vérifie la signature
+                        de la réponse via OpenSSL (SHA-256), et met le résultat en cache localement.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="lumark-lic-2">
+                        <strong class="text-lumark">> Fonctionnement hors-ligne :</strong><br><br>
+                        grâce au cache signé, la licence reste valide 7 jours sans connexion, avec détection de
+                        recul d'horloge système pour éviter la triche.
+                    </li>
+                    <li data-i18n="lumark-lic-3">
+                        <strong class="text-lumark">> Stockage sécurisé :</strong><br><br>
+                        <code>SecureStorage</code> chiffre le cache de licence (DPAPI sous Windows, AES-256 OpenSSL
+                        sur les autres plateformes) et lie la licence à l'appareil.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media hologram-card lumark-card">
+                <div class="placeholder-img"
+                    style="height: 300px; background: rgba(79, 172, 254, 0.05); display: flex; align-items: center; justify-content: center; color: var(--color-lumark-primary);">
+                    [ CLIENT → SIGNED LICENSE SERVER → OFFLINE CACHE ]
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. USER FLOW -->
+        <section class="section-padding">
+            <h3 class="section-title" data-i18n="lumark-flow-title">PARCOURS UTILISATEUR</h3>
+            <p class="description mb-4" data-i18n="lumark-flow-desc">
+                Licence → Chantier → Repérage (cotes/tolérances/gabarit DXF) → Plan PDF avec repères → Mesure au
+                laser en direct avec jauge de tolérance et photo → Export du rapport PDF.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel text-center">
+        <p>END OF TRANSMISSION // LUMARK</p>
+        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
