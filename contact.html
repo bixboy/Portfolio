@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & CV | Pierre Lamare | Imperial Datalink</title>
+    <meta name="description" content="Terminal de transmission et CV officiel de Pierre Lamare, Game Programmer C++ / C# (Unreal Engine 5, Unity, Qt). Téléchargez le CV ou contactez directement.">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📡</text></svg>">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">RETOUR BDD</a></li>
+                <li><a href="index.html#plugins" class="nav-item" data-i18n="nav-plugins">PLUGINS</a></li>
+                <li><a href="index.html#pro-software" class="nav-item" data-i18n="nav-software">LOGICIELS PRO</a></li>
+                <li><a href="index.html#bix-engine" class="nav-item" data-i18n="nav-engine">BIX ENGINE</a></li>
+                <li><a href="contact.html" class="nav-item" style="color: var(--color-primary); border-bottom: 2px solid var(--color-primary);" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO / TERMINAL HEADER -->
+    <header class="contact-hero">
+        <div class="container">
+            <div class="contact-hero-content">
+                <div>
+                    <div class="contact-badge-id">
+                        <span class="pulse-dot"></span>
+                        <span>UPLINK: ACTIVE // TERMINAL 01-PL</span>
+                    </div>
+                    <h1 class="glitch-text" style="font-size: 3rem; margin-bottom: 0.5rem;" data-i18n="contact-hero-title">
+                        CONTACT & CV
+                    </h1>
+                    <h2 class="subtitle" style="color: var(--color-contact-primary); font-size: 1.1rem;" data-i18n="contact-hero-subtitle">
+                        PIERRE LAMARE // GAME PROGRAMMER
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTACT CONTENT -->
+    <main class="container section-padding" style="padding-top: 2rem;">
+        <div class="contact-vertical-layout">
+
+            <!-- 1. CV DOSSIER & VIEWER (CENTERED) -->
+            <section class="cv-dossier-panel hologram-card no-tilt">
+                <div class="card-decorations">
+                    <span class="corner top-left"></span>
+                    <span class="corner top-right"></span>
+                    <span class="corner bottom-left"></span>
+                    <span class="corner bottom-right"></span>
+                </div>
+
+                <div class="dossier-header-bar">
+                    <div>
+                        <h3 class="section-title" style="margin-bottom: 0; padding-top: 0; font-size: 1.3rem;" data-i18n="cv-section-title">
+                            CURRICULUM VITAE
+                        </h3>
+                    </div>
+                    <div class="dossier-actions">
+                        <a href="assets/Cv_Pierre_Lamare.pdf" download="CV_Pierre_Lamare_GameProgrammer.pdf" class="action-btn-cv" id="cv-download-btn">
+                            <span>⬇</span>
+                            <span data-i18n="cv-btn-download">TÉLÉCHARGER LE CV (PDF)</span>
+                        </a>
+                        <a href="assets/Cv_Pierre_Lamare.pdf" target="_blank" rel="noopener noreferrer" class="action-btn-cv action-btn-secondary-cv" id="cv-open-btn">
+                            <span>↗</span>
+                            <span data-i18n="cv-btn-open">OUVRIR NOUVEL ONGLET</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PDF EMBED CONTAINER -->
+                <div class="pdf-viewer-container">
+                    <object data="assets/Cv_Pierre_Lamare.pdf#toolbar=1&navpanes=0&scrollbar=1" type="application/pdf" class="pdf-viewer-frame">
+                        <iframe src="assets/Cv_Pierre_Lamare.pdf#toolbar=1&navpanes=0&scrollbar=1" class="pdf-viewer-frame" title="CV Pierre Lamare">
+                            <div class="pdf-fallback-msg">
+                                <p data-i18n="cv-pdf-fallback">Visualiseur non supporté sur ce navigateur.</p>
+                                <a href="assets/Cv_Pierre_Lamare.pdf" download="CV_Pierre_Lamare.pdf" class="action-btn-cv mt-3">
+                                    <span data-i18n="cv-pdf-fallback-btn">Cliquez ici pour télécharger le CV</span>
+                                </a>
+                            </div>
+                        </iframe>
+                    </object>
+                </div>
+
+                <!-- OPERATOR PROFILE HIGHLIGHTS -->
+                <div class="operator-summary-card">
+                    <h4 style="color: var(--color-contact-primary); font-size: 0.95rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(0,229,255,0.2); padding-bottom: 0.4rem;" data-i18n="cv-summary-title">
+                        SYNTHÈSE DE PROFIL &amp; COMPÉTENCES CLÉS
+                    </h4>
+                    <ul class="summary-list">
+                        <li>
+                            <strong data-i18n="cv-summary-role-label">RÔLE PRINCIPAL :</strong>
+                            <span data-i18n="cv-summary-role-val">Game Programmer (C++ / C# / Unreal Engine 5 / Unity)</span>
+                        </li>
+                        <li>
+                            <strong data-i18n="cv-summary-stack-label">STACK PRINCIPALE :</strong>
+                            <span data-i18n="cv-summary-stack-val">C++, C#, UE5, Unity, Qt 6 / QML, Git, CMake, Box2D</span>
+                        </li>
+                        <li>
+                            <strong data-i18n="cv-summary-edu-label">FORMATION :</strong>
+                            <span data-i18n="cv-summary-edu-val">IIM Paris - Institut de l'Internet et du Multimédia (2022 - 2027)</span>
+                        </li>
+                        <li class="summary-dist-item">
+                            <strong data-i18n="cv-summary-dist-label">FAITS MARQUANTS :</strong>
+                            <ul class="sub-highlight-list">
+                                <li data-i18n="cv-summary-dist-1">> Projet <strong>Synaptik</strong> sélectionné pour la <strong>GDC à San Francisco</strong></li>
+                                <li data-i18n="cv-summary-dist-2">> <strong>Bix Engine</strong> : Moteur de jeu 2D/3D développé from scratch en C++ moderne</li>
+                                <li data-i18n="cv-summary-dist-3">> <strong>LuMark</strong> : Application mobile B2B en production (Qt 6 / C++ / Télémètres laser)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. DIRECT FREQUENCIES (UNDER CV, CENTERED) -->
+            <section class="direct-channels-card hologram-card no-tilt">
+                <div class="card-decorations">
+                    <span class="corner top-left"></span>
+                    <span class="corner top-right"></span>
+                    <span class="corner bottom-left"></span>
+                    <span class="corner bottom-right"></span>
+                </div>
+
+                <h3 class="section-title" style="font-size: 1.3rem; margin-bottom: 0.5rem; padding-top: 0;" data-i18n="contact-direct-title">
+                    FRÉQUENCES DIRECTES
+                </h3>
+
+                <div class="channels-list">
+                    <!-- EMAIL -->
+                    <div class="channel-item">
+                        <div class="channel-info">
+                            <span class="channel-tag" data-i18n="contact-direct-email-label">EMAIL PRINCIPAL</span>
+                            <span class="channel-val"><a href="mailto:Pierrelamare62@gmail.com" id="email-link">Pierrelamare62@gmail.com</a></span>
+                        </div>
+                        <button class="copy-channel-btn" onclick="copyToClipboard('Pierrelamare62@gmail.com', this)" data-i18n="contact-direct-copy-btn">
+                            COPIER
+                        </button>
+                    </div>
+
+                    <!-- PHONE -->
+                    <div class="channel-item">
+                        <div class="channel-info">
+                            <span class="channel-tag" data-i18n="contact-direct-phone-label">LIGNE COMM / TÉLÉPHONE</span>
+                            <span class="channel-val"><a href="tel:+33769384814">+33 7 69 38 48 14</a></span>
+                        </div>
+                        <button class="copy-channel-btn" onclick="copyToClipboard('+33769384814', this)" data-i18n="contact-direct-copy-btn">
+                            COPIER
+                        </button>
+                    </div>
+                </div>
+
+                <!-- NETWORK RELAYS -->
+                <div style="margin-top: 1.5rem;">
+                    <span class="channel-tag" data-i18n="contact-social-title">RELAIS RÉSEAU</span>
+                    <div class="social-relays-group">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-relay-btn hologram-link">
+                            [ LINKEDIN ]
+                        </a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-relay-btn hologram-link">
+                            [ GITHUB ]
+                        </a>
+                        <a href="mailto:Pierrelamare62@gmail.com" class="social-relay-btn hologram-link">
+                            [ EMAIL DIRECT ]
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact-footer" class="transmission-panel">
+        <div class="container text-center">
+            <h3 class="section-title" data-i18n="footer-title">CANAL DE TRANSMISSION</h3>
+            <p data-i18n="footer-eot-contact">FIN DE TRANSMISSION // TERMINAL DE CONTACT</p>
+
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hologram-link">[ LINKEDIN ]</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hologram-link">[ GITHUB ]</a>
+                <a href="mailto:Pierrelamare62@gmail.com" class="hologram-link">[ EMAIL ]</a>
+            </div>
+
+            <div class="footer-meta">
+                <p data-i18n="footer-meta">ID: PIERRE-LAMARE // STATUS: DISPONIBLE</p>
+                <p>© 2026 IMPERIAL DATAPAD v2.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="contact-toast">Information copiée dans le presse-papier !</div>
+
+    <!-- MAIN INTERACTIVE SCRIPT -->
+    <script src="js/main.js"></script>
+    <script>
+        function showToast(msg) {
+            const toast = document.getElementById('contact-toast');
+            if (!toast) return;
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function copyToClipboard(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const currentLang = window.i18n ? window.i18n.currentLang : 'fr';
+                const copiedLabel = (window.translations && window.translations[currentLang] && window.translations[currentLang]['contact-direct-copied']) || 'COPIÉ !';
+                const originalLabel = (window.translations && window.translations[currentLang] && window.translations[currentLang]['contact-direct-copy-btn']) || 'COPIER';
+                
+                btnElement.innerText = copiedLabel;
+                btnElement.classList.add('copied');
+                showToast(text + ' ' + (currentLang === 'fr' ? 'copié dans le presse-papier !' : 'copied to clipboard!'));
+
+                setTimeout(() => {
+                    btnElement.innerText = originalLabel;
+                    btnElement.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Copy failed', err);
+            });
+        }
+    </script>
+</body>
+
+</html>

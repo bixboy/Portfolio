@@ -543,9 +543,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 3D HOLOGRAPHIC TILT ---
-    const cards = document.querySelectorAll('.hologram-card');
+    const cards = document.querySelectorAll('.hologram-card:not(.no-tilt)');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
+            if (card.classList.contains('no-tilt')) return;
 
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
