@@ -183,4 +183,22 @@
             background: rgba(0, 10, 20, 0.7);
             border-color: var(--color-primary);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .video-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 3px 8px;
+            background: rgba(0, 5, 10, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
         }
