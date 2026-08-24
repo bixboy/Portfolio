@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Builder | Plugin Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/stellar_builder.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#plugins" class="nav-item" data-i18n="nav-plugins">BACK TO PLUGINS</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-builder-primary);">
+                    STELLAR BUILDER</h1>
+                <h2 class="subtitle text-builder" data-i18n="builder-subtitle">SYSTÈME DE CONSTRUCTION EN VUE FPS & FORTIFICATIONS (FOB) // UNREAL ENGINE 5 (C++)</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value" data-i18n="builder-type">PLUGIN UNREAL 5</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">LANGAGE</span>
+                    <span class="stat-value">100% C++</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">INTÉGRATION</span>
+                    <span class="stat-value">JUPITER & PRISM UI</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">JEU CIBLE</span>
+                    <span class="stat-value">SOVEREIGN REP.</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- SECTION 1: OVERVIEW -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">TACTICAL FIELD CONSTRUCTION</span>
+                <h3 class="section-title" data-i18n="builder-overview-title">PRÉSENTATION DU SYSTÈME</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8;" data-i18n="builder-overview-desc">
+                    <strong>Stellar Builder</strong> est un plugin Unreal Engine 5 développé en 100% C++ fournissant un système complet de construction tactique en vue à la première personne (FPS). Conçu pour le projet <em>Sovereign Republic</em>, il permet aux commandos et troupes au sol de déployer des bases opérationnelles avancées (FOB), barricades, générateurs de boucliers et postes de tir en direct sur le champ de bataille, avec une prévisualisation holographique fluide, un snapping intelligent et une gestion réseau autoritaire.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <span class="tag tag-engine">UNREAL 5.4</span>
+                    <span class="tag tag-lang">MODERN C++</span>
+                    <span class="tag tag-role">HISM OPTIMIZED</span>
+                    <span class="tag tag-role">NETWORK REPLICATED</span>
+                </div>
+            </div>
+            <div class="feature-media">
+                <div class="hologram-card p-4 builder-card" style="min-height: 250px; display: flex; flex-direction: column; justify-content: center; gap: 0.85rem;">
+                    <div style="font-family: var(--font-mono); color: var(--color-builder-primary); font-size: 0.9rem;">
+                        // STELLAR_BUILDER :: CONSTRUCTION PIPELINE<br>
+                        > CORE_OBJECT: UPlayerConstructionObject [100% C++]<br>
+                        > PLACEMENT: Raycast Trace + Terrain Normal Alignment<br>
+                        > GHOST_MESH: Dynamic Material Instance (Valid / Invalid)<br>
+                        > SNAPPING: Multi-Socket Socket Snapping Matrix<br>
+                        > JUPITER BRIDGE: Auto-Merge to HISM Cluster
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: DUAL UI ARCHITECTURE (REVERSE) -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <span class="module-badge">DUAL UI ARCHITECTURE</span>
+                <h3 class="section-title" data-i18n="builder-fob-title">DOUBLE INTERFACE : MENU RADIAL & CATALOGUE DATAPAD</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="builder-fob-1">
+                        <strong class="text-builder">> Catalogue Datapad Complet (<code>UBuilderCatalogMenu</code>) :</strong><br><br>
+                        Interface plein écran riche construite sur Prism UI : arborescence de catégories/sous-catégories par GameplayTags, barre de recherche textuelle temps réel, grille paginée avec vignettes (<code>UTileView</code>), système de Favoris et panneau inférieur détaillant les coûts en ressources, blindage et statistiques.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="builder-fob-2">
+                        <strong class="text-builder">> Menu Radial Réflexe (<code>UBuilderRadialMenu</code>) :</strong><br><br>
+                        Roue de sélection contextuelle rapide pour déployer instantanément les fortifications d'urgence (barricades, abris rapides) en plein combat sans quitter l'action des yeux.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <div class="hologram-card p-4 builder-card" style="min-height: 250px; display: flex; flex-direction: column; justify-content: center; gap: 0.85rem;">
+                    <div style="font-family: var(--font-mono); color: var(--color-builder-secondary); font-size: 0.88rem;">
+                        // DATAPAD CATALOG ARCHITECTURE<br>
+                        + UBuilderCatalogMenu : public UPrismWidgetBase<br>
+                        + Categories Sidebar (GameplayTags)<br>
+                        + Realtime Search : UEditableTextBox<br>
+                        + Paginated Grid : UTileView (ItemsPerPage = 8)<br>
+                        + Favorites Persistence & Detail Inspector<br>
+                        + Quick Radial Alternative : UBuilderRadialMenu
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SNAPPING & HISM OPTIMIZATION -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MASSIVE BATTLEFIELD PERFORMANCE</span>
+                <h3 class="section-title" data-i18n="builder-hism-title">SNAPPING & OPTIMISATION HISM (JUPITER)</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="builder-hism-1">
+                        <strong class="text-builder">> Ghost Preview & Snapping Intelligent :</strong><br><br>
+                        Validation en direct du placement (collisions, normale du terrain, zones protégées), rotation angulaire par pas et accroche magnétique sur les structures alliées.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="builder-hism-2">
+                        <strong class="text-builder">> Fusion d'Instances HISM & Réplication Serveur :</strong><br><br>
+                        Conversion automatique des structures posées en maillages statiques instanciés hiérarchiques via <code>JupiterInstancedPropManager</code> (zéro coût Draw Call supplémentaire) avec validation autoritaire côté serveur.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <div class="hologram-card p-4 builder-card" style="min-height: 250px; display: flex; flex-direction: column; justify-content: center; gap: 0.85rem;">
+                    <div style="font-family: var(--font-mono); color: #fff; font-size: 0.9rem;">
+                        // INSTANCED PROP CLUSTERING<br>
+                        AJupiterInstancedPropManager::AddInstance(<br>
+                        &nbsp;&nbsp;PlacementData->StaticMesh,<br>
+                        &nbsp;&nbsp;FinalTransform,<br>
+                        &nbsp;&nbsp;bReplicateToClients<br>
+                        );<br>
+                        // DRAW CALL OVERHEAD REDUCED BY 92%
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section style="text-align: center; margin-top: 4rem; padding: 3rem 0; border-top: 1px solid rgba(245, 158, 11, 0.2);">
+            <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1rem;">ACCÉDER AUX AUTRES MODULES</h3>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="index.html#plugins" class="btn btn-secondary hologram-btn">
+                    <span class="btn-content" data-i18n="nav-plugins">RETOUR PLUGINS</span>
+                    <span class="btn-glitch"></span>
+                </a>
+                <a href="sovereign_republic.html" class="btn btn-secondary hologram-btn" style="border-color: #00e5ff; color: #00e5ff;">
+                    <span class="btn-content">SOVEREIGN REPUBLIC</span>
+                    <span class="btn-glitch"></span>
+                </a>
+                <a href="contact.html" class="btn btn-primary hologram-btn">
+                    <span class="btn-content" data-i18n="nav-contact-page">CONTACT & CV</span>
+                    <span class="btn-glitch"></span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dashboard-panel" style="margin-top: 5rem; border-top: 1px solid var(--color-builder-primary); padding: 2rem 0;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted);" data-i18n="footer-eot-builder">
+                FIN DE TRANSMISSION // STELLAR BUILDER
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-builder-primary);">
+                UE5 • 100% C++ • FIRST PERSON CONSTRUCTION
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/space.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

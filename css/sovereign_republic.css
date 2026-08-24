@@ -1,0 +1,137 @@
+/* Sovereign Republic Theme: Star Wars Clone Wars Commando (Visor Cyan & Republic Amber) */
+:root {
+    --color-sovereign-bg: #040810;
+    --color-sovereign-primary: #00e5ff;
+    --color-sovereign-secondary: #ff9d00;
+    --color-sovereign-dim: rgba(0, 229, 255, 0.1);
+    --color-sovereign-amber-dim: rgba(255, 157, 0, 0.1);
+}
+
+.project-hero {
+    height: 60vh;
+    background: linear-gradient(to bottom, rgba(4, 8, 16, 0.55), var(--color-bg)),
+        url('../assets/sovereign_republic.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border-bottom: 2px solid var(--color-sovereign-primary);
+}
+
+.stat-block {
+    background: var(--color-sovereign-dim);
+    border: 1px solid var(--color-sovereign-primary);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stat-label {
+    font-family: var(--font-heading);
+    color: var(--color-sovereign-primary);
+    font-size: 0.75rem;
+    display: block;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.text-sovereign {
+    color: var(--color-sovereign-primary);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.sovereign-card {
+    border-color: var(--color-sovereign-primary);
+    background: rgba(4, 8, 16, 0.85);
+}
+
+.sovereign-card:hover {
+    box-shadow: 0 0 20px var(--color-sovereign-dim);
+    border-color: var(--color-sovereign-secondary);
+}
+
+.module-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid var(--color-sovereign-secondary);
+    color: var(--color-sovereign-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 157, 0, 0.05);
+    letter-spacing: 1px;
+}
+
+.spec-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.spec-list li {
+    font-family: var(--font-body);
+    color: var(--color-text-main);
+    line-height: 1.6;
+}
+
+.spec-list strong {
+    font-family: var(--font-mono);
+}
+
+.feature-row {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.feature-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.feature-text {
+    flex: 1;
+}
+
+.feature-media {
+    flex: 1;
+    position: relative;
+    border: 1px solid var(--color-sovereign-primary);
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+}
+
+.feature-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.feature-media:hover img {
+    transform: scale(1.03);
+}
+
+.feature-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.85);
+    color: var(--color-sovereign-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-top: 1px solid var(--color-sovereign-primary);
+}
+
+@media (max-width: 900px) {
+    .feature-row,
+    .feature-row.reverse {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}

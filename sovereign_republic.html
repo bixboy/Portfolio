@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Republic | Project Data | Pierre Lamare</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sovereign_republic.css">
+    
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body>
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="project-hero">
+        <div class="container"
+            style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
+            <div>
+                <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-sovereign-primary);">
+                    SOVEREIGN REPUBLIC</h1>
+                <h2 class="subtitle text-sovereign" data-i18n="sovereign-subtitle">SIMULATION TACTIQUE & RP MILITAIRE // STAR WARS (STYLE GMOD SWRP / SQUAD) // UNREAL ENGINE 5 (100% C++)</h2>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block">
+                    <span class="stat-label">MOTEUR</span>
+                    <span class="stat-value">UNREAL ENGINE 5</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">LANGAGE</span>
+                    <span class="stat-value">100% C++</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">RÉSEAU</span>
+                    <span class="stat-value">100+ JOUEURS</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">RÔLE</span>
+                    <span class="stat-value">CORE & NETWORKING</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- SECTION 1: OVERVIEW -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">TACTICAL RP SANDBOX</span>
+                <h3 class="section-title" data-i18n="sovereign-overview-title">PRÉSENTATION DU PROJET</h3>
+                <p class="description" style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8;" data-i18n="sovereign-overview-desc">
+                    <strong>Sovereign Republic</strong> est une simulation militaire et un bac à sable RP multijoueur à grande échelle (100+ joueurs simultanés) inspiré des serveurs Star Wars RP de Garry's Mod et de la rigueur tactique de jeux comme <em>Squad</em> ou <em>Arma</em>. Développé en 100% C++ sous Unreal Engine 5 en collaboration avec un ami en full-remote, le projet combine une chaîne de commandement militaire immersive, une VoIP radio multi-fréquences, des opérations scénarisées en temps réel par des Game Masters, et une architecture serveur dédié taillée pour 100+ joueurs sans compromis de performance.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <span class="tag tag-engine">UNREAL 5.4</span>
+                    <span class="tag tag-lang">MODERN C++</span>
+                    <span class="tag tag-role">DEDICATED SERVER</span>
+                    <span class="tag tag-role">MASSIVE MULTIPLAYER</span>
+                </div>
+            </div>
+            <div class="feature-media">
+                <img src="assets/sovereign_republic.jpg" alt="Sovereign Republic Commando Gameplay">
+                <span class="feature-caption">SOVEREIGN REPUBLIC // SQUAD COMBAT</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: NETWORKING & DEDICATED SERVER (REVERSE) -->
+        <section class="feature-row reverse">
+            <div class="feature-text">
+                <span class="module-badge">HIGH-PERFORMANCE NETWORKING</span>
+                <h3 class="section-title" data-i18n="sovereign-net-title">ARCHITECTURE RÉSEAU & SERVEUR DÉDIÉ (100+ JOUEURS)</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="sovereign-net-1">
+                        <strong class="text-sovereign">> Replication Graph & Network LOD :</strong><br><br>
+                        Gestion dynamique de la fréquence de réplication en fonction de la distance, du champ de vision et de la priorité tactique. Réduction drastique de la bande passante par client pour garantir 60Hz stable côté serveur avec plus de 100 joueurs.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="sovereign-net-2">
+                        <strong class="text-sovereign">> Prédiction Client & Réconciliation :</strong><br><br>
+                        Système de prédiction locale pour les tirs de blaster, déplacements d'escouade et compétences, avec correction d'erreur serveur fluide pour éliminer toute sensation de latence.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-media">
+                <div class="hologram-card p-4 sovereign-card" style="min-height: 250px; display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+                    <div style="font-family: var(--font-mono); color: var(--color-sovereign-primary); font-size: 0.95rem;">
+                        // SERVER TICKRATE MONITOR [60 HZ TARGET]<br>
+                        > CLIENT COUNT: 100+ CONCURRENT<br>
+                        > REPLICATION GRAPH: ACTIVE (SPATIAL GRID)<br>
+                        > BANDWIDTH BUDGET: OPTIMIZED (< 25 KB/S PER CLIENT)<br>
+                        > PACKET COMPRESSION & DELTA SERIALIZATION: ON
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SQUAD GAMEPLAY & SYSTEMS -->
+        <section class="feature-row">
+            <div class="feature-text">
+                <span class="module-badge">MILITARY RP & SQUAD SIMULATION</span>
+                <h3 class="section-title" data-i18n="sovereign-gameplay-title">IMMERSION RP MILITAIRE & HIÉRARCHIE (STYLE SQUAD / GMOD SWRP)</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="sovereign-gp-1">
+                        <strong class="text-sovereign">> Régiments Clones, Spécialisations & Hiérarchie :</strong><br><br>
+                        Système de légions et spécialisations (Commandos, 501e, 212e, Garde, Médecins, Démolisseurs, Pilotes) avec chaîne de commandement, gestion des permissions, ordres tactiques et holotables de briefing.
+                    </li>
+                    <li style="margin-bottom: 1.5rem;" data-i18n="sovereign-gp-2">
+                        <strong class="text-sovereign">> Communications Radio & VoIP Spatialisée 3D :</strong><br><br>
+                        Système radio militaire multi-fréquences (Canal Escouade, Commandement Inter-Régiments, Fréquence Générale) avec atténuation spatiale de proximité réaliste pour une coordination millimétrée.
+                    </li>
+                </ul>
+            </div>
+            <div class="feature-text">
+                <span class="module-badge">LIVE SCENARIO OPERATIONS</span>
+                <h3 class="section-title" data-i18n="sovereign-battle-title">OPÉRATIONS SCÉNARISÉES EN DIRECT & ÉVÉNEMENTS GAME MASTER (ZEUS)</h3>
+                <ul class="spec-list" style="font-size: 1rem;">
+                    <li style="margin-bottom: 1.5rem;" data-i18n="sovereign-battle-1">
+                        <strong class="text-sovereign">> Missions Scénarisées & Alertes Vaisseau :</strong><br><br>
+                        Opérations dynamiques dirigées en direct par les Game Masters (via le plugin Jupiter) : alertes de bord sur croiseur Venator, assauts planétaires, déploiements en canonnière LAAT et fortifications d'avant-postes (FOB) face aux vagues Séparatistes.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PLUGINS ECOSYSTEM -->
+        <section class="mb-5" style="margin-top: 3rem;">
+            <span class="module-badge">CUSTOM C++ ARCHITECTURE</span>
+            <h3 class="section-title" data-i18n="sovereign-plugins-title">ÉCOSYSTÈME DE PLUGINS SUR-MESURE (C++)</h3>
+            <p class="description" style="font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="sovereign-plugins-desc">
+                Pour répondre aux exigences de Sovereign Republic (100+ joueurs, gameplay commando, animation de scénarios RP en direct), j'ai conçu et développé une suite complète de plugins C++ modulaires intégrés au cœur du projet :
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                <div class="hologram-card p-4 sovereign-card">
+                    <span class="module-badge" style="border-color: #a855f7; color: #a855f7;">LOCOMOTION & VEHICLES</span>
+                    <h4 style="color: #a855f7; margin-bottom: 0.5rem;">STELLAR LOCOMOTION</h4>
+                    <p style="font-size: 0.95rem; color: var(--color-text-main); line-height: 1.6;">Framework complet de véhicules terrestres et spatiaux, multi-crew (pilote, canonniers, passagers) et physique avancée conçu spécifiquement pour le projet.</p>
+                    <a href="stellar.html" class="card-link" style="color: #a855f7; margin-top: 1rem; display: inline-block;">VOIR LE PLUGIN STELLAR >></a>
+                </div>
+
+                <div class="hologram-card p-4 sovereign-card">
+                    <span class="module-badge" style="border-color: #0ff; color: #0ff;">GAME MASTER & RP ZEUS</span>
+                    <h4 style="color: #0ff; margin-bottom: 0.5rem;">JUPITER GM SUITE</h4>
+                    <p style="font-size: 0.95rem; color: var(--color-text-main); line-height: 1.6;">Outil d'animation temps réel inspiré du système Zeus d'Arma 3, permettant aux animateurs de manipuler le monde, spawner des vagues et diriger les batailles RP en direct.</p>
+                    <a href="jupiter.html" class="card-link" style="color: #0ff; margin-top: 1rem; display: inline-block;">VOIR LE PLUGIN JUPITER >></a>
+                </div>
+
+                <div class="hologram-card p-4 sovereign-card">
+                    <span class="module-badge" style="border-color: #f59e0b; color: #f59e0b;">FOB CONSTRUCTION & DEFENSES</span>
+                    <h4 style="color: #f59e0b; margin-bottom: 0.5rem;">STELLAR BUILDER</h4>
+                    <p style="font-size: 0.95rem; color: var(--color-text-main); line-height: 1.6;">Système de construction tactique en vue FPS (FOB, barricades, générateurs de boucliers). Double interface (Menu radial d'urgence & grand catalogue Datapad avec recherche/favoris), prévisualisation Ghost, snapping intelligent et optimisation HISM via Jupiter.</p>
+                    <a href="stellar_builder.html" class="card-link" style="color: #f59e0b; margin-top: 1rem; display: inline-block;">VOIR LE PLUGIN STELLAR BUILDER >></a>
+                </div>
+
+                <div class="hologram-card p-4 sovereign-card">
+                    <span class="module-badge" style="border-color: #34d399; color: #34d399;">NETWORKING (100+ PLAYERS)</span>
+                    <h4 style="color: #34d399; margin-bottom: 0.5rem;">SMOOTH NETWORK SYNC</h4>
+                    <p style="font-size: 0.95rem; color: var(--color-text-main); line-height: 1.6;">Algorithme d'interpolation Hermite, prédiction client et compression réseau custom pour une synchronisation fluide et sans saccades à plus de 100 joueurs.</p>
+                    <a href="smooth_network_sync.html" class="card-link" style="color: #34d399; margin-top: 1rem; display: inline-block;">VOIR LE PLUGIN SMOOTH SYNC >></a>
+                </div>
+
+                <div class="hologram-card p-4 sovereign-card">
+                    <span class="module-badge" style="border-color: #22d3ee; color: #22d3ee;">HIGH-PERF UMG UI</span>
+                    <h4 style="color: #22d3ee; margin-bottom: 0.5rem;">PRISM UI</h4>
+                    <p style="font-size: 0.95rem; color: var(--color-text-main); line-height: 1.6;">Framework UI C++ zero-tick pour UMG avec tokens sémantiques et widget pooling garantissant un HUD commando réactif et ultra-léger.</p>
+                    <a href="prism_ui.html" class="card-link" style="color: #22d3ee; margin-top: 1rem; display: inline-block;">VOIR LE PLUGIN PRISM UI >></a>
+                </div>
+
+                <div class="hologram-card p-4 sovereign-card">
+                    <span class="module-badge" style="border-color: #0099ff; color: #0099ff;">VOIP & RP RADIO</span>
+                    <h4 style="color: #0099ff; margin-bottom: 0.5rem;">STELLAR AUDIO</h4>
+                    <p style="font-size: 0.95rem; color: var(--color-text-main); line-height: 1.6;">Sous-système audio multijoueur avec pooling de composants sonores, réplication Multicast RPC et communications radio spatialisées par fréquences.</p>
+                    <a href="stellar_audio.html" class="card-link" style="color: #0099ff; margin-top: 1rem; display: inline-block;">VOIR LE PLUGIN STELLAR AUDIO >></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section style="text-align: center; margin-top: 4rem; padding: 3rem 0; border-top: 1px solid rgba(0, 229, 255, 0.2);">
+            <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1rem;">ACCÉDER AUX AUTRES MODULES</h3>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="index.html#projects" class="btn btn-secondary hologram-btn">
+                    <span class="btn-content" data-i18n="nav-database">RETOUR BDD PROJETS</span>
+                    <span class="btn-glitch"></span>
+                </a>
+                <a href="contact.html" class="btn btn-primary hologram-btn">
+                    <span class="btn-content" data-i18n="nav-contact-page">CONTACT & CV</span>
+                    <span class="btn-glitch"></span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dashboard-panel" style="margin-top: 5rem; border-top: 1px solid var(--color-sovereign-primary); padding: 2rem 0;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted);" data-i18n="footer-eot-sovereign">
+                FIN DE TRANSMISSION // SOVEREIGN REPUBLIC
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-sovereign-primary);">
+                UE5 • 100% C++ • 100+ PLAYERS
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/space.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

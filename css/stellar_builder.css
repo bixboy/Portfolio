@@ -1,0 +1,137 @@
+/* Stellar Builder Theme: First Person Construction Suite (Amber Build & Hologram Ghost Cyan) */
+:root {
+    --color-builder-bg: #070b12;
+    --color-builder-primary: #f59e0b;
+    --color-builder-secondary: #00e5ff;
+    --color-builder-dim: rgba(245, 158, 11, 0.1);
+    --color-builder-cyan-dim: rgba(0, 229, 255, 0.1);
+}
+
+.project-hero {
+    height: 60vh;
+    background: linear-gradient(to bottom, rgba(7, 11, 18, 0.65), var(--color-bg)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border-bottom: 2px solid var(--color-builder-primary);
+}
+
+.stat-block {
+    background: var(--color-builder-dim);
+    border: 1px solid var(--color-builder-primary);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stat-label {
+    font-family: var(--font-heading);
+    color: var(--color-builder-primary);
+    font-size: 0.75rem;
+    display: block;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.text-builder {
+    color: var(--color-builder-primary);
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.builder-card {
+    border-color: var(--color-builder-primary);
+    background: rgba(7, 11, 18, 0.85);
+}
+
+.builder-card:hover {
+    box-shadow: 0 0 20px var(--color-builder-dim);
+    border-color: var(--color-builder-secondary);
+}
+
+.module-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid var(--color-builder-primary);
+    color: var(--color-builder-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    background: rgba(245, 158, 11, 0.05);
+    letter-spacing: 1px;
+}
+
+.spec-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.spec-list li {
+    font-family: var(--font-body);
+    color: var(--color-text-main);
+    line-height: 1.6;
+}
+
+.spec-list strong {
+    font-family: var(--font-mono);
+}
+
+.feature-row {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.feature-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.feature-text {
+    flex: 1;
+}
+
+.feature-media {
+    flex: 1;
+    position: relative;
+    border: 1px solid var(--color-builder-primary);
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+}
+
+.feature-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.feature-media:hover img {
+    transform: scale(1.03);
+}
+
+.feature-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.85);
+    color: var(--color-builder-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-top: 1px solid var(--color-builder-primary);
+}
+
+@media (max-width: 900px) {
+    .feature-row,
+    .feature-row.reverse {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
