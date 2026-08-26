@@ -51,11 +51,19 @@
         <div class="container"
             style="height: 100%; display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 2rem; flex-wrap: wrap;">
             <div>
+                <div class="status-badge" style="background: rgba(255, 157, 0, 0.1); border: 1px solid #ff9d00; color: #ff9d00; margin-bottom: 0.8rem; display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ff9d00; box-shadow: 0 0 8px #ff9d00;"></span>
+                    <span data-i18n="sovereign-status">EN COURS DE DÉVELOPPEMENT</span>
+                </div>
                 <h1 class="glitch-text" style="font-size: 3.5rem; text-shadow: 4px 4px var(--color-sovereign-primary);">
                     SOVEREIGN REPUBLIC</h1>
                 <h2 class="subtitle text-sovereign" data-i18n="sovereign-subtitle">SIMULATION TACTIQUE & RP MILITAIRE // STAR WARS (STYLE GMOD SWRP / SQUAD) // UNREAL ENGINE 5 (100% C++)</h2>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="stat-block" style="border-color: #ff9d00;">
+                    <span class="stat-label" style="color: #ff9d00;">STATUT</span>
+                    <span class="stat-value" style="color: #ff9d00;" data-i18n="sovereign-status">EN COURS DE DÉV</span>
+                </div>
                 <div class="stat-block">
                     <span class="stat-label">MOTEUR</span>
                     <span class="stat-value">UNREAL ENGINE 5</span>
@@ -67,10 +75,6 @@
                 <div class="stat-block">
                     <span class="stat-label">RÉSEAU</span>
                     <span class="stat-value">100+ JOUEURS</span>
-                </div>
-                <div class="stat-block">
-                    <span class="stat-label">RÔLE</span>
-                    <span class="stat-value">CORE & NETWORKING</span>
                 </div>
             </div>
         </div>
@@ -91,6 +95,7 @@
                     <span class="tag tag-lang">MODERN C++</span>
                     <span class="tag tag-role">DEDICATED SERVER</span>
                     <span class="tag tag-role">MASSIVE MULTIPLAYER</span>
+                    <span class="tag" style="border-color: #ff9d00; color: #ff9d00;" data-i18n="tag-in-dev">EN COURS DE DÉVELOPPEMENT</span>
                 </div>
             </div>
             <div class="feature-media">

@@ -50,11 +50,13 @@ const translations = {
         "army-desc": "Clicker stratégie. Gestion d'armée, skills trees et combats de boss.",
         "2042-desc": "Shooter Arcade Neo-Retro. Hommage minimaliste aux classiques du genre.",
         "net-desc": "Hub de mini-jeux multijoueurs. Architecture Client/Server custom, UDP et sérialisation binaire.",
-        "sovereign-desc": "Sandbox militaire & RP Star Wars multijoueur (100+ joueurs, style GMod SWRP / Squad). 100% C++, serveur dédié et écosystème de plugins sur-mesure.",
+        "sovereign-desc": "Jeu en cours de développement : Sandbox militaire & RP Star Wars multijoueur (100+ joueurs, style GMod SWRP / Squad). 100% C++, serveur dédié et écosystème de plugins sur-mesure.",
+        "tag-in-dev": "EN COURS DE DÉVELOPPEMENT",
         
         // --- PROJECT PAGE: SOVEREIGN REPUBLIC (STAR WARS) ---
         "sovereign-subtitle": "SIMULATION TACTIQUE & RP MILITAIRE // STAR WARS (STYLE GMOD SWRP / SQUAD) // UNREAL ENGINE 5 (100% C++)",
         "sovereign-type": "PROJET MULTIJOUEUR (100+ JOUEURS)",
+        "sovereign-status": "EN COURS DE DÉVELOPPEMENT",
         "sovereign-overview-title": "PRÉSENTATION DU PROJET",
         "sovereign-overview-desc": "<strong>Sovereign Republic</strong> est une simulation militaire et un bac à sable RP multijoueur à grande échelle (100+ joueurs simultanés) inspiré des serveurs Star Wars RP de Garry's Mod et de la rigueur tactique de jeux comme <em>Squad</em> ou <em>Arma</em>. Développé en 100% C++ sous Unreal Engine 5 en collaboration avec un ami en full-remote, le projet combine une chaîne de commandement militaire immersive, une VoIP radio multi-fréquences, des opérations scénarisées en temps réel par des Game Masters, et une architecture serveur dédié taillée pour 100+ joueurs sans compromis de performance.",
         "sovereign-net-title": "ARCHITECTURE RÉSEAU & SERVEUR DÉDIÉ (100+ JOUEURS)",
@@ -622,11 +624,13 @@ const translations = {
         "army-desc": "Strategy Clicker. Army management, skill trees and boss fights.",
         "2042-desc": "Neo-Retro Arcade Shooter. Minimalist tribute to genre classics.",
         "net-desc": "Multiplayer mini-games hub. Custom Client/Server architecture, UDP, and binary serialization.",
-        "sovereign-desc": "Tactical Star Wars Military RP Sandbox (100+ players, GMod SWRP & Squad style). 100% C++, dedicated server, and custom plugin ecosystem.",
+        "sovereign-desc": "Game currently in development: Tactical Star Wars Military RP Sandbox (100+ players, GMod SWRP & Squad style). 100% C++, dedicated server, and custom plugin ecosystem.",
+        "tag-in-dev": "IN ACTIVE DEVELOPMENT",
         
         // --- PROJECT PAGE: SOVEREIGN REPUBLIC (STAR WARS) ---
         "sovereign-subtitle": "TACTICAL SIMULATION & MILITARY RP // STAR WARS (GMOD SWRP / SQUAD STYLE) // UNREAL ENGINE 5 (100% C++)",
         "sovereign-type": "MULTIPLAYER PROJECT (100+ PLAYERS)",
+        "sovereign-status": "IN ACTIVE DEVELOPMENT",
         "sovereign-overview-title": "PROJECT OVERVIEW",
         "sovereign-overview-desc": "<strong>Sovereign Republic</strong> is a large-scale military simulation and RP tactical sandbox (100+ concurrent players) inspired by Garry's Mod Star Wars RP servers combined with the tactical discipline of games like <em>Squad</em> and <em>Arma</em>. Built in 100% C++ on Unreal Engine 5 in full-remote collaboration with a friend, it blends an immersive military chain of command, multi-frequency radio VoIP, live Game Master scenario orchestration, and a dedicated server architecture engineered for 100+ players.",
         "sovereign-net-title": "NETWORK ARCHITECTURE & DEDICATED SERVER (100+ PLAYERS)",
