@@ -343,9 +343,19 @@ a {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 229, 255, 0.18);
 }
 
-.hologram-card > * {
+.hologram-card > *:not(.card-decorations) {
     position: relative;
     z-index: 1;
+}
+
+.card-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
 }
 
 .card-visual {
@@ -468,45 +478,48 @@ a {
     text-shadow: 0 0 5px var(--color-primary);
 }
 
-/* Card Decorations (Corners) */
+/* Card Decorations (Corners at the 4 card edges) */
 .corner {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-color: var(--color-primary);
     border-style: solid;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     pointer-events: none;
+    opacity: 0.8;
 }
 
 .top-left {
-    top: -1px;
-    left: -1px;
+    top: 4px;
+    left: 4px;
     border-width: 2px 0 0 2px;
 }
 
 .top-right {
-    top: -1px;
-    right: -1px;
+    top: 4px;
+    right: 4px;
     border-width: 2px 2px 0 0;
 }
 
 .bottom-left {
-    bottom: -1px;
-    left: -1px;
+    bottom: 4px;
+    left: 4px;
     border-width: 0 0 2px 2px;
 }
 
 .bottom-right {
-    bottom: -1px;
-    right: -1px;
+    bottom: 4px;
+    right: 4px;
     border-width: 0 2px 2px 0;
 }
 
 .hologram-card:hover .corner {
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
+    width: 14px;
+    height: 14px;
+    border-color: #ffffff;
+    box-shadow: 0 0 8px var(--color-primary);
+    opacity: 1;
 }
 
 /* Bix Engine Section */
