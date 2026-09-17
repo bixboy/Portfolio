@@ -542,12 +542,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 3D HOLOGRAPHIC TILT & CURSOR BORDER GLOW ---
+    // --- 3D HOLOGRAPHIC TILT & DYNAMIC BORDER CONTOUR BEAM ---
     const cards = document.querySelectorAll('.hologram-card');
+    
+    // Check if CSS @property interpolation is supported
+    const supportsAtProperty = window.CSS && typeof CSS.registerProperty === 'function';
+    let activeBeamCard = null;
+    let beamAngle = 0;
+    let beamRaf = null;
+
+    function stepBeamAngle() {
+        if (activeBeamCard) {
+            beamAngle = (beamAngle + 2.4) % 360;
+            activeBeamCard.style.setProperty('--border-angle', `${beamAngle}deg`);
+            beamRaf = requestAnimationFrame(stepBeamAngle);
+        }
+    }
+
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
             // Immediate real-time response on hover without lag on ANY column
             card.style.transition = 'none';
+
+            if (!supportsAtProperty) {
+                activeBeamCard = card;
+                beamAngle = 0;
+                if (!beamRaf) {
+                    beamRaf = requestAnimationFrame(stepBeamAngle);
+                }
+            }
         });
 
         card.addEventListener('mousemove', (e) => {
@@ -575,6 +598,15 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--mouse-x', `-999px`);
             card.style.setProperty('--mouse-y', `-999px`);
             card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+
+            if (!supportsAtProperty && activeBeamCard === card) {
+                activeBeamCard = null;
+                if (beamRaf) {
+                    cancelAnimationFrame(beamRaf);
+                    beamRaf = null;
+                }
+                card.style.removeProperty('--border-angle');
+            }
         });
     });
 

@@ -1,3 +1,9 @@
+@property --border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
 :root {
     /* Colors */
     --color-bg: #050505;
@@ -293,27 +299,31 @@ a {
     overflow: hidden;
 }
 
-/* Cursor-Following Border Glow */
+/* Animated Cyber Laser Beam: Traces Card Contour on Hover */
 .hologram-card::before {
     content: '';
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: radial-gradient(
-        280px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-        rgba(0, 229, 255, 0.95),
-        rgba(0, 229, 255, 0.25) 40%,
-        transparent 70%
+    padding: 2px;
+    background: conic-gradient(
+        from var(--border-angle, 0deg),
+        transparent 0deg,
+        transparent 210deg,
+        rgba(0, 229, 255, 0.08) 240deg,
+        rgba(0, 229, 255, 0.35) 285deg,
+        rgba(0, 229, 255, 0.85) 330deg,
+        #00e5ff 352deg,
+        #ffffff 360deg
     );
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    padding: 1.5px;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
 }
 
 /* Ambient Radial Spot Glow Under Cursor */
@@ -323,29 +333,42 @@ a {
     inset: 0;
     border-radius: inherit;
     background: radial-gradient(
-        250px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+        260px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
         rgba(0, 229, 255, 0.08),
         transparent 70%
     );
-    z-index: 0;
+    z-index: 1;
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
 }
 
-.hologram-card:hover::before,
+.hologram-card:hover::before {
+    opacity: 1;
+    animation: cardBorderTrace 2.6s linear infinite;
+}
+
 .hologram-card:hover::after {
     opacity: 1;
 }
 
 .hologram-card:hover {
-    border-color: rgba(0, 229, 255, 0.4);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 229, 255, 0.18);
+    border-color: rgba(0, 229, 255, 0.45);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 229, 255, 0.22), inset 0 0 15px rgba(0, 229, 255, 0.04);
 }
 
 .hologram-card > * {
     position: relative;
-    z-index: 1;
+    z-index: 3;
+}
+
+@keyframes cardBorderTrace {
+    0% {
+        --border-angle: 0deg;
+    }
+    100% {
+        --border-angle: 360deg;
+    }
 }
 
 .card-visual {
@@ -469,71 +492,12 @@ a {
 }
 
 /* ==========================================================================
-   ELEGANT FLUSH CYBER CORNER BEZELS
+   CARD CORNER DECORATIONS (Removed in favor of dynamic perimeter border beam)
    ========================================================================== */
 
-.card-decorations {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-}
-
+.card-decorations,
 .corner {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    pointer-events: none;
-    opacity: 0.55;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.25s ease,
-                box-shadow 0.25s ease,
-                opacity 0.25s ease;
-}
-
-.corner.top-left {
-    top: 0;
-    left: 0;
-    border-top: 2px solid var(--color-primary);
-    border-left: 2px solid var(--color-primary);
-    border-top-left-radius: 6px;
-}
-
-.corner.top-right {
-    top: 0;
-    right: 0;
-    border-top: 2px solid var(--color-primary);
-    border-right: 2px solid var(--color-primary);
-    border-top-right-radius: 6px;
-}
-
-.corner.bottom-left {
-    bottom: 0;
-    left: 0;
-    border-bottom: 2px solid var(--color-primary);
-    border-left: 2px solid var(--color-primary);
-    border-bottom-left-radius: 6px;
-}
-
-.corner.bottom-right {
-    bottom: 0;
-    right: 0;
-    border-bottom: 2px solid var(--color-primary);
-    border-right: 2px solid var(--color-primary);
-    border-bottom-right-radius: 6px;
-}
-
-/* On hover: smooth elongation along the card border & high-tech illumination */
-.hologram-card:hover .corner {
-    opacity: 1;
-    width: 22px;
-    height: 22px;
-    border-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.85);
+    display: none !important;
 }
 
 /* Bix Engine Section */
