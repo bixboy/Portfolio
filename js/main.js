@@ -561,8 +561,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            // Immediate real-time response on hover without lag on ANY column
-            card.style.transition = 'none';
+            // Smooth organic entry transition with fluid damping
+            card.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
 
             if (!supportsAtProperty) {
                 activeBeamCard = card;
@@ -594,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease';
+            card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
             card.style.setProperty('--mouse-x', `-999px`);
             card.style.setProperty('--mouse-y', `-999px`);
             card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
