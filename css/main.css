@@ -287,10 +287,9 @@ a {
     border: 1px solid var(--color-primary-dim);
     position: relative;
     padding: 20px;
-    border-radius: 6px;
+    border-radius: 4px;
     transform-style: preserve-3d;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+    transition: transform 0.15s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Cursor-Following Border Glow */
@@ -468,10 +467,113 @@ a {
     text-shadow: 0 0 5px var(--color-primary);
 }
 
-/* Card Decorations (Disabled for clean minimal aesthetic) */
-.card-decorations,
+/* Card Decorations (Tactical HUD Corner Brackets) */
+.card-decorations {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
 .corner {
-    display: none !important;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.corner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-color: var(--color-primary);
+    border-style: solid;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    transition: all 0.25s ease;
+}
+
+/* Micro Laser Accent Dot */
+.corner::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--color-primary);
+    transition: all 0.25s ease;
+}
+
+.top-left {
+    top: -2px;
+    left: -2px;
+}
+.top-left::before {
+    border-width: 2.5px 0 0 2.5px;
+    border-radius: 3px 0 0 0;
+}
+.top-left::after {
+    top: 2px;
+    left: 2px;
+}
+
+.top-right {
+    top: -2px;
+    right: -2px;
+}
+.top-right::before {
+    border-width: 2.5px 2.5px 0 0;
+    border-radius: 0 3px 0 0;
+}
+.top-right::after {
+    top: 2px;
+    right: 2px;
+}
+
+.bottom-left {
+    bottom: -2px;
+    left: -2px;
+}
+.bottom-left::before {
+    border-width: 0 0 2.5px 2.5px;
+    border-radius: 0 0 0 3px;
+}
+.bottom-left::after {
+    bottom: 2px;
+    left: 2px;
+}
+
+.bottom-right {
+    bottom: -2px;
+    right: -2px;
+}
+.bottom-right::before {
+    border-width: 0 2.5px 2.5px 0;
+    border-radius: 0 0 3px 0;
+}
+.bottom-right::after {
+    bottom: 2px;
+    right: 2px;
+}
+
+/* Hover Lock-In Animation */
+.hologram-card:hover .corner {
+    width: 18px;
+    height: 18px;
+}
+
+.hologram-card:hover .corner::before {
+    border-color: #ffffff;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.9), 0 0 20px var(--color-primary);
+}
+
+.hologram-card:hover .corner::after {
+    background: var(--color-primary);
+    box-shadow: 0 0 8px #ffffff;
+    transform: scale(1.4);
 }
 
 /* Bix Engine Section */
