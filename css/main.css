@@ -287,13 +287,65 @@ a {
     border: 1px solid var(--color-primary-dim);
     position: relative;
     padding: 20px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border-radius: 6px;
+    transform-style: preserve-3d;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+/* Cursor-Following Border Glow */
+.hologram-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(
+        280px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+        rgba(0, 229, 255, 0.95),
+        rgba(0, 229, 255, 0.25) 40%,
+        transparent 70%
+    );
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    padding: 1.5px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+}
+
+/* Ambient Radial Spot Glow Under Cursor */
+.hologram-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        250px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+        rgba(0, 229, 255, 0.08),
+        transparent 70%
+    );
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.hologram-card:hover::before,
+.hologram-card:hover::after {
+    opacity: 1;
 }
 
 .hologram-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-primary);
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 229, 255, 0.18);
+}
+
+.hologram-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 .card-visual {
@@ -302,7 +354,51 @@ a {
     position: relative;
     overflow: hidden;
     margin-bottom: 15px;
-    border: 1px solid #333;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 4px;
+    transform: translateZ(12px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.hologram-card:hover .card-visual {
+    border-color: rgba(0, 229, 255, 0.6);
+    transform: translateZ(16px);
+}
+
+/* Diagonal Specular Sheen (Light Sweep) */
+.card-visual::after {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -150%;
+    width: 60%;
+    height: 220%;
+    background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(0, 229, 255, 0.25) 40%,
+        rgba(255, 255, 255, 0.65) 50%,
+        rgba(0, 229, 255, 0.25) 60%,
+        transparent 80%
+    );
+    transform: rotate(25deg);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.hologram-card:hover .card-visual::after {
+    animation: cardLightSweep 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardLightSweep {
+    0% {
+        left: -150%;
+        opacity: 1;
+    }
+    100% {
+        left: 200%;
+        opacity: 0;
+    }
 }
 
 .placeholder-img {
@@ -780,4 +876,46 @@ a {
     .lang-btn {
         margin-left: 0 !important;
     }
+}
+
+/* ==========================================================================
+   SCROLL REVEAL & SECTION ENERGY LINES (WARP SECTIONS)
+   ========================================================================== */
+
+.section-energy-line {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.45), rgba(0, 229, 255, 0.15), transparent);
+    margin: 2rem 0 3.5rem 0;
+    overflow: hidden;
+}
+
+.section-energy-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.9), #ffffff, rgba(0, 229, 255, 0.9), transparent);
+    box-shadow: 0 0 15px #00e5ff;
+    animation: energyPulseBeam 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes energyPulseBeam {
+    0% { left: -40%; }
+    50%, 100% { left: 140%; }
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
 }

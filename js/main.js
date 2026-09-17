@@ -542,29 +542,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 3D HOLOGRAPHIC TILT ---
-    const cards = document.querySelectorAll('.hologram-card:not(.no-tilt)');
+    // --- 3D HOLOGRAPHIC TILT & CURSOR BORDER GLOW ---
+    const cards = document.querySelectorAll('.hologram-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
-            if (card.classList.contains('no-tilt')) return;
-
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
+            // Feed coordinates for cursor-following border glow
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+
+            if (card.classList.contains('no-tilt')) return;
+
             const xPct = (x / rect.width) - 0.5;
             const yPct = (y / rect.height) - 0.5;
 
-            const rotateX = yPct * -15;
-            const rotateY = xPct * 15;
+            const rotateX = yPct * -12;
+            const rotateY = xPct * 12;
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
 
         card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--mouse-x', `-999px`);
+            card.style.setProperty('--mouse-y', `-999px`);
             card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
         });
     });
+
+    // --- SCROLL REVEAL (WARP SECTIONS & STAGGERED INERTIA) ---
+    const revealTargets = document.querySelectorAll('.project-grid > article, .plugin-grid > article, .software-grid > article, .bix-layout');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        revealTargets.forEach((target, index) => {
+            target.classList.add('scroll-reveal');
+            const colIndex = index % 3;
+            target.style.transitionDelay = `${colIndex * 0.12}s`;
+            observer.observe(target);
+        });
+    } else {
+        revealTargets.forEach(el => el.classList.add('is-revealed'));
+    }
 
     console.log("IMPERIAL DATAPAD SYSTEM v2.5 :: INITIALIZED");
 });
