@@ -545,6 +545,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3D HOLOGRAPHIC TILT & CURSOR BORDER GLOW ---
     const cards = document.querySelectorAll('.hologram-card');
     cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            // Immediate real-time response on hover without lag on ANY column
+            card.style.transition = 'none';
+        });
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -559,13 +564,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const xPct = (x / rect.width) - 0.5;
             const yPct = (y / rect.height) - 0.5;
 
-            const rotateX = yPct * -12;
-            const rotateY = xPct * 12;
+            const rotateX = yPct * -14;
+            const rotateY = xPct * 14;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.025)`;
         });
 
         card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease';
             card.style.setProperty('--mouse-x', `-999px`);
             card.style.setProperty('--mouse-y', `-999px`);
             card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
@@ -579,6 +585,9 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-revealed');
+                    setTimeout(() => {
+                        entry.target.style.removeProperty('--reveal-delay');
+                    }, 800);
                     observer.unobserve(entry.target);
                 }
             });
@@ -590,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealTargets.forEach((target, index) => {
             target.classList.add('scroll-reveal');
             const colIndex = index % 3;
-            target.style.transitionDelay = `${colIndex * 0.12}s`;
+            target.style.setProperty('--reveal-delay', `${colIndex * 0.12}s`);
             observer.observe(target);
         });
     } else {
