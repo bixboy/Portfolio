@@ -336,3 +336,28 @@ code {
         display: none;
     }
 }
+
+/* Gameplay video */
+.video-frame {
+    margin: 0;
+    border: 1px solid var(--accent);
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.video-frame video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1600 / 948;
+    background: #000;
+}
+
+.video-frame figcaption {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    border-top: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}

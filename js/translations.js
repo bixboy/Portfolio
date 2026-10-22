@@ -1238,5 +1238,9 @@ const translations = {
         "heist-recoil": "Each shot adds an impulse (bounded climb, lateral drift that changes direction) absorbed over a few frames, then partially recovered. A player compensating with the mouse consumes the planned recovery first: it is never applied twice.",
         "heist-hit-title": "HIT REACTIONS",
         "heist-hit": "Up close, a hit body blends physics and animation; far away or off-screen, a procedural torso and head flinch takes over. Shotgun pellets received in the same frame are merged into a single reaction.",
+
+        // --- PORTFOLIO V3 (about, Heist, MMO, Kotyx) ---
+        "heist-video-title": "GAMEPLAY DEMO",
+        "heist-video-caption": "Two clients connected to the same server, side by side: on the left the player sees their weapon in first person, on the right their teammate sees them aim in third person. Masks, loot, lockpicking, keypad, doors and shooting.",
     }
 };
