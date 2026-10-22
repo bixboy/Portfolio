@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotyx | Project Data | Pierre Lamare</title>
+    <meta name="description" content="Kotyx : application Android Qt 6 / C++ de relevé de cotes au télémètre laser Bluetooth pour la menuiserie et le BTP, avec serveur de licences Node.js et abonnements.">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/project.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body style="--accent: #4facfe; --accent-2: #fb923c;">
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#pro-software" class="nav-item" data-i18n="nav-software-back">RETOUR LOGICIELS</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="project-hero">
+        <div class="container">
+            <div style="display: flex; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap;">
+                <img src="assets/kotyx/kotyx-logo.png" alt="Logo Kotyx" width="110" height="113" style="filter: drop-shadow(0 0 22px rgba(79, 172, 254, 0.35));">
+                <div>
+                    <span class="status-badge is-live" data-i18n="flag-live">EN PRODUCTION</span>
+                    <h1 class="glitch-text">KOTYX</h1>
+                    <h2 class="subtitle" data-i18n="kotyx-subtitle">RELEVÉ DE COTES AU LASER POUR LA MENUISERIE & LE BTP // QT 6 / QML / C++ // ROLLON SYSTEMS</h2>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-block">
+                    <span class="stat-label">TYPE</span>
+                    <span class="stat-value" data-i18n="kotyx-type">SAAS B2B</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-app">APP</span>
+                    <span class="stat-value">QT 6 / C++20</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-server">SERVEUR</span>
+                    <span class="stat-value">NODE / POSTGRESQL</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-platform">PLATEFORME</span>
+                    <span class="stat-value">ANDROID</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- OVERVIEW -->
+        <section class="project-section">
+            <span class="module-badge">BRIEFING</span>
+            <h3 class="section-title" data-i18n="kotyx-overview-title">LE PRODUIT</h3>
+            <p class="lead" data-i18n="kotyx-overview">
+                Sur un chantier de menuiserie, le technicien relève des cotes d'ouvertures ou vérifie qu'une
+                maçonnerie respecte les tolérances avant la pose. <strong>Kotyx remplace le carnet papier</strong> :
+                il pose des repères sur le plan PDF de l'architecte, mesure au <strong>télémètre laser
+                Bluetooth</strong> (Leica, Hilti), voit instantanément si la cote est conforme, puis génère un
+                <strong>rapport PDF</strong> au logo de son entreprise. Je développe et commercialise seul
+                l'ensemble : l'app, le serveur de licences et le site client, via ma micro-entreprise
+                <strong>Rollon Systems</strong>.
+            </p>
+            <div class="flow">
+                <div class="flow-step"><b>01 — PLAN</b><span data-i18n="kotyx-flow-1">Import du plan PDF du chantier</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b>02 — REPÈRES</b><span data-i18n="kotyx-flow-2">Repères posés sur le plan, liés à un gabarit</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b>03 — MESURE</b><span data-i18n="kotyx-flow-3">Laser Bluetooth, verdict vert / rouge immédiat</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b>04 — RAPPORT</b><span data-i18n="kotyx-flow-4">PDF avec plans, cotes et photos</span></div>
+            </div>
+            <div class="project-cta">
+                <a href="https://kotyx.fr" target="_blank" rel="noopener noreferrer" class="hologram-btn">
+                    <span class="btn-content" data-i18n="kotyx-cta">VOIR KOTYX.FR</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- APP ARCHITECTURE -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">APP // ARCHITECTURE</span>
+                <h3 class="section-title" data-i18n="kotyx-mvvm-title">MVVM & INJECTION MANUELLE</h3>
+                <ul class="spec-list">
+                    <li data-i18n="kotyx-mvvm-1"><strong>> Le QML n'a aucune logique métier</strong>
+                        Cinq ViewModels C++ (<code>AppViewModel</code>, <code>ProjectViewModel</code>,
+                        <code>DrawingViewModel</code>, <code>MarkerViewModel</code>, <code>ExportViewModel</code>)
+                        exposent l'état via <code>Q_PROPERTY</code> et sont enregistrés comme singletons QML typés,
+                        vérifiés par <code>qmllint</code>.</li>
+                    <li data-i18n="kotyx-mvvm-2"><strong>> Un seul point de composition</strong>
+                        <code>AppEngine</code> crée et câble tous les objets (signaux inter-ViewModels compris) :
+                        aucune dépendance cachée, aucun singleton global.</li>
+                    <li data-i18n="kotyx-mvvm-3"><strong>> Données 100% locales</strong>
+                        Chantiers, plans, mesures et photos restent sur l'appareil (SQLite via
+                        <code>IDataRepository</code>), avec sauvegarde / restauration dans une archive
+                        <code>.kotyx</code>.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// une mesure, du laser à l'écran</span>
+<span class="c-accent">Laser BLE</span>        notification GATT
+   ▼
+<span class="c-accent">LeicaDistoDevice</span> décodage trame (m → mm)
+   ▼
+<span class="c-accent">HardwareService</span>  reconnexion auto (backoff)
+   ▼
+<span class="c-accent">AppViewModel</span>     dernière mesure + historique
+   ▼
+<span class="c-accent">ConformityRules</span>  cible ± tolérance → <span class="c-ok">vert</span> / <span class="c-err">rouge</span>
+   ▼
+<span class="c-accent">FeedbackService</span>  bip court ou double vibration
+   ▼
+<span class="c-accent">SQLite</span>           repère mis à jour</pre>
+            </div>
+        </section>
+
+        <!-- HARDWARE -->
+        <section class="project-section">
+            <span class="module-badge">HARDWARE</span>
+            <h3 class="section-title" data-i18n="kotyx-hw-title">TÉLÉMÈTRES LASER BLUETOOTH</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">ILaserDevice</span>
+                    <h4 data-i18n="kotyx-hw1-title">ABSTRACTION PAR MARQUE</h4>
+                    <p data-i18n="kotyx-hw1">Aucune marque câblée en dur : <code>AbstractBleLaserDevice</code> porte le scan, la connexion et l'abonnement aux notifications ; Leica et Hilti ne surchargent que le décodage. Un simulateur permet de développer sans appareil.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">LaserFrameParser</span>
+                    <h4 data-i18n="kotyx-hw2-title">DÉCODAGE TESTÉ</h4>
+                    <p data-i18n="kotyx-hw2">Trames binaires IEEE-754 ou texte selon le modèle, isolées dans un parseur pur couvert par des tests unitaires.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">HardwareService</span>
+                    <h4 data-i18n="kotyx-hw3-title">ROBUSTE SUR LE TERRAIN</h4>
+                    <p data-i18n="kotyx-hw3">Gestion des permissions Android avant toute connexion, reconnexion automatique avec backoff exponentiel quand le laser sort de portée.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DXF & PDF -->
+        <section class="feature-row reverse project-section">
+            <div class="feature-text">
+                <span class="module-badge">DXF // PDF</span>
+                <h3 class="section-title" data-i18n="kotyx-dxf-title">GABARITS DXF & RAPPORTS PDF</h3>
+                <ul class="spec-list">
+                    <li data-i18n="kotyx-dxf-1"><strong>> Parseur DXF maison</strong>
+                        Les gabarits de menuiserie dessinés sous AutoCAD (fenêtre 1 ou 2 vantaux, coulissant,
+                        châssis, porte…) sont importés : la géométrie devient un schéma, les cotes deviennent des
+                        champs de mesure ciblés.</li>
+                    <li data-i18n="kotyx-dxf-2"><strong>> Modèle multi-métier</strong>
+                        Cibles, tolérances et champs de mesure sont décrits par des schémas JSON par métier
+                        (<code>ProfessionManager</code>) plutôt que par des colonnes SQL figées.</li>
+                    <li data-i18n="kotyx-dxf-3"><strong>> Rapports PDF</strong>
+                        Générés avec <code>QPainter</code> : plans annotés, schémas cotés théorique / mesuré,
+                        photos et statut de chaque repère, puis partagés via l'intent Android natif.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// 10 suites de tests unitaires (C++)</span>
+ConformityTests      
+DxfParserTests       
+LaserFrameParserTests
+LicenseRulesTests    
+PdfReportTests       
+SqliteRepositoryTests
+BackupArchiveTests   
+CrashReporterTests   
+CustomFieldsTests    
+PhotoStorageTests    </pre>
+            </div>
+        </section>
+
+        <!-- BUSINESS / SERVER -->
+        <section class="project-section">
+            <span class="module-badge">BACKEND // SAAS</span>
+            <h3 class="section-title" data-i18n="kotyx-server-title">LICENCES, PAIEMENTS & FACTURATION</h3>
+            <p class="lead" data-i18n="kotyx-server-desc">
+                Kotyx est vendu en <strong>abonnement par poste</strong>. Derrière l'app tourne un serveur
+                <strong>Node.js / Express / PostgreSQL</strong> que j'ai écrit pour gérer tout le cycle commercial,
+                et un site avec espace client.
+            </p>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">LicenseManager ↔ API</span>
+                    <h4 data-i18n="kotyx-lic-title">LICENCES SIGNÉES RSA</h4>
+                    <p data-i18n="kotyx-lic">La réponse du serveur est signée (RSA-3072, SHA-256) et vérifiée par l'app avec OpenSSL. Cache chiffré lié à l'appareil, fonctionnement hors-ligne 7 jours, clé maître + sous-clés par technicien et quota de postes.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">Mollie</span>
+                    <h4 data-i18n="kotyx-pay-title">ABONNEMENTS & FACTURES</h4>
+                    <p data-i18n="kotyx-pay">Devis, paiement Mollie, prélèvements récurrents par webhooks, changement de postes au prorata, factures PDF Factur-X et emails transactionnels.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">/admin</span>
+                    <h4 data-i18n="kotyx-ops-title">EXPLOITATION</h4>
+                    <p data-i18n="kotyx-ops">Console d'administration (session, CSRF, 2FA optionnelle), environnement de test isolé de la prod, publication des mises à jour de l'APK et rapports de plantage anonymes.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel project-footer">
+        <p>END OF TRANSMISSION // KOTYX</p>
+        <a href="index.html#pro-software" class="hologram-link" data-i18n="nav-back">[ RETOUR À LA BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

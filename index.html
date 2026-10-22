@@ -14,7 +14,12 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pierre Lamare | Game Programmer | Imperial Datalink</title>
+    <title>Pierre Lamare | Game Programmer C++ / Unreal Engine 5</title>
+    <meta name="description" content="Portfolio de Pierre Lamare, game programmer C++ / Unreal Engine 5 : gameplay, réseau multijoueur, plugins UE5, Unity et Kotyx, application Qt/C++ en production.">
+    <meta property="og:title" content="Pierre Lamare | Game Programmer C++ / Unreal Engine 5">
+    <meta property="og:description" content="Gameplay, réseau multijoueur et plugins Unreal Engine 5 en C++. Projets UE5, Unity, moteur maison et app Qt/C++ en production.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bixboy.github.io/Portfolio/">
 
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +30,7 @@
 
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
-    
+
     <!-- i18n -->
     <script src="js/translations.js"></script>
     <script src="js/i18n.js"></script>
@@ -41,17 +46,25 @@
     <!-- HERO SECTION -->
     <header id="hero" class="cockpit-view">
         <div class="container text-center">
+            <p class="hero-kicker" data-i18n="hero-kicker">// TRANSMISSION ENTRANTE — PROFIL OPÉRATEUR</p>
             <h1 class="glitch-text" data-text="PIERRE LAMARE">PIERRE LAMARE</h1>
-            <h2 class="subtitle"><span data-i18n="hero-subtitle">GAME PROGRAMMER</span> <span class="accent-text">[ C# / C++ ]</span></h2>
+            <h2 class="subtitle"><span data-i18n="hero-role">GAME PROGRAMMER</span> <span class="accent-text">[ C++ / UE5 ]</span></h2>
+            <p class="hero-tagline" data-i18n="hero-tagline">
+                Je conçois les systèmes qui font tenir un jeu debout : <strong>gameplay en C++</strong>,
+                <strong>réseau multijoueur autoritaire serveur</strong> et <strong>plugins Unreal Engine 5</strong>
+                réutilisables. Étudiant en Master Game Programming à l'IIM Paris.
+            </p>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary hologram-btn">
-                    <span class="btn-content" data-i18n="btn-init">INITIALISER PROJETS</span>
+                    <span class="btn-content" data-i18n="btn-init">VOIR LES PROJETS</span>
                     <span class="btn-glitch"></span>
                 </a>
-                <button id="start-sim-btn" class="btn btn-secondary hologram-btn"
-                    style="border-color: #ff3333; color: #ff3333;">
+                <a href="contact.html" class="btn hologram-btn">
+                    <span class="btn-content" data-i18n="btn-cv">CONTACT & CV</span>
+                    <span class="btn-glitch"></span>
+                </a>
+                <button id="start-sim-btn" type="button" class="btn hologram-btn btn-ghost">
                     <span class="btn-content" data-i18n="btn-sim-start">COMBAT SIMULATION</span>
-                    <span class="btn-glitch" style="background: #ff3333;"></span>
                 </button>
             </div>
             <div class="status-indicators">
@@ -67,6 +80,7 @@
         <div class="container nav-container">
             <div class="nav-brand">PL-88</div>
             <ul class="nav-links">
+                <li><a href="#about" class="nav-item" data-i18n="nav-about">PROFIL</a></li>
                 <li><a href="#projects" class="nav-item" data-i18n="nav-projects">PROJETS</a></li>
                 <li><a href="#plugins" class="nav-item" data-i18n="nav-plugins">PLUGINS</a></li>
                 <li><a href="#pro-software" class="nav-item" data-i18n="nav-software">LOGICIELS PRO</a></li>
@@ -77,44 +91,225 @@
     </nav>
 
     <main>
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section-padding">
+            <div class="container">
+                <h3 class="section-title" data-i18n="section-about">PROFIL OPÉRATEUR</h3>
+                <div class="section-energy-line"></div>
+
+                <div class="about-grid">
+                    <div class="about-bio">
+                        <p data-i18n="about-p1">
+                            Game programmer spécialisé en <strong>C++ et Unreal Engine 5</strong>. Ce qui me motive :
+                            les systèmes de fond — <strong>réplication réseau</strong>, prédiction client, architecture
+                            gameplay <strong>data-driven</strong>, outils éditeur — ceux qui permettent à une équipe de
+                            produire du contenu sans tout recoder.
+                        </p>
+                        <p data-i18n="about-p2">
+                            J'ai construit un écosystème de <strong>plus de 14 plugins UE5</strong> (véhicules, RTS / Game
+                            Master, UI, audio, réseau) que je réutilise dans mes jeux, et je développe en parallèle
+                            <strong>Kotyx</strong>, une application mobile Qt / C++ que je commercialise via ma
+                            micro-entreprise Rollon Systems.
+                        </p>
+
+                        <ul class="timeline">
+                            <li>
+                                <span class="timeline-date">2022 — 2027</span>
+                                <span class="timeline-title" data-i18n="tl-iim-title">Master Game Programming — IIM Paris</span>
+                                <span class="timeline-desc" data-i18n="tl-iim-desc">C++, C#, moteurs (Unreal, Unity, moteur maison), algorithmique, mathématiques.</span>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2026</span>
+                                <span class="timeline-title" data-i18n="tl-kotyx-title">Fondateur — Rollon Systems (Kotyx)</span>
+                                <span class="timeline-desc" data-i18n="tl-kotyx-desc">App Qt / C++ Android, serveur de licences Node.js / PostgreSQL, abonnements Mollie.</span>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2025</span>
+                                <span class="timeline-title" data-i18n="tl-gdc-title">Synaptik! — sélectionné pour la GDC (San Francisco)</span>
+                                <span class="timeline-desc" data-i18n="tl-gdc-desc">Jeu Unity 6 en équipe de 8 : système multi-caméras et contrôleur custom.</span>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2024 — ...</span>
+                                <span class="timeline-title" data-i18n="tl-sovereign-title">Sovereign Republic — jeu multijoueur 100+ joueurs</span>
+                                <span class="timeline-desc" data-i18n="tl-sovereign-desc">UE5 100% C++, développé à deux en full remote.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="stat-tiles">
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">150k+</span>
+                                <span class="stat-tile-label" data-i18n="stat-loc">lignes de C++ dans mes plugins UE5</span>
+                            </div>
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">14</span>
+                                <span class="stat-tile-label" data-i18n="stat-plugins">plugins Unreal Engine modulaires</span>
+                            </div>
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">4</span>
+                                <span class="stat-tile-label" data-i18n="stat-engines">moteurs : UE5, Unity, Qt 6 et un moteur maison</span>
+                            </div>
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">1</span>
+                                <span class="stat-tile-label" data-i18n="stat-product">produit commercial en production (Kotyx)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-grid">
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-lang">LANGAGES</h4>
+                        <div class="chips">
+                            <span class="chip is-strong">C++20</span>
+                            <span class="chip is-strong">C#</span>
+                            <span class="chip">QML</span>
+                            <span class="chip">JavaScript / Node.js</span>
+                            <span class="chip">HLSL</span>
+                            <span class="chip">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-engines">MOTEURS & FRAMEWORKS</h4>
+                        <div class="chips">
+                            <span class="chip is-strong">Unreal Engine 5</span>
+                            <span class="chip is-strong">Unity 6</span>
+                            <span class="chip">Qt 6</span>
+                            <span class="chip">SFML</span>
+                            <span class="chip">Box2D</span>
+                            <span class="chip">ImGui</span>
+                            <span class="chip">EnTT</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-net">RÉSEAU & BACKEND</h4>
+                        <div class="chips">
+                            <span class="chip is-strong">UE5 Replication</span>
+                            <span class="chip">Client Prediction</span>
+                            <span class="chip">Dedicated Server</span>
+                            <span class="chip">ENet / UDP</span>
+                            <span class="chip">FlatBuffers</span>
+                            <span class="chip">Steam Sessions</span>
+                            <span class="chip">PostgreSQL / SQLite</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-tools">OUTILS & MÉTHODES</h4>
+                        <div class="chips">
+                            <span class="chip">Git</span>
+                            <span class="chip">Rider / Visual Studio</span>
+                            <span class="chip">xmake</span>
+                            <span class="chip">Editor Tooling</span>
+                            <span class="chip">Data Assets</span>
+                            <span class="chip">Automated Tests</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- PROJECTS SECTION -->
         <section id="projects" class="section-padding">
             <div class="container">
                 <h3 class="section-title"><span data-i18n="section-projects">BASE DE DONNÉES</span> <span class="blinking-cursor">_</span></h3>
                 <div class="section-energy-line"></div>
 
-                <div class="project-grid">
-                    <!-- 1. UMAI -->
-                    <article class="data-card hologram-card">
+                <div class="filter-bar" data-target="project-grid" role="toolbar" aria-label="Filtres">
+                    <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true" data-i18n="filter-all">TOUS</button>
+                    <button type="button" class="filter-btn" data-filter="unreal" aria-pressed="false">UNREAL ENGINE</button>
+                    <button type="button" class="filter-btn" data-filter="unity" aria-pressed="false">UNITY</button>
+                    <button type="button" class="filter-btn" data-filter="cpp" aria-pressed="false" data-i18n="filter-cpp">C++ / MOTEUR MAISON</button>
+                    <button type="button" class="filter-btn" data-filter="multi" aria-pressed="false" data-i18n="filter-multi">MULTIJOUEUR</button>
+                </div>
+
+                <div class="project-grid" id="project-grid">
+                    <!-- HEIST PROJECT -->
+                    <article class="data-card hologram-card" data-cat="unreal multi" style="--accent: #f5c542;">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/e5c409e4-680a-4f7e-a8ee-286bf94a963d_rwc_100x0x599x450x599.png?h=4a754b25b1a031c373a841c06a29df39"
-                                alt="UMAI Project" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <div class="placeholder-img">
+                                <span class="img-label">HEIST</span>
+                                <span class="img-sub">UE 5.7 // COOP 1-4</span>
+                            </div>
+                            <span class="card-flag" data-i18n="flag-dev">EN DÉVELOPPEMENT</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">HEIST PROJECT</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5.7</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">SOLO</span>
+                            </div>
+                            <p class="description" data-i18n="heist-desc">FPS de braquage tactique en coop (Payday × Ready or Not). Animation procédurale en C++, crochetage, effraction, balistique validée par le serveur et architecture 100% data-driven.</p>
+                            <a href="heist.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <!-- SOVEREIGN REPUBLIC -->
+                    <article class="data-card hologram-card" data-cat="unreal multi" style="--accent: #00e5ff;">
+                        <div class="card-visual">
+                            <img src="assets/sovereign_republic.jpg" alt="Sovereign Republic" loading="lazy">
+                            <span class="card-flag" data-i18n="flag-dev">EN DÉVELOPPEMENT</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">SOVEREIGN REPUBLIC</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">100+ PLAYERS</span>
+                            </div>
+                            <p class="description" data-i18n="sovereign-desc">Sandbox militaire & RP Star Wars multijoueur (100+ joueurs, style GMod SWRP / Squad). 100% C++, serveur dédié et écosystème de plugins sur-mesure.</p>
+                            <a href="sovereign_republic.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <!-- MMO MOBILE -->
+                    <article class="data-card hologram-card" data-cat="unity cpp multi" style="--accent: #a3e635;">
+                        <div class="card-visual">
+                            <div class="placeholder-img">
+                                <span class="img-label">MMO</span>
+                                <span class="img-sub">ENET // ECS // FLATBUFFERS</span>
+                            </div>
+                            <span class="card-flag" data-i18n="flag-proto">PROTOTYPE</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">MMO MOBILE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">C++ SERVER</span>
+                                <span class="tag tag-lang">UNITY / C#</span>
+                                <span class="tag tag-role">SOLO</span>
+                            </div>
+                            <p class="description" data-i18n="mmo-desc">Serveur C++ haute performance pour un MMO stratégique mobile (type Rise of Kingdoms) : multi-royaumes, ECS EnTT, UDP ENet et FlatBuffers, client Unity.</p>
+                            <a href="mmo_mobile.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <!-- UMAI -->
+                    <article class="data-card hologram-card" data-cat="unreal multi">
+                        <div class="card-visual">
+                            <img src="assets/covers/umai.png" alt="UMAI !!!" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">UMAI !!!</h4>
                             <div class="tech-tags">
                                 <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">LEAD DEV</span>
+                                <span class="tag tag-role" data-i18n="tag-team9">ÉQUIPE DE 9</span>
                             </div>
-                            <p class="description" data-i18n="umai-desc">Jeu de canapé 4 joueurs. Incarnez des sushis, pêchez des ingrédients
-                                et coulez vos rivaux !</p>
+                            <p class="description" data-i18n="umai-desc">Jeu de canapé 4 joueurs. Incarnez des sushis, pêchez des ingrédients et coulez vos rivaux !</p>
                             <a href="umai.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 2. PROTOCOL: SYNC -->
-                    <article class="data-card hologram-card">
+                    <!-- PROTOCOL: SYNC -->
+                    <article class="data-card hologram-card" data-cat="cpp multi" style="--accent: #ff003c;">
                         <div class="card-visual">
-                            <img src="assets/protocol_sync.png"
-                                alt="Protocol: Sync" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/protocol_sync.png" alt="Protocol: Sync" loading="lazy">
                         </div>
                         <div class="card-content">
-                            <h4 class="project-title" style="color: var(--color-secondary);">PROTOCOL: SYNC</h4>
+                            <h4 class="project-title">PROTOCOL: SYNC</h4>
                             <div class="tech-tags">
-                                <span class="tag tag-engine" style="border-color: var(--color-secondary); color: var(--color-secondary);">ENET / UDP</span>
+                                <span class="tag tag-engine">ENET / UDP</span>
                                 <span class="tag tag-lang">C++ 20</span>
                                 <span class="tag tag-role">SOLO</span>
                             </div>
@@ -123,32 +318,10 @@
                         </div>
                     </article>
 
-                    <!-- 3. SOVEREIGN REPUBLIC (STAR WARS RP COMMANDO) -->
-                    <article class="data-card hologram-card">
+                    <!-- CONFIDENTIAL (SCP) -->
+                    <article class="data-card hologram-card" data-cat="unreal">
                         <div class="card-visual">
-                            <img src="assets/sovereign_republic.jpg"
-                                alt="Sovereign Republic Project" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title" style="color: #00e5ff;">SOVEREIGN REPUBLIC</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">100+ PLAYERS</span>
-                                <span class="tag" style="border-color: #ff9d00; color: #ff9d00;" data-i18n="tag-in-dev">EN COURS DE DÉVELOPPEMENT</span>
-                            </div>
-                            <p class="description" data-i18n="sovereign-desc">Jeu en cours de développement : Sandbox militaire & RP Star Wars multijoueur (100+ joueurs, style GMod SWRP / Squad). 100% C++, serveur dédié et écosystème de plugins sur-mesure.</p>
-                            <a href="sovereign_republic.html" class="card-link" style="color: #00e5ff;" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <!-- 4. CONFIDENTIAL (SCP) -->
-                    <article class="data-card hologram-card">
-                        <div class="card-visual">
-                            <img src="assets/gamejam/gameplay_overview.png" alt="SCP Game Jam"
-                                style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/gamejam/gameplay_overview.png" alt="Confidential (SCP)" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">CONFIDENTIAL (SCP)</h4>
@@ -157,38 +330,32 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">GAMEPLAY</span>
                             </div>
-                            <p class="description" data-i18n="scp-desc">Survival Horror. Infiltration d'un complexe SCP. Mécanique de sang et
-                                environnement organique.</p>
+                            <p class="description" data-i18n="scp-desc">Survival Horror. Infiltration d'un complexe SCP. Mécanique de sang et environnement organique.</p>
                             <a href="gamejam.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 5. HELLSCAPE -->
-                    <article class="data-card hologram-card">
+                    <!-- HELLSCAPE -->
+                    <article class="data-card hologram-card" data-cat="unreal">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/1516969e-142a-4a9a-a82b-65d563010463_rwc_297x31x1364x1023x1364.png?h=3d75ec9176d8d06eee53f2562b7c4aea"
-                                alt="HellScape Project" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/covers/hellscape.png" alt="HellScape" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">HELLSCAPE</h4>
                             <div class="tech-tags">
                                 <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">GAMEPLAY</span>
+                                <span class="tag tag-role">GAMEPLAY / TECH ART</span>
                             </div>
-                            <p class="description" data-i18n="hellscape-desc">Fast-FPS infernal. Combattez vos démons intérieurs avec un système de
-                                mouvement avancé.</p>
+                            <p class="description" data-i18n="hellscape-desc">Fast-FPS infernal. Combattez vos démons intérieurs avec un système de mouvement avancé.</p>
                             <a href="hellscape.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 6. BIX ENGINE -->
-                    <article class="data-card hologram-card">
+                    <!-- BIX ENGINE -->
+                    <article class="data-card hologram-card" data-cat="cpp" style="--accent: #ff003c;">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/88343361-7dda-4ce8-9903-2ae1437a205e_rw_600.png?h=7fbfc152bd97b74b96add4daa4056d3c"
-                                alt="Bix Engine" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/covers/bix_engine.png" alt="Bix Engine" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">BIX ENGINE</h4>
@@ -197,38 +364,32 @@
                                 <span class="tag tag-lang">C++ 20</span>
                                 <span class="tag tag-role">SOLO</span>
                             </div>
-                            <p class="description" data-i18n="bix-desc">Moteur de jeu 2D Custom. Box2D, ImGui et Éditeur Visuel complet.
-                            </p>
+                            <p class="description" data-i18n="bix-desc">Moteur de jeu 2D Custom. Box2D, ImGui et Éditeur Visuel complet.</p>
                             <a href="bix_engine.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 7. PROJET ZOMBIE -->
-                    <article class="data-card hologram-card">
+                    <!-- PROJET ZOMBIE -->
+                    <article class="data-card hologram-card" data-cat="unreal">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/9eed0d94-ed89-45cb-8071-549f67b28402_rwc_0x125x1024x768x1024.jpeg?h=24dfc7148a24da7c7330786a35fe6ea4"
-                                alt="Projet Zombie" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/covers/zombie.jpeg" alt="Projet Zombie" loading="lazy">
                         </div>
                         <div class="card-content">
-                            <h4 class="project-title">PROJET ZOMBIE</h4>
+                            <h4 class="project-title" data-i18n="zombie-title">PROJET ZOMBIE</h4>
                             <div class="tech-tags">
                                 <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">SOLO</span>
                             </div>
-                            <p class="description" data-i18n="zombie-desc">FPS Solo Survie. Système d'armes complet, IA de horde et économie de
-                                jeu.</p>
+                            <p class="description" data-i18n="zombie-desc">FPS Solo Survie. Système d'armes complet, IA de horde et économie de jeu.</p>
                             <a href="zombie.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 8. BEEPBOOP BATTLE -->
-                    <article class="data-card hologram-card">
+                    <!-- BEEPBOOP BATTLE -->
+                    <article class="data-card hologram-card" data-cat="unity" style="--accent: #4ade80;">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/e7f4d186-bd1f-42ac-9907-b0c98264f8ba_rwc_0x62x512x384x512.png?h=f3f5541514f70db6f1e321041075ecb9"
-                                alt="BeepBoop Battle" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/covers/beepboop.png" alt="BeepBoop Battle" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">BEEPBOOP BATTLE</h4>
@@ -237,18 +398,15 @@
                                 <span class="tag tag-lang">C#</span>
                                 <span class="tag tag-role">TEAM</span>
                             </div>
-                            <p class="description" data-i18n="beepboop-desc">Jeu de stratégie mobile. Construction de vaisseaux et batailles
-                                tactiques.</p>
+                            <p class="description" data-i18n="beepboop-desc">Jeu de stratégie mobile. Construction de vaisseaux et batailles tactiques.</p>
                             <a href="beepboop.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 9. ARMY CLICKER -->
-                    <article class="data-card hologram-card">
+                    <!-- ARMY CLICKER -->
+                    <article class="data-card hologram-card" data-cat="unity" style="--accent: #4ade80;">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/70a5958b-0823-4444-815b-3729d7c79b51_rw_600.png?h=ebc0a9def0422c3973c7333eb99974bb"
-                                alt="Army Clicker" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/covers/army.jpg" alt="Army Clicker" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">ARMY CLICKER</h4>
@@ -257,18 +415,15 @@
                                 <span class="tag tag-lang">C#</span>
                                 <span class="tag tag-role">TEAM</span>
                             </div>
-                            <p class="description" data-i18n="army-desc">Clicker stratégie. Gestion d'armée, skills trees et combats de boss.
-                            </p>
+                            <p class="description" data-i18n="army-desc">Clicker stratégie. Gestion d'armée, skills trees et combats de boss.</p>
                             <a href="army.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <!-- 10. 2042 -->
-                    <article class="data-card hologram-card">
+                    <!-- 2042 -->
+                    <article class="data-card hologram-card" data-cat="cpp">
                         <div class="card-visual">
-                            <img src="https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/4de1fb77-fd35-4702-bd20-eb1b4e7cf240_rw_600.png?h=5d6b84e9cceccdc3e3cc7d84c254f2f6"
-                                alt="2042" style="width:100%; height:100%; object-fit:cover; object-position: top;">
-                            <div class="scan-overlay"></div>
+                            <img src="assets/covers/2042.png" alt="2042" loading="lazy" style="object-position: top;">
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">2042</h4>
@@ -277,8 +432,7 @@
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">TEAM</span>
                             </div>
-                            <p class="description" data-i18n="2042-desc">Shooter Arcade Neo-Retro. Hommage minimaliste aux classiques du
-                                genre.</p>
+                            <p class="description" data-i18n="2042-desc">Shooter Arcade Neo-Retro. Hommage minimaliste aux classiques du genre.</p>
                             <a href="2042.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
@@ -291,150 +445,139 @@
             <div class="container">
                 <h3 class="section-title" data-i18n="section-plugins">EXTENSIONS SYSTÈME (PLUGINS)</h3>
                 <div class="section-energy-line"></div>
+                <p class="section-intro mb-5" data-i18n="plugins-intro">Des modules C++ indépendants, documentés et réutilisés d'un projet à l'autre : Sovereign Republic, Heist Project et mes autres jeux UE5 tournent sur cette base commune.</p>
+
                 <div class="project-grid">
-                    <article class="data-card hologram-card">
+                    <article class="data-card hologram-card" style="--accent: #00e5ff;">
                         <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #001 0%, #000 100%); border: 1px solid #336;">
-                                <span class="img-label" style="color: #0ff; font-size: 3rem;">JPTR</span>
+                            <div class="placeholder-img">
+                                <span class="img-label">JPTR</span>
+                                <span class="img-sub">~43K LOC</span>
                             </div>
-                            <div class="scan-overlay"></div>
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">JUPITER PLUGIN</h4>
                             <div class="tech-tags">
                                 <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">MODULE</span>
+                                <span class="tag tag-role">RTS / GAME MASTER</span>
                             </div>
-                            <p class="description" data-i18n="jupiter-desc">Framework RTS complet. Gestion d'unités, formations, et UI tactique.
-                            </p>
+                            <p class="description" data-i18n="jupiter-desc">Suite d'animation temps réel & Maître de Jeu (type Zeus d'Arma 3). Manipulation du monde, spawn d'entités et contrôle du champ de bataille.</p>
                             <a href="jupiter.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <article class="data-card hologram-card">
+                    <article class="data-card hologram-card" style="--accent: #a855f7;">
                         <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #200 0%, #000 100%); border: 1px solid #633;">
-                                <span class="img-label" style="color: #f06; font-size: 3rem;">NEXUS</span>
+                            <div class="placeholder-img">
+                                <span class="img-label">STLR</span>
+                                <span class="img-sub">~55K LOC</span>
                             </div>
-                            <div class="scan-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">STELLAR PLUGIN</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">VEHICLES</span>
+                            </div>
+                            <p class="description" data-i18n="stellar-desc">Framework de locomotion spatiale. Système complet de véhicules multi-crew et tourelles.</p>
+                            <a href="stellar.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card" style="--accent: #ff0066;">
+                        <div class="card-visual">
+                            <div class="placeholder-img">
+                                <span class="img-label">NEXUS</span>
+                                <span class="img-sub">STEAM // SESSIONS</span>
+                            </div>
                         </div>
                         <div class="card-content">
                             <h4 class="project-title">NEXUS ONLINE</h4>
                             <div class="tech-tags">
                                 <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">MODULE</span>
+                                <span class="tag tag-role">NETWORKING</span>
                             </div>
-                            <p class="description" data-i18n="nexus-desc">Backend multijoueur. Sessions, Host Migration, et Chat System
-                                sécurisé.
-                            </p>
+                            <p class="description" data-i18n="nexus-desc">Backend multijoueur. Sessions, Host Migration, et Chat System sécurisé.</p>
                             <a href="nexus.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <article class="data-card hologram-card">
+                    <article class="data-card hologram-card" style="--accent: #34d399;">
                         <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #1a0b2e 0%, #000 100%); border: 1px solid #a855f7;">
-                                <span class="img-label" style="color: #d8b4fe; font-size: 3rem;">STLR</span>
+                            <div class="placeholder-img">
+                                <span class="img-label">SYNC</span>
+                                <span class="img-sub">HERMITE // PREDICTION</span>
                             </div>
-                            <div class="scan-overlay"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="project-title" style="color: #a855f7;">STELLAR PLUGIN</h4>
+                            <h4 class="project-title">SMOOTH NETWORK SYNC</h4>
                             <div class="tech-tags">
-                                <span class="tag tag-engine" style="border-color: #a855f7; color: #a855f7;">UNREAL
-                                    5</span>
-                                <span class="tag tag-lang" style="border-color: #fcd34d; color: #fcd34d;">C++</span>
-                                <span class="tag tag-role"
-                                    style="border-color: #a855f7; color: #a855f7;">VEHICLES</span>
-                            </div>
-                            <p class="description" data-i18n="stellar-desc">Framework de locomotion spatiale. Système complet de véhicules
-                                multi-crew et tourelles.</p>
-                            <a href="stellar.html" class="card-link" data-i18n="btn-access" style="color: #a855f7;">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card">
-                        <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #04262b 0%, #000 100%); border: 1px solid #22d3ee;">
-                                <span class="img-label" style="color: #22d3ee; font-size: 2.5rem;">PRSM</span>
-                            </div>
-                            <div class="scan-overlay"></div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title" style="color: #22d3ee;">PRISM UI</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine" style="border-color: #22d3ee; color: #22d3ee;">UNREAL 5</span>
-                                <span class="tag tag-lang" style="border-color: #f0abfc; color: #f0abfc;">C++</span>
-                                <span class="tag tag-role" style="border-color: #22d3ee; color: #22d3ee;">UI FRAMEWORK</span>
-                            </div>
-                            <p class="description" data-i18n="prismui-desc">Framework UI C++ "zero-tick" pour UMG. Theming par tokens sémantiques, widget pooling et builder fluide.</p>
-                            <a href="prism_ui.html" class="card-link" style="color: #22d3ee;" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card">
-                        <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #05261c 0%, #000 100%); border: 1px solid #34d399;">
-                                <span class="img-label" style="color: #34d399; font-size: 2.5rem;">SYNC</span>
-                            </div>
-                            <div class="scan-overlay"></div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title" style="color: #34d399;">SMOOTH NETWORK SYNC</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine" style="border-color: #34d399; color: #34d399;">UNREAL 5</span>
-                                <span class="tag tag-lang" style="border-color: #60a5fa; color: #60a5fa;">C++</span>
-                                <span class="tag tag-role" style="border-color: #34d399; color: #34d399;">NETWORKING</span>
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">NETWORKING</span>
                             </div>
                             <p class="description" data-i18n="netsync-desc">Réplication de mouvement avancée : interpolation Hermite, prédiction client et compression réseau custom.</p>
-                            <a href="smooth_network_sync.html" class="card-link" style="color: #34d399;" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                            <a href="smooth_network_sync.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <article class="data-card hologram-card">
+                    <article class="data-card hologram-card" style="--accent: #22d3ee;">
                         <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #001a33 0%, #000 100%); border: 1px solid #0099ff;">
-                                <span class="img-label" style="color: #0099ff; font-size: 2.5rem;">AUDIO</span>
+                            <div class="placeholder-img">
+                                <span class="img-label">PRSM</span>
+                                <span class="img-sub">ZERO-TICK UI</span>
                             </div>
-                            <div class="scan-overlay"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="project-title" style="color: #0099ff;">STELLAR AUDIO</h4>
+                            <h4 class="project-title">PRISM UI</h4>
                             <div class="tech-tags">
-                                <span class="tag tag-engine" style="border-color: #0099ff; color: #0099ff;">UNREAL 5</span>
+                                <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">MODULE</span>
+                                <span class="tag tag-role">UI FRAMEWORK</span>
                             </div>
-                            <p class="description" data-i18n="stellaraudio-desc">Sous-système audio multijoueur avec pooling de composants, réplication par Multicast RPC et streaming média.</p>
-                            <a href="stellar_audio.html" class="card-link" style="color: #0099ff;" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                            <p class="description" data-i18n="prismui-desc">Framework UI C++ "zero-tick" pour UMG. Theming par tokens sémantiques, widget pooling et builder fluide.</p>
+                            <a href="prism_ui.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
-                    <article class="data-card hologram-card">
+                    <article class="data-card hologram-card" style="--accent: #f59e0b;">
                         <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #2e1d08 0%, #000 100%); border: 1px solid #f59e0b;">
-                                <span class="img-label" style="color: #f59e0b; font-size: 2.5rem;">BLDR</span>
+                            <div class="placeholder-img">
+                                <span class="img-label">BLDR</span>
+                                <span class="img-sub">FOB // SNAPPING</span>
                             </div>
-                            <div class="scan-overlay"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="project-title" style="color: #f59e0b;">STELLAR BUILDER</h4>
+                            <h4 class="project-title">STELLAR BUILDER</h4>
                             <div class="tech-tags">
                                 <span class="tag tag-engine">UNREAL 5</span>
                                 <span class="tag tag-lang">C++</span>
                                 <span class="tag tag-role">MODULE</span>
                             </div>
                             <p class="description" data-i18n="builder-desc">Système de construction en vue FPS & bases avancées (FOB). Menus radiaux (Prism UI), prévisualisation Ghost, snapping dynamique et optimisation HISM (Jupiter).</p>
-                            <a href="stellar_builder.html" class="card-link" style="color: #f59e0b;" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                            <a href="stellar_builder.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card hologram-card" style="--accent: #0099ff;">
+                        <div class="card-visual">
+                            <div class="placeholder-img">
+                                <span class="img-label">AUDIO</span>
+                                <span class="img-sub">METASOUND // POOLING</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">STELLAR AUDIO</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">MODULE</span>
+                            </div>
+                            <p class="description" data-i18n="stellaraudio-desc">Sous-système audio multijoueur avec pooling de composants, réplication par Multicast RPC et streaming média.</p>
+                            <a href="stellar_audio.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
                 </div>
@@ -447,23 +590,20 @@
                 <h3 class="section-title" data-i18n="section-software">LOGICIELS PROFESSIONNELS</h3>
                 <div class="section-energy-line"></div>
                 <div class="project-grid">
-                    <article class="data-card hologram-card">
-                        <div class="card-visual">
-                            <div class="placeholder-img"
-                                style="background: radial-gradient(circle, #0f2027 0%, #203a43 50%, #2c5364 100%); border: 1px solid #4facfe;">
-                                <span class="img-label" style="color: #4facfe; font-size: 3rem;">LMRK</span>
-                            </div>
-                            <div class="scan-overlay"></div>
+                    <article class="data-card data-card--wide hologram-card" style="--accent: #4facfe;">
+                        <div class="card-visual" style="background: radial-gradient(circle at 50% 45%, #10283a 0%, #000 75%);">
+                            <img src="assets/kotyx/kotyx-logo.png" alt="Kotyx" loading="lazy" style="object-fit: contain; padding: 18px;">
+                            <span class="card-flag is-live" data-i18n="flag-live">EN PRODUCTION</span>
                         </div>
                         <div class="card-content">
-                            <h4 class="project-title" style="color: #4facfe;">LUMARK (LASER METRE APP)</h4>
+                            <h4 class="project-title">KOTYX</h4>
                             <div class="tech-tags">
-                                <span class="tag tag-engine" style="border-color: #4facfe; color: #4facfe;">QT 6 / QML</span>
-                                <span class="tag tag-lang" style="border-color: #fcd34d; color: #fcd34d;">C++</span>
-                                <span class="tag tag-role" style="border-color: #4facfe; color: #4facfe;">MOBILE / B2B</span>
+                                <span class="tag tag-engine">QT 6 / QML</span>
+                                <span class="tag tag-lang">C++20</span>
+                                <span class="tag tag-role">NODE.JS / SAAS</span>
                             </div>
-                            <p class="description" data-i18n="lumark-desc">Application mobile terrain pour métreurs. Lasers Bluetooth Leica & Hilti, import DXF et rapports de conformité PDF.</p>
-                            <a href="lumark.html" class="card-link" style="color: #4facfe;" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                            <p class="description" data-i18n="kotyx-desc">Application Android de relevé de cotes pour la menuiserie et le BTP : télémètres laser Bluetooth, plans PDF, gabarits DXF et rapports PDF. Vendue en abonnement par poste.</p>
+                            <a href="kotyx.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
                 </div>
@@ -512,20 +652,19 @@
 
             <div style="margin: 1.5rem 0;">
                 <a href="contact.html" class="btn btn-primary hologram-btn">
-                    <span class="btn-content" data-i18n="nav-contact-page">ACCÉDER AU TERMINAL DE CONTACT & CV &gt;&gt;</span>
+                    <span class="btn-content" data-i18n="footer-contact-btn">ACCÉDER AU TERMINAL DE CONTACT & CV &gt;&gt;</span>
                     <span class="btn-glitch"></span>
                 </a>
             </div>
 
             <div class="social-links">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hologram-link">[ LINKEDIN ]</a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hologram-link">[ GITHUB ]</a>
+                <a href="https://www.linkedin.com/in/pierre-lamare-931b1a1b8/" target="_blank" rel="noopener noreferrer" class="hologram-link">[ LINKEDIN ]</a>
                 <a href="mailto:Pierrelamare62@gmail.com" class="hologram-link">[ EMAIL ]</a>
             </div>
 
             <div class="footer-meta">
                 <p data-i18n="footer-meta">ID: PIERRE-LAMARE // STATUS: DISPONIBLE</p>
-                <p>© 2026 IMPERIAL DATAPAD v2.0</p>
+                <p>© 2026 IMPERIAL DATAPAD v3.0</p>
             </div>
         </div>
     </footer>

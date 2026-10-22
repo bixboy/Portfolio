@@ -373,13 +373,13 @@ document.addEventListener('DOMContentLoaded', () => {
             simBtn.addEventListener('click', () => {
                 gameActive = !gameActive;
                 if (gameActive) {
-                    simBtn.querySelector('.btn-content').innerText = translations[i18n.currentLang]["btn-sim-stop"];
+                    simBtn.querySelector('.btn-content').innerText = i18n.t("btn-sim-stop", "STOPPER SIMULATION");
                     score = 0;
                     enemies = [];
                     lasers = [];
                 }
                 else {
-                    simBtn.querySelector('.btn-content').innerText = translations[i18n.currentLang]["btn-sim-start"];
+                    simBtn.querySelector('.btn-content').innerText = i18n.t("btn-sim-start", "COMBAT SIMULATION");
                 }
             });
         }
@@ -637,6 +637,71 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         revealTargets.forEach(el => el.classList.add('is-revealed'));
     }
+
+    // --- MOBILE NAVIGATION TOGGLE ---
+    const navContainer = document.querySelector('.nav-container');
+    const navLinks = navContainer ? navContainer.querySelector('.nav-links') : null;
+    if (navLinks) {
+        const navToggle = document.createElement('button');
+        navToggle.type = 'button';
+        navToggle.className = 'nav-toggle';
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Menu');
+        navToggle.textContent = '[ MENU ]';
+        navContainer.insertBefore(navToggle, navLinks);
+
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('is-open');
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    // --- PROJECT FILTERS ---
+    document.querySelectorAll('.filter-bar').forEach(bar => {
+        const grid = document.getElementById(bar.dataset.target);
+        if (!grid)
+            return;
+
+        bar.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                bar.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.toggle('is-active', b === btn);
+                    b.setAttribute('aria-pressed', String(b === btn));
+                });
+
+                grid.querySelectorAll('.data-card').forEach(card => {
+                    const cats = (card.dataset.cat || '').split(' ');
+                    const visible = filter === 'all' || cats.includes(filter);
+                    card.classList.toggle('is-hidden', !visible);
+                    if (visible)
+                        card.classList.add('is-revealed');
+                });
+            });
+        });
+    });
+
+    // --- WHOLE CARD CLICK ---
+    document.querySelectorAll('.data-card').forEach(card => {
+        const link = card.querySelector('.card-link');
+        if (!link)
+            return;
+
+        card.dataset.href = link.getAttribute('href');
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('a, button'))
+                return;
+
+            link.click();
+        });
+    });
 
     console.log("IMPERIAL DATAPAD SYSTEM v2.5 :: INITIALIZED");
 });

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heist Project | Project Data | Pierre Lamare</title>
+    <meta name="description" content="Heist Project : FPS de braquage tactique en coopération sous Unreal Engine 5.7, 100% C++ — balistique validée par le serveur, crochetage, effraction et architecture data-driven.">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/project.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body style="--accent: #f5c542; --accent-2: #ff5c5c;">
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">RETOUR BDD</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="project-hero">
+        <div class="container">
+            <div>
+                <span class="status-badge" data-i18n="flag-dev">EN DÉVELOPPEMENT</span>
+                <h1 class="glitch-text">HEIST PROJECT</h1>
+                <h2 class="subtitle" data-i18n="heist-subtitle">FPS TACTIQUE DE BRAQUAGE EN COOPÉRATION // UNREAL ENGINE 5.7 // 100% C++</h2>
+            </div>
+            <div class="stat-row">
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-engine">MOTEUR</span>
+                    <span class="stat-value">UE 5.7</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-players">JOUEURS</span>
+                    <span class="stat-value">1 — 4 COOP</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-code">CODE DU JEU</span>
+                    <span class="stat-value">~50K LOC C++</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-role">RÔLE</span>
+                    <span class="stat-value">SOLO</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- OVERVIEW -->
+        <section class="project-section">
+            <span class="module-badge">BRIEFING</span>
+            <h3 class="section-title" data-i18n="heist-overview-title">LE CONCEPT</h3>
+            <p class="lead" data-i18n="heist-overview">
+                Un jeu de braquage <strong>tactique et réaliste</strong> à la première personne, en coopération de 1 à 4
+                joueurs : l'infiltration chirurgicale de <em>Ready or Not</em>, la liberté d'approche de <em>GTA V</em> et
+                la montée en tension de <em>Payday</em>. Ici, ouvrir un coffre n'est pas « maintenir E pendant 5
+                secondes » : on crochète goupille par goupille, on écoute une molette de coffre, on perce, on fait
+                sauter une porte blindée — et chaque action fait du bruit que les gardes peuvent entendre.
+            </p>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">PILIER 01</span>
+                    <h4 data-i18n="heist-pillar1-title">LA PRÉPARATION AVANT LES RÉFLEXES</h4>
+                    <p data-i18n="heist-pillar1">Repérage, angles morts, rôles attribués. Une balle peut neutraliser un joueur comme un garde : chaque décision se pèse.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">PILIER 02</span>
+                    <h4 data-i18n="heist-pillar2-title">COOPÉRATION ASYMÉTRIQUE</h4>
+                    <p data-i18n="heist-pillar2">Chaque braqueur a son paquetage. Coéquipier à terre : on le réanime ou on le traîne à couvert, en gardant l'arme secondaire en main.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">PILIER 03</span>
+                    <h4 data-i18n="heist-pillar3-title">QUAND LE PLAN DÉRAILLE</h4>
+                    <p data-i18n="heist-pillar3">Une caméra ratée, un civil qui panique : le monde réagit selon des règles systémiques, jamais par un script magique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">ARCHITECTURE</span>
+                <h3 class="section-title" data-i18n="heist-archi-title">C++ FIRST & 100% DATA-DRIVEN</h3>
+                <ul class="spec-list">
+                    <li data-i18n="heist-archi-1"><strong>> Zéro valeur en dur</strong>
+                        Toute valeur de gameplay (vitesses, recul, rayons de détection, durées, valeurs de butin) vit
+                        dans un <code>UPrimaryDataAsset</code>. Les Blueprints ne sont que des coquilles qui assignent
+                        meshes, sons et Data Assets — aucun Tick, aucune logique.</li>
+                    <li data-i18n="heist-archi-2"><strong>> Systèmes de personnage répliqués</strong>
+                        Le personnage est composé de systèmes <code>UObject</code> (crochetage, état À Terre, traînage,
+                        masque, port du butin, armes, parkour…) répliqués comme sous-objets, avec routage des RPC
+                        par <code>GetFunctionCallspace</code> / <code>CallRemoteFunction</code>.</li>
+                    <li data-i18n="heist-archi-3"><strong>> Extensible sans code</strong>
+                        Un nouveau panneau à forcer, une nouvelle porte ou un nouvel objectif de mission = un Data
+                        Asset. Un nouvel outil d'effraction = une config enfant + un acteur enfant. Les champs
+                        renommés sont migrés dans <code>PostLoad</code>.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// MODULES DU PROJET</span>
+<span class="c-accent">HeistProject</span>   personnage, combat, mission, économie
+<span class="c-accent">HeistProps</span>     portes, coffres, effraction, appareils
+<span class="c-accent">HeistUI</span>        HUD 100% C++ (PrismUI)
+<span class="c-accent">HeistShaders</span>   rendu des viseurs en post-process
+<span class="c-accent">HeistEditor</span>    Data Hub, assistants, validateurs
+
+<span class="c-dim">// PLUGINS MAISON RÉUTILISÉS</span>
+<span class="c-accent-2">PrismUI</span> · <span class="c-accent-2">SmoothNetworkSync</span> · <span class="c-accent-2">StellarInput</span>
+<span class="c-accent-2">StellarAudio</span> · <span class="c-accent-2">NexusOnline</span></pre>
+            </div>
+        </section>
+
+        <!-- COMBAT & NETWORK -->
+        <section class="project-section">
+            <span class="module-badge">COMBAT // NETWORK</span>
+            <h3 class="section-title" data-i18n="heist-combat-title">BALISTIQUE & AUTORITÉ SERVEUR</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">UHeistProjectileSubsystem</span>
+                    <h4 data-i18n="heist-proj-title">PROJECTILES SANS ACTEURS</h4>
+                    <p data-i18n="heist-proj">Tous les projectiles du monde sont simulés dans un tableau contigu : traces parallélisées, impacts résolus sur le game thread, aucun acteur par balle. Le subsystem ne tick que tant qu'un projectile est en vol.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">FHeistShotValidator</span>
+                    <h4 data-i18n="heist-valid-title">ANTI-TRICHE DES TIRS</h4>
+                    <p data-i18n="heist-valid">Le client propose, le serveur vérifie : numéro de séquence, cadence avec crédit de rafale, origine proche de l'œil serveur. Chaque touche déclarée est contrôlée (tir récent, plomb jamais déclaré, portée, axe, latence, aucun mur).</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">HeistSightView</span>
+                    <h4 data-i18n="heist-sight-title">VISEURS EN POST-PROCESS</h4>
+                    <p data-i18n="heist-sight">Points rouges, holographiques et lunettes rendus par la caméra du joueur : réticule à l'infini en MOA, grossissement, ombre de lunette. Aucun matériau à poser sur l'arme, seulement un socket.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">UHeistDownedSystem</span>
+                    <h4 data-i18n="heist-downed-title">À TERRE, RÉANIMATION, TRAÎNAGE</h4>
+                    <p data-i18n="heist-downed">Vie par zones d'os, hémorragie, état À Terre façon Payday / Battlefield : vue limitée à un cône, tir à l'arme secondaire, coéquipier qui réanime ou traîne le corps à couvert.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCEDURAL ANIMATION -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">PROCEDURAL ANIMATION</span>
+                <h3 class="section-title" data-i18n="heist-anim-title">ANIMATION PROCÉDURALE</h3>
+                <p class="lead" data-i18n="heist-anim-desc">
+                    En première personne, la vue et l'arme ne sont pas animées à la main : elles sont pilotées par
+                    un <strong>rig procédural écrit en C++</strong>. Les solveurs du squelette tournent
+                    <strong>hors du game thread</strong> (<code>NativeThreadSafeUpdateAnimation</code>) et tous les
+                    mouvements reposent sur des <strong>ressorts amortis intégrés par sous-pas fixes</strong> :
+                    le ressenti est identique à 30 ou à 240 FPS.
+                </p>
+                <ul class="spec-list">
+                    <li data-i18n="heist-anim-1"><strong>> Une seule source pour la caméra et l'arme</strong>
+                        <code>FHeistFirstPersonRig</code> est évalué une fois par frame et alimente à l'identique la
+                        caméra et l'arme : rien ne peut se désynchroniser entre ce que l'on voit et ce que l'on tient.</li>
+                    <li data-i18n="heist-anim-2"><strong>> Chaque machine anime sa propre vue</strong>
+                        Le joueur local se voit en première personne, les autres le voient en troisième ; les
+                        animations sont calées sur une durée de gameplay identique partout, et rien n'est joué sur
+                        un serveur dédié.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// UNE FRAME, JOUEUR LOCAL</span>
+<span class="c-accent-2">[GAME THREAD]</span>
+  FirstPersonRig ▸ œil, lean, bob, inertie
+       ├──▶ <span class="c-accent">CameraModifier</span> + ViewRecoil
+       └──▶ arme (même rig)
+<span class="c-accent-2">[WORKER THREAD]</span>
+  SpineSolver        ▸ 4 vertèbres, cou, tête
+  WeaponPoseSolver   ▸ ik_hand_gun + IK 2 mains
+<span class="c-accent-2">[COUCHES D'ARME]</span>
+  WeaponMotionSolver ▸ recul, sway, respiration,
+                       sprint, murs, sortie d'arme
+<span class="c-dim">THeistSpring&lt;T&gt; : ressort amorti, sous-pas fixes</span></pre>
+            </div>
+        </section>
+
+        <section class="project-section">
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">FHeistFirstPersonRig</span>
+                    <h4 data-i18n="heist-rig-title">CAMÉRA VIVANTE</h4>
+                    <p data-i18n="heist-rig">Head bob calé sur la distance parcourue (pas sur le temps), inertie de la tête aux accélérations et freinages, impulsions d'atterrissage, de saut et de changement de posture, lean et FOV. Le balancement du bassin de l'animation de marche est filtré de la caméra, sans jamais retarder la visée.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">FHeistWeaponMotionSolver</span>
+                    <h4 data-i18n="heist-motion-title">L'ARME VIT DANS LA MAIN</h4>
+                    <p data-i18n="heist-motion">Couches procédurales cumulées : recul visuel (l'arme rentre dans l'épaule, se cabre et bascule), inertie de la vue, balancement sur un cycle de deux pas, respiration, impacts, sprint, repli du canon contre les murs et sortie d'arme procédurale. Réglages partagés par catégorie d'armes.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">FHeistWeaponPoseSolver</span>
+                    <h4 data-i18n="heist-pose-title">GUN-CENTRIC & IK DES DEUX MAINS</h4>
+                    <p data-i18n="heist-pose">L'arme est posée en premier (tir au jugé, visée, dynamique), les bras suivent en Two Bone IK avec une prédiction de pose qui supprime le retard d'une frame. En visée, l'arme pivote pour aligner viseur et point avant sur l'axe de la vue, y compris pour un viseur canté à 45°.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">FHeistSpineSolver</span>
+                    <h4 data-i18n="heist-spine-title">VISÉE PORTÉE PAR LE CORPS</h4>
+                    <p data-i18n="heist-spine">La visée est répartie sur quatre vertèbres, le cou et la tête, avec des ratios différents arme en main. Vu par les autres joueurs, la crosse est calée à l'épaule puis la tête vient se poser sur l'arme (cheek weld) ; la visée distante est lissée, la visée locale n'a aucun retard.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">FHeistViewRecoil</span>
+                    <h4 data-i18n="heist-recoil-title">RECUL DE LA VISÉE</h4>
+                    <p data-i18n="heist-recoil">Chaque tir ajoute une impulsion (montée bornée, dérive latérale qui change de sens) absorbée en quelques images, puis partiellement rattrapée. Le joueur qui compense à la souris consomme d'abord la récupération prévue : il ne la subit jamais deux fois.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">UHeistHitReactionSystem</span>
+                    <h4 data-i18n="heist-hit-title">RÉACTIONS AUX IMPACTS</h4>
+                    <p data-i18n="heist-hit">De près, le corps touché mêle physique et animation ; de loin ou hors écran, un recul procédural du buste et de la tête prend le relais. Les plombs d'un fusil à pompe reçus dans la même frame sont cumulés en une seule réaction.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFILTRATION -->
+        <section class="feature-row reverse project-section">
+            <div class="feature-text">
+                <span class="module-badge">INFILTRATION</span>
+                <h3 class="section-title" data-i18n="heist-infil-title">INTERACTIONS TACTILES</h3>
+                <ul class="spec-list">
+                    <li data-i18n="heist-infil-1"><strong>> Crochetage & molette de coffre</strong>
+                        Le serveur ouvre une session sur la serrure et réplique au seul propriétaire la graine des
+                        points durs. Le joueur cherche chaque goupille au crochet ; à la dernière, le serveur valide
+                        session, durée minimale, distance et état de la serrure avant d'ouvrir.</li>
+                    <li data-i18n="heist-infil-2"><strong>> Effraction</strong>
+                        Perceuse (pannes à relancer), charge explosive (mèche, bips) et thermite partagent une base
+                        commune : pose, minuteur, bruit de fin, puis la cible cède.</li>
+                    <li data-i18n="heist-infil-3"><strong>> Monde électrique & sonore</strong>
+                        Badges, digicodes, disjoncteurs qui coupent les consommateurs, et un système de bruit branché
+                        sur la perception d'audition d'Unreal : chaque action a un coût sonore.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// FLUX D'UNE SESSION DE CROCHETAGE</span>
+<span class="c-accent-2">[CLIENT]</span> Interagir → Server_ demande de session
+<span class="c-accent">[SERVER]</span> ouvre FHeistLockpickSession
+         └ réplique au propriétaire : serrure + graine
+<span class="c-accent-2">[CLIENT]</span> plan rapproché, crochet sur chaque goupille
+         goupille <span class="c-ok">PinSet</span> · <span class="c-err">Miss</span> · <span class="c-err">Slip</span> (pénalité)
+<span class="c-accent-2">[CLIENT]</span> dernière goupille → Server_ fin de session
+<span class="c-accent">[SERVER]</span> session ? durée min ? distance ? état ?
+<span class="c-accent">[SERVER]</span> <span class="c-ok">ouverture</span> → bruit vers la perception IA</pre>
+            </div>
+        </section>
+
+        <!-- MASKS & PROPS -->
+        <section class="project-section">
+            <span class="module-badge">GAME FEEL</span>
+            <h3 class="section-title" data-i18n="heist-feel-title">MASQUES HOLOGRAPHIQUES & PROPS</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <h4 data-i18n="heist-mask-title">MASQUE HOLO (STYLE PAYDAY)</h4>
+                    <p data-i18n="heist-mask">Armes bloquées tant que le masque n'est pas mis. L'hologramme apparaît via des Custom Primitive Data comparées au temps du matériau ; la tête du personnage est masquée section par section, sur tous les LOD.</p>
+                </div>
+                <div class="sys-card">
+                    <h4 data-i18n="heist-loot-title">BUTIN PHYSIQUE</h4>
+                    <p data-i18n="heist-loot">Sacs simulés par Chaos, poids réel en kg qui ralentit le porteur, lancer de sac, zones de sécurisation et objectifs de mission qui s'enchaînent jusqu'à l'extraction.</p>
+                </div>
+                <div class="sys-card">
+                    <h4 data-i18n="heist-props-title">PROPS PILOTÉS PAR SOCKETS</h4>
+                    <p data-i18n="heist-props">La géométrie d'un prop (point visé, caméra, écran) vit dans les sockets de son mesh, choisis dans des listes déroulantes. Le Map Check signale tout socket manquant ou config du mauvais type.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLING & QA -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">TOOLING // QA</span>
+                <h3 class="section-title" data-i18n="heist-tools-title">OUTILS ÉDITEUR & TESTS RÉSEAU</h3>
+                <ul class="spec-list">
+                    <li data-i18n="heist-tools-1"><strong>> Module éditeur dédié</strong>
+                        Data Hub en Slate pour parcourir et créer les Data Assets, assistant de création, panneau de
+                        mission, visualisation des liens entre props dans le niveau et commandlets de rapport.</li>
+                    <li data-i18n="heist-tools-2"><strong>> Tests multijoueur automatisés</strong>
+                        Un serveur dédié et deux clients sans rendu (<code>-nullrhi</code>) jouent des scénarios
+                        réseau ; chaque vérification écrit « TEST OK » ou « TEST ÉCHEC », puis un bilan.</li>
+                    <li data-i18n="heist-tools-3"><strong>> Game design documenté</strong>
+                        Bible de conception dans un coffre Obsidian (piliers, systèmes, level design, Kanban du
+                        MVP), séparée du code.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// serveur dédié + 2 clients en -nullrhi</span>
+<span class="c-dim">// scénarios déclarés par chaque module</span>
+<span class="c-accent">heist.Test.DownedScenario</span>
+<span class="c-accent">heist.Test.BreachScenario</span>
+<span class="c-accent">heist.Test.MissionScenario</span>
+
+<span class="c-dim">// LogHeistGame</span>
+  étape vérifiée ........ <span class="c-ok">TEST OK</span>
+  étape en échec ........ <span class="c-err">TEST ÉCHEC</span>
+<span class="c-dim">-----------------------------------</span>
+  bilan du scénario</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel project-footer">
+        <p>END OF TRANSMISSION // HEIST PROJECT</p>
+        <a href="index.html#projects" class="hologram-link" data-i18n="nav-back">[ RETOUR À LA BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

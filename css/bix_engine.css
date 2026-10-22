@@ -1,7 +1,7 @@
 /* Specific page styles overlay */
 .project-hero {
     height: 60vh;
-    background: url('https://cdn.myportfolio.com/e02f57cc-6a9f-4608-9559-4aa0ccc64c7b/88343361-7dda-4ce8-9903-2ae1437a205e_rw_1920.png?h=b043c796f565e634385de570c9fc8fe9') no-repeat center center;
+    background: url('../assets/covers/bix_engine.png') no-repeat center center;
     background-size: cover;
     position: relative;
     border-bottom: 2px solid var(--color-primary);

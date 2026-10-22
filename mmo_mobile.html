@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMO Mobile | Project Data | Pierre Lamare</title>
+    <meta name="description" content="Serveur C++20 pour un MMO stratégique mobile type Rise of Kingdoms : multi-royaumes, ECS EnTT, ENet/UDP, FlatBuffers, SQLite WAL et client Unity.">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/project.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+</head>
+
+<body style="--accent: #a3e635; --accent-2: #38bdf8;">
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">RETOUR BDD</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="project-hero">
+        <div class="container">
+            <div>
+                <span class="status-badge" data-i18n="flag-proto">PROTOTYPE</span>
+                <h1 class="glitch-text">MMO MOBILE</h1>
+                <h2 class="subtitle" data-i18n="mmo-subtitle">SERVEUR C++20 HAUTE PERFORMANCE + CLIENT UNITY // MMO STRATÉGIQUE TYPE RISE OF KINGDOMS</h2>
+            </div>
+            <div class="stat-row">
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-server">SERVEUR</span>
+                    <span class="stat-value">C++20 / XMAKE</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-client">CLIENT</span>
+                    <span class="stat-value">UNITY / C#</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label">TRANSPORT</span>
+                    <span class="stat-value">ENET / UDP</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-role">RÔLE</span>
+                    <span class="stat-value">SOLO</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- OVERVIEW -->
+        <section class="project-section">
+            <span class="module-badge">BRIEFING</span>
+            <h3 class="section-title" data-i18n="heist-overview-title">LE CONCEPT</h3>
+            <p class="lead" data-i18n="mmo-overview">
+                Les jeux de stratégie mobiles comme <em>Rise of Kingdoms</em> font cohabiter des milliers de joueurs
+                sur une même carte. Ce projet en construit la fondation : un <strong>serveur autoritaire écrit de zéro
+                en C++20</strong>, sans moteur, qui gère plusieurs royaumes dans un seul processus, et un
+                <strong>client mobile Unity</strong> qui partage avec lui un protocole binaire généré.
+                Le client ne décide de rien : toute la logique de jeu vit côté serveur.
+            </p>
+            <div class="chips-row">
+                <span class="chip is-strong">EnTT (ECS)</span>
+                <span class="chip is-strong">ENet</span>
+                <span class="chip is-strong">FlatBuffers</span>
+                <span class="chip">SQLiteCpp</span>
+                <span class="chip">libsodium</span>
+                <span class="chip">nlohmann/json</span>
+                <span class="chip">spdlog</span>
+                <span class="chip">Unity</span>
+            </div>
+        </section>
+
+        <!-- MULTI KINGDOM -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">ARCHITECTURE</span>
+                <h3 class="section-title" data-i18n="mmo-archi-title">UN PROCESSUS, PLUSIEURS ROYAUMES</h3>
+                <ul class="spec-list">
+                    <li data-i18n="mmo-archi-1"><strong>> Partitions logiques</strong>
+                        Chaque royaume (déclaré dans <code>kingdoms.json</code>) possède sa propre registry ECS, sa
+                        grille spatiale et ses systèmes de gameplay. Ajouter une mécanique = implémenter
+                        <code>IGameSystem</code>.</li>
+                    <li data-i18n="mmo-archi-2"><strong>> Zéro reconnexion</strong>
+                        Le joueur garde une connexion unique du login au gameplay, même en changeant de royaume.
+                        Ses ressources sont stockées par clé composite <code>(account_id, kingdom_id)</code>.</li>
+                    <li data-i18n="mmo-archi-3"><strong>> Boucle à tick fixe</strong>
+                        <code>GameLoop</code> enchaîne réception réseau → logique → envoi, à 20 Hz par défaut
+                        (paramétrable). Les callbacks des autres threads sont remis au thread principal par une file
+                        thread-safe.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel">Client ──connexion unique──▶ Serveur :7777
+                                │
+            ┌───────────────────┴──────────────────┐
+            ▼                                      ▼
+   <span class="c-accent">KingdomWorld #1</span>                         <span class="c-accent">KingdomWorld #2</span>
+   ├ entt::registry                       ├ entt::registry
+   ├ SpatialGrid (AOI)                    ├ SpatialGrid (AOI)
+   └ IGameSystem[]                        └ IGameSystem[]
+
+<span class="c-dim">tick : NetworkIn → UpdateLogic(dt) → NetworkOut</span></pre>
+            </div>
+        </section>
+
+        <!-- PROTOCOL -->
+        <section class="project-section">
+            <span class="module-badge">NETWORK PROTOCOL</span>
+            <h3 class="section-title" data-i18n="mmo-proto-title">PROTOCOLE BINAIRE PARTAGÉ C++ / C#</h3>
+            <p class="lead" data-i18n="mmo-proto-desc">
+                Les messages sont décrits en <strong>FlatBuffers</strong> (un fichier <code>.fbs</code> par domaine :
+                Auth, Kingdom, Resources, Movement) et encapsulés dans une enveloppe universelle
+                <code>Opcode + payload</code>. Un script compile les schémas, génère les headers C++ du serveur
+                <strong>et copie les classes C# directement dans le projet Unity</strong> : les deux côtés ne peuvent
+                pas diverger.
+            </p>
+            <div class="flow">
+                <div class="flow-step"><b>01 — CONNECT</b>C2S_Login → S2C_LoginResult <span data-i18n="mmo-flow-1">+ jeton de session</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b>02 — ROYAUMES</b>C2S_RequestKingdoms → S2C_KingdomList</div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b>03 — SÉLECTION</b><span data-i18n="mmo-flow-3">profil chargé en base, entité ECS créée</span> → S2C_PlayerData</div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b>04 — GAMEPLAY</b>C2S_ModifyResources → S2C_ResourceUpdate</div>
+            </div>
+            <p class="description" data-i18n="mmo-proto-note">Les opcodes sont groupés par plages (1-999 général, 1000-1999 mouvement, 2000-2999 combat…) et routés vers des handlers dédiés via un <code>PacketDispatcher</code>.</p>
+        </section>
+
+        <!-- SYSTEMS -->
+        <section class="project-section">
+            <span class="module-badge">SYSTEMS</span>
+            <h3 class="section-title" data-i18n="mmo-sys-title">PERFORMANCE & DONNÉES</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">SpatialGrid</span>
+                    <h4 data-i18n="mmo-grid-title">AREA OF INTEREST</h4>
+                    <p data-i18n="mmo-grid">Grille spatiale hachée : insertion, suppression et déplacement en O(1), re-hash uniquement quand l'entité change de cellule, requête sur les 3×3 cellules voisines. L'inverse de la taille de cellule est pré-calculé pour éviter une division par entité.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">DatabaseManager</span>
+                    <h4 data-i18n="mmo-db-title">BASE ASYNCHRONE</h4>
+                    <p data-i18n="mmo-db">SQLite en mode WAL avec un thread worker dédié alimenté par une file concurrente : écritures en fire-and-forget, lectures avec callback renvoyé au thread de jeu. La boucle principale ne bloque jamais sur le disque.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">Repositories</span>
+                    <h4 data-i18n="mmo-repo-title">STOCKAGE DÉCOUPLÉ</h4>
+                    <p data-i18n="mmo-repo">Comptes et profils joueurs passent par des interfaces <code>IAccountRepository</code> / <code>IPlayerRepository</code> : le jeu ne connaît pas SQLite.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECURITY -->
+        <section class="feature-row reverse project-section">
+            <div class="feature-text">
+                <span class="module-badge">SECURITY</span>
+                <h3 class="section-title" data-i18n="mmo-sec-title">AUCUNE CONFIANCE DANS LE CLIENT</h3>
+                <ul class="spec-list">
+                    <li data-i18n="mmo-sec-1"><strong>> Mots de passe</strong>
+                        Hachés en Argon2id avec libsodium.</li>
+                    <li data-i18n="mmo-sec-2"><strong>> Anti brute-force</strong>
+                        Limitation des tentatives de login par IP sur une fenêtre glissante.</li>
+                    <li data-i18n="mmo-sec-3"><strong>> Validation serveur</strong>
+                        Authentification vérifiée dans chaque handler, variations de ressources bornées : un client
+                        modifié ne peut rien s'octroyer.</li>
+                    <li data-i18n="mmo-sec-4"><strong>> Reconnexion rapide</strong>
+                        Jeton de session généré côté serveur pour reprendre la partie sans repasser par le login
+                        après une coupure mobile.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// console d'administration du serveur</span>
+<span class="c-accent">> help</span>        liste des commandes
+<span class="c-accent">> stop</span>        arrêt propre
+<span class="c-accent">> deletedb</span>    purge d'une base
+
+<span class="c-dim">// options de lancement</span>
+--port 7777   --tick-rate 20
+--max-players 100
+--kingdoms-config kingdoms.json</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel project-footer">
+        <p>END OF TRANSMISSION // MMO MOBILE</p>
+        <a href="index.html#projects" class="hologram-link" data-i18n="nav-back">[ RETOUR À LA BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
