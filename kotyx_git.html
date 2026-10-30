@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotyx Git | Project Data | Pierre Lamare</title>
+    <meta name="description" content="Kotyx Git : client Git de bureau en C++20 / Qt 6.11 avec diff et fusion visuelle de Blueprints Unreal Engine (.uasset), Hub UE5 intégré, résolveur de conflits LCS et architecture de plugins DLL.">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/project.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+
+    <style>
+        /* ==========================================================================
+           KOTYX GIT — CUSTOM INTERACTIVE SHOWCASE STYLES (Matches Theme.qml)
+           ========================================================================== */
+        :root {
+            --kg-bg: #0E1116;
+            --kg-sidebar: #12161D;
+            --kg-panel: #161B22;
+            --kg-card: #1C222B;
+            --kg-hover: #232A35;
+            --kg-selected: #1B2E4B;
+            --kg-border: #2A313C;
+            --kg-border-subtle: #1E242D;
+            --kg-primary: #4C8DFF;
+            --kg-purple: #A371F7;
+            --kg-success: #3FB950;
+            --kg-warning: #D29922;
+            --kg-danger: #F85149;
+            --kg-cyan: #39C5CF;
+            --kg-text: #E6EDF3;
+            --kg-text-sec: #9DA7B3;
+            --kg-text-muted: #6E7781;
+        }
+
+        .kg-hero-glow {
+            position: relative;
+        }
+
+        .kg-hero-glow::after {
+            content: "";
+            position: absolute;
+            top: -120px;
+            right: 5%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(76, 141, 255, 0.18) 0%, rgba(163, 113, 247, 0.12) 45%, transparent 70%);
+            pointer-events: none;
+            filter: blur(30px);
+        }
+
+        /* Interactive Desktop Window Frame */
+        .kg-window {
+            background: var(--kg-bg);
+            border: 1px solid rgba(76, 141, 255, 0.45);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow:
+                0 24px 70px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(76, 141, 255, 0.16),
+                0 0 80px rgba(163, 113, 247, 0.08);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--kg-text);
+            margin-top: 1.5rem;
+        }
+
+        /* Top App Bar (Main.qml header replica) */
+        .kg-titlebar {
+            background: var(--kg-sidebar);
+            border-bottom: 1px solid var(--kg-border);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .kg-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kg-brand-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: linear-gradient(180deg, #4C8DFF 0%, #A371F7 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #fff;
+            font-size: 15px;
+            box-shadow: 0 0 12px rgba(76, 141, 255, 0.4);
+        }
+
+        .kg-brand-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--kg-text);
+            letter-spacing: 0.3px;
+        }
+
+        .kg-repo-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--kg-card);
+            border: 1px solid var(--kg-border);
+            padding: 4px 11px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--kg-text-sec);
+        }
+
+        .kg-repo-pill b {
+            color: var(--kg-text);
+        }
+
+        .kg-branch-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(76, 141, 255, 0.16);
+            color: #79A8FF;
+            border: 1px solid rgba(76, 141, 255, 0.35);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        /* View Switcher Tabs */
+        .kg-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .kg-tab-btn {
+            background: var(--kg-card);
+            border: 1px solid var(--kg-border);
+            color: var(--kg-text-sec);
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+        }
+
+        .kg-tab-btn:hover {
+            background: var(--kg-hover);
+            color: var(--kg-text);
+            border-color: rgba(76, 141, 255, 0.45);
+        }
+
+        .kg-tab-btn.is-active {
+            background: var(--kg-selected);
+            color: #fff;
+            border-color: var(--kg-primary);
+            box-shadow: 0 0 14px rgba(76, 141, 255, 0.28);
+        }
+
+        .kg-tab-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Operation Banner (Merge / Rebase in progress) */
+        .kg-op-banner {
+            background: linear-gradient(90deg, rgba(210, 153, 34, 0.16), rgba(163, 113, 247, 0.12));
+            border-bottom: 1px solid rgba(210, 153, 34, 0.4);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.82rem;
+        }
+
+        .kg-op-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kg-pill {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .kg-pill.warn { background: rgba(210, 153, 34, 0.2); color: #F0B72F; border: 1px solid rgba(210, 153, 34, 0.45); }
+        .kg-pill.ok { background: rgba(63, 185, 80, 0.18); color: #56D364; border: 1px solid rgba(63, 185, 80, 0.45); }
+        .kg-pill.err { background: rgba(248, 81, 73, 0.18); color: #FF7B72; border: 1px solid rgba(248, 81, 73, 0.45); }
+        .kg-pill.info { background: rgba(76, 141, 255, 0.18); color: #79A8FF; border: 1px solid rgba(76, 141, 255, 0.45); }
+        .kg-pill.purple { background: rgba(163, 113, 247, 0.18); color: #D2A8FF; border: 1px solid rgba(163, 113, 247, 0.45); }
+
+        /* Panels inside the simulator */
+        .kg-pane {
+            display: none;
+            min-height: 490px;
+        }
+
+        .kg-pane.is-active {
+            display: block;
+        }
+
+        /* --- TAB 1: UNREAL BLUEPRINT DIFF & MERGE --- */
+        .kg-bp-toolbar {
+            background: var(--kg-panel);
+            border-bottom: 1px solid var(--kg-border);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .kg-bp-file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .kg-bp-file-info strong {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .kg-submode-group {
+            display: inline-flex;
+            background: var(--kg-bg);
+            border: 1px solid var(--kg-border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .kg-submode-btn {
+            background: transparent;
+            border: none;
+            color: var(--kg-text-sec);
+            padding: 5px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .kg-submode-btn.is-active {
+            background: var(--kg-primary);
+            color: #fff;
+        }
+
+        .kg-bp-canvas-wrap {
+            position: relative;
+            background-color: #14181E;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+            min-height: 430px;
+            padding: 16px;
+            overflow-x: auto;
+        }
+
+        .kg-bp-legend {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 0.76rem;
+            color: var(--kg-text-sec);
+            margin-bottom: 8px;
+        }
+
+        .kg-bp-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .kg-bp-svg {
+            width: 100%;
+            min-width: 780px;
+            height: 360px;
+            display: block;
+        }
+
+        .kg-bp-node-UNCHANGED {
+            transition: opacity 0.25s ease;
+        }
+
+        .kg-bp-canvas-wrap.hide-unchanged .kg-bp-node-UNCHANGED {
+            opacity: 0.18;
+        }
+
+        /* Unreal Element-by-Element Merge Table */
+        .kg-merge-table-wrap {
+            display: none;
+            padding: 18px;
+            background: var(--kg-bg);
+            min-height: 430px;
+        }
+
+        .kg-merge-table-wrap.is-active {
+            display: block;
+        }
+
+        .kg-bp-canvas-wrap.is-hidden {
+            display: none;
+        }
+
+        .kg-merge-scroll {
+            overflow-x: auto;
+        }
+
+        .kg-merge-table {
+            width: 100%;
+            min-width: 620px;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+        }
+
+        .kg-merge-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--kg-panel);
+            border-bottom: 1px solid var(--kg-border);
+            color: var(--kg-text-sec);
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.5px;
+        }
+
+        .kg-merge-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--kg-border-subtle);
+            vertical-align: middle;
+        }
+
+        .kg-choice-cell {
+            cursor: pointer;
+            border-radius: 6px;
+            padding: 7px 10px;
+            border: 1px solid var(--kg-border);
+            background: var(--kg-card);
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .kg-choice-cell:hover {
+            border-color: var(--kg-primary);
+        }
+
+        .kg-choice-cell.selected-ours {
+            background: rgba(76, 141, 255, 0.18);
+            border-color: var(--kg-primary);
+            color: #fff;
+        }
+
+        .kg-choice-cell.selected-theirs {
+            background: rgba(163, 113, 247, 0.2);
+            border-color: var(--kg-purple);
+            color: #fff;
+        }
+
+        /* --- TAB 2: LCS CONFLICT RESOLVER --- */
+        .kg-conflict-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            min-height: 440px;
+        }
+
+        @media (max-width: 900px) {
+            .kg-conflict-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .kg-conflict-blocks {
+            padding: 16px;
+            border-right: 1px solid var(--kg-border);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .kg-cblock {
+            background: var(--kg-panel);
+            border: 1px solid var(--kg-border);
+            border-radius: 7px;
+            overflow: hidden;
+        }
+
+        .kg-cblock-header {
+            padding: 8px 12px;
+            background: var(--kg-card);
+            border-bottom: 1px solid var(--kg-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.78rem;
+        }
+
+        .kg-cblock-sides {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+        }
+
+        @media (max-width: 650px) {
+            .kg-cblock-sides {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .kg-side-ours {
+            padding: 10px 12px;
+            background: rgba(76, 141, 255, 0.08);
+            border-right: 1px solid var(--kg-border);
+        }
+
+        .kg-side-theirs {
+            padding: 10px 12px;
+            background: rgba(163, 113, 247, 0.08);
+        }
+
+        .kg-cblock-sides code {
+            display: block;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .kg-side-title {
+            font-size: 0.7rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .kg-side-ours .kg-side-title { color: #79A8FF; }
+        .kg-side-theirs .kg-side-title { color: #D2A8FF; }
+
+        .kg-cblock-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .kg-mini-btn {
+            background: var(--kg-bg);
+            border: 1px solid var(--kg-border);
+            color: var(--kg-text-sec);
+            font-size: 0.72rem;
+            padding: 3px 9px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            transition: all 0.15s ease;
+        }
+
+        .kg-mini-btn:hover {
+            color: #fff;
+            border-color: var(--kg-primary);
+        }
+
+        .kg-mini-btn.active-ours {
+            background: var(--kg-primary);
+            border-color: var(--kg-primary);
+            color: #fff;
+        }
+
+        .kg-mini-btn.active-theirs {
+            background: var(--kg-purple);
+            border-color: var(--kg-purple);
+            color: #fff;
+        }
+
+        .kg-mini-btn.active-both {
+            background: var(--kg-success);
+            border-color: var(--kg-success);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .kg-conflict-result .kg-pill {
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .kg-conflict-result {
+            padding: 16px;
+            background: #0B0E13;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kg-code-preview {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.65;
+            background: var(--kg-panel);
+            border: 1px solid var(--kg-border);
+            border-radius: 6px;
+            padding: 12px;
+            flex: 1;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .kg-line-chosen {
+            background: rgba(63, 185, 80, 0.15);
+            border-left: 3px solid var(--kg-success);
+            padding-left: 8px;
+            display: block;
+            color: #AFF5B4;
+        }
+
+        /* Bottom Console Bar */
+        .kg-statusbar {
+            background: #090C10;
+            border-top: 1px solid var(--kg-border);
+            padding: 8px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--kg-text-sec);
+        }
+
+        .kg-cmd-trace {
+            color: #56D364;
+            overflow-wrap: anywhere;
+        }
+
+        /* ==========================================================================
+           VIDEO CHAPTERS & SCREENSHOT GALLERY + LIGHTBOX
+           ========================================================================== */
+        .kg-video-chapters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .kg-chapter-btn {
+            background: var(--kg-panel);
+            border: 1px solid var(--kg-border);
+            border-radius: 7px;
+            padding: 10px 13px;
+            color: var(--kg-text);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .kg-chapter-btn:hover {
+            background: var(--kg-hover);
+            border-color: var(--kg-primary);
+            transform: translateY(-2px);
+        }
+
+        .kg-chapter-btn.is-active {
+            background: var(--kg-selected);
+            border-color: var(--kg-primary);
+            box-shadow: 0 0 18px rgba(76, 141, 255, 0.25);
+        }
+
+        .kg-chapter-time {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 3px 7px;
+            border-radius: 4px;
+            background: rgba(76, 141, 255, 0.16);
+            color: #79A8FF;
+            border: 1px solid rgba(76, 141, 255, 0.35);
+            flex-shrink: 0;
+        }
+
+        .kg-chapter-btn.is-active .kg-chapter-time {
+            background: var(--kg-primary);
+            color: #fff;
+        }
+
+        .kg-chapter-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        /* High-Res Screenshot Gallery */
+        .kg-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.35rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 1050px) {
+            .kg-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .kg-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .kg-shot-card {
+            background: var(--kg-panel);
+            border: 1px solid var(--kg-border);
+            border-radius: 9px;
+            overflow: hidden;
+            cursor: zoom-in;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kg-shot-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--kg-primary);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.75), 0 0 24px rgba(76, 141, 255, 0.22);
+        }
+
+        .kg-shot-img-wrap {
+            position: relative;
+            overflow: hidden;
+            background: #090C10;
+            aspect-ratio: 16 / 9.5;
+        }
+
+        .kg-shot-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .kg-shot-card:hover .kg-shot-img-wrap img {
+            transform: scale(1.035);
+        }
+
+        .kg-shot-zoom-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(14, 17, 22, 0.86);
+            border: 1px solid rgba(76, 141, 255, 0.45);
+            color: #E6EDF3;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+            opacity: 0.85;
+            transition: opacity 0.2s ease, background 0.2s ease;
+        }
+
+        .kg-shot-card:hover .kg-shot-zoom-badge {
+            opacity: 1;
+            background: var(--kg-primary);
+            color: #fff;
+        }
+
+        .kg-shot-body {
+            padding: 14px 16px;
+            border-top: 1px solid var(--kg-border-subtle);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .kg-shot-body h4 {
+            font-size: 0.92rem;
+            color: #fff;
+            margin: 0;
+            font-family: var(--font-heading);
+            letter-spacing: 0.4px;
+        }
+
+        .kg-shot-body p {
+            font-size: 0.82rem;
+            color: var(--kg-text-sec);
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        /* Fullscreen Lightbox Modal */
+        .kg-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 8, 12, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .kg-lightbox.is-open {
+            display: flex;
+        }
+
+        .kg-lightbox-inner {
+            max-width: 1440px;
+            width: 100%;
+            background: var(--kg-bg);
+            border: 1px solid var(--kg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(76, 141, 255, 0.25);
+        }
+
+        .kg-lightbox-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: var(--kg-sidebar);
+            border-bottom: 1px solid var(--kg-border);
+            gap: 12px;
+        }
+
+        .kg-lightbox-title {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        .kg-lightbox-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .kg-lightbox-btn {
+            background: var(--kg-card);
+            border: 1px solid var(--kg-border);
+            color: var(--kg-text);
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .kg-lightbox-btn:hover {
+            border-color: var(--kg-primary);
+            background: var(--kg-hover);
+        }
+
+        .kg-lightbox-img-box {
+            background: #05070A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 78vh;
+            overflow: hidden;
+        }
+
+        .kg-lightbox-img-box img {
+            max-width: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .feature-media.kg-feature-stack {
+            flex-direction: column;
+            gap: 1.25rem;
+            min-width: 0;
+        }
+
+        .kg-feature-stack .kg-shot-img-wrap img {
+            max-width: none;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .kg-lightbox-caption {
+            padding: 12px 18px;
+            font-size: 0.86rem;
+            color: var(--kg-text-sec);
+            background: var(--kg-panel);
+            border-top: 1px solid var(--kg-border);
+        }
+    </style>
+</head>
+
+<body style="--accent: #4c8dff; --accent-2: #a371f7;">
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#pro-software" class="nav-item" data-i18n="nav-software-back">RETOUR LOGICIELS</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">RETOUR BDD</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="project-hero kg-hero-glow">
+        <div class="container">
+            <div style="display: flex; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap;">
+                <img src="assets/kotyx_git/kotyx-git-logo.svg" alt="Logo Kotyx Git" width="108" height="108" style="filter: drop-shadow(0 0 25px rgba(76, 141, 255, 0.45));">
+                <div>
+                    <span class="status-badge is-live" data-i18n="kgit-badge-status">OUTIL INTERNE // ROLLON SYSTEMS</span>
+                    <h1 class="glitch-text">KOTYX GIT</h1>
+                    <h2 class="subtitle" data-i18n="kgit-subtitle">RELIRE & FUSIONNER DES BLUEPRINTS DANS GIT, SANS OUVRIR UNREAL // CLIENT GIT C++20 / QT 6.11 // PLUGINS DLL</h2>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-block">
+                    <span class="stat-label">STACK</span>
+                    <span class="stat-value">C++20 / QT 6.11</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="kgit-stat-role-label">RÔLE</span>
+                    <span class="stat-value" data-i18n="kgit-stat-role-val">DÉVELOPPEUR SOLO</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="kgit-stat-code-label">CODE</span>
+                    <span class="stat-value" data-i18n="kgit-stat-code-val">≈ 27 000 LIGNES</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="kgit-stat-ue-label">CORPUS UNREAL</span>
+                    <span class="stat-value" data-i18n="kgit-stat-ue-val">120 891 NŒUDS</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="kgit-stat-tests-label">QUALITÉ</span>
+                    <span class="stat-value" data-i18n="kgit-stat-tests-val">8 SUITES · 76 TESTS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- DEMO VIDEO -->
+        <section class="project-section">
+            <span class="module-badge" data-i18n="kgit-demo-badge">DÉMO // APPLICATION RÉELLE</span>
+            <h3 class="section-title" data-i18n="kgit-demo-title">KOTYX GIT EN ACTION</h3>
+            <figure class="video-frame">
+                <video id="kg-demo-video" controls playsinline preload="metadata" poster="assets/kotyx_git/kotyx_git_poster.jpg">
+                    <source src="assets/kotyx_git/kotyx_git_demo.mp4" type="video/mp4">
+                </video>
+                <figcaption data-i18n="kgit-demo-caption">Enregistrement de l'application sur mes dépôts, dont un jeu développé en équipe. Les noms de l'équipe sont floutés.</figcaption>
+            </figure>
+            <div class="kg-video-chapters">
+                <button type="button" class="kg-chapter-btn is-active" data-time="0">
+                    <span class="kg-chapter-time">0:00</span>
+                    <span class="kg-chapter-label" data-i18n="kgit-chapter-1">Dépôts & console</span>
+                </button>
+                <button type="button" class="kg-chapter-btn" data-time="8">
+                    <span class="kg-chapter-time">0:08</span>
+                    <span class="kg-chapter-label" data-i18n="kgit-chapter-2">Graphe & focus de branche</span>
+                </button>
+                <button type="button" class="kg-chapter-btn" data-time="27">
+                    <span class="kg-chapter-time">0:27</span>
+                    <span class="kg-chapter-label" data-i18n="kgit-chapter-3">Plugins</span>
+                </button>
+                <button type="button" class="kg-chapter-btn" data-time="35">
+                    <span class="kg-chapter-time">0:35</span>
+                    <span class="kg-chapter-label" data-i18n="kgit-chapter-4">Dossiers & clics droits</span>
+                </button>
+                <button type="button" class="kg-chapter-btn" data-time="57">
+                    <span class="kg-chapter-time">0:57</span>
+                    <span class="kg-chapter-label" data-i18n="kgit-chapter-5">Hub Unreal & compilation</span>
+                </button>
+                <button type="button" class="kg-chapter-btn" data-time="72">
+                    <span class="kg-chapter-time">1:12</span>
+                    <span class="kg-chapter-label" data-i18n="kgit-chapter-6">Diff de Blueprint</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- OVERVIEW -->
+        <section class="project-section">
+            <span class="module-badge">BRIEFING</span>
+            <h3 class="section-title" data-i18n="kgit-overview-title">POURQUOI KOTYX GIT ?</h3>
+            <p class="lead" data-i18n="kgit-overview-lead">Les clients Git classiques traitent les fichiers <strong>Unreal Engine (<code>.uasset</code>, <code>.umap</code>)</strong> comme des binaires opaques, impossibles à relire ou à fusionner, et noient les conflits de code dans d'immenses blocs illisibles. <strong>Kotyx Git</strong> est le client Git de bureau que j'ai <strong>conçu et développé seul</strong> chez <strong>Rollon Systems</strong>, en <strong>C++20 et Qt 6.11 / QML</strong> : il suit plusieurs dépôts à la fois et décode les <strong>Blueprints d'Unreal Engine 4.0 à 5.7 sans lancer l'éditeur</strong>. Je l'utilise sur mes propres dépôts, dont un jeu développé en équipe.</p>
+            <div class="flow">
+                <div class="flow-step"><b data-i18n="kgit-flow-1-t">01 — MULTI-DÉPÔTS</b><span data-i18n="kgit-flow-1">Arborescence de repos, Fetch parallèle & focus de branche</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b data-i18n="kgit-flow-2-t">02 — DIFF .UASSET</b><span data-i18n="kgit-flow-2">Décodage binaire des Blueprints & rendu du graphe sans Unreal</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b data-i18n="kgit-flow-3-t">03 — FUSION LCS & UE</b><span data-i18n="kgit-flow-3">Conflits C++ découpés par LCS & merge Blueprint élément par élément</span></div>
+                <span class="flow-arrow">▶</span>
+                <div class="flow-step"><b data-i18n="kgit-flow-4-t">04 — HUB UNREAL & SDK</b><span data-i18n="kgit-flow-4">Build C++ / Cooking intégré & plugins externes en DLL</span></div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE KOTYX GIT UI SIMULATOR -->
+        <section class="project-section">
+            <span class="module-badge" data-i18n="kgit-sim-badge">DÉMO INTERACTIVE // REPRODUCTION WEB</span>
+            <h3 class="section-title" data-i18n="kgit-sim-title">ESSAYER LES DEUX ÉCRANS CLÉS</h3>
+            <p style="color: var(--color-text-muted); margin-bottom: 1rem;" data-i18n="kgit-sim-desc">Reproduction web, sur un projet d'exemple, des deux écrans qui font la différence : cliquez pour choisir ce que vous gardez dans un Blueprint (<code>.uasset</code>) ou dans un conflit C++.</p>
+
+            <div class="kg-window">
+                <!-- Window Header -->
+                <div class="kg-titlebar">
+                    <div class="kg-brand">
+                        <span class="kg-brand-logo">K</span>
+                        <span class="kg-brand-name">Kotyx Git</span>
+                        <span class="kg-repo-pill">
+                            <span>📁</span>
+                            <b>jeu-unreal</b>
+                            <span class="kg-branch-badge">⎇ feature/combat-rig ↑2</span>
+                        </span>
+                    </div>
+
+                    <div class="kg-tabs" role="tablist">
+                        <button type="button" class="kg-tab-btn is-active" onclick="switchKgTab('unreal-bp', this)">
+                            <span class="kg-tab-dot" style="background: #A371F7;"></span>
+                            <span data-i18n="kgit-tab-1">1. Diff & Merge Blueprint (.uasset)</span>
+                        </button>
+                        <button type="button" class="kg-tab-btn" onclick="switchKgTab('lcs-conflict', this)">
+                            <span class="kg-tab-dot" style="background: #F85149;"></span>
+                            <span data-i18n="kgit-tab-2">2. Résolveur de Conflits LCS</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==================== PANE 1: UNREAL BLUEPRINT DIFF & MERGE ==================== -->
+                <div id="kg-pane-unreal-bp" class="kg-pane is-active">
+                    <div class="kg-bp-toolbar">
+                        <div class="kg-bp-file-info">
+                            <span class="kg-pill purple">UASSET // UE 5.7</span>
+                            <strong style="font-family: var(--font-mono); font-size: 0.85rem;">Content/Characters/BP_ThirdPersonCharacter.uasset</strong>
+                            <span class="kg-pill warn" data-i18n="kgit-bp-parsed-tag">Lu sans lancer Unreal</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <label style="font-size: 0.78rem; color: var(--kg-text-sec); display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" id="kg-filter-unchanged-label">
+                                <input type="checkbox" checked onchange="toggleBpUnchanged(this.checked)">
+                                <span data-i18n="kgit-bp-only-changes">Changements seuls</span>
+                            </label>
+                            <div class="kg-submode-group">
+                                <button type="button" class="kg-submode-btn is-active" id="btn-bp-graph" onclick="setBpSubmode('graph')" data-i18n="kgit-bp-btn-graph">Graphe Blueprint</button>
+                                <button type="button" class="kg-submode-btn" id="btn-bp-table" onclick="setBpSubmode('table')" data-i18n="kgit-bp-btn-table">Fusion Élément par Élément (4)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blueprint Node Canvas -->
+                    <div id="kg-bp-canvas" class="kg-bp-canvas-wrap hide-unchanged">
+                        <div class="kg-bp-legend">
+                            <span><i class="kg-tab-dot" style="background: #3FB950;"></i> <b style="color:#56D364;" data-i18n="kgit-leg-add">+ Nœud / Lien ajouté</b></span>
+                            <span><i class="kg-tab-dot" style="background: #D29922;"></i> <b style="color:#F0B72F;" data-i18n="kgit-leg-mod">~ Pin / Fonction modifiée</b></span>
+                            <span><i class="kg-tab-dot" style="background: #F85149;"></i> <b style="color:#FF7B72;" data-i18n="kgit-leg-del">− Nœud supprimé</b></span>
+                            <span style="margin-left: auto; font-family: var(--font-mono); color: var(--kg-primary);">EventGraph ● │ ConstructionScript</span>
+                        </div>
+
+                        <svg class="kg-bp-svg" viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Comment Box -->
+                            <rect x="15" y="12" width="850" height="315" rx="6" fill="rgba(255,255,255,0.015)" stroke="#2A313C" stroke-dasharray="4 4" />
+                            <text x="28" y="34" fill="#6E7781" font-family="Consolas, monospace" font-size="11" data-i18n="kgit-svg-comment">// EventGraph — Mobilité &amp; Visée (projet d'exemple)</text>
+
+                            <!-- Bezier Wires -->
+                            <!-- Exec wire: InputAction -> Viser -->
+                            <path d="M 215 95 C 255 95, 265 95, 305 95" stroke="#FFFFFF" stroke-width="2.5" fill="none" />
+                            <!-- Exec wire: Viser -> Branch (Modified) -->
+                            <path d="M 505 95 C 535 95, 545 95, 575 95" stroke="#D29922" stroke-width="2.5" fill="none" />
+                            <!-- Bool wire: bIsAiming -> Branch Condition -->
+                            <path d="M 505 134 C 535 134, 545 121, 575 121" stroke="#8E2323" stroke-width="2" fill="none" />
+                            <!-- Added Exec wire: Branch True -> Sprint Boost (Added in Green) -->
+                            <path d="M 695 95 C 715 95, 715 80, 735 80" stroke="#3FB950" stroke-width="3" fill="none" />
+                            <!-- Added Float wire: CharacterMovement -> Set MaxWalkSpeed -->
+                            <path d="M 505 250 C 590 250, 640 130, 735 130" stroke="#39C5CF" stroke-width="2" stroke-dasharray="3 2" fill="none" />
+                            <!-- Removed Wire to old node (Red) -->
+                            <path d="M 695 118 C 715 118, 715 245, 735 245" stroke="#F85149" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+
+                            <!-- NODE 1: Event InputAction Aim (Context neighbor) -->
+                            <g transform="translate(35, 55)">
+                                <rect width="180" height="82" rx="6" fill="#1C222B" stroke="#4E5560" stroke-width="1.5" />
+                                <rect width="180" height="24" rx="6" fill="#8E2323" />
+                                <text x="10" y="16" fill="#fff" font-size="11" font-weight="bold">⚡ InputAction Aim</text>
+                                <text x="125" y="45" fill="#E6EDF3" font-size="11">Pressed ▶</text>
+                                <text x="120" y="65" fill="#9DA7B3" font-size="11">Released ▷</text>
+                            </g>
+
+                            <!-- NODE 2: Function Call Renamed Aim -> Viser (MODIFIED - Orange) -->
+                            <g transform="translate(305, 48)">
+                                <rect width="200" height="105" rx="6" fill="#1C222B" stroke="#D29922" stroke-width="2.5" />
+                                <rect width="200" height="24" rx="6" fill="#1F4F8F" />
+                                <text x="10" y="16" fill="#fff" font-size="11" font-weight="bold" data-i18n="kgit-svg-renamed">ƒ Viser (avant : Aim)</text>
+                                <rect x="132" y="4" width="62" height="16" rx="3" fill="#D29922" />
+                                <text x="137" y="15" fill="#000" font-size="9.5" font-weight="bold" data-i18n="kgit-svg-modified">MODIFIÉ</text>
+                                <text x="10" y="47" fill="#E6EDF3" font-size="11">▶ Exec</text>
+                                <text x="155" y="47" fill="#E6EDF3" font-size="11">Then ▶</text>
+                                <text x="10" y="72" fill="#3FB950" font-size="11">● NewFOV: <tspan fill="#F0B72F">75.0 → 68.0</tspan></text>
+                                <text x="118" y="90" fill="#F85149" font-size="11">bIsAiming ●</text>
+                            </g>
+
+                            <!-- NODE 3: Unchanged Node (faded when "Changements seuls" is checked) -->
+                            <g class="kg-bp-node-UNCHANGED" transform="translate(35, 195)">
+                                <rect width="210" height="76" rx="6" fill="#1C222B" stroke="#2A313C" stroke-width="1" />
+                                <rect width="210" height="22" rx="6" fill="#2F7A3A" />
+                                <text x="10" y="15" fill="#fff" font-size="11" font-weight="bold" data-i18n="kgit-svg-unchanged">Get Control Rotation (Inchangé)</text>
+                                <text x="115" y="52" fill="#D29922" font-size="11">Return Value ●</text>
+                            </g>
+
+                            <!-- NODE 4: CharacterMovement Reference -->
+                            <g transform="translate(305, 210)">
+                                <rect width="200" height="58" rx="6" fill="#1C222B" stroke="#39C5CF" stroke-width="1.5" />
+                                <rect width="200" height="22" rx="6" fill="#227070" />
+                                <text x="10" y="15" fill="#fff" font-size="11" font-weight="bold">CharacterMovement</text>
+                                <text x="105" y="44" fill="#39C5CF" font-size="11">CharMoveComp ●</text>
+                            </g>
+
+                            <!-- NODE 5: Branch -->
+                            <g transform="translate(575, 55)">
+                                <rect width="120" height="88" rx="6" fill="#1C222B" stroke="#4E5560" stroke-width="1.5" />
+                                <rect width="120" height="24" rx="6" fill="#4E5560" />
+                                <text x="10" y="16" fill="#fff" font-size="11" font-weight="bold">⑂ Branch</text>
+                                <text x="10" y="45" fill="#E6EDF3" font-size="11">▶ Exec</text>
+                                <text x="72" y="45" fill="#3FB950" font-size="11">True ▶</text>
+                                <text x="10" y="70" fill="#F85149" font-size="11">● Cond</text>
+                                <text x="68" y="70" fill="#F85149" font-size="11">False ▶</text>
+                            </g>
+
+                            <!-- NODE 6: Set Max Walk Speed (ADDED - Green) -->
+                            <g transform="translate(735, 42)">
+                                <rect width="122" height="118" rx="6" fill="rgba(63, 185, 80, 0.1)" stroke="#3FB950" stroke-width="2.5" />
+                                <rect width="122" height="24" rx="6" fill="#2F7A3A" />
+                                <text x="8" y="16" fill="#fff" font-size="10.5" font-weight="bold">+ Set MaxWalkSpeed</text>
+                                <text x="8" y="46" fill="#56D364" font-size="10" font-weight="bold" data-i18n="kgit-svg-added">[AJOUTÉ]</text>
+                                <text x="8" y="68" fill="#3FB950" font-size="11">● Speed: 650.0</text>
+                                <text x="8" y="92" fill="#39C5CF" font-size="11">● Target: Move</text>
+                            </g>
+
+                            <!-- NODE 7: Old Camera Shake (REMOVED - Red) -->
+                            <g transform="translate(735, 205)">
+                                <rect width="122" height="82" rx="6" fill="rgba(248, 81, 73, 0.1)" stroke="#F85149" stroke-width="2" stroke-dasharray="4 2" />
+                                <rect width="122" height="22" rx="6" fill="#8E2323" />
+                                <text x="8" y="15" fill="#fff" font-size="10.5" font-weight="bold">− PlayLegacyShake</text>
+                                <text x="8" y="46" fill="#FF7B72" font-size="10" font-weight="bold" data-i18n="kgit-svg-removed">[SUPPRIMÉ]</text>
+                                <text x="8" y="66" fill="#9DA7B3" font-size="10">Scale: 1.0</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Element-by-Element Merge Table (MergeTable.qml) -->
+                    <div id="kg-bp-merge-table" class="kg-merge-table-wrap">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                            <div style="font-size: 0.84rem; color: var(--kg-text-sec);" data-i18n="kgit-merge-help"><strong>Fusion chirurgicale d'asset Unreal :</strong> cliquez sur la version à conserver pour chaque élément. Kotyx Git pilote ensuite <code>UnrealEditor-Cmd</code> en tâche de fond (<code>merge_asset.py</code>), relit le fichier et vérifie chaque choix. Les nœuds, composants et acteurs ne se rejouent pas par script : ils viennent du fichier de départ.</div>
+                            <span class="kg-pill ok" data-i18n="kgit-merge-summary">4 / 4 éléments résolus</span>
+                        </div>
+
+                        <div class="kg-merge-scroll">
+                        <table class="kg-merge-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="kgit-th-elem">ÉLÉMENT UNREAL</th>
+                                    <th data-i18n="kgit-th-ours">GAUCHE (BRANCHE DE BASE : MAIN)</th>
+                                    <th data-i18n="kgit-th-theirs">DROITE (TON COMMIT : FEATURE)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="kg-pill info">Default</span>
+                                        <strong style="margin-left: 6px;">CharMoveComp.MaxWalkSpeed</strong>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell" data-idle-key="kgit-keep-left" onclick="selectUeMergeRow(this, 'ours')">
+                                            <span>500.0 → <strong>550.0 cm/s</strong></span>
+                                            <span class="kg-pill info"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell selected-theirs" data-idle-key="kgit-keep-right" onclick="selectUeMergeRow(this, 'theirs')">
+                                            <span>500.0 → <strong>650.0 cm/s</strong></span>
+                                            <span class="kg-pill purple"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="kg-pill ok">Variable</span>
+                                        <strong style="margin-left: 6px;">StaminaDrainRate (Float)</strong>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell" data-idle-key="kgit-ignore" onclick="selectUeMergeRow(this, 'ours')">
+                                            <span style="color: var(--kg-text-muted);" data-i18n="kgit-merge-absent">Absent</span>
+                                            <span class="kg-pill info"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell selected-theirs" data-idle-key="kgit-keep-right" onclick="selectUeMergeRow(this, 'theirs')">
+                                            <span data-i18n="kgit-merge-added">Ajoutée — défaut : <strong>12.5</strong></span>
+                                            <span class="kg-pill purple"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="kg-pill warn">Function</span>
+                                        <strong style="margin-left: 6px;">Viser (Aim)</strong>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell selected-ours" data-idle-key="kgit-keep-left" onclick="selectUeMergeRow(this, 'ours')">
+                                            <span data-i18n="kgit-merge-keep-name">Garder le nom <strong>Aim()</strong></span>
+                                            <span class="kg-pill info"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell" data-idle-key="kgit-keep-right" onclick="selectUeMergeRow(this, 'theirs')">
+                                            <span data-i18n="kgit-merge-renamed">Renommée <strong>Viser()</strong> (les appels suivent)</span>
+                                            <span class="kg-pill purple"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="kg-pill info">Default</span>
+                                        <strong style="margin-left: 6px;">CharMoveComp.JumpZVelocity</strong>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell selected-ours" data-idle-key="kgit-keep-left" onclick="selectUeMergeRow(this, 'ours')">
+                                            <span>420.0 → <strong>600.0</strong></span>
+                                            <span class="kg-pill info"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="kg-choice-cell" data-idle-key="kgit-keep-right" onclick="selectUeMergeRow(this, 'theirs')">
+                                            <span>420.0 → <strong>520.0</strong></span>
+                                            <span class="kg-pill purple"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PANE 2: LCS CONFLICT RESOLVER ==================== -->
+                <div id="kg-pane-lcs-conflict" class="kg-pane">
+                    <div class="kg-op-banner">
+                        <div class="kg-op-banner-left">
+                            <span class="kg-pill warn" data-i18n="kgit-lcs-op">REBASE EN COURS</span>
+                            <span data-i18n="kgit-lcs-banner"><strong>Source/Combat/WeaponRecoil.cpp</strong> — Gros bloc Git découpé en <strong>2 micro-blocs LCS</strong> (les lignes communes ne sont jamais dupliquées)</span>
+                        </div>
+                        <span class="kg-pill ok" data-i18n="kgit-lcs-progress">2 / 2 blocs résolus · Alt+← / Alt+→</span>
+                    </div>
+
+                    <div class="kg-conflict-grid">
+                        <div class="kg-conflict-blocks">
+                            <div class="kg-cblock">
+                                <div class="kg-cblock-header">
+                                    <span data-i18n="kgit-lcs-block1"><strong>BLOC #1</strong> (ligne 42)</span>
+                                    <div class="kg-cblock-actions">
+                                        <button type="button" class="kg-mini-btn" onclick="setLcsChoice(1, 'ours', this)" data-i18n="kgit-lcs-btn-left">Gauche (Base)</button>
+                                        <button type="button" class="kg-mini-btn active-theirs" onclick="setLcsChoice(1, 'theirs', this)" data-i18n="kgit-lcs-btn-right">Droite (Commit)</button>
+                                        <button type="button" class="kg-mini-btn" onclick="setLcsChoice(1, 'both', this)" data-i18n="kgit-lcs-btn-both">Les deux</button>
+                                    </div>
+                                </div>
+                                <div class="kg-cblock-sides">
+                                    <div class="kg-side-ours">
+                                        <span class="kg-side-title" data-i18n="kgit-lcs-side-left">GAUCHE — BRANCHE DE BASE (main)</span>
+                                        <code>Recoil.Scale = 1.15f;</code>
+                                    </div>
+                                    <div class="kg-side-theirs">
+                                        <span class="kg-side-title" data-i18n="kgit-lcs-side-right">DROITE — TON COMMIT REJOUÉ</span>
+                                        <code>Recoil.Scale = Data-&gt;GetRecoilScale();</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--kg-text-muted); padding-left: 8px;" data-i18n="kgit-lcs-common">⋮ 14 lignes identiques isolées automatiquement par <code>GitConflicts::Refine</code> (LCS) ⋮</div>
+
+                            <div class="kg-cblock">
+                                <div class="kg-cblock-header">
+                                    <span data-i18n="kgit-lcs-block2"><strong>BLOC #2</strong> (ligne 57)</span>
+                                    <div class="kg-cblock-actions">
+                                        <button type="button" class="kg-mini-btn active-ours" onclick="setLcsChoice(2, 'ours', this)" data-i18n="kgit-lcs-btn-left">Gauche (Base)</button>
+                                        <button type="button" class="kg-mini-btn" onclick="setLcsChoice(2, 'theirs', this)" data-i18n="kgit-lcs-btn-right">Droite (Commit)</button>
+                                        <button type="button" class="kg-mini-btn" onclick="setLcsChoice(2, 'both', this)" data-i18n="kgit-lcs-btn-both">Les deux</button>
+                                    </div>
+                                </div>
+                                <div class="kg-cblock-sides">
+                                    <div class="kg-side-ours">
+                                        <span class="kg-side-title" data-i18n="kgit-lcs-side-left">GAUCHE — BRANCHE DE BASE (main)</span>
+                                        <code>SpringSolver.StepSubframe(DeltaTime, 120.f);</code>
+                                    </div>
+                                    <div class="kg-side-theirs">
+                                        <span class="kg-side-title" data-i18n="kgit-lcs-side-right">DROITE — TON COMMIT REJOUÉ</span>
+                                        <code>ApplyCameraImpulse(Recoil.Scale * 0.5f);</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kg-conflict-result">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--kg-text-sec);" data-i18n="kgit-lcs-preview-title">APERÇU DU FICHIER FINAL (OCTET PAR OCTET, CRLF PRÉSERVÉ)</span>
+                                <span class="kg-pill ok" data-i18n="kgit-lcs-ready">Prêt pour git add</span>
+                            </div>
+                            <div class="kg-code-preview" id="kg-lcs-preview">void UWeaponMovement::TickRecoil(float DeltaTime)
+{<span class="kg-line-chosen" id="kg-lcs-line-1"></span><span data-i18n="kgit-lcs-preview-note">    // ⋮ 14 lignes communes, isolées par le LCS</span>
+<span class="kg-line-chosen" id="kg-lcs-line-2"></span>}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Status & Git Console Trace (Ctrl+J) -->
+                <div class="kg-statusbar">
+                    <div>
+                        <span class="kg-pill info" style="margin-right: 8px;">CONSOLE (Ctrl+J)</span>
+                        <span class="kg-cmd-trace" id="kg-console-trace"></span>
+                    </div>
+                    <span data-i18n="kgit-status-note">Reproduction web · données d'exemple</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREENSHOT GALLERY -->
+        <section class="project-section">
+            <span class="module-badge" data-i18n="kgit-gallery-badge">CAPTURES // APPLICATION RÉELLE</span>
+            <h3 class="section-title" data-i18n="kgit-gallery-title">L'INTERFACE EN VRAI</h3>
+            <p style="color: var(--color-text-muted);" data-i18n="kgit-gallery-desc">Cliquez sur une capture pour l'agrandir. Les noms et adresses sont floutés.</p>
+            <div class="kg-gallery-grid">
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_graph.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_graph.jpg" alt="Graphe de commits multi-branches dans Kotyx Git" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-graph-t">GRAPHE MULTI-BRANCHES</h4>
+                        <p data-i18n="kgit-shot-graph-d">Un projet d'équipe avec 12 branches distantes : chaque étiquette a la couleur de sa ligne, et le détail du commit dit où il a été mergé.</p>
+                    </div>
+                </div>
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_blueprint_graph.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_blueprint_graph.jpg" alt="Graphe d'un Blueprint Unreal affiché dans Kotyx Git" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-bpgraph-t">BLUEPRINT DESSINÉ SANS UNREAL</h4>
+                        <p data-i18n="kgit-shot-bpgraph-d">Le graphe d'un <code>.uasset</code> Unreal 5.8.4 lu directement depuis un commit : nœuds, broches et changements colorés.</p>
+                    </div>
+                </div>
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_blueprint_details.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_blueprint_details.jpg" alt="Détail des changements d'un asset Unreal" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-bpdetails-t">DÉTAIL D'UN ASSET</h4>
+                        <p data-i18n="kgit-shot-bpdetails-d">La liste de ce qui a changé dans l'asset : graphes, composants, valeurs par défaut et nœuds.</p>
+                    </div>
+                </div>
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_unreal_hub.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_unreal_hub.jpg" alt="Hub Unreal intégré à Kotyx Git" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-hub-t">HUB UNREAL</h4>
+                        <p data-i18n="kgit-shot-hub-d">Ouvrir, compiler et packager le projet depuis le client, avec l'état du projet : version d'Unreal, binaires, <code>.gitignore</code> et Git LFS.</p>
+                    </div>
+                </div>
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_context_menu.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_context_menu.jpg" alt="Menu clic droit d'une branche distante" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-menu-t">ACTIONS SUR LES BRANCHES</h4>
+                        <p data-i18n="kgit-shot-menu-d">Clic droit sur une branche : checkout, merge, isolation de ses commits dans le graphe.</p>
+                    </div>
+                </div>
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_console.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_console.jpg" alt="Panneau de commit et console Git intégrée" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-console-t">COMMIT & CONSOLE GIT</h4>
+                        <p data-i18n="kgit-shot-console-d">Le panneau de commit et une vraie console Git intégrée, ouverte avec <code>Ctrl+J</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UNREAL BINARY PARSER ARCHITECTURE -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">UNREAL ENGINE // .UASSET PARSER</span>
+                <h3 class="section-title" data-i18n="kgit-ue-title">DÉCODAGE BINAIRE DES .UASSET SANS LANCER UNREAL</h3>
+                <ul class="spec-list">
+                    <li data-i18n="kgit-ue-1"><strong>> Lecture directe du format binaire Unreal (UE 4.0 à 5.7)</strong><code>UnrealAssets::Parse</code> décode à la volée le <code>PackageFileSummary</code>, la <code>NameTable</code>, les tables d'<code>Imports</code> / <code>Exports</code>, les <code>PropertyTag</code> et la sérialisation des broches (<code>UEdGraphPin::Serialize</code>) directement depuis les octets Git (<code>:1</code>, <code>:2</code>, <code>:3</code>), sans jamais ouvrir l'éditeur Unreal.</li>
+                    <li data-i18n="kgit-ue-2"><strong>> Comparaison sémantique intelligente (<code>SameBytes</code>)</strong>Ajouter un simple nom dans un Blueprint décale tous les index de la <code>NameTable</code> et modifie les octets de tout le fichier. Kotyx Git résout les références d'objets et de noms avant de comparer, ignore le bytecode généré (<code>SKEL_</code>) et isole uniquement les vrais changements (variables, valeurs par défaut, fonctions, composants, acteurs et nœuds).</li>
+                    <li data-i18n="kgit-ue-3"><strong>> Validé sur 120 891 nœuds Blueprint d'Unreal 5.7</strong>La suite de tests peut parcourir tout le corpus de Blueprints du moteur Unreal Engine 5.7 : 120 891 nœuds lus jusqu'au dernier octet. Un fichier tronqué à n'importe quel endroit ne provoque aucun crash : au pire, il est signalé comme illisible.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel" data-i18n="kgit-pipeline"><span class="c-dim">// PIPELINE DE LECTURE &amp; FUSION D'UN .UASSET</span>
+<span class="c-accent">git show :1/:2/:3</span>  lecture des 3 versions en mémoire
+   ▼
+<span class="c-accent">UnrealAssets::Parse</span> PackageFileSummary + Name/Export/Import
+   ▼
+<span class="c-accent">UEdGraphPin</span>         décodage des nœuds, broches &amp; liens
+   ▼
+<span class="c-accent">SameBytes &amp; Compare</span> filtrage SKEL_ + alignement par GUID
+   ▼
+<span class="c-accent-2">BlueprintGraph.qml</span>  rendu du graphe + focus changements
+   ▼
+<span class="c-ok">merge_asset.py</span>      fusion headless via UnrealEditor-Cmd
+   ▼
+<span class="c-ok">MissingChoices</span>      relecture &amp; contrôle post-fusion</pre>
+            </div>
+        </section>
+
+        <!-- CORE ARCHITECTURE & LCS -->
+        <section class="project-section">
+            <span class="module-badge">CORE // C++20 &amp; QT 6.11</span>
+            <h3 class="section-title" data-i18n="kgit-core-title">ARCHITECTURE ASYNCHRONE & ALGORITHMIQUE</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">GitConflicts::Refine (LCS)</span>
+                    <h4 data-i18n="kgit-card1-title">DÉCOUPAGE CHIRURGICAL PAR LCS</h4>
+                    <p data-i18n="kgit-card1-desc">Les zones de conflit marquées par Git sont redécoupées via un algorithme de Plus Longue Sous-séquence Commune (LCS) pour isoler les lignes réellement différentes. Le fichier résolu est réassemblé en octets bruts (<code>QByteArray</code>) afin de préserver l'encodage et les fins de ligne <code>CRLF</code>/<code>LF</code> à l'octet près.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">GitRepositoryReader</span>
+                    <h4 data-i18n="kgit-card2-title">LECTURES HORS THREAD UI</h4>
+                    <p data-i18n="kgit-card2-desc">Les lectures Git s'exécutent dans un <code>QThreadPool</code>, pas sur le thread d'interface, avec fusion automatique des requêtes (<code>Status | History | Focus</code>) et un compteur de génération qui écarte les snapshots périmés.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">GitLaneCalculator</span>
+                    <h4 data-i18n="kgit-card3-title">GRAPHE MULTI-BRANCHES & FOCUS</h4>
+                    <p data-i18n="kgit-card3-desc">Calcul déterministe des couloirs de branches, détection d'intégration dans <code>main</code>, et mode Focus en un clic qui filtre le graphe pour n'afficher que les commits propres à la branche sélectionnée.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">UGitHubAccount (GCM)</span>
+                    <h4 data-i18n="kgit-card4-title">SÉCURITÉ & ZÉRO JETON SUR DISQUE</h4>
+                    <p data-i18n="kgit-card4-desc">Délégation complète à <em>Git Credential Manager</em> : Kotyx Git n'écrit aucun mot de passe ni jeton sur le disque ou dans les logs. Le jeton reste en mémoire pour appeler l'API, et le client HTTP refuse toute requête hors de <code>https://api.github.com</code>.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">UnrealEditor::Find</span>
+                    <h4 data-i18n="kgit-card5-title">HUB UNREAL INTÉGRÉ</h4>
+                    <p data-i18n="kgit-card5-desc">Dès qu'un <code>.uproject</code> est trouvé, un hub ouvre l'éditeur, compile avec tri Warnings / Erreurs, package pour Windows et contrôle l'état du projet : binaires à jour après un pull, <code>.gitignore</code>, Git LFS. La compilation est refusée tant que l'éditeur est ouvert.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag" data-i18n="kgit-card6-tag">MODE GUIDÉ</span>
+                    <h4 data-i18n="kgit-card6-title">LISIBLE PAR LES DÉBUTANTS</h4>
+                    <p data-i18n="kgit-card6-desc">Mode guidé, erreurs Git traduites avec la marche à suivre, confirmation avant toute action destructrice et bouton « Annuler l'opération » pendant un merge ou un rebase : les artistes et game designers d'une équipe peuvent s'en servir aussi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLUGIN SDK & QML OVERRIDES -->
+        <section class="feature-row reverse project-section">
+            <div class="feature-text">
+                <span class="module-badge" data-i18n="kgit-sdk-badge">EXTENSIBILITÉ // SDK C++ &amp; DLL</span>
+                <h3 class="section-title" data-i18n="kgit-sdk-title">ARCHITECTURE DE PLUGINS & SURCHARGE QML</h3>
+                <ul class="spec-list">
+                    <li data-i18n="kgit-sdk-1"><strong>> Un cœur 100% agnostique des formats</strong>Le cœur de Kotyx Git (<code>core</code>, <code>viewmodels</code>) ne contient aucun <code>if (Unreal)</code> ni logique liée aux images : tout passe par l'interface C++ pure <code>IPlugin</code> / <code>IPluginHost</code>, qu'il s'agisse d'un plugin intégré ou d'une <strong>DLL externe</strong> chargée via <code>QPluginLoader</code> avec contrôle strict de version d'ABI (<code>KOTYXGIT_PLUGIN_IID</code>).</li>
+                    <li data-i18n="kgit-sdk-2"><strong>> Générateur de SDK intégré à l'application</strong>Depuis <em>Réglages &gt; Plugins</em>, le bouton « Créer un plugin… » génère sur le disque un projet C++/xmake autonome prêt à compiler en DLL, incluant les en-têtes du SDK (<code>Plugin.h</code>, <code>PluginHost.h</code>) et une copie des vues QML de l'application.</li>
+                    <li data-i18n="kgit-sdk-3"><strong>> Hooks Git, Thèmes & Surcharge de vues QML avec Fallback</strong>Un plugin peut ajouter des boutons d'en-tête, des actions clic droit, bloquer un commit non conforme (<code>CheckCommit</code>), fournir des thèmes complets ou remplacer n'importe quelle vue QML de l'application (<code>QmlOverrides</code>) via un intercepteur d'URL doté d'un repli automatique sécurisé si la vue custom échoue au chargement.</li>
+                </ul>
+            </div>
+            <div class="feature-media kg-feature-stack">
+                <div class="kg-shot-card" role="button" tabindex="0" data-shot="assets/kotyx_git/kotyx_git_plugins.jpg">
+                    <div class="kg-shot-img-wrap">
+                        <img src="assets/kotyx_git/kotyx_git_plugins.jpg" alt="Réglages des plugins de Kotyx Git" width="1920" height="1140" loading="lazy">
+                        <span class="kg-shot-zoom-badge" data-i18n="kgit-shot-zoom">AGRANDIR</span>
+                    </div>
+                    <div class="kg-shot-body">
+                        <h4 data-i18n="kgit-shot-plugins-t">PLUGINS & CONTRÔLE D'ABI</h4>
+                        <p data-i18n="kgit-shot-plugins-d">Les plugins Images et Unreal, et une DLL refusée parce qu'elle ne correspond pas à l'interface attendue (<code>IPlugin/4</code>).</p>
+                    </div>
+                </div>
+<pre class="console-panel" data-i18n="kgit-tests-panel"><span class="c-dim">// ARCHITECTURE MODULAIRE &amp; 8 SUITES DE TESTS C++</span>
+<span class="c-accent">QML (src/ui/qml)</span>
+  └──▶ <span class="c-accent">gitApp</span> (commands · workspace · repo · conflicts)
+         ├──▶ <span class="c-accent-2">IPlugin / DLL</span> (Images · Unreal · Custom)
+         └──▶ <span class="c-ok">Core C++20 pur</span> (sans QObject)
+
+<span class="c-dim">// SUITES DE TESTS AUTOMATISÉS (KotyxGitTests)</span>
+<span class="c-ok">✓</span> UnrealAssetsTests       <span class="c-dim">(+ 120 891 nœuds UE 5.7)</span>
+<span class="c-ok">✓</span> UnrealProjectTests      <span class="c-dim">(.uproject, cibles, logs)</span>
+<span class="c-ok">✓</span> GitConflictsTests       <span class="c-dim">(LCS, encodage, octets)</span>
+<span class="c-ok">✓</span> GitLaneCalculatorTests  <span class="c-dim">(couloirs multi-branches)</span>
+<span class="c-ok">✓</span> GitParsersTests         <span class="c-dim">(0x1E/0x1F, erreurs FR)</span>
+<span class="c-ok">✓</span> GitHubParsersTests      <span class="c-dim">(GCM, pagination API)</span>
+<span class="c-ok">✓</span> RepoTreeTests           <span class="c-dim">(arborescence drag &amp; drop)</span>
+<span class="c-ok">✓</span> PluginInfoTests         <span class="c-dim">(validation ABI &amp; métadonnées)</span></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel project-footer">
+        <p>END OF TRANSMISSION // KOTYX GIT</p>
+        <a href="index.html#pro-software" class="hologram-link" data-i18n="nav-back">[ RETOUR À LA BASE ]</a>
+    </footer>
+
+    <!-- SCREENSHOT LIGHTBOX -->
+    <div id="kg-lightbox" class="kg-lightbox" role="dialog" aria-modal="true" aria-labelledby="kg-lightbox-title">
+        <div class="kg-lightbox-inner">
+            <div class="kg-lightbox-bar">
+                <span class="kg-lightbox-title" id="kg-lightbox-title"></span>
+                <div class="kg-lightbox-controls">
+                    <button type="button" class="kg-lightbox-btn" id="kg-lightbox-prev" aria-label="Précédent / Previous">◀</button>
+                    <button type="button" class="kg-lightbox-btn" id="kg-lightbox-next" aria-label="Suivant / Next">▶</button>
+                    <button type="button" class="kg-lightbox-btn" id="kg-lightbox-close" data-i18n="kgit-lightbox-close">FERMER</button>
+                </div>
+            </div>
+            <div class="kg-lightbox-img-box"><img id="kg-lightbox-img" alt=""></div>
+            <div class="kg-lightbox-caption" id="kg-lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        const kgT = (key, fallback) => window.i18n.t(key, fallback);
+
+        // --- Interactive simulator ---
+        let kgActiveTab = 'unreal-bp';
+        const KG_TRACE_KEYS = { 'unreal-bp': 'kgit-trace-bp', 'lcs-conflict': 'kgit-trace-lcs' };
+
+        function renderKgTrace() {
+            const traceEl = document.getElementById('kg-console-trace');
+            if (traceEl) traceEl.textContent = kgT(KG_TRACE_KEYS[kgActiveTab], '');
+        }
+
+        function switchKgTab(tabId, btnEl) {
+            document.querySelectorAll('.kg-pane').forEach(p => p.classList.remove('is-active'));
+            document.querySelectorAll('.kg-tab-btn').forEach(b => b.classList.remove('is-active'));
+            const target = document.getElementById('kg-pane-' + tabId);
+            if (target) target.classList.add('is-active');
+            if (btnEl) btnEl.classList.add('is-active');
+            kgActiveTab = tabId;
+            renderKgTrace();
+        }
+
+        function setBpSubmode(mode) {
+            const canvas = document.getElementById('kg-bp-canvas');
+            const table = document.getElementById('kg-bp-merge-table');
+            const btnGraph = document.getElementById('btn-bp-graph');
+            const btnTable = document.getElementById('btn-bp-table');
+            const filterLabel = document.getElementById('kg-filter-unchanged-label');
+
+            if (mode === 'table') {
+                canvas.classList.add('is-hidden');
+                table.classList.add('is-active');
+                btnGraph.classList.remove('is-active');
+                btnTable.classList.add('is-active');
+                if (filterLabel) filterLabel.style.display = 'none';
+            } else {
+                canvas.classList.remove('is-hidden');
+                table.classList.remove('is-active');
+                btnGraph.classList.add('is-active');
+                btnTable.classList.remove('is-active');
+                if (filterLabel) filterLabel.style.display = 'inline-flex';
+            }
+        }
+
+        function toggleBpUnchanged(onlyChanges) {
+            const canvas = document.getElementById('kg-bp-canvas');
+            if (!canvas) return;
+            if (onlyChanges) {
+                canvas.classList.add('hide-unchanged');
+            } else {
+                canvas.classList.remove('hide-unchanged');
+            }
+        }
+
+        function renderUeMergePills() {
+            document.querySelectorAll('.kg-choice-cell').forEach(cell => {
+                const isChosen = cell.classList.contains('selected-ours') || cell.classList.contains('selected-theirs');
+                const pill = cell.querySelector('.kg-pill');
+                if (pill) pill.textContent = kgT(isChosen ? 'kgit-chosen' : cell.dataset.idleKey, '');
+            });
+        }
+
+        function selectUeMergeRow(cellEl, side) {
+            const row = cellEl.closest('tr');
+            if (!row) return;
+            row.querySelectorAll('.kg-choice-cell').forEach(c => c.classList.remove('selected-ours', 'selected-theirs'));
+            cellEl.classList.add(side === 'ours' ? 'selected-ours' : 'selected-theirs');
+            renderUeMergePills();
+        }
+
+        const KG_LCS_LINES = {
+            1: { ours: '    Recoil.Scale = 1.15f;', theirs: '    Recoil.Scale = Data->GetRecoilScale();' },
+            2: { ours: '    SpringSolver.StepSubframe(DeltaTime, 120.f);', theirs: '    ApplyCameraImpulse(Recoil.Scale * 0.5f);' }
+        };
+
+        function renderLcsLine(blockNum, choice) {
+            const lineEl = document.getElementById('kg-lcs-line-' + blockNum);
+            if (!lineEl) return;
+            const lines = KG_LCS_LINES[blockNum];
+            lineEl.textContent = choice === 'both' ? lines.ours + '\n' + lines.theirs : lines[choice];
+        }
+
+        function setLcsChoice(blockNum, choice, btnEl) {
+            const header = btnEl.closest('.kg-cblock-header');
+            if (header) {
+                header.querySelectorAll('.kg-mini-btn').forEach(b => {
+                    b.classList.remove('active-ours', 'active-theirs', 'active-both');
+                });
+            }
+            btnEl.classList.add('active-' + choice);
+            renderLcsLine(blockNum, choice);
+        }
+
+        renderLcsLine(1, 'theirs');
+        renderLcsLine(2, 'ours');
+
+        document.addEventListener('i18n:updated', () => {
+            renderKgTrace();
+            renderUeMergePills();
+        });
+
+        // --- Video chapters ---
+        const kgVideo = document.getElementById('kg-demo-video');
+        const kgChapters = [...document.querySelectorAll('.kg-chapter-btn')];
+
+        kgChapters.forEach(btn => btn.addEventListener('click', () => {
+            kgVideo.currentTime = Number(btn.dataset.time);
+            kgVideo.play();
+        }));
+
+        kgVideo.addEventListener('timeupdate', () => {
+            const current = kgChapters.filter(btn => Number(btn.dataset.time) <= kgVideo.currentTime).pop();
+            kgChapters.forEach(btn => btn.classList.toggle('is-active', btn === current));
+        });
+
+        // --- Screenshot lightbox ---
+        const kgLightbox = document.getElementById('kg-lightbox');
+        const kgShots = [...document.querySelectorAll('.kg-shot-card')];
+        let kgShotIndex = 0;
+        let kgShotOpener = null;
+
+        function showKgShot(index) {
+            kgShotIndex = (index + kgShots.length) % kgShots.length;
+            const shot = kgShots[kgShotIndex];
+            const img = document.getElementById('kg-lightbox-img');
+            img.src = shot.dataset.shot;
+            img.alt = shot.querySelector('img').alt;
+            document.getElementById('kg-lightbox-title').textContent = shot.querySelector('h4').textContent;
+            document.getElementById('kg-lightbox-caption').textContent = shot.querySelector('p').textContent;
+        }
+
+        function openKgLightbox(index) {
+            kgShotOpener = document.activeElement;
+            showKgShot(index);
+            kgLightbox.classList.add('is-open');
+            document.getElementById('kg-lightbox-close').focus();
+        }
+
+        function closeKgLightbox() {
+            kgLightbox.classList.remove('is-open');
+            if (kgShotOpener) kgShotOpener.focus();
+        }
+
+        kgShots.forEach((shot, index) => {
+            shot.addEventListener('click', () => openKgLightbox(index));
+            shot.addEventListener('keydown', e => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                openKgLightbox(index);
+            });
+        });
+
+        document.getElementById('kg-lightbox-prev').addEventListener('click', () => showKgShot(kgShotIndex - 1));
+        document.getElementById('kg-lightbox-next').addEventListener('click', () => showKgShot(kgShotIndex + 1));
+        document.getElementById('kg-lightbox-close').addEventListener('click', closeKgLightbox);
+        kgLightbox.addEventListener('click', e => {
+            if (e.target === kgLightbox) closeKgLightbox();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (!kgLightbox.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeKgLightbox();
+            if (e.key === 'ArrowLeft') showKgShot(kgShotIndex - 1);
+            if (e.key === 'ArrowRight') showKgShot(kgShotIndex + 1);
+        });
+    </script>
+</body>
+
+</html>
+
