@@ -1,0 +1,143 @@
+/* ==========================================================================
+   STAR WARS 3D HYPERSPACE INTRO OVERLAY (js/intro.js)
+   Renders cleanly over the live 3D WebGL #well-canvas so the intro flows
+   directly into the portfolio background without any visual cut.
+   ========================================================================== */
+
+#intro {
+    display: none;
+}
+
+html.intro-pending {
+    overflow: hidden;
+}
+
+/* Hide portfolio DOM and 2D star overlay during the 2.5s 3D flyby */
+html.intro-pending #space-canvas,
+html.intro-pending #hero,
+html.intro-pending #main-nav,
+html.intro-pending main,
+html.intro-pending footer {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Ensure the 3D WebGL canvas is immediately visible from frame 0 during intro */
+html.intro-pending #well-canvas {
+    opacity: 1 !important;
+    transition: none;
+}
+
+html.intro-pending #intro,
+#intro.is-out,
+#intro.is-skip {
+    display: block;
+}
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: transparent;
+    overflow: hidden;
+    color: #e8f6ff;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    opacity: 1;
+    transition: opacity 0.75s cubic-bezier(0.22, 0.72, 0.3, 1);
+}
+
+/* Subtle tactical HUD corner — understated Star Wars datapad feel */
+.intro-hud {
+    position: absolute;
+    left: clamp(16px, 3.5vw, 44px);
+    bottom: clamp(18px, 3.5vh, 36px);
+    font-family: var(--font-mono);
+    font-size: clamp(0.68rem, 1.15vw, 0.82rem);
+    letter-spacing: 0.22em;
+    color: rgba(0, 229, 255, 0.82);
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.45s ease 0.18s, transform 0.45s ease 0.18s;
+}
+
+#intro.is-active .intro-hud {
+    opacity: 1;
+    transform: none;
+}
+
+.intro-skip {
+    position: absolute;
+    right: clamp(16px, 3.5vw, 44px);
+    bottom: clamp(14px, 3vh, 32px);
+    background: rgba(5, 10, 18, 0.55);
+    border: 1px solid rgba(0, 229, 255, 0.32);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    padding: 0.45em 1em;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.intro-skip:hover,
+.intro-skip:focus-visible {
+    color: #fff;
+    border-color: var(--color-primary);
+    background: rgba(0, 229, 255, 0.14);
+    outline: none;
+}
+
+/* Smooth fade-out of HUD overlay */
+#intro.is-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#intro.is-skip {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease;
+}
+
+/* Smooth reveal of portfolio over the live 3D fleet */
+html.intro-arrived #hero,
+html.intro-arrived #main-nav,
+html.intro-arrived main,
+html.intro-arrived footer {
+    animation: intro-site-reveal 0.9s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+}
+
+html.intro-arrived #hero .container {
+    animation: intro-hero-settle 0.95s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+}
+
+@keyframes intro-site-reveal {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes intro-hero-settle {
+    0% {
+        opacity: 0;
+        transform: translateY(16px) scale(0.985);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .intro-hud {
+        letter-spacing: 0.1em;
+        max-width: 62vw;
+        line-height: 1.4;
+    }
+}

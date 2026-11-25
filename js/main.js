@@ -374,12 +374,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameActive = !gameActive;
                 if (gameActive) {
                     simBtn.querySelector('.btn-content').innerText = i18n.t("btn-sim-stop", "STOPPER SIMULATION");
+                    canvas.style.opacity = '1';
                     score = 0;
                     enemies = [];
                     lasers = [];
                 }
                 else {
                     simBtn.querySelector('.btn-content').innerText = i18n.t("btn-sim-start", "COMBAT SIMULATION");
+                    canvas.style.opacity = '';
                 }
             });
         }

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GET1SJLWPC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GET1SJLWPC');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hold the Shot | Epic MegaJam | Pierre Lamare</title>
+    <meta name="description" content="Hold the Shot : FPS / Réalisateur hybride créé pour l'Epic MegaJam sous Unreal Engine 5.9 (C++ / HLSL). Criez CUT! au micro pour figer le plateau, diriger l'équipe de tournage et repartir sur ACTION!.">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/project.css">
+
+    <!-- i18n -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+
+    <style>
+        .hts-embed-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .hts-embed-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .hts-media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .hts-gif-card {
+            margin: 0;
+            background: rgba(6, 10, 18, 0.88);
+            border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .hts-gif-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 22px color-mix(in srgb, var(--accent) 18%, transparent);
+        }
+
+        .hts-gif-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .hts-gif-card figcaption {
+            padding: 0.9rem 1.1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.9rem;
+            color: #c9d1d9;
+            line-height: 1.5;
+        }
+
+        .hts-gif-card figcaption strong {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .hts-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .hts-shot {
+            position: relative;
+            margin: 0;
+            border: 1px solid rgba(245, 197, 66, 0.22);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #05080f;
+            cursor: zoom-in;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .hts-shot:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hts-shot img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hts-shot:hover img {
+            transform: scale(1.04);
+        }
+
+        .hts-shot figcaption {
+            padding: 0.55rem 0.8rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            color: #9cb0c4;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .hts-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 2rem;
+            background: rgba(3, 6, 12, 0.92);
+            backdrop-filter: blur(10px);
+            cursor: zoom-out;
+        }
+
+        .hts-lightbox.is-open {
+            display: flex;
+        }
+
+        .hts-lightbox img {
+            max-width: min(92vw, 1320px);
+            max-height: 82vh;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
+        }
+
+        .hts-lightbox p {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+        }
+
+        @media (max-width: 780px) {
+            .hts-media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body style="--accent: #f5c542; --accent-2: #ff2e4c; --hero-bg: url('../assets/hold_the_shot/03_cut.jpg');">
+    <!-- FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="dashboard-panel">
+        <div class="container nav-container">
+            <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">RETOUR BDD</a></li>
+                <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="project-hero">
+        <div class="container">
+            <div>
+                <span class="status-badge is-live" data-i18n="flag-jam">EPIC MEGAJAM</span>
+                <h1 class="glitch-text">HOLD THE SHOT</h1>
+                <h2 class="subtitle" data-i18n="hts-subtitle">FPS / RÉALISATEUR HYBRIDE // EPIC MEGAJAM ("DIRECTOR'S CUT") // UNREAL ENGINE 5.9</h2>
+                <div class="project-cta">
+                    <a href="https://bixboy1.itch.io/hold-the-shot" target="_blank" rel="noopener noreferrer" class="btn hologram-btn">
+                        <span class="btn-content" data-i18n="hts-btn-itch">JOUER SUR ITCH.IO ↗</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=9UhByZV2bI0" target="_blank" rel="noopener noreferrer" class="btn hologram-btn">
+                        <span class="btn-content" data-i18n="hts-btn-yt">VOIR SUR YOUTUBE ↗</span>
+                    </a>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="lbl-engine">MOTEUR</span>
+                    <span class="stat-value">UE 5.9</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="hts-lbl-event">ÉVÉNEMENT</span>
+                    <span class="stat-value">MEGAJAM</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="hts-lbl-tech">TECH</span>
+                    <span class="stat-value">C++ / HLSL</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="hts-lbl-input">CONTRÔLE</span>
+                    <span class="stat-value">MICRO + FPS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+
+        <!-- YOUTUBE TRAILER / GAMEPLAY VIDEO -->
+        <section class="project-section">
+            <span class="module-badge">TRAILER // YOUTUBE</span>
+            <h3 class="section-title" data-i18n="hts-video-title">VIDÉO DE PRÉSENTATION &amp; GAMEPLAY</h3>
+            <figure class="video-frame">
+                <div class="hts-embed-wrap">
+                    <iframe
+                        src="https://www.youtube.com/embed/9UhByZV2bI0"
+                        title="Hold the Shot — Epic MegaJam Gameplay"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <figcaption data-i18n="hts-video-caption">Vidéo officielle du projet Epic MegaJam : braquage en vue FPS, commande vocale « CUT! » / « ACTION! », transition vers la régie studio, ordres à l'équipe technique et poursuite finale.</figcaption>
+            </figure>
+        </section>
+
+        <!-- BRIEFING & PILLARS -->
+        <section class="project-section">
+            <span class="module-badge">BRIEFING // DIRECTOR'S CUT</span>
+            <h3 class="section-title" data-i18n="hts-overview-title">UN BRAQUEUR. IL EST AUSSI LE RÉALISATEUR.</h3>
+            <p class="lead" data-i18n="hts-overview">
+                Créé pour l'<strong>Epic MegaJam</strong> autour du thème <em>« Director's Cut »</em>,
+                <strong>Hold the Shot</strong> vous met dans la peau de l'acteur principal <em>et</em> du réalisateur
+                d'un film de braquage grindhouse des années 80 retranché dans un hangar portuaire cerné par la police.
+                Quand la prise dérape, vous criez littéralement <strong>« CUT! »</strong> dans votre micro : tout le
+                plateau se fige, une onde visuelle dévoile les coulisses en wireframe, la caméra monte en vue grue et
+                vous dirigez l'équipe technique pour réarranger le décor avant de relancer sur <strong>« ACTION! »</strong>.
+            </p>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">PILIER 01 // VOICE</span>
+                    <h4 data-i18n="hts-pillar1-title">CRIEZ « CUT! » ET « ACTION! »</h4>
+                    <p data-i18n="hts-pillar1">Capture microphone temps réel (ou touche Tab) : crier « CUT! » déclenche un ralenti de 2,5 s puis bascule l'ensemble du plateau en mode Régie pour reprendre le contrôle tactique de la scène.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">PILIER 02 // RÉGIE</span>
+                    <h4 data-i18n="hts-pillar2-title">DIRIGEZ L'ÉQUIPE DE TOURNAGE</h4>
+                    <p data-i18n="hts-pillar2">Dépensez votre budget de production pour envoyer les techniciens déplacer des caisses de couverture, fermer des rideaux métalliques, piéger le décor en pyro, éblouir ou repositionner les figurants policiers.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">PILIER 03 // SPECTACLE</span>
+                    <h4 data-i18n="hts-pillar3-title">PELLICULE, HYPE & SHOT LIST</h4>
+                    <p data-i18n="hts-pillar3">Les éliminations stylées, les indications en direct (<em>Headshot!</em>, <em>Blow Something Up!</em>, <em>Point Blank</em>) et les défis de <em>Shot List</em> remplissent la pellicule pour débloquer le prochain Cut et gonflent votre budget.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAMEPLAY GIFS IN ACTION -->
+        <section class="project-section">
+            <span class="module-badge">GAMEPLAY // EN ACTION</span>
+            <h3 class="section-title" data-i18n="hts-gifs-title">EXTRAITS DE GAMEPLAY</h3>
+            <div class="hts-media-grid">
+                <figure class="hts-gif-card">
+                    <img src="assets/hold_the_shot/cut_freeze.gif" alt="Hold the Shot — CUT! freeze et transition wireframe" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="hts-gif1-t">« CUT! » — ARRÊT SUR IMAGE &amp; ONDE STUDIO</strong>
+                        <span data-i18n="hts-gif1-d">Le temps se fige en plein assaut et une onde radiale dépouille le décor cel-shadé vers le plateau wireframe des coulisses.</span>
+                    </figcaption>
+                </figure>
+                <figure class="hts-gif-card">
+                    <img src="assets/hold_the_shot/crew_moves_cop.gif" alt="Hold the Shot — Ordres de régie et équipe de tournage" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="hts-gif2-t">RÉGIE — ORDRES À L'ÉQUIPE TECHNIQUE</strong>
+                        <span data-i18n="hts-gif2-d">En vue grue, le réalisateur dépense son budget : Blocking, Swap Prop, Look Here!, Move Set Piece ou charge Pyro.</span>
+                    </figcaption>
+                </figure>
+                <figure class="hts-gif-card">
+                    <img src="assets/hold_the_shot/cops_blow_door.gif" alt="Hold the Shot — Explosion du rideau métallique par la police" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="hts-gif3-t">BRÈCHE POLICIÈRE &amp; DESTRUCTION</strong>
+                        <span data-i18n="hts-gif3-d">Fermer un rideau métallique ralentit l'assaut, jusqu'à ce que la police pose une charge qui le pulvérise en 60 morceaux.</span>
+                    </figcaption>
+                </figure>
+                <figure class="hts-gif-card">
+                    <img src="assets/hold_the_shot/car_chase.gif" alt="Hold the Shot — Poursuite finale sur autoroute sous la pluie" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="hts-gif4-t">FINAL SUR AUTOROUTE SOUS L'ORAGE</strong>
+                        <span data-i18n="hts-gif4-d">Après l'ouverture du coffre, le chargement des sacs dans le van et l'explosion du hangar, place à la poursuite armée sous la pluie.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE & SHADERS -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">C++ // HLSL SHADERS</span>
+                <h3 class="section-title" data-i18n="hts-archi-title">TRANSITION DE PLATEAU &amp; SHADERS CUSTOM</h3>
+                <ul class="spec-list">
+                    <li data-i18n="hts-archi-1"><strong>> Machine d'états Director / Action</strong>
+                        Orchestration complète du cycle <code>EEJDirectorMode</code> (<code>Action</code> →
+                        <code>CutSlowMotion</code> → <code>ToDirector</code> → <code>Director</code> →
+                        <code>ToAction</code>) avec ouverture micro en direct, gestion de 335 acteurs du hangar et
+                        14 acteurs de coulisses, et transition de caméra vers la grue de régie.</li>
+                    <li data-i18n="hts-archi-2"><strong>> Onde radiale &amp; cel-shading HLSL</strong>
+                        Extension de vue custom (<code>LogEJShaders</code>, shaders montés sous <code>/EpicJam</code>)
+                        combinant un rendu bande dessinée / grindhouse 80s à contours encrés et une onde sphérique
+                        temps réel (~69 m de rayon) qui bascule dynamiquement 252 acteurs et 93 pans de décor vers
+                        le mode wireframe studio.</li>
+                    <li data-i18n="hts-archi-3"><strong>> Système d'ordres &amp; exécution asynchrone</strong>
+                        Les ordres de régie (<code>MoveSetPiece</code>, <code>CloseDoor</code>, <code>Pyro</code>,
+                        <code>SwapProp</code>, <code>Blocking</code>, <code>LookHere</code>) sont exécutés physiquement
+                        par l'équipe de tournage pendant le compte à rebours avant le retour sur le plateau.</li>
+                </ul>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// CYCLE D'UNE PRISE (HOLD THE SHOT — UE 5.9)</span>
+<span class="c-accent">[MICROPHONE / TAB]</span> "CUT!" détecté (pellicule 100 %)
+   ▼
+<span class="c-accent-2">EEJDirectorMode::CutSlowMotion</span>  ralenti 2.50 s + arrêt image
+   ▼
+<span class="c-accent">Transition Onde Radiale</span>        rayon 69 m · 93 pans · 252 acteurs
+   ▼
+<span class="c-accent-2">EEJDirectorMode::Director</span>      vue grue · 31 cibles surlignées
+   ├── MoveSetPiece (300 $)    ├── Pyro (400 $)
+   ├── CloseDoor    (350 $)    ├── SwapProp (600 $)
+   └── Blocking     (400 $)    └── LookHere (150 $)
+   ▼
+<span class="c-ok">[MICROPHONE / TAB]</span> "ACTION!" → onde inversée → fusillade</pre>
+            </div>
+        </section>
+
+        <!-- SYSTEMIC GAMEPLAY MODULES -->
+        <section class="project-section">
+            <span class="module-badge">SYSTEMS // AI &amp; ATMOSPHERE</span>
+            <h3 class="section-title" data-i18n="hts-sys-title">IA, ÉCONOMIE &amp; MISE EN SCÈNE SYSTÉMIQUE</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">LogEJEnemies</span>
+                    <h4 data-i18n="hts-sys1-t">DIRECTEUR IA &amp; 86 COUVERTURES</h4>
+                    <p data-i18n="hts-sys1-d">3 vagues d'assaut sur 6 points d'accès, 86 emplacements de couverture tactiques, flics en rappel qui brisent les verrières, voitures de police servant de barricades, boucliers anti-émeutes (<em>Riot Shield</em>) et voleurs (<em>Thief</em>) tentant d'exfiltrer vos sacs.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">LogEJEconomy</span>
+                    <h4 data-i18n="hts-sys2-t">BUDGET, SPECTACLE &amp; SHOT LIST</h4>
+                    <p data-i18n="hts-sys2-d">Budget de départ de 10 000 $, primes de style et multiplicateur <em>Hype</em>, objectifs de <em>Shot List</em> bonus (ex. <em>Crossfire</em> +2 000 $, <em>Long Take</em> +1 500 $) et jauge de pellicule qui récompense la prise de risque.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">LogEJWeather</span>
+                    <h4 data-i18n="hts-sys3-t">ORAGE &amp; COUPURE DE COURANT</h4>
+                    <p data-i18n="hts-sys3-d">9 ouvertures de toit, 15 nappes de pluie, verrières brisées en direct à l'entrée des ennemis, 30 lampes qui vacillent puis basculent en veilleuse à 4 % avec 4 éclairages de secours rouges en vague 3.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">LogEJScene // LogEJRadio</span>
+                    <h4 data-i18n="hts-sys4-t">BRAQUAGE EN 3 ACTES &amp; TALKIE</h4>
+                    <p data-i18n="hts-sys4-d">Foreuse thermique sur le coffre (sabotable par les flics), transport et lancer physique des 4 sacs de butin vers la fourgonnette, file prioritaire radio (<em>Driver</em> / <em>Dispatch</em>) et fuite explosive sur autoroute.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREENSHOT GALLERY -->
+        <section class="project-section">
+            <span class="module-badge">GALERIE // CAPTURES IN-GAME</span>
+            <h3 class="section-title" data-i18n="hts-gallery-title">CAPTURES DU JEU</h3>
+            <p class="lead" data-i18n="hts-gallery-desc">Cliquez sur une capture pour l'agrandir.</p>
+            <div class="hts-gallery">
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/01_thermal_drill.jpg" alt="Perceuse thermique sur le coffre" loading="lazy">
+                    <figcaption data-i18n="hts-cap-1">01 // PERCEUSE THERMIQUE &amp; LIVE CUE</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/03_cut.jpg" alt="Déclenchement du CUT!" loading="lazy">
+                    <figcaption data-i18n="hts-cap-2">02 // DÉCLENCHEMENT DU « CUT! »</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/04_wireframe_set.jpg" alt="Transition wireframe des coulisses" loading="lazy">
+                    <figcaption data-i18n="hts-cap-3">03 // PLATEAU WIREFRAME &amp; SHADER HLSL</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/05_director_orders.jpg" alt="Menu d'ordres du réalisateur" loading="lazy">
+                    <figcaption data-i18n="hts-cap-4">04 // ORDRES DE RÉGIE &amp; SHOT LIST</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/06_director_view.jpg" alt="Placement de décor en vue grue" loading="lazy">
+                    <figcaption data-i18n="hts-cap-5">05 // VUE GRUE — DÉPLACEMENT DU DÉCOR</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/07_firefight.jpg" alt="Fusillade et gestion des sacs" loading="lazy">
+                    <figcaption data-i18n="hts-cap-6">06 // FUSILLADE &amp; MULTIPLICATEUR HYPE</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/09_hangar_blast.jpg" alt="Explosion du hangar" loading="lazy">
+                    <figcaption data-i18n="hts-cap-7">07 // EXPLOSION DU HANGAR</figcaption>
+                </figure>
+                <figure class="hts-shot">
+                    <img src="assets/hold_the_shot/10_car_chase.jpg" alt="Course-poursuite sur autoroute" loading="lazy">
+                    <figcaption data-i18n="hts-cap-8">08 // POURSUITE FINALE SOUS LA PLUIE</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ITCH CTA -->
+        <section class="project-section">
+            <span class="module-badge">BUILD PLAYABLE // WINDOWS</span>
+            <h3 class="section-title" data-i18n="hts-play-title">TESTER LE JEU</h3>
+            <p class="lead" data-i18n="hts-play-desc">
+                La build Windows complète issue de l'Epic MegaJam est disponible gratuitement sur itch.io (jouable au micro ou au clavier/souris).
+            </p>
+            <div class="project-cta">
+                <a href="https://bixboy1.itch.io/hold-the-shot" target="_blank" rel="noopener noreferrer" class="btn hologram-btn">
+                    <span class="btn-content" data-i18n="hts-btn-itch">JOUER SUR ITCH.IO ↗</span>
+                </a>
+                <a href="index.html#projects" class="btn hologram-btn">
+                    <span class="btn-content" data-i18n="nav-database">RETOUR BDD</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div class="hts-lightbox" id="hts-lightbox" role="dialog" aria-modal="true" aria-label="Capture agrandie">
+        <img src="" alt="">
+        <p></p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="transmission-panel project-footer">
+        <p>END OF TRANSMISSION // HOLD THE SHOT</p>
+        <a href="index.html#projects" class="hologram-link" data-i18n="nav-back">[ RETOUR À LA BASE ]</a>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/background.js"></script>
+    <script>
+        (function () {
+            const lb = document.getElementById('hts-lightbox');
+            if (!lb) return;
+            const lbImg = lb.querySelector('img');
+            const lbCap = lb.querySelector('p');
+            document.querySelectorAll('.hts-shot').forEach(fig => {
+                fig.addEventListener('click', () => {
+                    const img = fig.querySelector('img');
+                    const cap = fig.querySelector('figcaption');
+                    lbImg.src = img.src;
+                    lbImg.alt = img.alt;
+                    lbCap.textContent = cap ? cap.textContent : '';
+                    lb.classList.add('is-open');
+                });
+            });
+            lb.addEventListener('click', () => lb.classList.remove('is-open'));
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') lb.classList.remove('is-open');
+            });
+        })();
+    </script>
+</body>
+
+</html>

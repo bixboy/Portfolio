@@ -25,10 +25,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
 
+    <link rel="preload" as="image" href="assets/bg_orbital_fleet.jpg">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/intro.css">
+
+    <!-- INTRO: decided before first paint so the site never flashes under it (see js/intro.js) -->
+    <script>
+      (function () {
+        try {
+          var q = location.search;
+          var force = /[?&]intro(=|&|$)/.test(q) || /[?&]introDebug=/.test(q);
+          var skip = /[?&]nointro(=|&|$)/.test(q) ||
+            (!force && sessionStorage.getItem('sw-intro-v9')) ||
+            (!force && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+          if (skip)
+            return;
+          var html = document.documentElement;
+          html.classList.add('intro-pending');
+          // Safety net: if intro.js never runs, do not leave the visitor on a black screen.
+          setTimeout(function () {
+            if (!window.__introReady)
+              html.classList.remove('intro-pending');
+          }, 6000);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 
     <!-- i18n -->
@@ -37,6 +61,12 @@
 </head>
 
 <body>
+    <!-- STAR WARS HYPERSPACE INTRO OVERLAY (js/intro.js) -->
+    <div id="intro" role="dialog" aria-modal="true" aria-label="Introduction">
+        <div class="intro-hud" aria-hidden="true"></div>
+        <button class="intro-skip" type="button">PASSER ›</button>
+    </div>
+
     <!-- FX LAYERS -->
     <div class="scanlines"></div>
     <div class="vignette"></div>
@@ -73,6 +103,9 @@
                 <span class="status-item" data-i18n="status-unity">UNITY: ACTIVE</span>
             </div>
         </div>
+        <a href="#projects" class="hero-scroll-cue" aria-label="Explorer les projets">
+            <span></span>
+        </a>
     </header>
 
     <!-- NAVIGATION -->
@@ -80,139 +113,24 @@
         <div class="container nav-container">
             <div class="nav-brand">PL-88</div>
             <ul class="nav-links">
-                <li><a href="#about" class="nav-item" data-i18n="nav-about">PROFIL</a></li>
                 <li><a href="#projects" class="nav-item" data-i18n="nav-projects">PROJETS</a></li>
-                <li><a href="#plugins" class="nav-item" data-i18n="nav-plugins">PLUGINS</a></li>
                 <li><a href="#pro-software" class="nav-item" data-i18n="nav-software">LOGICIELS PRO</a></li>
-                <li><a href="#bix-engine" class="nav-item" data-i18n="nav-engine">BIX ENGINE</a></li>
+                <li><a href="#plugins" class="nav-item" data-i18n="nav-plugins">PLUGINS</a></li>
+                <li><a href="#bix-engine" class="nav-item" data-i18n="nav-engine">AI ENGINE</a></li>
+                <li><a href="#about" class="nav-item" data-i18n="nav-about">PROFIL</a></li>
                 <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
-        <!-- ABOUT SECTION -->
-        <section id="about" class="section-padding">
-            <div class="container">
-                <h3 class="section-title" data-i18n="section-about">PROFIL OPÉRATEUR</h3>
-                <div class="section-energy-line"></div>
-
-                <div class="about-grid">
-                    <div class="about-bio">
-                        <p data-i18n="about-p1">
-                            Game programmer spécialisé en <strong>C++ et Unreal Engine 5</strong>. Ce qui me motive :
-                            les systèmes de fond — <strong>réplication réseau</strong>, prédiction client, architecture
-                            gameplay <strong>data-driven</strong>, outils éditeur — ceux qui permettent à une équipe de
-                            produire du contenu sans tout recoder.
-                        </p>
-                        <p data-i18n="about-p2">
-                            J'ai construit un écosystème de <strong>plus de 14 plugins UE5</strong> (véhicules, RTS / Game
-                            Master, UI, audio, réseau) que je réutilise dans mes jeux, et je développe en parallèle
-                            <strong>Kotyx</strong>, une application mobile Qt / C++ que je commercialise via ma
-                            micro-entreprise Rollon Systems.
-                        </p>
-
-                        <ul class="timeline">
-                            <li>
-                                <span class="timeline-date">2022 — 2027</span>
-                                <span class="timeline-title" data-i18n="tl-iim-title">Master Game Programming — IIM Paris</span>
-                                <span class="timeline-desc" data-i18n="tl-iim-desc">C++, C#, moteurs (Unreal, Unity, moteur maison), algorithmique, mathématiques.</span>
-                            </li>
-                            <li>
-                                <span class="timeline-date">2026</span>
-                                <span class="timeline-title" data-i18n="tl-kotyx-title">Fondateur — Rollon Systems (Kotyx)</span>
-                                <span class="timeline-desc" data-i18n="tl-kotyx-desc">App Qt / C++ Android, serveur de licences Node.js / PostgreSQL, abonnements Mollie.</span>
-                            </li>
-                            <li>
-                                <span class="timeline-date">2025</span>
-                                <span class="timeline-title" data-i18n="tl-gdc-title">Synaptik! — sélectionné pour la GDC (San Francisco)</span>
-                                <span class="timeline-desc" data-i18n="tl-gdc-desc">Jeu Unity 6 en équipe de 8 : système multi-caméras et contrôleur custom.</span>
-                            </li>
-                            <li>
-                                <span class="timeline-date">2024 — ...</span>
-                                <span class="timeline-title" data-i18n="tl-sovereign-title">Sovereign Republic — jeu multijoueur 100+ joueurs</span>
-                                <span class="timeline-desc" data-i18n="tl-sovereign-desc">UE5 100% C++, développé à deux en full remote.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <div class="stat-tiles">
-                            <div class="stat-tile">
-                                <span class="stat-tile-value">150k+</span>
-                                <span class="stat-tile-label" data-i18n="stat-loc">lignes de C++ dans mes plugins UE5</span>
-                            </div>
-                            <div class="stat-tile">
-                                <span class="stat-tile-value">14</span>
-                                <span class="stat-tile-label" data-i18n="stat-plugins">plugins Unreal Engine modulaires</span>
-                            </div>
-                            <div class="stat-tile">
-                                <span class="stat-tile-value">4</span>
-                                <span class="stat-tile-label" data-i18n="stat-engines">moteurs : UE5, Unity, Qt 6 et un moteur maison</span>
-                            </div>
-                            <div class="stat-tile">
-                                <span class="stat-tile-value">1</span>
-                                <span class="stat-tile-label" data-i18n="stat-product">produit commercial en production (Kotyx)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-grid">
-                    <div class="skill-group">
-                        <h4 data-i18n="skills-lang">LANGAGES</h4>
-                        <div class="chips">
-                            <span class="chip is-strong">C++20</span>
-                            <span class="chip is-strong">C#</span>
-                            <span class="chip">QML</span>
-                            <span class="chip">JavaScript / Node.js</span>
-                            <span class="chip">HLSL</span>
-                            <span class="chip">SQL</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4 data-i18n="skills-engines">MOTEURS & FRAMEWORKS</h4>
-                        <div class="chips">
-                            <span class="chip is-strong">Unreal Engine 5</span>
-                            <span class="chip is-strong">Unity 6</span>
-                            <span class="chip">Qt 6</span>
-                            <span class="chip">SFML</span>
-                            <span class="chip">Box2D</span>
-                            <span class="chip">ImGui</span>
-                            <span class="chip">EnTT</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4 data-i18n="skills-net">RÉSEAU & BACKEND</h4>
-                        <div class="chips">
-                            <span class="chip is-strong">UE5 Replication</span>
-                            <span class="chip">Client Prediction</span>
-                            <span class="chip">Dedicated Server</span>
-                            <span class="chip">ENet / UDP</span>
-                            <span class="chip">FlatBuffers</span>
-                            <span class="chip">Steam Sessions</span>
-                            <span class="chip">PostgreSQL / SQLite</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4 data-i18n="skills-tools">OUTILS & MÉTHODES</h4>
-                        <div class="chips">
-                            <span class="chip">Git</span>
-                            <span class="chip">Rider / Visual Studio</span>
-                            <span class="chip">xmake</span>
-                            <span class="chip">Editor Tooling</span>
-                            <span class="chip">Data Assets</span>
-                            <span class="chip">Automated Tests</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PROJECTS SECTION -->
+    <main class="content-focus">
+        <!-- 01. PROJECTS SECTION (Flagship Bento + Filterable Archive) -->
         <section id="projects" class="section-padding">
             <div class="container">
-                <h3 class="section-title"><span data-i18n="section-projects">BASE DE DONNÉES</span> <span class="blinking-cursor">_</span></h3>
+                <div class="section-head">
+                    <span class="section-eyebrow">01 // GAMEPLAY &amp; MULTIJOUEUR</span>
+                    <h3 class="section-title"><span data-i18n="section-projects">BASE DE DONNÉES</span> <span class="blinking-cursor">_</span></h3>
+                </div>
                 <div class="section-energy-line"></div>
 
                 <div class="filter-bar" data-target="project-grid" role="toolbar" aria-label="Filtres">
@@ -223,9 +141,35 @@
                     <button type="button" class="filter-btn" data-filter="multi" aria-pressed="false" data-i18n="filter-multi">MULTIJOUEUR</button>
                 </div>
 
-                <div class="project-grid" id="project-grid">
-                    <!-- HEIST PROJECT -->
-                    <article class="data-card hologram-card" data-cat="unreal multi" style="--accent: #f5c542;">
+                <div class="project-grid project-grid--bento" id="project-grid">
+                    <!-- HERO FLAGSHIP: AI ENGINE (CUSTOM 3D ENGINE IN ACTIVE DEV) -->
+                    <article class="data-card data-card--hero hologram-card" data-cat="cpp" style="--accent: #ff4d2e;">
+                        <div class="card-visual">
+                            <video autoplay muted loop playsinline preload="metadata" poster="assets/ai_engine/editor_sky.png" aria-label="AI Engine — Démo temps réel sur Vulkan">
+                                <source src="assets/ai_engine/ai_engine_showcase.mp4" type="video/mp4">
+                            </video>
+                            <span class="card-flag" data-i18n="flag-dev">EN DÉVELOPPEMENT</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="hero-card-kicker" data-i18n="aie-card-kicker">PROJET PHARE // MOTEUR 3D MAISON</span>
+                            <h4 class="project-title">AI ENGINE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">RUST 2024 / WGPU</span>
+                                <span class="tag tag-lang">162K+ LOC · 15 CRATES</span>
+                                <span class="tag tag-role">SOLO · EN DEV</span>
+                            </div>
+                            <p class="description" data-i18n="aie-card-desc">Moteur de jeu 3D écrit à partir de zéro en Rust 2024 et wgpu, conçu dès le jour 1 pour être piloté et vérifié par des agents IA : CLI JSON stricte, simulation ECS déterministe (xxh3), PBR + 10k lumières en grappes + 1M d'instances/foules GPU, physique Rapier, décodeurs audio FLAC/Vorbis/MP3 maison, scripting Luau et éditeur visuel.</p>
+                            <div class="hero-card-metrics">
+                                <span><strong>0.94 ms</strong> · 1M instances GPU</span>
+                                <span><strong>1.61 ms</strong> · 10k lumières</span>
+                                <span><strong>84</strong> ADRs</span>
+                            </div>
+                            <a href="bix_engine.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <!-- FLAGSHIP 1: HEIST PROJECT -->
+                    <article class="data-card data-card--featured hologram-card" data-cat="unreal multi" style="--accent: #f5c542;">
                         <div class="card-visual">
                             <img src="assets/heist/heist_cover.jpg" alt="Heist Project — gameplay en coopération" loading="lazy">
                             <span class="card-flag" data-i18n="flag-dev">EN DÉVELOPPEMENT</span>
@@ -242,8 +186,8 @@
                         </div>
                     </article>
 
-                    <!-- SOVEREIGN REPUBLIC -->
-                    <article class="data-card hologram-card" data-cat="unreal multi" style="--accent: #00e5ff;">
+                    <!-- FLAGSHIP 2: SOVEREIGN REPUBLIC -->
+                    <article class="data-card data-card--featured hologram-card" data-cat="unreal multi" style="--accent: #00e5ff;">
                         <div class="card-visual">
                             <img src="assets/sovereign_republic.jpg" alt="Sovereign Republic" loading="lazy">
                             <span class="card-flag" data-i18n="flag-dev">EN DÉVELOPPEMENT</span>
@@ -257,6 +201,24 @@
                             </div>
                             <p class="description" data-i18n="sovereign-desc">Sandbox militaire & RP Star Wars multijoueur (100+ joueurs, style GMod SWRP / Squad). 100% C++, serveur dédié et écosystème de plugins sur-mesure.</p>
                             <a href="sovereign_republic.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <!-- HOLD THE SHOT (EPIC MEGAJAM) -->
+                    <article class="data-card hologram-card" data-cat="unreal cpp" style="--accent: #f59e0b;">
+                        <div class="card-visual">
+                            <img src="assets/hold_the_shot/cover.png" alt="Hold the Shot — Epic MegaJam" loading="lazy">
+                            <span class="card-flag is-live" data-i18n="flag-jam">EPIC MEGAJAM</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">HOLD THE SHOT</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5.9</span>
+                                <span class="tag tag-lang">C++ / HLSL</span>
+                                <span class="tag tag-role">GAME JAM</span>
+                            </div>
+                            <p class="description" data-i18n="hts-desc">FPS / Réalisateur hybride créé pour l'Epic MegaJam (« Director's Cut »). Criez « CUT! » au micro pour figer le braquage, basculer le plateau en wireframe, diriger l'équipe technique en vue grue et relancer sur « ACTION! ».</p>
+                            <a href="hold_the_shot.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
                         </div>
                     </article>
 
@@ -349,23 +311,6 @@
                         </div>
                     </article>
 
-                    <!-- BIX ENGINE -->
-                    <article class="data-card hologram-card" data-cat="cpp" style="--accent: #ff003c;">
-                        <div class="card-visual">
-                            <img src="assets/covers/bix_engine.png" alt="Bix Engine" loading="lazy">
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">BIX ENGINE</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">CUSTOM</span>
-                                <span class="tag tag-lang">C++ 20</span>
-                                <span class="tag tag-role">SOLO</span>
-                            </div>
-                            <p class="description" data-i18n="bix-desc">Moteur de jeu 2D Custom. Box2D, ImGui et Éditeur Visuel complet.</p>
-                            <a href="bix_engine.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
                     <!-- PROJET ZOMBIE -->
                     <article class="data-card hologram-card" data-cat="unreal">
                         <div class="card-visual">
@@ -437,159 +382,19 @@
             </div>
         </section>
 
-        <!-- PLUGINS SECTION -->
-        <section id="plugins" class="section-padding">
-            <div class="container">
-                <h3 class="section-title" data-i18n="section-plugins">EXTENSIONS SYSTÈME (PLUGINS)</h3>
-                <div class="section-energy-line"></div>
-                <p class="section-intro mb-5" data-i18n="plugins-intro">Des modules C++ indépendants, documentés et réutilisés d'un projet à l'autre : Sovereign Republic, Heist Project et mes autres jeux UE5 tournent sur cette base commune.</p>
-
-                <div class="project-grid">
-                    <article class="data-card hologram-card" style="--accent: #00e5ff;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">JPTR</span>
-                                <span class="img-sub">~43K LOC</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">JUPITER PLUGIN</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">RTS / GAME MASTER</span>
-                            </div>
-                            <p class="description" data-i18n="jupiter-desc">Suite d'animation temps réel & Maître de Jeu (type Zeus d'Arma 3). Manipulation du monde, spawn d'entités et contrôle du champ de bataille.</p>
-                            <a href="jupiter.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card" style="--accent: #a855f7;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">STLR</span>
-                                <span class="img-sub">~55K LOC</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">STELLAR PLUGIN</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">VEHICLES</span>
-                            </div>
-                            <p class="description" data-i18n="stellar-desc">Framework de locomotion spatiale. Système complet de véhicules multi-crew et tourelles.</p>
-                            <a href="stellar.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card" style="--accent: #ff0066;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">NEXUS</span>
-                                <span class="img-sub">STEAM // SESSIONS</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">NEXUS ONLINE</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">NETWORKING</span>
-                            </div>
-                            <p class="description" data-i18n="nexus-desc">Backend multijoueur. Sessions, Host Migration, et Chat System sécurisé.</p>
-                            <a href="nexus.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card" style="--accent: #34d399;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">SYNC</span>
-                                <span class="img-sub">HERMITE // PREDICTION</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">SMOOTH NETWORK SYNC</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">NETWORKING</span>
-                            </div>
-                            <p class="description" data-i18n="netsync-desc">Réplication de mouvement avancée : interpolation Hermite, prédiction client et compression réseau custom.</p>
-                            <a href="smooth_network_sync.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card" style="--accent: #22d3ee;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">PRSM</span>
-                                <span class="img-sub">ZERO-TICK UI</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">PRISM UI</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">UI FRAMEWORK</span>
-                            </div>
-                            <p class="description" data-i18n="prismui-desc">Framework UI C++ "zero-tick" pour UMG. Theming par tokens sémantiques, widget pooling et builder fluide.</p>
-                            <a href="prism_ui.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card" style="--accent: #f59e0b;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">BLDR</span>
-                                <span class="img-sub">FOB // SNAPPING</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">STELLAR BUILDER</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">MODULE</span>
-                            </div>
-                            <p class="description" data-i18n="builder-desc">Système de construction en vue FPS & bases avancées (FOB). Menus radiaux (Prism UI), prévisualisation Ghost, snapping dynamique et optimisation HISM (Jupiter).</p>
-                            <a href="stellar_builder.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-
-                    <article class="data-card hologram-card" style="--accent: #0099ff;">
-                        <div class="card-visual">
-                            <div class="placeholder-img">
-                                <span class="img-label">AUDIO</span>
-                                <span class="img-sub">METASOUND // POOLING</span>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="project-title">STELLAR AUDIO</h4>
-                            <div class="tech-tags">
-                                <span class="tag tag-engine">UNREAL 5</span>
-                                <span class="tag tag-lang">C++</span>
-                                <span class="tag tag-role">MODULE</span>
-                            </div>
-                            <p class="description" data-i18n="stellaraudio-desc">Sous-système audio multijoueur avec pooling de composants, réplication par Multicast RPC et streaming média.</p>
-                            <a href="stellar_audio.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- PRO SOFTWARE SECTION -->
+        <!-- 02. PRO SOFTWARE SECTION (Elevated — commercial SaaS & Unreal tooling!) -->
         <section id="pro-software" class="section-padding">
             <div class="container">
-                <h3 class="section-title" data-i18n="section-software">LOGICIELS PROFESSIONNELS</h3>
+                <div class="section-head">
+                    <span class="section-eyebrow">02 // PRODUITS &amp; OUTILS C++ / QT 6</span>
+                    <h3 class="section-title" data-i18n="section-software">LOGICIELS PROFESSIONNELS</h3>
+                </div>
                 <div class="section-energy-line"></div>
-                <div class="project-grid" style="grid-template-columns: 1fr;">
-                    <article class="data-card data-card--wide hologram-card" style="--accent: #4facfe;">
-                        <div class="card-visual" style="background: radial-gradient(circle at 50% 45%, #10283a 0%, #000 75%);">
-                            <img src="assets/kotyx/kotyx-logo.png" alt="Kotyx" loading="lazy" style="object-fit: contain; padding: 18px;">
+
+                <div class="software-grid">
+                    <article class="data-card software-card hologram-card" style="--accent: #4facfe;">
+                        <div class="card-visual software-visual" style="background: radial-gradient(circle at 50% 45%, #10283a 0%, #05080f 78%);">
+                            <img src="assets/kotyx/kotyx-logo.png" alt="Kotyx" loading="lazy">
                             <span class="card-flag is-live" data-i18n="flag-live">EN PRODUCTION</span>
                         </div>
                         <div class="card-content">
@@ -604,9 +409,9 @@
                         </div>
                     </article>
 
-                    <article class="data-card data-card--wide hologram-card" style="--accent: #4c8dff;">
-                        <div class="card-visual" style="background: radial-gradient(circle at 50% 45%, #161d38 0%, #090c14 75%);">
-                            <img src="assets/kotyx_git/kotyx-git-logo.svg" alt="Kotyx Git" loading="lazy" style="object-fit: contain; padding: 28px; filter: drop-shadow(0 0 20px rgba(76, 141, 255, 0.35));">
+                    <article class="data-card software-card hologram-card" style="--accent: #4c8dff;">
+                        <div class="card-visual software-visual" style="background: radial-gradient(circle at 50% 45%, #161d38 0%, #060911 78%);">
+                            <img src="assets/kotyx_git/kotyx-git-logo.svg" alt="Kotyx Git" loading="lazy" style="filter: drop-shadow(0 0 20px rgba(76, 141, 255, 0.35));">
                             <span class="card-flag is-live" data-i18n="kgit-card-flag">OUTIL INTERNE</span>
                         </div>
                         <div class="card-content">
@@ -624,33 +429,292 @@
             </div>
         </section>
 
-        <!-- REACTOR SECTION -->
+        <!-- 03. PLUGINS SECTION (Compact Technical SDK Module Cards) -->
+        <section id="plugins" class="section-padding">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-eyebrow">03 // ARCHITECTURE MODULAIRE UNREAL ENGINE 5</span>
+                    <h3 class="section-title" data-i18n="section-plugins">EXTENSIONS SYSTÈME (PLUGINS)</h3>
+                </div>
+                <div class="section-energy-line"></div>
+                <p class="section-intro" data-i18n="plugins-intro">Des modules C++ indépendants, documentés et réutilisés d'un projet à l'autre : Sovereign Republic, Heist Project et mes autres jeux UE5 tournent sur cette base commune.</p>
+
+                <div class="plugin-grid">
+                    <article class="data-card plugin-card hologram-card" style="--accent: #00e5ff;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">JPTR</span>
+                            <span class="plugin-metric">~43K LOC</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">JUPITER PLUGIN</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">RTS / GAME MASTER</span>
+                            </div>
+                            <p class="description" data-i18n="jupiter-desc">Suite d'animation temps réel & Maître de Jeu (type Zeus d'Arma 3). Manipulation du monde, spawn d'entités et contrôle du champ de bataille.</p>
+                            <a href="jupiter.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card plugin-card hologram-card" style="--accent: #a855f7;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">STLR</span>
+                            <span class="plugin-metric">~55K LOC</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">STELLAR PLUGIN</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">VEHICLES</span>
+                            </div>
+                            <p class="description" data-i18n="stellar-desc">Framework de locomotion spatiale. Système complet de véhicules multi-crew et tourelles.</p>
+                            <a href="stellar.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card plugin-card hologram-card" style="--accent: #ff0066;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">NEXUS</span>
+                            <span class="plugin-metric">STEAM // SESSIONS</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">NEXUS ONLINE</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">NETWORKING</span>
+                            </div>
+                            <p class="description" data-i18n="nexus-desc">Backend multijoueur. Sessions, Host Migration, et Chat System sécurisé.</p>
+                            <a href="nexus.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card plugin-card hologram-card" style="--accent: #34d399;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">SYNC</span>
+                            <span class="plugin-metric">HERMITE // PREDICTION</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">SMOOTH NETWORK SYNC</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">NETWORKING</span>
+                            </div>
+                            <p class="description" data-i18n="netsync-desc">Réplication de mouvement avancée : interpolation Hermite, prédiction client et compression réseau custom.</p>
+                            <a href="smooth_network_sync.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card plugin-card hologram-card" style="--accent: #22d3ee;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">PRSM</span>
+                            <span class="plugin-metric">ZERO-TICK UI</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">PRISM UI</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">UI FRAMEWORK</span>
+                            </div>
+                            <p class="description" data-i18n="prismui-desc">Framework UI C++ "zero-tick" pour UMG. Theming par tokens sémantiques, widget pooling et builder fluide.</p>
+                            <a href="prism_ui.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card plugin-card hologram-card" style="--accent: #f59e0b;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">BLDR</span>
+                            <span class="plugin-metric">FOB // SNAPPING</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">STELLAR BUILDER</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">MODULE</span>
+                            </div>
+                            <p class="description" data-i18n="builder-desc">Système de construction en vue FPS & bases avancées (FOB). Menus radiaux (Prism UI), prévisualisation Ghost, snapping dynamique et optimisation HISM (Jupiter).</p>
+                            <a href="stellar_builder.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+
+                    <article class="data-card plugin-card hologram-card" style="--accent: #0099ff;">
+                        <div class="plugin-head">
+                            <span class="plugin-code">AUDIO</span>
+                            <span class="plugin-metric">METASOUND // POOLING</span>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="project-title">STELLAR AUDIO</h4>
+                            <div class="tech-tags">
+                                <span class="tag tag-engine">UNREAL 5</span>
+                                <span class="tag tag-lang">C++</span>
+                                <span class="tag tag-role">MODULE</span>
+                            </div>
+                            <p class="description" data-i18n="stellaraudio-desc">Sous-système audio multijoueur avec pooling de composants, réplication par Multicast RPC et streaming média.</p>
+                            <a href="stellar_audio.html" class="card-link" data-i18n="btn-access">ACCÉDER AUX DONNÉES >></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. REACTOR SECTION (AI ENGINE — FEATURED SHOWCASE) -->
         <section id="bix-engine" class="section-padding reactor-core">
             <div class="container">
-                <div class="engine-layout">
-                    <div class="engine-info">
-                        <h3 class="section-title text-red" data-i18n="section-engine">CŒUR DU RÉACTEUR : BIX ENGINE</h3>
-                        <div class="section-energy-line" style="background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.15), rgba(255, 0, 60, 0.5), rgba(255, 0, 60, 0.15), transparent);"></div>
-                        <div class="engine-specs">
-                            <p class="tech-text" data-i18n="engine-desc">Moteur de jeu 2D/3D écrit à partir de zéro en C++ moderne.</p>
-                            <ul class="spec-list">
-                                <li data-i18n="engine-spec-1">> Architecture Entity-Component (Object -> Actor)</li>
-                                <li data-i18n="engine-spec-2">> Suite d'outils d'édition (ImGui Docking)</li>
-                                <li data-i18n="engine-spec-3">> Physique Box2D Intégrée</li>
-                                <li data-i18n="engine-spec-4">> Pipeline de Build & Cooking d'Assets</li>
-                            </ul>
-                            <a href="bix_engine.html" class="btn btn-danger hologram-btn mt-4">
-                                <span class="btn-content" data-i18n="btn-engine-analysis">ANALYSE DU MOTEUR</span>
-                            </a>
+                <div class="engine-showcase">
+                    <div class="engine-layout">
+                        <div class="engine-info">
+                            <span class="section-eyebrow section-eyebrow--red" data-i18n="aie-reactor-eyebrow">04 // MOTEUR 3D MAISON — EN DÉVELOPPEMENT ACTIF</span>
+                            <h3 class="section-title text-red" data-i18n="section-engine">CŒUR DU RÉACTEUR : AI ENGINE</h3>
+                            <div class="section-energy-line section-energy-line--red"></div>
+                            <div class="engine-specs">
+                                <p class="tech-text" data-i18n="engine-desc">Moteur de jeu 3D écrit à partir de zéro en Rust 2024 et wgpu, conçu pour les agents IA et la simulation déterministe (162k+ lignes, 15 crates, 84 ADRs — en développement actif).</p>
+                                <ul class="spec-list">
+                                    <li data-i18n="engine-spec-1">> Rendu wgpu/WGSL : PBR HDR, CSM, 10k lumières en grappes, TAAU, culling &amp; foules GPU (1M)</li>
+                                    <li data-i18n="engine-spec-2">> ECS hecs déterministe (xxh3), physique Rapier3D, véhicules, déformables &amp; destruction</li>
+                                    <li data-i18n="engine-spec-3">> Moteur audio bit-exact avec décodeurs FLAC, Vorbis &amp; MP3 écrits maison + streaming disque</li>
+                                    <li data-i18n="engine-spec-4">> Pilotage CLI JSON strict (aie), scripting Luau &amp; éditeur visuel hot-reload (aie-editor)</li>
+                                </ul>
+                                <a href="bix_engine.html" class="btn btn-secondary hologram-btn mt-4">
+                                    <span class="btn-content" data-i18n="btn-engine-analysis">ANALYSE DU MOTEUR</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="engine-visual">
+                            <div class="schematic-anim">
+                                <div class="reactor-ring ring-outer"></div>
+                                <div class="reactor-ring ring-mid"></div>
+                                <div class="reactor-ring ring-inner"></div>
+                                <div class="reactor-core-orb"></div>
+                                <div class="reactor-particles"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="engine-visual">
-                        <div class="schematic-anim">
-                            <div class="reactor-ring ring-outer"></div>
-                            <div class="reactor-ring ring-mid"></div>
-                            <div class="reactor-ring ring-inner"></div>
-                            <div class="reactor-core-orb"></div>
-                            <div class="reactor-particles"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. ABOUT / PROFILE SECTION -->
+        <section id="about" class="section-padding">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-eyebrow">05 // PARCOURS &amp; COMPÉTENCES</span>
+                    <h3 class="section-title" data-i18n="section-about">PROFIL OPÉRATEUR</h3>
+                </div>
+                <div class="section-energy-line"></div>
+
+                <div class="about-grid">
+                    <div class="about-bio glass-panel">
+                        <p data-i18n="about-p1">
+                            Game programmer spécialisé en <strong>C++ et Unreal Engine 5</strong>. Ce qui me motive :
+                            les systèmes de fond — <strong>réplication réseau</strong>, prédiction client, architecture
+                            gameplay <strong>data-driven</strong>, outils éditeur — ceux qui permettent à une équipe de
+                            produire du contenu sans tout recoder.
+                        </p>
+                        <p data-i18n="about-p2">
+                            J'ai construit un écosystème de <strong>plus de 14 plugins UE5</strong> (véhicules, RTS / Game
+                            Master, UI, audio, réseau) que je réutilise dans mes jeux, et je développe en parallèle
+                            <strong>Kotyx</strong>, une application mobile Qt / C++ que je commercialise via ma
+                            micro-entreprise Rollon Systems.
+                        </p>
+
+                        <ul class="timeline">
+                            <li>
+                                <span class="timeline-date">2022 — 2027</span>
+                                <span class="timeline-title" data-i18n="tl-iim-title">Master Game Programming — IIM Paris</span>
+                                <span class="timeline-desc" data-i18n="tl-iim-desc">C++, C#, moteurs (Unreal, Unity, moteur maison), algorithmique, mathématiques.</span>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2026</span>
+                                <span class="timeline-title" data-i18n="tl-kotyx-title">Fondateur — Rollon Systems (Kotyx)</span>
+                                <span class="timeline-desc" data-i18n="tl-kotyx-desc">App Qt / C++ Android, serveur de licences Node.js / PostgreSQL, abonnements Mollie.</span>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2025</span>
+                                <span class="timeline-title" data-i18n="tl-gdc-title">Synaptik! — sélectionné pour la GDC (San Francisco)</span>
+                                <span class="timeline-desc" data-i18n="tl-gdc-desc">Jeu Unity 6 en équipe de 8 : système multi-caméras et contrôleur custom.</span>
+                            </li>
+                            <li>
+                                <span class="timeline-date">2024 — ...</span>
+                                <span class="timeline-title" data-i18n="tl-sovereign-title">Sovereign Republic — jeu multijoueur 100+ joueurs</span>
+                                <span class="timeline-desc" data-i18n="tl-sovereign-desc">UE5 100% C++, développé à deux en full remote.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="about-side">
+                        <div class="stat-tiles">
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">150k+</span>
+                                <span class="stat-tile-label" data-i18n="stat-loc">lignes de C++ dans mes plugins UE5</span>
+                            </div>
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">14</span>
+                                <span class="stat-tile-label" data-i18n="stat-plugins">plugins Unreal Engine modulaires</span>
+                            </div>
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">4</span>
+                                <span class="stat-tile-label" data-i18n="stat-engines">moteurs : UE5, Unity, Qt 6 et un moteur maison</span>
+                            </div>
+                            <div class="stat-tile">
+                                <span class="stat-tile-value">1</span>
+                                <span class="stat-tile-label" data-i18n="stat-product">produit commercial en production (Kotyx)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-grid">
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-lang">LANGAGES</h4>
+                        <div class="chips">
+                            <span class="chip is-strong">C++20</span>
+                            <span class="chip is-strong">Rust 2024</span>
+                            <span class="chip is-strong">C#</span>
+                            <span class="chip">Luau</span>
+                            <span class="chip">QML</span>
+                            <span class="chip">JavaScript / Node.js</span>
+                            <span class="chip">HLSL / WGSL</span>
+                            <span class="chip">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-engines">MOTEURS & FRAMEWORKS</h4>
+                        <div class="chips">
+                            <span class="chip is-strong">Unreal Engine 5</span>
+                            <span class="chip is-strong">wgpu / Vulkan</span>
+                            <span class="chip is-strong">Unity 6</span>
+                            <span class="chip">Qt 6</span>
+                            <span class="chip">Rapier3D / hecs</span>
+                            <span class="chip">ImGui / egui</span>
+                            <span class="chip">EnTT</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-net">RÉSEAU & BACKEND</h4>
+                        <div class="chips">
+                            <span class="chip is-strong">UE5 Replication</span>
+                            <span class="chip">Client Prediction</span>
+                            <span class="chip">Dedicated Server</span>
+                            <span class="chip">ENet / UDP</span>
+                            <span class="chip">FlatBuffers</span>
+                            <span class="chip">Steam Sessions</span>
+                            <span class="chip">PostgreSQL / SQLite</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-i18n="skills-tools">OUTILS & MÉTHODES</h4>
+                        <div class="chips">
+                            <span class="chip">Git</span>
+                            <span class="chip">Rider / Visual Studio</span>
+                            <span class="chip">xmake</span>
+                            <span class="chip">Editor Tooling</span>
+                            <span class="chip">Data Assets</span>
+                            <span class="chip">Automated Tests</span>
                         </div>
                     </div>
                 </div>
@@ -662,9 +726,9 @@
     <footer id="contact" class="transmission-panel">
         <div class="container text-center">
             <h3 class="section-title" data-i18n="footer-title">CANAL DE TRANSMISSION</h3>
-            <p data-i18n="footer-text">Fréquence ouverte pour opportunités de missions.</p>
+            <p class="footer-lead" data-i18n="footer-text">Fréquence ouverte pour opportunités de missions.</p>
 
-            <div style="margin: 1.5rem 0;">
+            <div class="footer-cta">
                 <a href="contact.html" class="btn btn-primary hologram-btn">
                     <span class="btn-content" data-i18n="footer-contact-btn">ACCÉDER AU TERMINAL DE CONTACT & CV &gt;&gt;</span>
                     <span class="btn-glitch"></span>
@@ -674,6 +738,7 @@
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/pierre-lamare-931b1a1b8/" target="_blank" rel="noopener noreferrer" class="hologram-link">[ LINKEDIN ]</a>
                 <a href="mailto:Pierrelamare62@gmail.com" class="hologram-link">[ EMAIL ]</a>
+                <a href="?intro" class="hologram-link">[ ↻ REPLAY INTRO ]</a>
             </div>
 
             <div class="footer-meta">
@@ -684,6 +749,8 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/intro.js"></script>
 </body>
 
 </html>

@@ -14,47 +14,359 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bix Engine | System Core | Pierre Lamare</title>
+    <title>AI Engine | Moteur 3D Rust & wgpu | Pierre Lamare</title>
+    <meta name="description" content="AI Engine (en développement actif) : moteur de jeu 3D écrit à partir de zéro en Rust 2024 et wgpu, conçu pour être piloté par des agents IA — 162k LOC, 15 crates, rendu PBR, foules GPU 1M, physique Rapier déterministe, audio FLAC/Vorbis/MP3 maison et éditeur visuel.">
+
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/bix_engine.css">
-    
+    <link rel="stylesheet" href="css/project.css">
+
     <!-- i18n -->
     <script src="js/translations.js"></script>
     <script src="js/i18n.js"></script>
+
+    <style>
+        .aie-dev-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.15rem 1.35rem;
+            margin-bottom: 3rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 12%, rgba(7, 11, 20, 0.92)), rgba(7, 11, 20, 0.88));
+        }
+
+        .aie-dev-dot {
+            flex: 0 0 auto;
+            width: 10px;
+            height: 10px;
+            margin-top: 0.45rem;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 12px var(--accent);
+            animation: blink 1.8s infinite;
+        }
+
+        .aie-dev-banner strong {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .aie-dev-banner p {
+            margin: 0;
+            color: #cfd8e3;
+            font-size: 0.94rem;
+            line-height: 1.6;
+        }
+
+        .aie-video-frame {
+            position: relative;
+            margin-top: 1.4rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #04070d;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.72), 0 0 32px color-mix(in srgb, var(--accent) 16%, transparent);
+        }
+
+        .aie-video-frame video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #04070d;
+            object-fit: cover;
+        }
+
+        .aie-video-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            padding: 0.7rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(6, 10, 18, 0.94);
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.08em;
+            color: #9fb2c7;
+        }
+
+        .aie-video-bar .aie-live-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .aie-video-bar .aie-live-pill::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            animation: blink 1.6s infinite;
+        }
+
+        .aie-gif-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 780px) {
+            .aie-gif-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .aie-bench-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .aie-bench-tile {
+            background: rgba(6, 10, 18, 0.86);
+            border: 1px solid color-mix(in srgb, var(--accent-2) 26%, transparent);
+            border-radius: 8px;
+            padding: 1.25rem 1.2rem;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .aie-bench-tile:hover {
+            border-color: var(--accent-2);
+            transform: translateY(-2px);
+        }
+
+        .aie-bench-scenario {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            color: var(--accent-2);
+            margin-bottom: 0.4rem;
+        }
+
+        .aie-bench-val {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.65rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.15;
+            text-shadow: 0 0 14px color-mix(in srgb, var(--accent) 40%, transparent);
+        }
+
+        .aie-bench-desc {
+            display: block;
+            margin-top: 0.4rem;
+            font-size: 0.86rem;
+            color: #9cb0c4;
+            line-height: 1.45;
+        }
+
+        .aie-layer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.25rem;
+            font-size: 0.92rem;
+            background: rgba(6, 10, 18, 0.84);
+            border: 1px solid rgba(148, 185, 220, 0.16);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .aie-layer-table th,
+        .aie-layer-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .aie-layer-table th {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            background: rgba(255, 77, 46, 0.08);
+        }
+
+        .aie-layer-table td:first-child {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--accent-2);
+            white-space: nowrap;
+        }
+
+        .aie-layer-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .aie-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .aie-shot {
+            margin: 0;
+            border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(5, 9, 16, 0.9);
+            cursor: zoom-in;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .aie-shot:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6), 0 0 22px color-mix(in srgb, var(--accent) 18%, transparent);
+        }
+
+        .aie-shot img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #04070d;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .aie-shot:hover img {
+            transform: scale(1.03);
+        }
+
+        .aie-shot figcaption {
+            padding: 0.75rem 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.86rem;
+            color: #b8c6d4;
+            line-height: 1.45;
+        }
+
+        .aie-shot figcaption strong {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.2rem;
+        }
+
+        .aie-roadmap {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .aie-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 2rem;
+            background: rgba(3, 6, 12, 0.92);
+            backdrop-filter: blur(10px);
+            cursor: zoom-out;
+        }
+
+        .aie-lightbox.is-open {
+            display: flex;
+        }
+
+        .aie-lightbox img {
+            max-width: min(94vw, 1440px);
+            max-height: 82vh;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
+        }
+
+        .aie-lightbox p {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            text-align: center;
+            max-width: 900px;
+        }
+
+        @media (max-width: 780px) {
+            .aie-roadmap {
+                grid-template-columns: 1fr;
+            }
+            .aie-layer-table th:nth-child(2),
+            .aie-layer-table td:nth-child(2) {
+                word-break: break-word;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body style="--accent: #ff4d2e; --accent-2: #00e5ff; --hero-bg: url('../assets/ai_engine/editor_sky.png');">
+    <!-- FX LAYERS -->
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <canvas id="space-canvas"></canvas>
 
+    <!-- NAVIGATION -->
     <nav id="main-nav" class="dashboard-panel">
         <div class="container nav-container">
             <div class="nav-brand"><a href="index.html">PL-88 // HOME</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">BACK TO DATABASE</a></li>
+                <li><a href="index.html#projects" class="nav-item" data-i18n="nav-database">RETOUR BDD</a></li>
                 <li><a href="contact.html" class="nav-item" data-i18n="nav-contact-page">CONTACT & CV</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- HERO -->
     <header class="project-hero">
-        <div class="scan-overlay"></div>
-        <div class="container" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 2rem;">
+        <div class="container">
             <div>
-                <h1 class="glitch-text"
-                    style="font-size: 3rem; background: rgba(0,0,0,0.7); padding: 10px; display: inline-block;">BIX
-                    ENGINE</h1>
-                <div class="tech-tags"
-                    style="margin-top: 1rem; background: rgba(0,0,0,0.7); padding: 10px; display: inline-block;">
-                    <span class="tag tag-lang">C++ 20</span>
-                    <span class="tag tag-engine" data-i18n="tag-editor-suite">FULL EDITOR SUITE</span>
-                    <span class="tag tag-role" data-i18n="tag-custom-reflection">CUSTOM REFLECTION</span>
+                <span class="status-badge" data-i18n="aie-status-badge">EN DÉVELOPPEMENT ACTIF // v0.1</span>
+                <h1 class="glitch-text">AI ENGINE</h1>
+                <h2 class="subtitle" data-i18n="aie-subtitle">MOTEUR DE JEU 3D CONÇU POUR LES AGENTS IA // RUST 2024 · WGPU · SIMULATION DÉTERMINISTE</h2>
+            </div>
+            <div class="stat-row">
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="aie-stat-lang">LANGAGE</span>
+                    <span class="stat-value">RUST 2024</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="aie-stat-code">CODEBASE</span>
+                    <span class="stat-value">162K+ LOC</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="aie-stat-arch">ARCHITECTURE</span>
+                    <span class="stat-value">15 CRATES</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-label" data-i18n="aie-stat-adrs">DÉCISIONS</span>
+                    <span class="stat-value">84 ADRs</span>
                 </div>
             </div>
         </div>
@@ -62,222 +374,371 @@
 
     <main class="container section-padding">
 
-        <section class="mb-5">
-            <h3 class="section-title" data-i18n="bix-eco-title">ENGINE ECOSYSTEM</h3>
-            <p class="description" style="font-size: 1.1rem; max-width: 900px;" data-i18n="bix-eco-desc">
-                Le <strong>Bix Engine</strong> est un environnement de développement complet.
-                Au-delà d'un simple runtime, il intègre une suite d'outils d'édition natifs ("Page System"), un pipeline
-                de build (BixAssetTool) et une architecture de données orientée performance.
+        <!-- ACTIVE DEVELOPMENT NOTICE -->
+        <div class="aie-dev-banner">
+            <span class="aie-dev-dot" aria-hidden="true"></span>
+            <div>
+                <strong data-i18n="aie-dev-title">PROJET EN DÉVELOPPEMENT ACTIF — DÉV QUOTIDIEN (213 COMMITS · 84 ADRs)</strong>
+                <p data-i18n="aie-dev-desc">
+                    AI Engine est mon moteur 3D nouvelle génération actuellement en cours de construction en Rust 2024 et wgpu (il succède à mon premier moteur 2D C++ Bix Engine). Les socles rendu PBR, animation GPU, physique déterministe, éditeur visuel et moteur audio maison avec codecs FLAC/Vorbis/MP3 sont déjà opérationnels et benchmarkés, et de nouveaux lots sont livrés chaque semaine.
+                </p>
+            </div>
+        </div>
+
+        <!-- 01. VISION & AI-FIRST PHILOSOPHY -->
+        <section class="project-section">
+            <span class="module-badge">01 // VISION &amp; PHILOSOPHIE</span>
+            <h3 class="section-title" data-i18n="aie-vision-title">UN MOTEUR 3D PENSÉ DÈS LE JOUR 1 POUR LES AGENTS IA</h3>
+            <p class="lead" data-i18n="aie-vision-lead">
+                La plupart des moteurs sont construits autour d'interfaces graphiques opaques où une IA est aveugle.
+                <strong>AI Engine</strong> renverse le problème : <strong>tout le moteur se pilote en ligne de commande
+                (<code>aie</code>)</strong>, chaque format est du JSON strict documenté par un schéma généré depuis les types
+                Rust (<code>schemars</code>), chaque commande renvoie un rapport JSON structuré avec codes d'erreur stables et
+                indications de correction, et <strong>la simulation est 100 % déterministe</strong>. L'éditeur visuel
+                (<code>aie-editor</code>) et le jeu (<code>aie-play</code>) ne sont que des fenêtres sur exactement les mêmes fichiers.
             </p>
-        </section>
-
-        <!-- --- SECTION: SUITE OUTILS (Layout Interactif) --- -->
-        <section class="mb-5">
-            <h3 class="section-title" data-i18n="bix-suite-title">SUITE OUTILS & EDITEURS</h3>
-
-            <!-- Feature Row 1: Editor System -->
-            <div class="feature-row">
-                <div class="feature-text hologram-card tech-item">
-                    <h4 data-i18n="bix-page-title">>>> EDITOR PAGE SYSTEM</h4>
-                    <p data-i18n="bix-page-desc">Architecture UI fenêtrée basée sur le concept de <strong>Pages</strong> et <strong>Docking
-                            Spaces</strong>.</p>
-                    <ul class="feature-list">
-                        <li data-i18n="bix-page-1">Fenêtres flottantes et layouts persistants (ImGui Docking).</li>
-                        <li data-i18n="bix-page-2">Système de Focus et Raccourcis globaux.</li>
-                        <li data-i18n="bix-page-3">Inspection en temps réel de n'importe quel <code>UObject</code>.</li>
-                    </ul>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">CLI-FIRST // CONTRATS IA</span>
+                    <h4 data-i18n="aie-pil1-t">PILOTABLE &amp; VÉRIFIABLE PAR AGENT</h4>
+                    <p data-i18n="aie-pil1-d"><code>aie schema</code>, <code>aie validate</code>, <code>aie sim --watch/--events/--why</code>, <code>aie ask</code> (dialogue avec l'éditeur ouvert), <code>aie diff</code>, <code>aie anim check</code>, <code>aie render</code>, <code>aie bench</code> et <code>aie audio analyze</code>. Zéro panique sur entrée utilisateur : chaque anomalie est un <code>Diagnostic</code> typé.</p>
                 </div>
-                <div class="feature-visual">
-                    <!-- PLACEHOLDER: Insert Editor GIF here -->
-                    <div class="placeholder-media">
-                        [ INSERT EDITOR_UI.GIF ]
-                    </div>
+                <div class="sys-card">
+                    <span class="sys-tag">DÉTERMINISME // XXH3</span>
+                    <h4 data-i18n="aie-pil2-t">SIMULATION &amp; INSTANTANÉS BIT-EXACTS</h4>
+                    <p data-i18n="aie-pil2-d">ECS <code>hecs</code> à pas fixe, parallélisme déterministe par lots (<code>rayon</code>), empreinte d'état <code>World::state_hash</code> en <code>xxh3</code>, et instantanés binaires/JSON rejouables au bit près — y compris la physique Rapier, les fragments de destruction et le mixeur audio.</p>
                 </div>
-            </div>
-
-            <!-- Feature Row 2: Sprite Slicer -->
-            <div class="feature-row">
-                <div class="feature-text hologram-card tech-item">
-                    <h4 data-i18n="bix-atlas-title">>>> VISUAL SPRITE ATLAS SLICER</h4>
-                    <p data-i18n="bix-atlas-desc">Outil dédié au découpage de textures et à la génération d'animations.</p>
-                    <ul class="feature-list">
-                        <li data-i18n="bix-atlas-1">Définition visuelle des régions de sprites.</li>
-                        <li data-i18n="bix-atlas-2">Points de pivots et métadonnées d'animation.</li>
-                        <li data-i18n="bix-atlas-3">Export optimisé en <code>.atlas</code> binaire.</li>
-                    </ul>
-                </div>
-                <div class="feature-visual">
-                    <!-- PLACEHOLDER: Insert Atlas Tool GIF here -->
-                    <div class="placeholder-media">
-                        [ INSERT ATLAS_TOOL.GIF ]
-                    </div>
-                </div>
-            </div>
-
-            <!-- Feature Row 3: Prefab & Audio -->
-            <div class="tech-grid">
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-prefab-title">>>> ACTOR & PREFAB EDITOR</h4>
-                    <p data-i18n="bix-prefab-desc">
-                        Éditeur visuel d'objets (Prefabs) pour la composition d'entités.
-                    </p>
-                    <div class="sys-diagram">
-                        Components -> Visualization -> Serialization
-                    </div>
-                    <ul class="feature-list">
-                        <li data-i18n="bix-prefab-1">Assemblage drag & drop de composants (Sprite, Collider, Script).</li>
-                        <li data-i18n="bix-prefab-2">Modification hiérarchique : les changements sur le Prefab se propagent aux instances.</li>
-                        <li data-i18n="bix-prefab-3">Sauvegarde en JSON lisible ou binaire optimisé.</li>
-                    </ul>
-                </div>
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-audio-title">>>> AUDIO CONTAINER SYSTEM</h4>
-                    <p data-i18n="bix-audio-desc">
-                        Système avancé de gestion des assets sonores.
-                    </p>
-                    <ul class="feature-list">
-                        <li data-i18n="bix-audio-1"><strong>Randomization :</strong> Variation automatique du Pitch et du Volume.</li>
-                        <li data-i18n="bix-audio-2"><strong>Virtualization :</strong> Gestion des voix via Miniaudio.</li>
-                        <li data-i18n="bix-audio-3"><strong>Looping & Streaming :</strong> Contrôle fin de la lecture mémoire.</li>
-                    </ul>
+                <div class="sys-card">
+                    <span class="sys-tag">ÉDITEUR // HOT-RELOAD</span>
+                    <h4 data-i18n="aie-pil3-t">FICHIERS COMME SOURCE DE VÉRITÉ</h4>
+                    <p data-i18n="aie-pil3-d"><code>aie-editor</code> (<code>eframe</code> / <code>wgpu</code>) surveille le disque en continu (scène &lt; 500 ms, assets &lt; 1 s, partie en cours incluse), gère 200 niveaux d'undo/redo, le découpage 3D de meshes et l'automatisation scriptée (<code>--do</code>, <code>--screenshot</code>).</p>
                 </div>
             </div>
         </section>
 
-
-        <!-- --- SECTION: GAMEPLAY FRAMEWORK (Layout Détaillé) --- -->
-        <section class="mb-5">
-            <h3 class="section-title">GAMEPLAY FRAMEWORK</h3>
-
-            <div class="feature-row">
-                <div class="feature-visual" style="flex: 0.6;">
-                    <!-- PLACEHOLDER: Insert Input/Gameplay GIF here -->
-                    <div class="placeholder-media">
-                        [ INSERT GAMEPLAY_DEMO.GIF ]
-                    </div>
-                </div>
-                <div class="feature-text">
-                    <h4 class="section-subtitle" style="color: var(--color-primary); margin-bottom: 1rem;" data-i18n="bix-input-title">> INPUT
-                        SYSTEM (Action & Axis)</h4>
-                    <div class="hologram-card tech-item">
-                        <p data-i18n="bix-input-desc">Le système d'input sépare la logique de jeu du matériel physique via une abstraction
-                            complète.</p>
-                        <ul class="feature-list">
-                            <li data-i18n="bix-input-1"><strong>BindAction :</strong> Événements discrets (Saut, Tir). Gère les états
-                                <code>Pressed</code>, <code>Released</code> et <code>Hold</code>.
-                            </li>
-                            <li data-i18n="bix-input-2"><strong>BindAxis :</strong> Valeurs continues (Mouvement). Normalise automatiquement les
-                                entrées Clavier/Gamepad entre [-1, 1].</li>
-                            <li data-i18n="bix-input-3">Support du Hot-Plugging de manettes SDL3.</li>
-                        </ul>
-                    </div>
+        <!-- 02. LIVE DEMO VIDEO & REAL-TIME GIFS -->
+        <section class="project-section">
+            <span class="module-badge">02 // DÉMO VIDÉO &amp; CLIPS TEMPS RÉEL (VULKAN)</span>
+            <h3 class="section-title" data-i18n="aie-reel-title">LE MOTEUR EN ACTION</h3>
+            <p class="lead" data-i18n="aie-reel-lead">
+                Séquences générées directement par le moteur via <code>aie render</code> sur Vulkan — aucune maquette, chaque frame provient du renderer <code>wgpu</code> et de la simulation déterministe réelle.
+            </p>
+            <div class="aie-video-frame">
+                <video controls autoplay muted loop playsinline preload="metadata" poster="assets/ai_engine/editor_sky.png">
+                    <source src="assets/ai_engine/ai_engine_showcase.mp4" type="video/mp4">
+                </video>
+                <div class="aie-video-bar">
+                    <span class="aie-live-pill">SHOWREEL VULKAN // AI ENGINE v0.1</span>
+                    <span data-i18n="aie-reel-caption">Destruction &amp; tissus · Foule animée GPU · Corps déformables &amp; câbles · Fracture Voronoï déterministe</span>
                 </div>
             </div>
+            <div class="aie-gif-grid">
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/destruction_cloth.gif" alt="AI Engine — Destruction fracturée, particules de débris et bannières de tissu" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-gif1-t">01 // DESTRUCTION, PARTICULES &amp; TISSUS</strong>
+                        <span data-i18n="aie-gif1-d">Deux boulets pulvérisent des murs en pierre et en brique avec nuage de débris pendant que 5 bannières de tissu ondulent au vent.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/animation_crowd.gif" alt="AI Engine — Animation de personnages et foule GPU massive" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-gif2-t">02 // ANIMATION AAA &amp; FOULE GPU</strong>
+                        <span data-i18n="aie-gif2-d">Personnages au premier plan (graphes d'états, IK, escaliers) devant une foule animée sur GPU jusqu'à l'horizon.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/deformables.gif" alt="AI Engine — Drapeaux, câble pendulaire et corps mous" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-gif3-t">03 // CORPS MOUS, DRAPEAUX &amp; CÂBLES</strong>
+                        <span data-i18n="aie-gif3-d">Drapeaux simulés au vent, pendule à câble flexible avec sphère métallique et corps déformables élastiques.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/demolition_wall.gif" alt="AI Engine — Percée balistique et fracture Voronoï" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-gif4-t">04 // FRACTURE VORONOÏ DÉTERMINISTE</strong>
+                        <span data-i18n="aie-gif4-d">Impact balistique creusant un mur pré-fracturé avec projection d'éclats rejouable au bit près sur snapshot.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
 
-            <!-- Component Grid -->
-            <h4 class="section-subtitle" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 1rem;" data-i18n="bix-comp-title">>
-                COMPONENT DATABASE</h4>
-            <div class="tech-grid">
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-comp-gfx">[GFX] SPRITE ANIMATOR</h4>
-                    <p data-i18n="bix-comp-gfx-desc">Moteur d'animation 2D haute performance.</p>
-                    <ul class="feature-list">
-                        <li>Lecture native des fichiers <code>.atlas</code> binaires.</li>
-                        <li>Machine à états (Idle -> Run -> Jump).</li>
-                        <li>Système d'événements (OnAnimationEnd, OnFrame).</li>
-                    </ul>
+        <!-- 03. MEASURED BENCHMARKS -->
+        <section class="project-section">
+            <span class="module-badge">03 // BENCHMARKS MESURÉS (RTX 4060 LAPTOP · VULKAN)</span>
+            <h3 class="section-title" data-i18n="aie-bench-title">PERFORMANCES RÉELLES SUIVIES EN CI</h3>
+            <p class="lead" data-i18n="aie-bench-lead">
+                Chaque jalon est mesuré automatiquement par <code>node tools/perf.mjs</code> sur plus de 40 scénarios de stress
+                (<code>tools/perf-baseline.json</code>) avec détection de régression sur le temps de tick CPU, le temps de frame GPU et l'empreinte d'état.
+            </p>
+            <div class="aie-bench-grid">
+                <div class="aie-bench-tile">
+                    <span class="aie-bench-scenario">statues-1m</span>
+                    <span class="aie-bench-val">0.94 ms</span>
+                    <span class="aie-bench-desc" data-i18n="aie-b1">1 million d'instances statiques avec culling GPU et LODs.</span>
                 </div>
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-comp-phys">[PHYS] BOX COLLIDER</h4>
-                    <p data-i18n="bix-comp-phys-desc">Intégration profonde de Box2D.</p>
-                    <ul class="feature-list">
-                        <li><strong>Modes :</strong> Static, Kinematic, Dynamic.</li>
-                        <li><strong>Material :</strong> Friction, Restitution (Rebond), Densité.</li>
-                        <li><strong>Events :</strong> Callbacks C++ <code>OnCollisionEnter</code> / <code>Exit</code>.
-                        </li>
-                    </ul>
+                <div class="aie-bench-tile">
+                    <span class="aie-bench-scenario">anim-1m-crowd</span>
+                    <span class="aie-bench-val">9.23 ms</span>
+                    <span class="aie-bench-desc" data-i18n="aie-b2">1 million de personnages en foule animée sur GPU (50k en 3.23 ms).</span>
                 </div>
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-comp-sfx">[SFX] AUDIO SOURCE</h4>
-                    <p data-i18n="bix-comp-sfx-desc">Émetteur sonore 3D.</p>
-                    <ul class="feature-list">
-                        <li>Spatialisation basée sur la distance (Min/Max).</li>
-                        <li>Pooling automatique des voix pour éviter la surcharge CPU.</li>
-                        <li>Support du Doppler Effect simulé.</li>
-                    </ul>
+                <div class="aie-bench-tile">
+                    <span class="aie-bench-scenario">lights-10k</span>
+                    <span class="aie-bench-val">1.61 ms</span>
+                    <span class="aie-bench-desc" data-i18n="aie-b3">10 000 lumières dynamiques en grappes sur 20 002 entités.</span>
                 </div>
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-comp-cam">[CORE] CAMERA</h4>
-                    <p data-i18n="bix-comp-cam-desc">Système de vue flexible.</p>
-                    <ul class="feature-list">
-                        <li>Gestion du Zoom et de l'Offset dynamique.</li>
-                        <li>Helpers <code>WorldToScreen</code> et <code>ScreenToWorld</code> pour le UI.</li>
-                        <li>Support de l'Aspect Ratio fixe ou adaptatif.</li>
-                    </ul>
+                <div class="aie-bench-tile">
+                    <span class="aie-bench-scenario">city-shadows</span>
+                    <span class="aie-bench-val">4.07 ms</span>
+                    <span class="aie-bench-desc" data-i18n="aie-b4">26 627 entités avec ombres en cascades (CSM) et occlusion GPU.</span>
+                </div>
+                <div class="aie-bench-tile">
+                    <span class="aie-bench-scenario">crowd-10k</span>
+                    <span class="aie-bench-val">82.9 µs</span>
+                    <span class="aie-bench-desc" data-i18n="aie-b5">Tick CPU déterministe pour 10 002 entités (frame GPU 0.84 ms).</span>
+                </div>
+                <div class="aie-bench-tile">
+                    <span class="aie-bench-scenario">audio-streams-32</span>
+                    <span class="aie-bench-val">1.4 µs</span>
+                    <span class="aie-bench-desc" data-i18n="aie-b6">32 flux audio Vorbis/FLAC/MP3 lus en streaming depuis le disque.</span>
                 </div>
             </div>
         </section>
 
-        <!-- --- SECTION: ARCHITECTURE & CORE (Grid Layout) --- -->
-        <section class="mb-5">
-            <h3 class="section-title" data-i18n="bix-arch-title">CORE & ARCHITECTURE</h3>
-            <div class="tech-grid">
-
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-arch-obj">>>> UOBJECT DATAMODEL</h4>
-                    <p data-i18n="bix-arch-obj-desc">La classe racine de tout le système de réflexion.</p>
-                    <ul class="feature-list">
-                        <li>Apporte l'identité unique (UUID) à chaque entité.</li>
-                        <li>Embarque le Transform (Position/Rotation/Scale).</li>
-                        <li>Compatible avec la sérialisation automatique <code>BPROPERTY</code>.</li>
-                    </ul>
-                </div>
-
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-arch-scene">>>> SCENE SYSTEM</h4>
-                    <p data-i18n="bix-arch-scene-desc">Conteneur hermétique du gameplay.</p>
-                    <ul class="feature-list">
-                        <li>Encapsule son propre monde physique <strong>Box2D</strong>.</li>
-                        <li>Gère le cycle de vie des Acteurs (Spawn/Destroy).</li>
-                        <li>Possède son contexte (Input, Render, Window) injecté.</li>
-                    </ul>
-                </div>
-
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-arch-seriv">>>> BINARY SERIALIZATION</h4>
-                    <p data-i18n="bix-arch-seriv-desc">Système de persistance haute performance.</p>
-                    <ul class="feature-list">
-                        <li>Sauvegarde l'état complet du monde en binaire compact.</li>
-                        <li>Utilise un système de <strong>Factory</strong> pour réinstancier les acteurs par leur nom de
-                            classe.</li>
-                        <li>Supporte le versioning de données.</li>
-                    </ul>
-                </div>
-
-                <div class="tech-item hologram-card">
-                    <h4 data-i18n="bix-arch-math">>>> CUSTOM MATH</h4>
-                    <p data-i18n="bix-arch-math-desc">Bibliothèque mathématique optimisée C++20.</p>
-                    <ul class="feature-list">
-                        <li>Structures <code>Vec3</code>, <code>Matrix4</code>, <code>Rotator</code> (Euler) faites
-                            maison.</li>
-                        <li>Système de <strong>Dirty Flags</strong> dans le Transform pour éviter les calculs de
-                            matrices inutiles.</li>
-                    </ul>
-                </div>
-
+        <!-- 04. ARCHITECTURE IN 6 STRICT LAYERS -->
+        <section class="feature-row project-section">
+            <div class="feature-text">
+                <span class="module-badge">04 // ARCHITECTURE MODULAIRE</span>
+                <h3 class="section-title" data-i18n="aie-arch-title">15 CRATES EN 6 COUCHES ACYCLIQUES</h3>
+                <p class="lead" data-i18n="aie-arch-lead">
+                    Chaque crate déclare sa couche dans son <code>Cargo.toml</code> : une crate ne peut dépendre que de couches
+                    strictement inférieures (vérifié automatiquement par <code>tools/code-map.mjs --check</code>). La simulation
+                    tourne sans GPU en quelques millisecondes et le renderer reste testable sans scène.
+                </p>
+                <table class="aie-layer-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="aie-th-layer">COUCHE</th>
+                            <th>CRATES</th>
+                            <th data-i18n="aie-th-role">RÔLE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>L0</td>
+                            <td><code>aie_core</code></td>
+                            <td data-i18n="aie-l0">Maths (glam), <code>Diagnostic</code>, JSON strict, <code>FrameData</code>, maillages &amp; <code>mesh_split</code></td>
+                        </tr>
+                        <tr>
+                            <td>L1</td>
+                            <td><code>aie_scene</code> · <code>aie_render</code> · <code>aie_physics</code> · <code>aie_animation</code> · <code>aie_audio</code></td>
+                            <td data-i18n="aie-l1">Schémas de scène, renderer <code>wgpu</code>, physique Rapier, animation GPU et audio bit-exact</td>
+                        </tr>
+                        <tr>
+                            <td>L2</td>
+                            <td><code>aie_world</code> · <code>aie_assets</code></td>
+                            <td data-i18n="aie-l2">Monde ECS <code>hecs</code> déterministe, cache disque (<code>.aiem</code> / KTX2 / BCn) &amp; import glTF/FBX</td>
+                        </tr>
+                        <tr>
+                            <td>L3</td>
+                            <td><code>aie_test</code> · <code>aie_script</code> · <code>aie_input</code></td>
+                            <td data-i18n="aie-l3">Tests déclaratifs <code>*.test.json</code>, scripting Luau (<code>mlua</code>) et entrées rebindables (<code>gilrs</code>)</td>
+                        </tr>
+                        <tr>
+                            <td>L4</td>
+                            <td><code>aie_cli</code> · <code>aie_editor</code> · <code>aie_runtime</code></td>
+                            <td data-i18n="aie-l4">Trois clients des mêmes crates : CLI <code>aie</code>, éditeur visuel et runtime <code>aie-play</code></td>
+                        </tr>
+                        <tr>
+                            <td>L5</td>
+                            <td><code>aie_game</code></td>
+                            <td data-i18n="aie-l5">Point d'entrée d'un jeu combinant ses propres systèmes Rust natifs aux blocs du moteur</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="feature-media">
+<pre class="console-panel"><span class="c-dim">// FLUX DE DONNÉES — AI ENGINE (RUST 2024)</span>
+<span class="c-accent">scenes/*.scene.json</span> ──▶ aie_scene::load (ValidScene)
+        │
+        ▼
+<span class="c-accent">aie_world::World</span> (ECS hecs · pas fixe · rayon)
+  ├── components/*.luau   (aie_script / Luau)
+  ├── systèmes Rust jeu   (impl System · ADR 0005)
+  ├── physique Rapier3D   (déterminisme renforcé)
+  ├── animation &amp; IK      (graphes, motion matching)
+  └── state_hash (xxh3)   (snapshots &amp; tests)
+        │
+        ▼ extract_frame_blended() ──▶ <span class="c-accent-2">FrameData</span>
+        │
+<span class="c-ok">// PIPELINE GPU (aie_render · wgpu 30 · WGSL)</span>
+  env/IBL ─▶ GPU skinning ─▶ cull &amp; occlusion
+  ─▶ CSM shadows ─▶ clustered lights (10k)
+  ─▶ HDR PBR ─▶ sorted transparency ─▶ sky
+  ─▶ TAA/TAAU ─▶ auto-exposure ─▶ bloom ─▶ tonemap</pre>
             </div>
         </section>
 
+        <!-- 05. DEEP-DIVE SUBSYSTEMS -->
+        <section class="project-section">
+            <span class="module-badge">05 // SOUS-SYSTÈMES DU MOTEUR</span>
+            <h3 class="section-title" data-i18n="aie-sub-title">UN SOCLE COMPLET ÉCRIT DE ZÉRO</h3>
+            <div class="card-grid">
+                <div class="sys-card">
+                    <span class="sys-tag">aie_render // WGPU + WGSL</span>
+                    <h4 data-i18n="aie-s1-t">RENDU PBR &amp; PIPELINE GPU MODERNE</h4>
+                    <p data-i18n="aie-s1-d">PBR HDR, ombres en cascades (CSM), éclairage en grappes jusqu'à 10 000 lumières dynamiques, ciel atmosphérique &amp; cartes EXR/HDR, transparence triée, TAA et mise à l'échelle temporelle (TAAU), auto-exposition, bloom, tonemap, culling + occlusion GPU et LODs <code>meshoptimizer</code>.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">aie_animation</span>
+                    <h4 data-i18n="aie-s2-t">ANIMATION AAA &amp; FOULES SUR GPU</h4>
+                    <p data-i18n="aie-s2-d">Graphes d'états, mélanges 1D et 2D, couches et masques, montages, IK &amp; pieds plantés, reciblage entre squelettes, morph targets, os à ressort (<em>spring bones</em>), ragdolls, motion matching, hot-reload d'animations et foules jusqu'à 1M d'agents sur GPU.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">aie_physics // RAPIER3D</span>
+                    <h4 data-i18n="aie-s3-t">PHYSIQUE, DÉFORMABLES &amp; DESTRUCTION</h4>
+                    <p data-i18n="aie-s3-d">Corps rigides parallèles à déterminisme renforcé, contrôleur de personnage, véhicules, volumes de force et d'eau, corps déformables (tissus, corps mous, câbles), et système de destruction dont les fragments sont rejoués à l'identique sur reprise d'instantané.</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">aie_audio // ADR 0077</span>
+                    <h4 data-i18n="aie-s4-t">AUDIO BIT-EXACT &amp; CODECS MAISON</h4>
+                    <p data-i18n="aie-s4-d">Décodeurs <strong>FLAC, Vorbis et MP3 écrits maison en Rust pur</strong>, streaming disque ou mémoire, cache PCM16/ADPCM, mixeur sans état (reprise d'instantané égale au bit au mix continu), sortie carte son lock-free (<code>rtrb</code> + <code>cpal</code>) avec marge adaptative et vérification hors ligne (<code>aie audio analyze</code>).</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">aie_assets // MESH SPLIT</span>
+                    <h4 data-i18n="aie-s5-t">PIPELINE 3D, CACHE &amp; DÉCOUPAGE DE MESH</h4>
+                    <p data-i18n="aie-s5-d">Import glTF 2.0, OBJ et FBX (squelettes, skins, morphs, PBR), PNG/JPEG/TIFF/TGA/HDR/EXR/KTX2, compression BCn (<code>intel_tex_2</code>), cache binaire <code>.aiem</code>, plus un outil de <strong>découpage de mesh 3D</strong> (<code>aie_core::mesh_split</code> + encodeur GLB 2.0 + aperçu 3D dans l'éditeur).</p>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">aie_script // QUALITÉ CI</span>
+                    <h4 data-i18n="aie-s6-t">LUAU, OUTILS IA &amp; DISCIPLINE D'INGÉNIERIE</h4>
+                    <p data-i18n="aie-s6-d">Scripts Luau (<code>mlua</code>) pour la logique de gameplay et systèmes Rust natifs pour le code critique. 84 ADRs documentés, <code>unsafe</code> non documentés interdits au compilateur, journal unifié (ADR 0076) et suite d'outillage (<code>check.mjs</code>, <code>stress.mjs</code>, <code>couverture-rejeu.mjs</code>).</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- 06. REAL ENGINE & EDITOR GALLERY -->
+        <section class="project-section">
+            <span class="module-badge">06 // CAPTURES ÉDITEUR &amp; VULKAN</span>
+            <h3 class="section-title" data-i18n="aie-gal-title">L'ÉDITEUR &amp; LES RENDUS EN DIRECT</h3>
+            <p class="lead" data-i18n="aie-gal-desc">Captures issues directement d'<code>aie-editor</code> et du renderer <code>wgpu</code> sur Vulkan. Cliquez pour agrandir.</p>
+            <div class="aie-gallery">
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/editor_sky.png" alt="aie-editor — PBR, ciel atmosphérique et matériaux métalliques" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap1-t">01 // AIE-EDITOR — PBR &amp; CIEL ATMOSPHÉRIQUE</strong>
+                        <span data-i18n="aie-cap1-d">Matériaux PBR (craie, miroir, or), ombres en cascades, hiérarchie, inspecteur de scène et navigateur d'assets.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/editor_model.png" alt="aie-editor — Modèle glTF et gizmos 3D" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap2-t">02 // IMPORT GLTF, GIZMOS &amp; HOT-RELOAD</strong>
+                        <span data-i18n="aie-cap2-d">Manipulation directe des entités, modèles instanciables (<code>aie.spawn</code>), onglet Problèmes et rechargement disque en temps réel.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/crowd_play.png" alt="AI Engine — Foule massive animée sur GPU" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap3-t">03 // FOULE ANIMÉE SUR GPU</strong>
+                        <span data-i18n="aie-cap3-d">Rendu de masse avec skinning GPU, ombres portées et culling matériel — jusqu'à 1 million de personnages mesurés à 9.23 ms.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/lights_10k.png" alt="AI Engine — 10 000 lumières dynamiques en grappes" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap4-t">04 // 10 000 LUMIÈRES DYNAMIQUES (CLUSTERED)</strong>
+                        <span data-i18n="aie-cap4-d">Éclairage par grappes adaptatives sur 20 002 entités en 1.61 ms sur RTX 4060 Laptop (Vulkan).</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/editor_deformables.png" alt="aie-editor — Corps mous, tissus et câbles" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap5-t">05 // CORPS DÉFORMABLES, TISSUS &amp; CÂBLES</strong>
+                        <span data-i18n="aie-cap5-d">Drapeau soumis au vent, câbles, balle et cube mous simulés en temps réel dans <code>aie-editor</code>.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/editor_transparency.png" alt="aie-editor — Alpha cutout et transparence triée" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap6-t">06 // TRANSPARENCE TRIÉE &amp; OMBRES ALPHA-CUTOUT</strong>
+                        <span data-i18n="aie-cap6-d">Grille à ombre découpée et plans de verre colorés triés en profondeur autour d'une sphère PBR.</span>
+                    </figcaption>
+                </figure>
+                <figure class="aie-shot">
+                    <img src="assets/ai_engine/mascotte.jpg" alt="Mascotte AI Engine — robot de crash-test" loading="lazy">
+                    <figcaption>
+                        <strong data-i18n="aie-cap7-t">07 // LA MASCOTTE DU MOTEUR</strong>
+                        <span data-i18n="aie-cap7-d">Personnage jouable du modèle <code>third_person</code> généré par <code>aie new mon_jeu</code> (course, saut, caméra tierce personne).</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 07. STATUS & ROADMAP -->
+        <section class="project-section">
+            <span class="module-badge">07 // AVANCEMENT &amp; FEUILLE DE ROUTE</span>
+            <h3 class="section-title" data-i18n="aie-road-title">ÉTAT DU DÉVELOPPEMENT</h3>
+            <div class="aie-roadmap">
+                <div class="sys-card">
+                    <span class="sys-tag" style="color: #34d399;">OPÉRATIONNEL &amp; BENCHMARKÉ</span>
+                    <h4 data-i18n="aie-road1-t">SOCLE MOTEUR, RENDU, PHYSIQUE &amp; AUDIO</h4>
+                    <ul class="spec-list">
+                        <li data-i18n="aie-r1-1"><strong>> Simulation &amp; CLI IA</strong> ECS déterministe, schémas JSON, snapshots, <code>aie ask</code>, <code>aie sim</code>, <code>aie test</code>, <code>aie diff</code> et scripts Luau.</li>
+                        <li data-i18n="aie-r1-2"><strong>> Rendu &amp; Animation</strong> PBR HDR, CSM, 10k lumières, TAA/TAAU, occlusion GPU, skinning GPU 1M, IK, motion matching et découpage de mesh 3D.</li>
+                        <li data-i18n="aie-r1-3"><strong>> Physique &amp; Audio maison</strong> Rapier3D déterministe, véhicules, déformables, destruction, et moteur audio complet avec codecs FLAC/Vorbis/MP3 maison.</li>
+                    </ul>
+                </div>
+                <div class="sys-card">
+                    <span class="sys-tag">EN COURS DE DÉVELOPPEMENT</span>
+                    <h4 data-i18n="aie-road2-t">PROCHAINS JALONS</h4>
+                    <ul class="spec-list">
+                        <li data-i18n="aie-r2-1"><strong>> Audio spatial &amp; effets (lots suivants)</strong> Spatialisation 3D, bus de mixage, atténuation et effets DSP temps réel toujours déterministes.</li>
+                        <li data-i18n="aie-r2-2"><strong>> Outils éditeur &amp; workflow jeu</strong> Enrichissement des panneaux visuels d'<code>aie-editor</code>, édition avancée d'animation et packaging autonome.</li>
+                        <li data-i18n="aie-r2-3"><strong>> Démo jouable vitrine</strong> Construction d'un jeu complet piloté de bout en bout par les outils agents IA et la suite de tests <code>*.test.json</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <footer class="transmission-panel text-center">
-        <p>END OF TRANSMISSION // BIX ENGINE</p>
-        <a href="index.html" class="hologram-link" data-i18n="nav-back">[ RETURN TO BASE ]</a>
+    <!-- LIGHTBOX -->
+    <div class="aie-lightbox" id="aie-lightbox" role="dialog" aria-modal="true" aria-label="Capture agrandie">
+        <img src="" alt="">
+        <p></p>
+    </div>
+
+    <footer class="transmission-panel project-footer">
+        <p>END OF TRANSMISSION // AI ENGINE (EN DÉVELOPPEMENT)</p>
+        <a href="index.html#projects" class="hologram-link" data-i18n="nav-back">[ RETOUR À LA BASE ]</a>
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/background.js"></script>
+    <script>
+        (function () {
+            const lb = document.getElementById('aie-lightbox');
+            if (!lb) return;
+            const lbImg = lb.querySelector('img');
+            const lbCap = lb.querySelector('p');
+            document.querySelectorAll('.aie-shot').forEach(fig => {
+                fig.addEventListener('click', () => {
+                    const img = fig.querySelector('img');
+                    const cap = fig.querySelector('figcaption');
+                    lbImg.src = img.src;
+                    lbImg.alt = img.alt;
+                    lbCap.textContent = cap ? cap.textContent.trim() : '';
+                    lb.classList.add('is-open');
+                });
+            });
+            lb.addEventListener('click', () => lb.classList.remove('is-open'));
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') lb.classList.remove('is-open');
+            });
+        })();
+    </script>
 </body>
 
 </html>
